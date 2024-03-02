@@ -1,0 +1,136 @@
+package com.amenal.amenalbackend.application.project.port.in;
+
+import java.util.List;
+
+import com.amenal.amenalbackend.application.project.domain.Avenant;
+import com.amenal.amenalbackend.application.project.domain.BudgetAchatAv;
+import com.amenal.amenalbackend.application.project.domain.DetailProduit;
+import com.amenal.amenalbackend.application.project.domain.DetailProduitAttente;
+import com.amenal.amenalbackend.application.project.domain.Lot;
+import com.amenal.amenalbackend.application.project.domain.MetreAv;
+import com.amenal.amenalbackend.application.project.domain.Produit;
+import com.amenal.amenalbackend.application.project.domain.Tache;
+import com.amenal.amenalbackend.application.project.port.out.BudgetAchatAvDao;
+import com.amenal.amenalbackend.application.project.port.out.DetailProduitAttenteDao;
+import com.amenal.amenalbackend.application.project.port.out.DetailProduitDao;
+import com.amenal.amenalbackend.application.project.port.out.LotDao;
+import com.amenal.amenalbackend.application.project.port.out.MetreAvDao;
+import com.amenal.amenalbackend.application.project.port.out.ProduitDao;
+import com.amenal.amenalbackend.application.project.port.out.TacheDao;
+
+public class SaveViaDetailProduitAttenteUseCase {
+	private TacheDao tacheDao;
+	private LotDao lotDao;
+	private ProduitDao produitDao;
+	private DetailProduitDao detailProduitDao;
+	private MetreAvDao metreDao;
+	private BudgetAchatAvDao budgetAchatAvDao;
+	private DetailProduitAttenteDao detailProduitAttenteDao;
+
+	public SaveViaDetailProduitAttenteUseCase(TacheDao tacheDao, LotDao lotDao, ProduitDao produitDao,
+			DetailProduitDao detailProduitDao, MetreAvDao metreDao, BudgetAchatAvDao budgetAchatAvDao,
+			DetailProduitAttenteDao detailProduitAttenteDao) {
+		super();
+		this.tacheDao = tacheDao;
+		this.lotDao = lotDao;
+		this.produitDao = produitDao;
+		this.detailProduitDao = detailProduitDao;
+		this.metreDao = metreDao;
+		this.budgetAchatAvDao = budgetAchatAvDao;
+		this.detailProduitAttenteDao = detailProduitAttenteDao;
+	}
+
+	private void validerDetailProduit(DetailProduitAttente detailProduitAttente) {
+		String erreur = detailProduitAttente.getErreur();
+		if (erreur == null || erreur.isEmpty()) {
+			return;
+		}
+
+		if (erreur.length() < 1) {
+			return;
+		}
+		Integer codeErreur = Integer.parseInt(erreur.charAt(1) + "");
+		
+		System.out.println(codeErreur);
+		if (codeErreur <= 8) {
+			return;
+		}
+
+		// if the erreur is RST:
+		// Set Produit:
+		Avenant avenant = detailProduitAttente.getAvenant();
+
+		BudgetAchatAv budget = budgetAchatAvDao.getOneBudgetAchatByAvenantId(avenant.getId());
+		if (budget == null) {
+			BudgetAchatAv rowBudget = new BudgetAchatAv();
+			rowBudget.setAvenant(avenant);
+			budget = budgetAchatAvDao.saveBudgetAchatAv(rowBudget);
+		}
+
+		MetreAv metre = metreDao.getOneMetreByAvenantId(avenant.getId());
+		if (metre == null) {
+			MetreAv rowMetre = new MetreAv();
+			rowMetre.setBudget(budget);
+			metre = metreDao.saveMetreAv(metre);
+		}
+
+		Produit produit = new Produit();
+		produit.setDesignation(detailProduitAttente.getProduit());
+		produit.setMetre(metre);
+
+		// Save produit:
+		produit = produitDao.saveProduit(produit);
+
+		// Set Lot:
+		Lot lot = new Lot();
+		lot.setDesignation(detailProduitAttente.getLot());
+		lot.setProject(produit.getMetre().getBudget().getAvenant().getProject());
+
+		// Save lot:
+		lot = lotDao.saveLot(lot);
+
+		// Set Tache:
+		Tache tache = new Tache();
+		tache.setOrdreMef(detailProduitAttente.getOrdre());
+		tache.setTitreActivite(detailProduitAttente.getActivite());
+		tache.setProduit(produit);
+		tache.setLot(lot);
+		tache.setUnite(detailProduitAttente.getUpb());
+		if (!detailProduitAttente.getCle())
+			tache.setActivitePrincipale(new Tache());
+
+		// Save Tache:
+		tache = tacheDao.saveTache(tache);
+
+		// Set DetailProduit:
+		DetailProduit detailProduit = new DetailProduit();
+		detailProduit.setTache(tache);
+		detailProduit.setReference(detailProduitAttente.getReference());
+		detailProduit.setNbr(detailProduitAttente.getNbr());
+		detailProduit.setDim1(detailProduitAttente.getDim1());
+		detailProduit.setDim2(detailProduitAttente.getDim2());
+		detailProduit.setDim3(detailProduitAttente.getDim3());
+
+		// Save DetailProduit:
+		detailProduitDao.saveDetailProduit(detailProduit);
+
+	}
+
+	public void valider(Integer id) {
+		// get all detailProduitAttentes:
+		List<DetailProduitAttente> detailProduitAttentes = detailProduitAttenteDao.getDetailProduitAttentesByAvenantId(id);
+
+		for (DetailProduitAttente detailProduitAttente : detailProduitAttentes) {
+			try {
+				validerDetailProduit(detailProduitAttente);
+			} catch (Exception e) {
+			}
+			try {
+				// delete detailProduitAttente from the table
+				detailProduitAttenteDao.deleteDetailProduitAttente(detailProduitAttente.getId());
+			} catch (Exception e) {
+			}
+		}
+
+	}
+}

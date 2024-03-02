@@ -1,0 +1,19 @@
+package com.amenal.amenalbackend.adapter.project.out.postgres.repositories;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.amenal.amenalbackend.adapter.project.out.postgres.entities.DetailChargeAttenteEntity;
+
+@Repository
+public interface DetailChargeAttenteRepository extends JpaRepository<DetailChargeAttenteEntity, Integer>{
+
+	@Query("SELECT d FROM DetailChargeAttenteEntity d WHERE d.id <> :id AND d.avenant.id = :avenantId")
+	List<DetailChargeAttenteEntity> getOtherDetailsById(Integer id, Integer avenantId);
+	
+	@Query("SELECT d FROM DetailChargeAttenteEntity d WHERE d.avenant.id = :id")
+	List<DetailChargeAttenteEntity> getDetailChargeAttentesByAvenantId(Integer id);
+}
