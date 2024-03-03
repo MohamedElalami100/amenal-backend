@@ -112,7 +112,7 @@ public class DetailDelaiTableDaoAdapter implements DetailDelaiTableDao {
 		// Iterate over each tache
 		for (Tache tache : taches) {
 
-			DetailDelaiTableDto detailDelaiTableDto = new DetailDelaiTableDto(tache.getOrdreMef(),
+			DetailDelaiTableDto detailDelaiTableDto = new DetailDelaiTableDto(tache.getId(), tache.getOrdreMef(),
 					tache.getProduit().getDesignation(), tache.getLot().getDesignation(), tache.getTitreActivite(),
 					tache.getUnite(), tache.getCleAttachement(), tache.getDateDebut(), tache.getDelai(),
 					tache.getDateFin(), tache.getProduit().getId(), tache.getLot().getId(), tache.getId());

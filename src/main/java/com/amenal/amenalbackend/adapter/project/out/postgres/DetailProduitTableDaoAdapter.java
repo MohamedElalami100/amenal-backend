@@ -118,7 +118,7 @@ public class DetailProduitTableDaoAdapter implements DetailProduitTableDao {
 					.collect(Collectors.toList());
 
 			for (DetailProduit detailProduit : detailProduits) {
-				DetailProduitTableDto detailProduitTableDto = new DetailProduitTableDto(detailProduit.getOrdreMef(),
+				DetailProduitTableDto detailProduitTableDto = new DetailProduitTableDto(detailProduit.getId(), detailProduit.getOrdreMef(),
 						tache.getProduit().getDesignation(), tache.getLot().getDesignation(), tache.getTitreActivite(),
 						tache.getUnite(), tache.getCleAttachement(), detailProduit.getReference(),
 						detailProduit.getNbr(), detailProduit.getDim1(), detailProduit.getDim2(),

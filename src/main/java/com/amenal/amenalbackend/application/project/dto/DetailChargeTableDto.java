@@ -3,6 +3,7 @@ package com.amenal.amenalbackend.application.project.dto;
 import java.time.LocalDate;
 
 public class DetailChargeTableDto {
+	private Integer id;
 	private String ordre;
 	private String produit;
 	private String lot;
@@ -22,10 +23,11 @@ public class DetailChargeTableDto {
 	private Integer lotId;
 	private Integer activiteId;
 
-	public DetailChargeTableDto(String ordre, String produit, String lot, String activite, String upb, Boolean cle,
+	public DetailChargeTableDto(Integer id, String ordre, String produit, String lot, String activite, String upb, Boolean cle,
 			String charge, String nature, String ucb, Double qcb, Double pcb, Double mcb, String rcb, Double qpb,
 			LocalDate ddb, Integer produitId, Integer lotId, Integer activiteId) {
 		super();
+		this.id = id;
 		this.ordre = ordre;
 		this.produit = produit;
 		this.lot = lot;
@@ -48,6 +50,14 @@ public class DetailChargeTableDto {
 
 	public DetailChargeTableDto() {
 		super();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getOrdre() {

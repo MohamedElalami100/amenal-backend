@@ -129,7 +129,7 @@ public class DetailQualiteTableDaoAdapter implements DetailQualiteTableDao {
 						.collect(Collectors.toList());
 
 				for (DetailQualite detailQualite : detailQualites) {
-					DetailQualiteTableDto detailQualiteTableDto = new DetailQualiteTableDto(detailQualite.getOrdreMef(),
+					DetailQualiteTableDto detailQualiteTableDto = new DetailQualiteTableDto(detailQualite.getId(), detailQualite.getOrdreMef(),
 							tache.getProduit().getDesignation(), tache.getLot().getDesignation(),
 							tache.getTitreActivite(), tache.getUnite(), tache.getCleAttachement(),
 							groupe.getTitre(), detailQualite.getAffaire(), tache.getProduit().getId(),

@@ -119,7 +119,7 @@ public class DetailChargeTableDaoAdapter implements DetailChargeTableDao {
 					.collect(Collectors.toList());
 
 			for (DetailCharge detailCharge : detailCharges) {
-				DetailChargeTableDto detailChargeTableDto = new DetailChargeTableDto(detailCharge.getOrdreMef(),
+				DetailChargeTableDto detailChargeTableDto = new DetailChargeTableDto(detailCharge.getId(), detailCharge.getOrdreMef(),
 						tache.getProduit().getDesignation(), tache.getLot().getDesignation(), tache.getTitreActivite(),
 						tache.getUnite(), tache.getCleAttachement(), detailCharge.getDesignation(),
 						detailCharge.getNature().getNature(), detailCharge.getUnite(), detailCharge.getQte(),

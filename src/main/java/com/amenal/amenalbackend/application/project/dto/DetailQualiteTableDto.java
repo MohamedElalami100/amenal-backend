@@ -1,6 +1,7 @@
 package com.amenal.amenalbackend.application.project.dto;
 
 public class DetailQualiteTableDto {
+	private Integer id;
 	private String ordre;
 	private String produit;
 	private String lot;
@@ -13,9 +14,10 @@ public class DetailQualiteTableDto {
 	private Integer lotId;
 	private Integer activiteId;
 
-	public DetailQualiteTableDto(String ordre, String produit, String lot, String activite, String upb, Boolean cle,
+	public DetailQualiteTableDto(Integer id, String ordre, String produit, String lot, String activite, String upb, Boolean cle,
 			String groupe, String pointDeControle, Integer produitId, Integer lotId, Integer activiteId) {
 		super();
+		this.id = id;
 		this.ordre = ordre;
 		this.produit = produit;
 		this.lot = lot;
@@ -31,6 +33,14 @@ public class DetailQualiteTableDto {
 
 	public DetailQualiteTableDto() {
 		super();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getOrdre() {
