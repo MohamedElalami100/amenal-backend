@@ -12,6 +12,7 @@ import com.amenal.amenalbackend.application.project.port.out.DetailProduitDao;
 import com.amenal.amenalbackend.application.project.port.out.LotDao;
 import com.amenal.amenalbackend.application.project.port.out.ProduitDao;
 import com.amenal.amenalbackend.application.project.port.out.TacheDao;
+import com.amenal.amenalbackend.infrastructure.exception.DuplicateElementException;
 
 public class SaveViaDetailProduitAttenteUseCase {
 	private TacheDao tacheDao;
@@ -86,7 +87,12 @@ public class SaveViaDetailProduitAttenteUseCase {
 		detailProduit.setDim3(detailProduitAttente.getDim3());
 
 		// Save DetailProduit:
-		detailProduitDao.saveDetailProduit(detailProduit);
+		try {
+			detailProduitDao.saveDetailProduit(detailProduit);
+		} catch (DuplicateElementException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

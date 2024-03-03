@@ -10,6 +10,7 @@ import com.amenal.amenalbackend.application.project.port.out.DetailDelaiAttenteD
 import com.amenal.amenalbackend.application.project.port.out.LotDao;
 import com.amenal.amenalbackend.application.project.port.out.ProduitDao;
 import com.amenal.amenalbackend.application.project.port.out.TacheDao;
+import com.amenal.amenalbackend.infrastructure.exception.DuplicateElementException;
 
 public class SaveViaDetailDelaiAttenteUseCase {
 	private TacheDao tacheDao;
@@ -76,7 +77,12 @@ public class SaveViaDetailDelaiAttenteUseCase {
 		tache.setDelai(detailDelaiAttente.getDlb());
 		
 		// Save DetailDelai:
-		tache = tacheDao.updateTache(tache);
+		try {
+			tache = tacheDao.updateTache(tache);
+		} catch (DuplicateElementException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

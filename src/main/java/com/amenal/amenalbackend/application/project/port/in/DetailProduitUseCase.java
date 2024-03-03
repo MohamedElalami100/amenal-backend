@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.amenal.amenalbackend.application.project.domain.DetailProduit;
 import com.amenal.amenalbackend.application.project.port.out.DetailProduitDao;
+import com.amenal.amenalbackend.infrastructure.exception.DuplicateElementException;
 
 public class DetailProduitUseCase {
 	
@@ -21,11 +22,11 @@ public class DetailProduitUseCase {
 		return banqueDao.findAllDetailProduits();
 	}
 	
-	public DetailProduit saveDetailProduit(DetailProduit banque) {
+	public DetailProduit saveDetailProduit(DetailProduit banque) throws DuplicateElementException {
 		return banqueDao.saveDetailProduit(banque);
 	}
 	
-	public DetailProduit updateDetailProduit(DetailProduit banque) {
+	public DetailProduit updateDetailProduit(DetailProduit banque) throws DuplicateElementException {
 		return banqueDao.updateDetailProduit(banque);
 	}
 	

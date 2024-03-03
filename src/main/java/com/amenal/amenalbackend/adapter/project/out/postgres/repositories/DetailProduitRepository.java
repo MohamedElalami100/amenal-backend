@@ -15,4 +15,7 @@ public interface DetailProduitRepository extends JpaRepository<DetailProduitEnti
 	   
 	    @Query("SELECT l FROM DetailProduitEntity l WHERE l.tache.produit.metre.budget.avenant.id = :avenantId")
 	    List<DetailProduitEntity> getDetailProduitsByAvenantId(Integer avenantId);
+
+		@Query("SELECT l FROM DetailProduitEntity l WHERE l.tache.id = :tacheId AND l.reference = :reference")
+		List<DetailProduitEntity> getDetailProduitsByTacheIdAndDesignation(Integer id, String reference);
 }

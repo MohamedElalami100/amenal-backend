@@ -12,6 +12,7 @@ import com.amenal.amenalbackend.adapter.project.out.postgres.entities.DetailProd
 import com.amenal.amenalbackend.adapter.project.out.postgres.repositories.DetailProduitRepository;
 import com.amenal.amenalbackend.application.project.domain.DetailProduit;
 import com.amenal.amenalbackend.application.project.port.out.DetailProduitDao;
+import com.amenal.amenalbackend.infrastructure.exception.DuplicateElementException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,16 +42,44 @@ public class DetailProduitDaoAdapter implements DetailProduitDao {
 	}
 
 	@Override
-	public DetailProduit saveDetailProduit(DetailProduit detailProduit) {
+	public DetailProduit saveDetailProduit(DetailProduit detailProduit) throws DuplicateElementException {
+		try {
+			// if there is a detailProduit with the same designation in the same avenant:
+			List<DetailProduitEntity> sameDetailProduitEntities = detailProduitRepository.getDetailProduitsByTacheIdAndDesignation(
+					detailProduit.getTache().getId(), detailProduit.getReference());
+			List<DetailProduit> sameDetailProduits = sameDetailProduitEntities.stream()
+					.map(detailProduitEntity -> modelMapper.map(detailProduitEntity, DetailProduit.class)).collect(Collectors.toList());
+			if (!sameDetailProduits.isEmpty()) {
+				throw new DuplicateElementException("Charge existe deja");
+			}
+		} catch (NullPointerException e) {
+			System.out.print(e);
+		}
+		// if not:
 		DetailProduitEntity detailProduitEntity = modelMapper.map(detailProduit, DetailProduitEntity.class);
 		DetailProduitEntity savedEntity = detailProduitRepository.save(detailProduitEntity);
 		return modelMapper.map(savedEntity, DetailProduit.class);
 	}
 
 	@Override
-	public DetailProduit updateDetailProduit(DetailProduit detailProduit) {
+	public DetailProduit updateDetailProduit(DetailProduit detailProduit) throws DuplicateElementException {
 		DetailProduitEntity existingEntity = detailProduitRepository.findById(detailProduit.getId()).orElseThrow();
 
+		try {
+			// if there is a detailProduit with the same designation in the same avenant:
+			if(!detailProduit.getReference().equals(existingEntity.getReference())) {
+				List<DetailProduitEntity> sameDetailProduitEntities = detailProduitRepository.getDetailProduitsByTacheIdAndDesignation(
+						detailProduit.getTache().getId(), detailProduit.getReference());
+				List<DetailProduit> sameDetailProduits = sameDetailProduitEntities.stream()
+						.map(detailProduitEntity -> modelMapper.map(detailProduitEntity, DetailProduit.class)).collect(Collectors.toList());
+				if (!sameDetailProduits.isEmpty()) {
+					throw new DuplicateElementException("Charge existe deja");
+				}
+			}
+		} catch (NullPointerException e) {
+			System.out.print(e);
+		}
+		// if not:
 		// Use ModelMapper to map non-null properties from DetailProduit to existingEntity
 		modelMapper.map(detailProduit, existingEntity);
 
