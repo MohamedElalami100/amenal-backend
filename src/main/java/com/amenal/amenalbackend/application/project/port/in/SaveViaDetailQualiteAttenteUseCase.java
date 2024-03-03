@@ -2,21 +2,16 @@ package com.amenal.amenalbackend.application.project.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.application.project.domain.Avenant;
-import com.amenal.amenalbackend.application.project.domain.BudgetAchatAv;
 import com.amenal.amenalbackend.application.project.domain.DetailQualite;
 import com.amenal.amenalbackend.application.project.domain.DetailQualiteAttente;
 import com.amenal.amenalbackend.application.project.domain.GrpQualite;
 import com.amenal.amenalbackend.application.project.domain.Lot;
-import com.amenal.amenalbackend.application.project.domain.MetreAv;
 import com.amenal.amenalbackend.application.project.domain.Produit;
 import com.amenal.amenalbackend.application.project.domain.Tache;
-import com.amenal.amenalbackend.application.project.port.out.BudgetAchatAvDao;
 import com.amenal.amenalbackend.application.project.port.out.DetailQualiteAttenteDao;
 import com.amenal.amenalbackend.application.project.port.out.DetailQualiteDao;
 import com.amenal.amenalbackend.application.project.port.out.GrpQualiteDao;
 import com.amenal.amenalbackend.application.project.port.out.LotDao;
-import com.amenal.amenalbackend.application.project.port.out.MetreAvDao;
 import com.amenal.amenalbackend.application.project.port.out.ProduitDao;
 import com.amenal.amenalbackend.application.project.port.out.TacheDao;
 
@@ -26,21 +21,17 @@ public class SaveViaDetailQualiteAttenteUseCase {
 	private ProduitDao produitDao;
 	private DetailQualiteDao detailQualiteDao;
 	private GrpQualiteDao grpQualiteDao;
-	private MetreAvDao metreDao;
-	private BudgetAchatAvDao budgetAchatAvDao;
+
 	private DetailQualiteAttenteDao detailQualiteAttenteDao;
 	
 	public SaveViaDetailQualiteAttenteUseCase(TacheDao tacheDao, LotDao lotDao, ProduitDao produitDao,
-			DetailQualiteDao detailQualiteDao, GrpQualiteDao grpQualiteDao, MetreAvDao metreDao,
-			BudgetAchatAvDao budgetAchatAvDao, DetailQualiteAttenteDao detailQualiteAttenteDao) {
+			DetailQualiteDao detailQualiteDao, GrpQualiteDao grpQualiteDao, DetailQualiteAttenteDao detailQualiteAttenteDao) {
 		super();
 		this.tacheDao = tacheDao;
 		this.lotDao = lotDao;
 		this.produitDao = produitDao;
 		this.detailQualiteDao = detailQualiteDao;
 		this.grpQualiteDao = grpQualiteDao;
-		this.metreDao = metreDao;
-		this.budgetAchatAvDao = budgetAchatAvDao;
 		this.detailQualiteAttenteDao = detailQualiteAttenteDao;
 	}
 
@@ -61,25 +52,9 @@ public class SaveViaDetailQualiteAttenteUseCase {
 
 		// if the erreur is RST:
 		// Set Produit:
-		Avenant avenant = detailQualiteAttente.getAvenant();
-
-		BudgetAchatAv budget = budgetAchatAvDao.getOneBudgetAchatByAvenantId(avenant.getId());
-		if (budget == null) {
-			BudgetAchatAv rowBudget = new BudgetAchatAv();
-			rowBudget.setAvenant(avenant);
-			budget = budgetAchatAvDao.saveBudgetAchatAv(rowBudget);
-		}
-
-		MetreAv metre = metreDao.getOneMetreByAvenantId(avenant.getId());
-		if (metre == null) {
-			MetreAv rowMetre = new MetreAv();
-			rowMetre.setBudget(budget);
-			metre = metreDao.saveMetreAv(metre);
-		}
-
 		Produit produit = new Produit();
 		produit.setDesignation(detailQualiteAttente.getProduit());
-		produit.setMetre(metre);
+		produit.setMetre(detailQualiteAttente.getMetre());
 
 		// Save produit:
 		produit = produitDao.saveProduit(produit);

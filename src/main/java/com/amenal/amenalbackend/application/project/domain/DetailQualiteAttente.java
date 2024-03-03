@@ -11,10 +11,10 @@ public class DetailQualiteAttente {
 	private String groupe;
 	private String pointDeControle;
 	private String erreur;
-	private Avenant avenant;
+	private MetreAv metre;
 
 	public DetailQualiteAttente(Integer id, String ordre, String produit, String lot, String activite, String upb, Boolean cle,
-			String groupe, String pointDeControle, String erreur, Avenant avenant) {
+			String groupe, String pointDeControle, String erreur, MetreAv metre) {
 		super();
 		this.id = id;
 		this.ordre = ordre;
@@ -26,7 +26,7 @@ public class DetailQualiteAttente {
 		this.groupe = groupe;
 		this.pointDeControle = pointDeControle;
 		this.erreur = erreur;
-		this.avenant = avenant;
+		this.metre = metre;
 	}
 
 	public DetailQualiteAttente() {
@@ -113,12 +113,12 @@ public class DetailQualiteAttente {
 		this.erreur = erreur;
 	}
 
-	public Avenant getAvenant() {
-		return avenant;
+	public MetreAv getMetre() {
+		return metre;
 	}
 
-	public void setAvenant(Avenant avenant) {
-		this.avenant = avenant;
+	public void setAvenant(MetreAv metre) {
+		this.metre = metre;
 	}
 
 }

@@ -223,34 +223,30 @@ public class AmenalBackEndConfig {
 
 	@Bean
 	public SaveViaDetailChargeAttenteUseCase saveViaDetailChargeAttenteUseCase(TacheDao tacheDao, LotDao lotDao,
-			ProduitDao produitDao, DetailChargeDao detailChargeDao, MetreAvDao metreDao,
-			BudgetAchatAvDao budgetAchatAvDao, DetailChargeAttenteDao detailChargeAttenteDao) {
-		return new SaveViaDetailChargeAttenteUseCase(tacheDao, lotDao, produitDao, detailChargeDao, metreDao,
-				budgetAchatAvDao, detailChargeAttenteDao);
+			ProduitDao produitDao, DetailChargeDao detailChargeDao, DetailChargeAttenteDao detailChargeAttenteDao) {
+		return new SaveViaDetailChargeAttenteUseCase(tacheDao, lotDao, produitDao, detailChargeDao,
+				detailChargeAttenteDao);
 	}
 
 	@Bean
 	public SaveViaDetailProduitAttenteUseCase saveViaDetailProduitAttenteUseCase(TacheDao tacheDao, LotDao lotDao,
-			ProduitDao produitDao, DetailProduitDao detailProduitDao, MetreAvDao metreDao,
-			BudgetAchatAvDao budgetAchatAvDao, DetailProduitAttenteDao detailProduitAttenteDao) {
-		return new SaveViaDetailProduitAttenteUseCase(tacheDao, lotDao, produitDao, detailProduitDao, metreDao,
-				budgetAchatAvDao, detailProduitAttenteDao);
+			ProduitDao produitDao, DetailProduitDao detailProduitDao, DetailProduitAttenteDao detailProduitAttenteDao) {
+		return new SaveViaDetailProduitAttenteUseCase(tacheDao, lotDao, produitDao, detailProduitDao,
+				detailProduitAttenteDao);
 	}
 
 	@Bean
 	public SaveViaDetailDelaiAttenteUseCase saveViaDetailDelaiAttenteUseCase(TacheDao tacheDao, LotDao lotDao,
-			ProduitDao produitDao, MetreAvDao metreDao, BudgetAchatAvDao budgetAchatAvDao,
-			DetailDelaiAttenteDao detailDelaiAttenteDao) {
-		return new SaveViaDetailDelaiAttenteUseCase(tacheDao, lotDao, produitDao, metreDao, budgetAchatAvDao,
-				detailDelaiAttenteDao);
+			ProduitDao produitDao, DetailDelaiAttenteDao detailDelaiAttenteDao) {
+		return new SaveViaDetailDelaiAttenteUseCase(tacheDao, lotDao, produitDao, detailDelaiAttenteDao);
 	}
 
 	@Bean
 	public SaveViaDetailQualiteAttenteUseCase saveViaDetailQualiteAttenteUseCase(TacheDao tacheDao, LotDao lotDao,
-			ProduitDao produitDao, DetailQualiteDao detailQualiteDao, GrpQualiteDao grpQualiteDao, MetreAvDao metreDao,
-			BudgetAchatAvDao budgetAchatAvDao, DetailQualiteAttenteDao detailQualiteAttenteDao) {
+			ProduitDao produitDao, DetailQualiteDao detailQualiteDao, GrpQualiteDao grpQualiteDao,
+			DetailQualiteAttenteDao detailQualiteAttenteDao) {
 		return new SaveViaDetailQualiteAttenteUseCase(tacheDao, lotDao, produitDao, detailQualiteDao, grpQualiteDao,
-				metreDao, budgetAchatAvDao, detailQualiteAttenteDao);
+				detailQualiteAttenteDao);
 	}
 
 	@Bean

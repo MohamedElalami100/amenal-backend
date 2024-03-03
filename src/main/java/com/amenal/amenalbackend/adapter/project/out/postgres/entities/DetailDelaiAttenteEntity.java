@@ -2,6 +2,7 @@ package com.amenal.amenalbackend.adapter.project.out.postgres.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -48,12 +49,13 @@ public class DetailDelaiAttenteEntity {
     @Column(name = "erreur")
     private String erreur;
 
-    @ManyToOne
-    @JoinColumn(name = "id_avenant")
-    private AvenantEntity avenant;
+    // Fk objects:
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_metre_av")
+    private MetreAvEntity metre;
 	
 	public DetailDelaiAttenteEntity(Integer id, String ordre, String produit, String lot, String activite, String upb, Boolean cle,
-			LocalDate ddb, Integer dlb, LocalDate dfb, String erreur, AvenantEntity avenant) {
+			LocalDate ddb, Integer dlb, LocalDate dfb, String erreur, MetreAvEntity metre) {
 		super();
 		this.id = id;
 		this.ordre = ordre;
@@ -66,7 +68,7 @@ public class DetailDelaiAttenteEntity {
 		this.dlb = dlb;
 		this.dfb = dfb;
 		this.erreur = erreur;
-		this.avenant = avenant;
+		this.metre = metre;
 	}
 
 	public DetailDelaiAttenteEntity() {
@@ -161,12 +163,12 @@ public class DetailDelaiAttenteEntity {
 		this.erreur = erreur;
 	}
 
-	public AvenantEntity getAvenant() {
-		return avenant;
+	public MetreAvEntity getMetre() {
+		return metre;
 	}
 
-	public void setAvenant(AvenantEntity avenant) {
-		this.avenant = avenant;
+	public void setMetre(MetreAvEntity metre) {
+		this.metre = metre;
 	}
 	
 }

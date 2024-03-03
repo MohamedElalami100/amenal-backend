@@ -20,7 +20,7 @@ public class DetailChargeAttente {
 	private Double qpb;
 	private LocalDate ddb;
 	private String erreur;
-	private Avenant avenant;
+	private MetreAv metre;
 
 	public DetailChargeAttente() {
 		super();
@@ -28,7 +28,7 @@ public class DetailChargeAttente {
 
 	public DetailChargeAttente(Integer id, String ordre, String produit, String lot, String activite, String upb, Boolean cle,
 			String charge, String nature, String ucb, Double qcb, Double pcb, Double mcb, String rcb, Double qpb,
-			LocalDate ddb, String erreur, Avenant avenant) {
+			LocalDate ddb, String erreur, MetreAv metre) {
 		super();
 		this.id = id;
 		this.ordre = ordre;
@@ -47,7 +47,7 @@ public class DetailChargeAttente {
 		this.qpb = qpb;
 		this.ddb = ddb;
 		this.erreur = erreur;
-		this.avenant = avenant;
+		this.metre = metre;
 	}
 
 	
@@ -186,13 +186,13 @@ public class DetailChargeAttente {
 	public void setErreur(String erreur) {
 		this.erreur = erreur;
 	}
-
-	public Avenant getAvenant() {
-		return avenant;
+	
+	public MetreAv getMetre() {
+		return metre;
 	}
 
-	public void setAvenant(Avenant avenant) {
-		this.avenant = avenant;
+	public void setAvenant(MetreAv metre) {
+		this.metre = metre;
 	}
 
 }

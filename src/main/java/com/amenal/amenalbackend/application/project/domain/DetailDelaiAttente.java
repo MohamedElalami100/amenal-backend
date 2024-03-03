@@ -14,10 +14,10 @@ public class DetailDelaiAttente {
 	private Integer dlb;
 	private LocalDate dfb;
 	private String erreur;
-	private Avenant avenant;
+	private MetreAv metre;
 	
 	public DetailDelaiAttente(Integer id, String ordre, String produit, String lot, String activite, String upb, Boolean cle,
-			LocalDate ddb, Integer dlb, LocalDate dfb, String erreur, Avenant avenant) {
+			LocalDate ddb, Integer dlb, LocalDate dfb, String erreur, MetreAv metre) {
 		super();
 		this.id = id;
 		this.ordre = ordre;
@@ -30,7 +30,7 @@ public class DetailDelaiAttente {
 		this.dlb = dlb;
 		this.dfb = dfb;
 		this.erreur = erreur;
-		this.avenant = avenant;
+		this.metre = metre;
 	}
 
 	public DetailDelaiAttente() {
@@ -125,12 +125,12 @@ public class DetailDelaiAttente {
 		this.erreur = erreur;
 	}
 
-	public Avenant getAvenant() {
-		return avenant;
+	public MetreAv getMetre() {
+		return metre;
 	}
 
-	public void setAvenant(Avenant avenant) {
-		this.avenant = avenant;
+	public void setAvenant(MetreAv metre) {
+		this.metre = metre;
 	}
 	
 }

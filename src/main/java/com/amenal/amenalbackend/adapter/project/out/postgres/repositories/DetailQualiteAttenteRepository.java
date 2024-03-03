@@ -10,9 +10,9 @@ import com.amenal.amenalbackend.adapter.project.out.postgres.entities.DetailQual
 
 @Repository
 public interface DetailQualiteAttenteRepository extends JpaRepository<DetailQualiteAttenteEntity, Integer>{
-	@Query("SELECT d FROM DetailQualiteAttenteEntity d WHERE d.id <> :id AND d.avenant.id = :avenantId")
+	@Query("SELECT d FROM DetailQualiteAttenteEntity d WHERE d.id <> :id AND d.metre.budget.avenant.id = :avenantId")
 	List<DetailQualiteAttenteEntity> getOtherDetailsById(Integer id, Integer avenantId);
 	
-	@Query("SELECT d FROM DetailQualiteAttenteEntity d WHERE d.avenant.id = :id")
+	@Query("SELECT d FROM DetailQualiteAttenteEntity d WHERE d.metre.budget.avenant.id = :id")
 	List<DetailQualiteAttenteEntity> getDetailQualiteAttentesByAvenantId(Integer id);
 }

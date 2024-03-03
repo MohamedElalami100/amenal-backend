@@ -2,17 +2,12 @@ package com.amenal.amenalbackend.application.project.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.application.project.domain.Avenant;
-import com.amenal.amenalbackend.application.project.domain.BudgetAchatAv;
 import com.amenal.amenalbackend.application.project.domain.DetailDelaiAttente;
 import com.amenal.amenalbackend.application.project.domain.Lot;
-import com.amenal.amenalbackend.application.project.domain.MetreAv;
 import com.amenal.amenalbackend.application.project.domain.Produit;
 import com.amenal.amenalbackend.application.project.domain.Tache;
-import com.amenal.amenalbackend.application.project.port.out.BudgetAchatAvDao;
 import com.amenal.amenalbackend.application.project.port.out.DetailDelaiAttenteDao;
 import com.amenal.amenalbackend.application.project.port.out.LotDao;
-import com.amenal.amenalbackend.application.project.port.out.MetreAvDao;
 import com.amenal.amenalbackend.application.project.port.out.ProduitDao;
 import com.amenal.amenalbackend.application.project.port.out.TacheDao;
 
@@ -20,19 +15,15 @@ public class SaveViaDetailDelaiAttenteUseCase {
 	private TacheDao tacheDao;
 	private LotDao lotDao;
 	private ProduitDao produitDao;
-	private MetreAvDao metreDao;
-	private BudgetAchatAvDao budgetAchatAvDao;
 	private DetailDelaiAttenteDao detailDelaiAttenteDao;
 
 	public SaveViaDetailDelaiAttenteUseCase(TacheDao tacheDao, LotDao lotDao, ProduitDao produitDao,
-			MetreAvDao metreDao, BudgetAchatAvDao budgetAchatAvDao,
+			
 			DetailDelaiAttenteDao detailDelaiAttenteDao) {
 		super();
 		this.tacheDao = tacheDao;
 		this.lotDao = lotDao;
 		this.produitDao = produitDao;
-		this.metreDao = metreDao;
-		this.budgetAchatAvDao = budgetAchatAvDao;
 		this.detailDelaiAttenteDao = detailDelaiAttenteDao;
 	}
 
@@ -53,25 +44,9 @@ public class SaveViaDetailDelaiAttenteUseCase {
 
 		// if the erreur is RST:
 		// Set Produit:
-		Avenant avenant = detailDelaiAttente.getAvenant();
-
-		BudgetAchatAv budget = budgetAchatAvDao.getOneBudgetAchatByAvenantId(avenant.getId());
-		if (budget == null) {
-			BudgetAchatAv rowBudget = new BudgetAchatAv();
-			rowBudget.setAvenant(avenant);
-			budget = budgetAchatAvDao.saveBudgetAchatAv(rowBudget);
-		}
-
-		MetreAv metre = metreDao.getOneMetreByAvenantId(avenant.getId());
-		if (metre == null) {
-			MetreAv rowMetre = new MetreAv();
-			rowMetre.setBudget(budget);
-			metre = metreDao.saveMetreAv(metre);
-		}
-
 		Produit produit = new Produit();
 		produit.setDesignation(detailDelaiAttente.getProduit());
-		produit.setMetre(metre);
+		produit.setMetre(detailDelaiAttente.getMetre());
 
 		// Save produit:
 		produit = produitDao.saveProduit(produit);

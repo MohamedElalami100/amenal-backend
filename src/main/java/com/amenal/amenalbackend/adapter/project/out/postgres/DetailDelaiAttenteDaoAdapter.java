@@ -108,7 +108,7 @@ public class DetailDelaiAttenteDaoAdapter implements DetailDelaiAttenteDao {
 
 		// TACHE EXISTE DANS UN AUTRE AVENANT
 		List<TacheEntity> tachesInOtherAvenantEntities = tacheRepository
-				.getTachesInOtherAvenants(detailDelaiAttente.getAvenant().getId());
+				.getTachesInOtherAvenants(detailDelaiAttente.getMetre().getBudget().getAvenant().getId());
 		List<Tache> tachesInOtherAvenants = tachesInOtherAvenantEntities.stream()
 				.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
 
@@ -121,12 +121,12 @@ public class DetailDelaiAttenteDaoAdapter implements DetailDelaiAttenteDao {
 
 		// get taches in same avenant:
 		List<TacheEntity> tachesInSameAvenantEntities = tacheRepository
-				.getTachesByAvenantId(detailDelaiAttente.getAvenant().getId());
+				.getTachesByAvenantId(detailDelaiAttente.getMetre().getBudget().getAvenant().getId());
 		List<Tache> tachesInSameAvenants = tachesInSameAvenantEntities.stream()
 				.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
 
 		List<DetailDelaiAttenteEntity> otherDetailEntities = detailDelaiAttenteRepository
-				.getOtherDetailsById(detailDelaiAttente.getId(), detailDelaiAttente.getAvenant().getId());
+				.getOtherDetailsById(detailDelaiAttente.getId(), detailDelaiAttente.getMetre().getBudget().getAvenant().getId());
 		List<DetailDelaiAttente> otherDetailsInAttente = otherDetailEntities.stream()
 				.map(detailEntity -> modelMapper.map(detailEntity, DetailDelaiAttente.class))
 				.collect(Collectors.toList());

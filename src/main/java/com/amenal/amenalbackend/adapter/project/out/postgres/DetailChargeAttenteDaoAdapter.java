@@ -113,7 +113,7 @@ public class DetailChargeAttenteDaoAdapter implements DetailChargeAttenteDao {
 			return "(1)" + erreur;
 
 		//TACHE EXISTE DANS UN AUTRE AVENANT 
-		List<TacheEntity> tachesInOtherAvenantEntities = tacheRepository.getTachesInOtherAvenants(detailChargeAttente.getAvenant().getId());
+		List<TacheEntity> tachesInOtherAvenantEntities = tacheRepository.getTachesInOtherAvenants(detailChargeAttente.getMetre().getBudget().getAvenant().getId());
 		List<Tache> tachesInOtherAvenants = tachesInOtherAvenantEntities.stream().map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class))
 				.collect(Collectors.toList());
 		
@@ -125,11 +125,11 @@ public class DetailChargeAttenteDaoAdapter implements DetailChargeAttenteDao {
 		}
 		
 		//get taches in same avenant:
-		List<TacheEntity> tachesInSameAvenantEntities = tacheRepository.getTachesByAvenantId(detailChargeAttente.getAvenant().getId());
+		List<TacheEntity> tachesInSameAvenantEntities = tacheRepository.getTachesByAvenantId(detailChargeAttente.getMetre().getBudget().getAvenant().getId());
 		List<Tache> tachesInSameAvenants = tachesInSameAvenantEntities.stream().map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class))
 				.collect(Collectors.toList());
 		
-		List<DetailChargeAttenteEntity> otherDetailEntities = detailChargeAttenteRepository.getOtherDetailsById(detailChargeAttente.getId(), detailChargeAttente.getAvenant().getId());
+		List<DetailChargeAttenteEntity> otherDetailEntities = detailChargeAttenteRepository.getOtherDetailsById(detailChargeAttente.getId(), detailChargeAttente.getMetre().getBudget().getAvenant().getId());
 		List<DetailChargeAttente> otherDetailsInAttente = otherDetailEntities.stream().map(detailEntity -> modelMapper.map(detailEntity, DetailChargeAttente.class))
 				.collect(Collectors.toList());
 		
@@ -215,7 +215,7 @@ public class DetailChargeAttenteDaoAdapter implements DetailChargeAttenteDao {
 			return "(7)" + erreur;
 		
 		//get detailCharges in same avenant:
-		List<DetailChargeEntity> otherDetailChargeEntities = detailChargeRepository.getDetailChargesByAvenantId(detailChargeAttente.getAvenant().getId());
+		List<DetailChargeEntity> otherDetailChargeEntities = detailChargeRepository.getDetailChargesByAvenantId(detailChargeAttente.getMetre().getBudget().getAvenant().getId());
 		List<DetailCharge> otherDetailCharges = otherDetailChargeEntities.stream().map(detailEntity -> modelMapper.map(detailEntity, DetailCharge.class))
 		.collect(Collectors.toList());
 		

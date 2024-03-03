@@ -2,19 +2,14 @@ package com.amenal.amenalbackend.application.project.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.application.project.domain.Avenant;
-import com.amenal.amenalbackend.application.project.domain.BudgetAchatAv;
 import com.amenal.amenalbackend.application.project.domain.DetailProduit;
 import com.amenal.amenalbackend.application.project.domain.DetailProduitAttente;
 import com.amenal.amenalbackend.application.project.domain.Lot;
-import com.amenal.amenalbackend.application.project.domain.MetreAv;
 import com.amenal.amenalbackend.application.project.domain.Produit;
 import com.amenal.amenalbackend.application.project.domain.Tache;
-import com.amenal.amenalbackend.application.project.port.out.BudgetAchatAvDao;
 import com.amenal.amenalbackend.application.project.port.out.DetailProduitAttenteDao;
 import com.amenal.amenalbackend.application.project.port.out.DetailProduitDao;
 import com.amenal.amenalbackend.application.project.port.out.LotDao;
-import com.amenal.amenalbackend.application.project.port.out.MetreAvDao;
 import com.amenal.amenalbackend.application.project.port.out.ProduitDao;
 import com.amenal.amenalbackend.application.project.port.out.TacheDao;
 
@@ -23,20 +18,16 @@ public class SaveViaDetailProduitAttenteUseCase {
 	private LotDao lotDao;
 	private ProduitDao produitDao;
 	private DetailProduitDao detailProduitDao;
-	private MetreAvDao metreDao;
-	private BudgetAchatAvDao budgetAchatAvDao;
+
 	private DetailProduitAttenteDao detailProduitAttenteDao;
 
 	public SaveViaDetailProduitAttenteUseCase(TacheDao tacheDao, LotDao lotDao, ProduitDao produitDao,
-			DetailProduitDao detailProduitDao, MetreAvDao metreDao, BudgetAchatAvDao budgetAchatAvDao,
-			DetailProduitAttenteDao detailProduitAttenteDao) {
+			DetailProduitDao detailProduitDao, DetailProduitAttenteDao detailProduitAttenteDao) {
 		super();
 		this.tacheDao = tacheDao;
 		this.lotDao = lotDao;
 		this.produitDao = produitDao;
 		this.detailProduitDao = detailProduitDao;
-		this.metreDao = metreDao;
-		this.budgetAchatAvDao = budgetAchatAvDao;
 		this.detailProduitAttenteDao = detailProduitAttenteDao;
 	}
 
@@ -50,7 +41,7 @@ public class SaveViaDetailProduitAttenteUseCase {
 			return;
 		}
 		Integer codeErreur = Integer.parseInt(erreur.charAt(1) + "");
-		
+
 		System.out.println(codeErreur);
 		if (codeErreur <= 8) {
 			return;
@@ -58,25 +49,9 @@ public class SaveViaDetailProduitAttenteUseCase {
 
 		// if the erreur is RST:
 		// Set Produit:
-		Avenant avenant = detailProduitAttente.getAvenant();
-
-		BudgetAchatAv budget = budgetAchatAvDao.getOneBudgetAchatByAvenantId(avenant.getId());
-		if (budget == null) {
-			BudgetAchatAv rowBudget = new BudgetAchatAv();
-			rowBudget.setAvenant(avenant);
-			budget = budgetAchatAvDao.saveBudgetAchatAv(rowBudget);
-		}
-
-		MetreAv metre = metreDao.getOneMetreByAvenantId(avenant.getId());
-		if (metre == null) {
-			MetreAv rowMetre = new MetreAv();
-			rowMetre.setBudget(budget);
-			metre = metreDao.saveMetreAv(metre);
-		}
-
 		Produit produit = new Produit();
 		produit.setDesignation(detailProduitAttente.getProduit());
-		produit.setMetre(metre);
+		produit.setMetre(detailProduitAttente.getMetre());
 
 		// Save produit:
 		produit = produitDao.saveProduit(produit);
@@ -98,7 +73,6 @@ public class SaveViaDetailProduitAttenteUseCase {
 		tache.setUnite(detailProduitAttente.getUpb());
 		tache.setCleAttachement(detailProduitAttente.getCle());
 
-
 		// Save Tache:
 		tache = tacheDao.saveTache(tache);
 
@@ -118,7 +92,8 @@ public class SaveViaDetailProduitAttenteUseCase {
 
 	public void valider(Integer id) {
 		// get all detailProduitAttentes:
-		List<DetailProduitAttente> detailProduitAttentes = detailProduitAttenteDao.getDetailProduitAttentesByAvenantId(id);
+		List<DetailProduitAttente> detailProduitAttentes = detailProduitAttenteDao
+				.getDetailProduitAttentesByAvenantId(id);
 
 		for (DetailProduitAttente detailProduitAttente : detailProduitAttentes) {
 			try {

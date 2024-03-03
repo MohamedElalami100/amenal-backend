@@ -15,10 +15,10 @@ public class DetailProduitAttente {
 	private Double dim3;
 	private Double rls;
 	private String erreur;
-	private Avenant avenant;
+	private MetreAv metre;
 	
 	public DetailProduitAttente(Integer id, String ordre, String produit, String lot, String activite, String upb, Boolean cle,
-			String reference, Double nbr, Double dim1, Double dim2, Double dim3, Double rls, String erreur, Avenant avenant) {
+			String reference, Double nbr, Double dim1, Double dim2, Double dim3, Double rls, String erreur, MetreAv metre) {
 		super();
 		this.id = id;
 		this.ordre = ordre;
@@ -34,7 +34,7 @@ public class DetailProduitAttente {
 		this.dim3 = dim3;
 		this.rls = rls;
 		this.erreur = erreur;
-		this.avenant = avenant;
+		this.metre = metre;
 	}
 
 	public DetailProduitAttente() {
@@ -153,12 +153,12 @@ public class DetailProduitAttente {
 		this.erreur = erreur;
 	}
 
-	public Avenant getAvenant() {
-		return avenant;
+	public MetreAv getMetre() {
+		return metre;
 	}
 
-	public void setAvenant(Avenant avenant) {
-		this.avenant = avenant;
+	public void setAvenant(MetreAv metre) {
+		this.metre = metre;
 	}
 	
 }

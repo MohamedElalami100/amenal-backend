@@ -11,9 +11,9 @@ import com.amenal.amenalbackend.adapter.project.out.postgres.entities.DetailProd
 @Repository
 public interface DetailProduitAttenteRepository extends JpaRepository<DetailProduitAttenteEntity, Integer>{
 	
-	@Query("SELECT d FROM DetailProduitAttenteEntity d WHERE d.id <> :id AND d.avenant.id = :avenantId")
+	@Query("SELECT d FROM DetailProduitAttenteEntity d WHERE d.id <> :id AND d.metre.budget.avenant.id = :avenantId")
 	List<DetailProduitAttenteEntity> getOtherDetailsById(Integer id, Integer avenantId);
 	
-	@Query("SELECT d FROM DetailProduitAttenteEntity d WHERE d.avenant.id = :id")
+	@Query("SELECT d FROM DetailProduitAttenteEntity d WHERE d.metre.budget.avenant.id = :id")
 	List<DetailProduitAttenteEntity> getDetailProduitAttentesByAvenantId(Integer id);
 }
