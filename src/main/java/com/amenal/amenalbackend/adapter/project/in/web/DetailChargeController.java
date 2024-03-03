@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.amenal.amenalbackend.application.project.domain.DetailCharge;
 import com.amenal.amenalbackend.application.project.port.in.DetailChargeUseCase;
+import com.amenal.amenalbackend.infrastructure.exception.DuplicateElementException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -44,7 +45,12 @@ public class DetailChargeController {
 
 	@PostMapping
 	public ResponseEntity<DetailCharge> saveDetailCharge(@RequestBody DetailCharge detailCharge) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(detailChargeUseCase.saveDetailCharge(detailCharge));
+		try {
+			return ResponseEntity.status(HttpStatus.CREATED)
+					.body(detailChargeUseCase.saveDetailCharge(detailCharge));
+		} catch (DuplicateElementException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+		}
 	}
 
 	@PutMapping
@@ -54,6 +60,8 @@ public class DetailChargeController {
 		} catch (NoSuchElementException e) {
 			// return a response with status 404 if an object with id is not found
 			return ResponseEntity.notFound().build();
+		} catch (DuplicateElementException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
 	}
 

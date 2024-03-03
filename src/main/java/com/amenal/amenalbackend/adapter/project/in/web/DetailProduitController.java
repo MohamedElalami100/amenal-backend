@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.amenal.amenalbackend.application.project.domain.DetailProduit;
 import com.amenal.amenalbackend.application.project.port.in.DetailProduitUseCase;
+import com.amenal.amenalbackend.infrastructure.exception.DuplicateElementException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -47,7 +48,11 @@ public class DetailProduitController {
 
 	@PostMapping
 	public ResponseEntity<DetailProduit> saveDetailProduit(@RequestBody DetailProduit detailProduit) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(detailProduitUseCase.saveDetailProduit(detailProduit));
+		try {
+			return ResponseEntity.status(HttpStatus.CREATED).body(detailProduitUseCase.saveDetailProduit(detailProduit));
+		} catch (DuplicateElementException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+		}
 	}
 
 	@PutMapping
@@ -57,6 +62,8 @@ public class DetailProduitController {
 		} catch (NoSuchElementException e) {
 			// return a response with status 404 if an object with id is not found
 			return ResponseEntity.notFound().build();
+		}  catch (DuplicateElementException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
 	}
 
