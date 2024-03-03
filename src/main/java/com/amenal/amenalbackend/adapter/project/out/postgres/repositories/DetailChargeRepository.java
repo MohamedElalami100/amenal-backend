@@ -16,6 +16,6 @@ public interface DetailChargeRepository extends JpaRepository<DetailChargeEntity
     @Query("SELECT l FROM DetailChargeEntity l WHERE l.tache.produit.metre.budget.avenant.id = :avenantId")
     List<DetailChargeEntity> getDetailChargesByAvenantId(Integer avenantId);
 
-    @Query("SELECT l FROM DetailChargeEntity l WHERE l.tache.id = :tacheId AND l.designation = :designation")    
+    @Query("SELECT l FROM DetailChargeEntity l WHERE l.tache.id = :id AND l.designation = :designation")    
 	List<DetailChargeEntity> getDetailChargesByTacheIdAndDesignation(Integer id, String designation);
 }

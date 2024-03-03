@@ -42,7 +42,7 @@ public class GrpQualiteDaoAdapter implements GrpQualiteDao {
 
 	@Override
 	public GrpQualite saveGrpQualite(GrpQualite grpQualite) {
-		// if there is a grpQualite with the same designation in the same project:
+		// if there is a grpQualite with the same designation in the same avenant:
 		List<GrpQualiteEntity> sameGrpQualiteEntities = grpQualiteRepository.getGrpQualitesByAvenantIdAndTitre(
 				grpQualite.getTache().getProduit().getMetre().getBudget().getAvenant().getId(),
 				grpQualite.getTitre());
