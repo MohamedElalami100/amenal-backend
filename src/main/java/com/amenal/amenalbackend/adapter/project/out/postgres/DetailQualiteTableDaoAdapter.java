@@ -80,7 +80,7 @@ public class DetailQualiteTableDaoAdapter implements DetailQualiteTableDao {
 		List<DetailQualiteTableDto> detailQualiteTableDtos = getDetailQualiteTableByProjectId(projectId);
 
 		List<DetailQualiteTableDto> filteredDetailQualite = detailQualiteTableDtos.stream()
-				.filter(obj -> obj.getProduit() == produitDesignation).collect(Collectors.toList());
+				.filter(obj -> obj.getProduit().equalsIgnoreCase(produitDesignation)).collect(Collectors.toList());
 		return filteredDetailQualite;
 	}
 
@@ -99,7 +99,7 @@ public class DetailQualiteTableDaoAdapter implements DetailQualiteTableDao {
 		List<DetailQualiteTableDto> detailQualiteTableDtos = getDetailQualiteTableByProjectId(projectId);
 
 		List<DetailQualiteTableDto> filteredDetailQualite = detailQualiteTableDtos.stream()
-				.filter(obj -> obj.getProduit() == produitDesignation && obj.getLotId() == lotId)
+				.filter(obj -> obj.getProduit().equalsIgnoreCase(produitDesignation) && obj.getLotId() == lotId)
 				.collect(Collectors.toList());
 		return filteredDetailQualite;
 	}
