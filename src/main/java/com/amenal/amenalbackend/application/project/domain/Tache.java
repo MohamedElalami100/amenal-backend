@@ -12,7 +12,7 @@ public class Tache {
 	private String article;
 	private String unite;
 	private String observation;
-	private Boolean lieAttachement;
+	private Boolean cleAttachement;
 	private LocalDate dateSaisie;
 	private Integer delai;
 	private LocalDate dateDebut;
@@ -37,18 +37,15 @@ public class Tache {
 	// Fk objects:
 	private Produit produit;
 	private Lot lot;
-	private Tache activitePrincipale;
 	private List<DetailProduit> detailProduits;
 	private List<DetailCharge> detailCharges;
-	//activiteSecondaire lie
-	private List<Tache> taches;
 
 	public Tache(Integer id, String titreActivite, Double qte, Double prix, String article, String unite,
-			String observation, Boolean lieAttachement, LocalDate dateSaisie, Integer delai, LocalDate dateDebut,
+			String observation, Boolean cleAttachement, LocalDate dateSaisie, Integer delai, LocalDate dateDebut,
 			Integer idPrdParent, String defPrix, Double mncRls, Double mncBda, Double qtePRls, Double qtePBda,
 			Double avp, Integer id2, Integer delaiReel, Boolean choisi, Integer idProcedureDetail,
 			Boolean maj, String descriptif, String ordrePrt, String ordreMef, Integer ordre, Double puRef,
-			Produit produit, Lot lot, Tache activitePrincipale) {
+			Produit produit, Lot lot) {
 		super();
 		this.id = id;
 		this.titreActivite = titreActivite;
@@ -57,7 +54,7 @@ public class Tache {
 		this.article = article;
 		this.unite = unite;
 		this.observation = observation;
-		this.lieAttachement = lieAttachement;
+		this.cleAttachement = cleAttachement;
 		this.dateSaisie = dateSaisie;
 		this.delai = delai;
 		this.dateDebut = dateDebut;
@@ -78,15 +75,8 @@ public class Tache {
 		this.ordreMef = ordreMef;
 		this.ordre = ordre;
 		this.puRef = puRef;
-		if (activitePrincipale != null) {
-			this.produit = activitePrincipale.getProduit();
-			this.lot = activitePrincipale.getLot();		
-		}
-		else {
-			this.produit = produit;
-			this.lot = lot;
-		}
-		this.activitePrincipale = activitePrincipale;
+		this.produit = produit;
+		this.lot = lot;
 	}
 
 	public Tache() {
@@ -107,22 +97,6 @@ public class Tache {
 
 	public void setDetailCharges(List<DetailCharge> detailCharges) {
 		this.detailCharges = detailCharges;
-	}
-
-	public List<Tache> getTaches() {
-		return taches;
-	}
-
-	public void setTaches(List<Tache> taches) {
-		this.taches = taches;
-	}
-
-	public Tache getActivitePrincipale() {
-		return activitePrincipale;
-	}
-
-	public void setActivitePrincipale(Tache activitePrincipale) {
-		this.activitePrincipale = activitePrincipale;
 	}
 
 	public Integer getId() {
@@ -181,12 +155,12 @@ public class Tache {
 		this.observation = observation;
 	}
 
-	public Boolean getLieAttachement() {
-		return lieAttachement;
+	public Boolean getCleAttachement() {
+		return cleAttachement;
 	}
 
-	public void setLieAttachement(Boolean lieAttachement) {
-		this.lieAttachement = lieAttachement;
+	public void setCleAttachement(Boolean cleAttachement) {
+		this.cleAttachement = cleAttachement;
 	}
 
 	public LocalDate getDateSaisie() {
@@ -549,10 +523,6 @@ public class Tache {
 			return null;
 		}
 	}
-
-	public Boolean getCleAttachement() {
-		return activitePrincipale == null;
-	}
 	
 	public Double getQtePBdg() {
 		try {
@@ -574,39 +544,6 @@ public class Tache {
 				qteRefBCalcule += detail.getMontant();		
 			}
 			return qteRefBCalcule;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-	
-	public LocalDate getDateDbtIni() {
-		try {
-			return taches.stream()
-            .map(Tache::getDateDebut)
-            .filter(date -> date != null) // Filter out null dates
-            .min(LocalDate::compareTo).get();
-		} catch (Exception e) {
-			return null;	
-		}
-	}
-	
-	public LocalDate getDateFinIni() {
-		try {
-			return taches.stream()
-            .map(Tache::getDateFin)
-            .filter(date -> date != null) // Filter out null dates
-            .max(LocalDate::compareTo).get();
-		} catch (Exception e) {
-			return null;	
-		}
-	}
-	
-	public Integer getDlaIni() {
-		try {
-			if (getDateDbtIni() == null && getDateFinIni() == null)
-				return 1;
-			else
-				return (int) (getDateFinIni().toEpochDay() - getDateDbtIni().toEpochDay() + 1);
 		} catch (Exception e) {
 			return null;
 		}

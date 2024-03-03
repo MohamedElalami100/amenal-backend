@@ -142,8 +142,7 @@ public class DetailProduitAttenteDaoAdapter implements DetailProduitAttenteDao {
 			tache.setProduit(produit);
 			tache.setLot(lot);
 			tache.setUnite(detail.getUpb());
-			if(!detail.getCle())
-				tache.setActivitePrincipale(new Tache());
+			tache.setCleAttachement(detail.getCle());
 			
 			tachesInSameAvenants.add(tache);
 		}
@@ -225,8 +224,7 @@ public class DetailProduitAttenteDaoAdapter implements DetailProduitAttenteDao {
 			tache.setProduit(produit);
 			tache.setLot(lot);
 			tache.setUnite(detail.getUpb());
-			if(!detail.getCle())
-				tache.setActivitePrincipale(new Tache());
+			tache.setCleAttachement(detail.getCle());
 			
 			DetailProduit detailProduit = new DetailProduit();
 			detailProduit.setTache(tache);

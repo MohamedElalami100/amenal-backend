@@ -142,8 +142,7 @@ public class DetailQualiteAttenteDaoAdapter implements DetailQualiteAttenteDao {
 			tache.setProduit(produit);
 			tache.setLot(lot);
 			tache.setUnite(detail.getUpb());
-			if(!detail.getCle())
-				tache.setActivitePrincipale(new Tache());
+			tache.setCleAttachement(detail.getCle());
 			
 			tachesInSameAvenants.add(tache);
 		}
@@ -223,8 +222,7 @@ public class DetailQualiteAttenteDaoAdapter implements DetailQualiteAttenteDao {
 			tache.setProduit(produit);
 			tache.setLot(lot);
 			tache.setUnite(detail.getUpb());
-			if(!detail.getCle())
-				tache.setActivitePrincipale(new Tache());
+			tache.setCleAttachement(detail.getCle());
 			
 			GrpQualite groupe = new GrpQualite();
 			groupe.setTitre(detail.getGroupe());

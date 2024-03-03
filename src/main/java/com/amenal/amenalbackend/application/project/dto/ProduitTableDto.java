@@ -22,11 +22,11 @@ public class ProduitTableDto {
 	private LocalDate ddb;
 	private Integer dlb;
 	private LocalDate dfb;
-	private List<LotDeProduitDto> lotsDeProduit;
+	private List<LotTableDto> lotsDeProduit;
 
 	public ProduitTableDto(Integer id,String art, String designation, String upb, Double qpm, Double ppm, Double mpm, Double qpb,
 			Double ppb, Double mpb, Double mrg, Double prcRg, LocalDate ddb, Integer dlb, LocalDate dfb,
-			List<LotDeProduitDto> lotsDeProduit) {
+			List<LotTableDto> lotsDeProduit) {
 		super();
 		this.id = id;
 		this.art = art;
@@ -58,11 +58,11 @@ public class ProduitTableDto {
 		this.id = id;
 	}
 
-	public List<LotDeProduitDto> getLotsDeProduit() {
+	public List<LotTableDto> getLotsDeProduit() {
 		return lotsDeProduit;
 	}
 
-	public void setLotsDeProduit(List<LotDeProduitDto> lotsDeProduit) {
+	public void setLotsDeProduit(List<LotTableDto> lotsDeProduit) {
 		this.lotsDeProduit = lotsDeProduit;
 	}
 
@@ -178,14 +178,6 @@ public class ProduitTableDto {
 		this.dfb = dfb;
 	}
 
-	public List<LotDeProduitDto> getLotDeProduit() {
-		return lotsDeProduit;
-	}
-
-	public void setLotDeProduit(List<LotDeProduitDto> lotDeProduit) {
-		this.lotsDeProduit = lotDeProduit;
-	}
-
 	// for sigma functionality
 	private ProduitTableDto sum(ProduitTableDto produitTableDto) {
 		Double sumQpm = this.qpm + produitTableDto.getQpm();
@@ -199,10 +191,10 @@ public class ProduitTableDto {
 		LocalDate minDdb = (this.ddb.isAfter(produitTableDto.getDdb())) ? produitTableDto.getDdb() : this.ddb;
 		LocalDate maxDfb = (this.dfb.isAfter(produitTableDto.getDfb())) ? this.dfb : produitTableDto.getDfb();
 		Integer sumDlb = (int) ChronoUnit.DAYS.between(minDdb, maxDfb) + 1;
-		List<LotDeProduitDto> allLotDeProduits = new ArrayList<>();
+		List<LotTableDto> allLotDeProduits = new ArrayList<>();
 		allLotDeProduits.addAll(this.lotsDeProduit);
-		allLotDeProduits.addAll(produitTableDto.getLotDeProduit());
-		allLotDeProduits = LotDeProduitDto.removeDuplicatesAndSum(allLotDeProduits);
+		allLotDeProduits.addAll(produitTableDto.getLotsDeProduit());
+		allLotDeProduits = LotTableDto.removeDuplicatesAndSum(allLotDeProduits);
 
 		return new ProduitTableDto(this.id, this.art, this.designation, this.upb, sumQpm, sumPpm, sumMpm, sumQpb, sumPpb, sumMpb,
 				sumMrg, sumPrcRg, minDdb, sumDlb, maxDfb, allLotDeProduits);

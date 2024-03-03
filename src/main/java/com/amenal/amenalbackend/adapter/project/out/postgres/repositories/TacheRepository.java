@@ -10,11 +10,8 @@ import com.amenal.amenalbackend.adapter.project.out.postgres.entities.TacheEntit
 
 @Repository
 public interface TacheRepository extends JpaRepository<TacheEntity, Integer> {
-	@Query("SELECT l FROM TacheEntity l WHERE l.produit.id = :produitId AND l.lot.id = :lotId AND l.activitePrincipale IS NULL")
-	List<TacheEntity> getActivitePrincipalesByProduitIdAndLotId(Integer produitId, Integer lotId);
-
-	@Query("SELECT l FROM TacheEntity l WHERE l.activitePrincipale.id = :tacheId")
-	List<TacheEntity> getActiviteSecondairesByActivitePrincipaleId(Integer tacheId);
+	@Query("SELECT l FROM TacheEntity l WHERE l.produit.id = :produitId AND l.lot.id = :lotId")
+	List<TacheEntity> getTachesByProduitIdAndLotId(Integer produitId, Integer lotId);
 
 	@Query("SELECT l FROM TacheEntity l WHERE l.lot.id = :lotId")
 	List<TacheEntity> getActiviteByLotId(Integer lotId);

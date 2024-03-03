@@ -38,8 +38,8 @@ public class TacheEntity {
     @Column(name = "observation")
     private String observation;
 
-    @Column(name = "lie_attachement")
-    private Boolean lieAttachement;
+    @Column(name = "cle_attachement")
+    private Boolean cleAttachement;
 
     @Column(name = "date_saisie")
     private LocalDate dateSaisie;
@@ -112,17 +112,13 @@ public class TacheEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_lot")
     private LotEntity lot;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_activite_principale")
-    private TacheEntity activitePrincipale;
 
 	public TacheEntity(Integer id, String titreActivite, Double qte, Double prix, String article, String unite,
-			String observation, Boolean lieAttachement, LocalDate dateSaisie, Integer delai,
+			String observation, Boolean cleAttachement, LocalDate dateSaisie, Integer delai,
 			LocalDate dateDebut, Integer idPrdParent, String defPrix, Double mncRls, Double mncBda, Double qtePRls,
 			Double qtePBda, Double avp, Integer id2, Double mncBdg, Integer delaiReel, Boolean choisi,
 			Integer idProcedureDetail, Boolean maj, String descriptif, String ordrePrt, String ordreMef, Integer ordre,
-			Double puRef, ProduitEntity produit, LotEntity lot, TacheEntity activitePrincipale) {
+			Double puRef, ProduitEntity produit, LotEntity lot) {
 		super();
 		this.id = id;
 		this.titreActivite = titreActivite;
@@ -131,7 +127,7 @@ public class TacheEntity {
 		this.article = article;
 		this.unite = unite;
 		this.observation = observation;
-		this.lieAttachement = lieAttachement;
+		this.cleAttachement = cleAttachement;
 		this.dateSaisie = dateSaisie;
 		this.delai = delai;
 		this.dateDebut = dateDebut;
@@ -155,7 +151,6 @@ public class TacheEntity {
 		this.puRef = puRef;
 		this.produit = produit;
 		this.lot = lot;
-		this.activitePrincipale = activitePrincipale;
 	}
 
 	public TacheEntity() {
@@ -218,12 +213,12 @@ public class TacheEntity {
 		this.observation = observation;
 	}
 
-	public Boolean getLieAttachement() {
-		return lieAttachement;
+	public Boolean getCleAttachement() {
+		return cleAttachement;
 	}
 
-	public void setLieAttachement(Boolean lieAttachement) {
-		this.lieAttachement = lieAttachement;
+	public void setCleAttachement(Boolean cleAttachement) {
+		this.cleAttachement = cleAttachement;
 	}
 
 	public LocalDate getDateSaisie() {
@@ -408,183 +403,6 @@ public class TacheEntity {
 
 	public void setLot(LotEntity lot) {
 		this.lot = lot;
-	}
-
-	public TacheEntity getActivitePrincipale() {
-		return activitePrincipale;
-	}
-
-	public void setActivitePrincipale(TacheEntity activitePrincipale) {
-		this.activitePrincipale = activitePrincipale;
-	}
-
-	// business methods:
-	public Double getMontantVnt() {
-		try {
-			return prix * qte;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMontantAchat() {
-		try {
-			return prix * qte;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public String getLienPrdAtt() {
-		try {
-			return lot.getId() + "$" + produit.getId();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public LocalDate getDateFin() {
-		try {
-			return (delai < 0) ? null : dateDebut.plusDays(delai - 1);
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getQtePBdg() {
-		return qte;
-	}
-
-	public Double getPucRls() {
-		try {
-			return mncRls / qtePRls;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getPucBda() {
-		try {
-			return mncBda / qtePBda;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMnpRls() {
-		try {
-			return qtePRls * prix;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMnpBda() {
-		try {
-			return qtePBda * prix;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrgRls() {
-		try {
-			return getMnpRls() - mncRls;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrpRls() {
-		try {
-			return (getMnpRls() == 0 || getMnpRls() == null) ? 0 : (getMnpRls() - mncRls) / getMnpRls();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrgBda() {
-		try {
-			return getMnpBda() - mncBda;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrpBda() {
-		try {
-			return (getMnpBda() == 0 || getMnpBda() == null) ? 0 : (getMnpBda() - mncBda) / getMnpRls();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getPucBdg() {
-		try {
-			return mncBdg / getQtePBdg();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMnpBdg() {
-		return getMontantVnt();
-	}
-
-	public Double getMrpBdg() {
-		try {
-			return (getMnpBdg() == 0 || getMnpBdg() == null) ? 0 : (getMnpBdg() - mncBdg) / getMnpBdg();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrgBdg() {
-		try {
-			return getMnpBdg() - mncBdg;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Integer getDelaiPrevu() {
-		try {
-			return (int) (getDateFin().toEpochDay() - dateDebut.toEpochDay() + 1);
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getQteRef() {
-		return qte;
-	}
-
-	public Double getMntRef() {
-		try {
-			return puRef * getQteRef();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrgRef() {
-		try {
-			return getMntRef() - mncBdg;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrpRef() {
-		try {
-			return (getMntRef() == 0 || getMntRef() == null) ? 0 : (getMntRef() - mncBdg) / getMntRef();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-	
-	public Boolean getCleAttachement() {
-		return activitePrincipale == null;
 	}
 
 }

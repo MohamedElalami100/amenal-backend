@@ -34,10 +34,6 @@ public class DetailDelaiTableUseCase {
 		return detailDelaiTableDao.getFilteredDetailDelaiTableByTacheAndProject(projectId, tacheId);
 	}
 	
-	public List<RowDelaiDto> getFilteredDetailDelaiTableByActivitePrincipaleAndProject(Integer tacheId) {
-		return detailDelaiTableDao.getFilteredDetailDelaiTableByActivitePrincipaleAndProject(tacheId);
-	}
-	
 	public List<DetailDelaiTableDto> getDetailDelaiTableByAvenantId(Integer id) {
 		return detailDelaiTableDao.getDetailDelaiTableByAvenantId(id);
 	}
@@ -58,7 +54,4 @@ public class DetailDelaiTableUseCase {
 		return detailDelaiTableDao.getFilteredDetailDelaiTableByTacheAndAvenant(tacheId);
 	}
 	
-	public List<RowDelaiDto> getFilteredDetailDelaiTableByActivitePrincipaleAndAvenant(Integer tacheId) {
-		return detailDelaiTableDao.getFilteredDetailDelaiTableByActivitePrincipaleAndAvenant(tacheId);
-	}
 }

@@ -48,11 +48,6 @@ public class DetailDelaiTableController {
         return ResponseEntity.ok(detailDelaiTableUseCase.getFilteredDetailDelaiTableByTacheAndProject(projectId, tacheId));
     }
 
-    @GetMapping("/activitePrincipale/{tacheId}")
-    public ResponseEntity<List<RowDelaiDto>> getFilteredDetailDelaiTableByActivitePrincipaleAndProject(@PathVariable Integer tacheId) {
-        return ResponseEntity.ok(detailDelaiTableUseCase.getFilteredDetailDelaiTableByActivitePrincipaleAndProject(tacheId));
-    }
-
     @GetMapping("/avenant/{id}")
     public ResponseEntity<List<DetailDelaiTableDto>> getDetailDelaiTableByAvenantId(@PathVariable Integer id) {
         return ResponseEntity.ok(detailDelaiTableUseCase.getDetailDelaiTableByAvenantId(id));
@@ -82,9 +77,4 @@ public class DetailDelaiTableController {
         return ResponseEntity.ok(detailDelaiTableUseCase.getFilteredDetailDelaiTableByTacheAndAvenant(tacheId));
     }
 
-    @GetMapping("/avenant/activitePrincipale/{tacheId}")
-    public ResponseEntity<List<RowDelaiDto>> getFilteredDetailDelaiTableByActivitePrincipaleAndAvenant(
-            @PathVariable Integer tacheId) {
-        return ResponseEntity.ok(detailDelaiTableUseCase.getFilteredDetailDelaiTableByActivitePrincipaleAndAvenant(tacheId));
-    }
 }

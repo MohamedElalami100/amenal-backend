@@ -17,8 +17,6 @@ public interface DetailDelaiTableDao {
 
 	List<RowDelaiDto> getFilteredDetailDelaiTableByTacheAndProject(Integer projectId, Integer tacheId);
 
-	List<RowDelaiDto> getFilteredDetailDelaiTableByActivitePrincipaleAndProject(Integer tacheId);
-
 	// By Avenant
 	List<DetailDelaiTableDto> getDetailDelaiTableByAvenantId(Integer id);
 
@@ -29,7 +27,5 @@ public interface DetailDelaiTableDao {
 
 	List<RowDelaiDto> getFilteredDetailDelaiTableByProduitAndAvenant(Integer produitId);
 
-	List<RowDelaiDto> getFilteredDetailDelaiTableByTacheAndAvenant(Integer tacheId);
-	
-	List<RowDelaiDto> getFilteredDetailDelaiTableByActivitePrincipaleAndAvenant(Integer tacheId);
+	List<RowDelaiDto> getFilteredDetailDelaiTableByTacheAndAvenant(Integer tacheId);	
 }

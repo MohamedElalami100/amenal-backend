@@ -144,8 +144,7 @@ public class DetailDelaiAttenteDaoAdapter implements DetailDelaiAttenteDao {
 			tache.setProduit(produit);
 			tache.setLot(lot);
 			tache.setUnite(detail.getUpb());
-			if (!detail.getCle())
-				tache.setActivitePrincipale(new Tache());
+			tache.setCleAttachement(detail.getCle());
 			tache.setDateDebut(detail.getDdb());
 			tache.setDelai(detail.getDlb());
 

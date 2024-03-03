@@ -95,8 +95,7 @@ public class SaveViaDetailChargeAttenteUseCase {
 		tache.setProduit(produit);
 		tache.setLot(lot);
 		tache.setUnite(detailChargeAttente.getUpb());
-		if (!detailChargeAttente.getCle())
-			tache.setActivitePrincipale(new Tache());
+		tache.setCleAttachement(detailChargeAttente.getCle());
 
 		// Save Tache:
 		tache = tacheDao.saveTache(tache);

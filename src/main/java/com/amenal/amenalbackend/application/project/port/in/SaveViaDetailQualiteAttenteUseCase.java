@@ -99,8 +99,7 @@ public class SaveViaDetailQualiteAttenteUseCase {
 		tache.setProduit(produit);
 		tache.setLot(lot);
 		tache.setUnite(detailQualiteAttente.getUpb());
-		if (!detailQualiteAttente.getCle())
-			tache.setActivitePrincipale(new Tache());
+		tache.setCleAttachement(detailQualiteAttente.getCle());
 
 		// Save Tache:
 		tache = tacheDao.saveTache(tache);

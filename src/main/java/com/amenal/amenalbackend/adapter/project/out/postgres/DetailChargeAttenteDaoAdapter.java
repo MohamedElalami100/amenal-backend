@@ -146,8 +146,7 @@ public class DetailChargeAttenteDaoAdapter implements DetailChargeAttenteDao {
 			tache.setProduit(produit);
 			tache.setLot(lot);
 			tache.setUnite(detail.getUpb());
-			if(!detail.getCle())
-				tache.setActivitePrincipale(new Tache());
+			tache.setCleAttachement(detail.getCle());
 			
 			tachesInSameAvenants.add(tache);
 		}
@@ -233,8 +232,8 @@ public class DetailChargeAttenteDaoAdapter implements DetailChargeAttenteDao {
 			tache.setProduit(produit);
 			tache.setLot(lot);
 			tache.setUnite(detail.getUpb());
-			if(!detail.getCle())
-				tache.setActivitePrincipale(new Tache());
+			tache.setCleAttachement(detail.getCle());
+
 			
 			DetailCharge detailCharge = new DetailCharge();
 			detailCharge.setTache(tache);

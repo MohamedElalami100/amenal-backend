@@ -101,32 +101,6 @@ public class DetailDelaiTableDaoAdapter implements DetailDelaiTableDao {
 	}
 
 	@Override
-	public List<RowDelaiDto> getFilteredDetailDelaiTableByActivitePrincipaleAndProject(Integer tacheId) {
-		List<DetailDelaiTableDto> detailDelaiTableDtos = new ArrayList<>();
-
-		List<TacheEntity> activiteSecondaireEntities = tacheRepository
-				.getActiviteSecondairesByActivitePrincipaleId(tacheId);
-		List<Tache> activiteSecondaires = activiteSecondaireEntities.stream()
-				.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
-
-		// Iterate over each tache
-		for (Tache tache : activiteSecondaires) {
-
-			DetailDelaiTableDto detailDelaiTableDto = new DetailDelaiTableDto(tache.getOrdreMef(),
-					tache.getProduit().getDesignation(), tache.getLot().getDesignation(), tache.getTitreActivite(),
-					tache.getUnite(), tache.getCleAttachement(), tache.getDateDebut(), tache.getDelai(),
-					tache.getDateFin(), tache.getProduit().getId(), tache.getLot().getId(), tache.getId());
-			detailDelaiTableDtos.add(detailDelaiTableDto);
-
-		}
-		List<DetailDelaiTableDto> filteredDetailDelai = detailDelaiTableDtos.stream()
-				.filter(obj -> obj.getActiviteId() == tacheId).collect(Collectors.toList());
-
-		List<RowDelaiDto> rowDetails = DetailDelaiTableDto.transformToRowDelais(filteredDetailDelai);
-		return rowDetails;
-	}
-
-	@Override
 	public List<DetailDelaiTableDto> getDetailDelaiTableByAvenantId(Integer id) {
 		List<DetailDelaiTableDto> detailDelaiTableDtos = new ArrayList<>();
 
@@ -201,32 +175,5 @@ public class DetailDelaiTableDaoAdapter implements DetailDelaiTableDao {
 		List<RowDelaiDto> rowDetails = DetailDelaiTableDto.transformToRowDelais(filteredDetailDelai);
 		return rowDetails;
 	}
-
-	@Override
-	public List<RowDelaiDto> getFilteredDetailDelaiTableByActivitePrincipaleAndAvenant(Integer tacheId) {
-		List<DetailDelaiTableDto> detailDelaiTableDtos = new ArrayList<>();
-
-		List<TacheEntity> activiteSecondaireEntities = tacheRepository
-				.getActiviteSecondairesByActivitePrincipaleId(tacheId);
-		List<Tache> activiteSecondaires = activiteSecondaireEntities.stream()
-				.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
-
-		// Iterate over each tache
-		for (Tache tache : activiteSecondaires) {
-
-			DetailDelaiTableDto detailDelaiTableDto = new DetailDelaiTableDto(tache.getOrdreMef(),
-					tache.getProduit().getDesignation(), tache.getLot().getDesignation(), tache.getTitreActivite(),
-					tache.getUnite(), tache.getCleAttachement(), tache.getDateDebut(), tache.getDelai(),
-					tache.getDateFin(), tache.getProduit().getId(), tache.getLot().getId(), tache.getId());
-			detailDelaiTableDtos.add(detailDelaiTableDto);
-
-		}
-		List<DetailDelaiTableDto> filteredDetailDelai = detailDelaiTableDtos.stream()
-				.filter(obj -> obj.getActiviteId() == tacheId).collect(Collectors.toList());
-
-		List<RowDelaiDto> rowDetails = DetailDelaiTableDto.transformToRowDelais(filteredDetailDelai);
-		return rowDetails;
-	}
-
 
 }

@@ -27,9 +27,8 @@ import com.amenal.amenalbackend.application.project.domain.DetailProduit;
 import com.amenal.amenalbackend.application.project.domain.Lot;
 import com.amenal.amenalbackend.application.project.domain.Produit;
 import com.amenal.amenalbackend.application.project.domain.Tache;
-import com.amenal.amenalbackend.application.project.dto.ActivitePrincipaleDto;
-import com.amenal.amenalbackend.application.project.dto.ActiviteSecondaireDto;
-import com.amenal.amenalbackend.application.project.dto.LotDeProduitDto;
+import com.amenal.amenalbackend.application.project.dto.ActiviteDeLotDto;
+import com.amenal.amenalbackend.application.project.dto.LotTableDto;
 import com.amenal.amenalbackend.application.project.dto.ProduitTableDto;
 import com.amenal.amenalbackend.application.project.port.out.ProduitTableDao;
 
@@ -68,7 +67,7 @@ public class ProduitTableDaoAdapter implements ProduitTableDao {
 		// Fetch all produitEntities and map them to Produit
 		List<ProduitEntity> produitEntities;
 
-		if (charge.equals("null")) 
+		if (charge.equals("null"))
 			produitEntities = produitRepository.getProduitsByAvenantId(id);
 		else
 			produitEntities = produitRepository.getProduitsByAvenantIdAndCharge(id, charge);
@@ -77,7 +76,7 @@ public class ProduitTableDaoAdapter implements ProduitTableDao {
 
 		// Iterate over each Produit
 		for (Produit produit : produits) {
-			List<LotDeProduitDto> lotDeProduitDtos = new ArrayList<>();
+			List<LotTableDto> lotTableDtos = new ArrayList<>();
 
 			// Fetch all LotEntities for the current Produit
 			List<LotEntity> lotEntities = lotRepository.getLotsByProduitId(produit.getId());
@@ -88,113 +87,58 @@ public class ProduitTableDaoAdapter implements ProduitTableDao {
 
 			// Iterate over each Lot for the current Produit
 			for (Lot lot : lots) {
-				List<ActivitePrincipaleDto> activitePrincipaleDtos = new ArrayList<>();
+				List<ActiviteDeLotDto> activiteDeLotDtos = new ArrayList<>();
 
 				// Fetch all ActivitePrincipaleEntities for the current Produit and Lot
-				List<TacheEntity> activitePrincipaleEntities = tacheRepository
-						.getActivitePrincipalesByProduitIdAndLotId(produit.getId(), lot.getId());
-				List<Tache> activitePrincipales = activitePrincipaleEntities.stream()
+				List<TacheEntity> tacheEntities = tacheRepository.getTachesByProduitIdAndLotId(produit.getId(),
+						lot.getId());
+				List<Tache> taches = tacheEntities.stream()
 						.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
 
 				List<Tache> allLotTaches = new ArrayList<>();
 
 				// Iterate over each ActivitePrincipale for the current Produit and Lot
-				for (Tache activitePrincipale : activitePrincipales) {
-					List<ActiviteSecondaireDto> activiteSecondaireDtos = new ArrayList<>();
-
-					// Fetch all ActiviteSecondaireEntities for the current Produit, Lot, and
-					// ActivitePrincipale
-					List<TacheEntity> activiteSecondaireEntities = tacheRepository
-							.getActiviteSecondairesByActivitePrincipaleId(activitePrincipale.getId());
-					List<Tache> activiteSecondaires = activiteSecondaireEntities.stream()
-							.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
-
-					// Iterate over each ActiviteSecondaire for the current Produit, Lot, and
-					// ActivitePrincipale
-					for (Tache activiteSecondaire : activiteSecondaires) {
-
-						// Fetch all DetailChargeEntities for the current ActiviteSecoodaire
-						List<DetailChargeEntity> detailsChargeEntities = detailChargeRepository
-								.getDetailChargeByTacheId(activiteSecondaire.getId());
-						List<DetailCharge> detailCharges = detailsChargeEntities.stream()
-								.map(detailEntity -> modelMapper.map(detailEntity, DetailCharge.class))
-								.collect(Collectors.toList());
-
-						// Set list of DetailCharge to ActivitePrincipale
-						activiteSecondaire.setDetailCharges(detailCharges);
-
-						// Fetch all DetailProduitEntities for the current ActivitePrincipale
-						List<DetailProduitEntity> detailsProduitEntities = detailProduitRepository
-								.getDetailProduitByTacheId(activiteSecondaire.getId());
-						List<DetailProduit> detailProduits = detailsProduitEntities.stream()
-								.map(detailEntity -> modelMapper.map(detailEntity, DetailProduit.class))
-								.collect(Collectors.toList());
-
-						// Set list of DetailProduit to ActivitePrincipale
-						activiteSecondaire.setDetailProduits(detailProduits);
-
-						allLotTaches.add(activiteSecondaire);
-						allProduitTaches.add(activiteSecondaire);
-
-						// Create ActiviteSecondaireDto and add it to the list
-						ActiviteSecondaireDto activiteSecondaireDto = new ActiviteSecondaireDto(
-								activiteSecondaire.getId(), activiteSecondaire.getOrdre(),
-								activiteSecondaire.getTitreActivite(), activiteSecondaire.getUnite(),
-								activiteSecondaire.getQtePBdg(), activiteSecondaire.getPuRef(),
-								activiteSecondaire.getMntRefB(), activiteSecondaire.getQtePBdg(),
-								activiteSecondaire.getPucBdg(), activiteSecondaire.getMncBdg(),
-								activiteSecondaire.getMrgRefB(), activiteSecondaire.getMrpRefB(),
-								activiteSecondaire.getDateDebut(), activiteSecondaire.getDelai(),
-								activiteSecondaire.getDateFin());
-						activiteSecondaireDtos.add(activiteSecondaireDto);
-					}
-					// Set list of ActiviteSecondaires to ActivitePrincipale
-					activiteSecondaires.add(activitePrincipale);
-					activitePrincipale.setTaches(activiteSecondaires);
-
+				for (Tache tache : taches) {
 					// Fetch all DetailChargeEntities for the current ActivitePrincipale
 					List<DetailChargeEntity> detailsChargeEntities = detailChargeRepository
-							.getDetailChargeByTacheId(activitePrincipale.getId());
+							.getDetailChargeByTacheId(tache.getId());
 					List<DetailCharge> detailCharges = detailsChargeEntities.stream()
 							.map(detailEntity -> modelMapper.map(detailEntity, DetailCharge.class))
 							.collect(Collectors.toList());
 
 					// Set list of DetailCharge to ActivitePrincipale
-					activitePrincipale.setDetailCharges(detailCharges);
+					tache.setDetailCharges(detailCharges);
 
 					// Fetch all DetailProduitEntities for the current ActivitePrincipale
 					List<DetailProduitEntity> detailsProduitEntities = detailProduitRepository
-							.getDetailProduitByTacheId(activitePrincipale.getId());
+							.getDetailProduitByTacheId(tache.getId());
 					List<DetailProduit> detailProduits = detailsProduitEntities.stream()
 							.map(detailEntity -> modelMapper.map(detailEntity, DetailProduit.class))
 							.collect(Collectors.toList());
 
 					// Set list of DetailProduit to ActivitePrincipale
-					activitePrincipale.setDetailProduits(detailProduits);
+					tache.setDetailProduits(detailProduits);
 
-					allLotTaches.add(activitePrincipale);
-					allProduitTaches.add(activitePrincipale);
+					allLotTaches.add(tache);
+					allProduitTaches.add(tache);
 
 					// Create ActivitePrincipaleDto and add it to the list
-					ActivitePrincipaleDto activitePrincipaleDto = new ActivitePrincipaleDto(activitePrincipale.getId(),
-							activitePrincipale.getOrdre(), activitePrincipale.getTitreActivite(),
-							activitePrincipale.getUnite(), activitePrincipale.getQtePBdg(),
-							activitePrincipale.getPuRef(), activitePrincipale.getMntRefB(),
-							activitePrincipale.getQtePBdg(), activitePrincipale.getPucBdg(),
-							activitePrincipale.getMncBdg(), activitePrincipale.getMrgRefB(),
-							activitePrincipale.getMrpRefB(), activitePrincipale.getDateDbtIni(),
-							activitePrincipale.getDlaIni(), activitePrincipale.getDateFinIni(), activiteSecondaireDtos);
-					activitePrincipaleDtos.add(activitePrincipaleDto);
+					ActiviteDeLotDto activiteDeLotDto = new ActiviteDeLotDto(tache.getId(), tache.getCleAttachement(),
+							tache.getOrdre(), tache.getTitreActivite(), tache.getUnite(), tache.getQtePBdg(),
+							tache.getPuRef(), tache.getMntRefB(), tache.getQtePBdg(), tache.getPucBdg(),
+							tache.getMncBdg(), tache.getMrgRefB(), tache.getMrpRefB(), tache.getDateDebut(),
+							tache.getDelai(), tache.getDateFin());
+					activiteDeLotDtos.add(activiteDeLotDto);
 				}
 
 				// Set list of ActivitePrincipaleDto to Lot
 				lot.setTaches(allLotTaches);
 
 				// Create LotDeProduitDto and add it to the list
-				LotDeProduitDto lotDeProduitDto = new LotDeProduitDto(lot.getId(), lot.getOrdre(), lot.getDesignation(),
+				LotTableDto lotTableDto = new LotTableDto(lot.getId(), lot.getOrdre(), lot.getDesignation(),
 						lot.getMntRefB(), lot.getMncBdg(), lot.getMrgRefB(), lot.getMrpRefB(), lot.getDateDbtIni(),
-						lot.getDlaIni(), lot.getDateFinIni(), activitePrincipaleDtos);
-				lotDeProduitDtos.add(lotDeProduitDto);
+						lot.getDlaIni(), lot.getDateFinIni(), activiteDeLotDtos);
+				lotTableDtos.add(lotTableDto);
 			}
 
 			// Set list of Tache to Produit
@@ -205,7 +149,7 @@ public class ProduitTableDaoAdapter implements ProduitTableDao {
 					produit.getDesignation(), produit.getUnite(), produit.getQteRef(), produit.getPuRef(),
 					produit.getMntRef(), produit.getPucBdg(), produit.getQteCum(), produit.getMncBdg(),
 					produit.getMrgRef(), produit.getMrpRef(), produit.getDateDbtIni(), produit.getDlaIni(),
-					produit.getDateFinIni(), lotDeProduitDtos);
+					produit.getDateFinIni(), lotTableDtos);
 
 			produitTableDtos.add(produitTableDto);
 		}
