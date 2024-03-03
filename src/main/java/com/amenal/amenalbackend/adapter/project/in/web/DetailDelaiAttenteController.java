@@ -1,6 +1,5 @@
 package com.amenal.amenalbackend.adapter.project.in.web;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -59,17 +58,7 @@ public class DetailDelaiAttenteController {
 
 	@PostMapping("/addAll")
 	public ResponseEntity<List<DetailDelaiAttente>> saveAllDetailDelaiAttentes(@RequestBody List<DetailDelaiAttente> detailDelaiAttentes) {
-		List<DetailDelaiAttente> addedDetails = new ArrayList<>();
-		
-		for(DetailDelaiAttente detailDelaiAttente: detailDelaiAttentes) {
-			try {
-				DetailDelaiAttente addedDetail = detailDelaiAttenteUseCase.saveDetailDelaiAttente(detailDelaiAttente);
-				addedDetails.add(detailDelaiAttenteUseCase.saveDetailDelaiAttenteWithErreur(addedDetail));
-			} catch (Exception e) {
-			}
-		}
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body(addedDetails);
+		return ResponseEntity.status(HttpStatus.CREATED).body(detailDelaiAttenteUseCase.saveAllDetailDelaiAttente(detailDelaiAttentes));
 	}
 	
 	@PutMapping

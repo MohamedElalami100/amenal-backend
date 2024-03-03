@@ -15,12 +15,12 @@ public interface LotRepository extends JpaRepository<LotEntity, Integer> {
     
 	@Query("SELECT l FROM LotEntity l WHERE l.id IN (SELECT t.lot.id FROM TacheEntity t WHERE t.produit.metre.budget.avenant.id = :id)")
     List<LotEntity> getLotsByAvenantId(Integer id);
+	
+	@Query("SELECT p FROM LotEntity p WHERE p.project.id = :id")
+	List<LotEntity> getLotsByProjectId(Integer id);
 
 	@Query("SELECT p FROM LotEntity p WHERE p.project.id = :id AND p.designation = :designation")
 	List<LotEntity> getLotsByProjectIdAndDesignation(Integer id, String designation);
-
-	@Query("SELECT MAX(e.id) FROM LotEntity e")
-	Integer getMaxId();
 	
 	@Query("SELECT l FROM LotEntity l WHERE  l.id IN (SELECT t.lot.id FROM TacheEntity t WHERE t.produit.metre.budget.avenant.id = :id) And :charge IN (SELECT c.designation FROM DetailChargeEntity c WHERE c.tache.lot.id = l.id)")
 	List<LotEntity> getLotsByAvenantIdAndCharge(Integer id, String charge);

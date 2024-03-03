@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.amenal.amenalbackend.application.project.domain.Tache;
 import com.amenal.amenalbackend.application.project.port.in.TacheUseCase;
+import com.amenal.amenalbackend.infrastructure.exception.DuplicateElementException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -44,7 +45,11 @@ public class TacheController {
 
 	@PostMapping
 	public ResponseEntity<Tache> saveTache(@RequestBody Tache tache) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(tacheUseCase.saveTache(tache));
+		try {
+			return ResponseEntity.status(HttpStatus.CREATED).body(tacheUseCase.saveTache(tache));
+		} catch (DuplicateElementException e) {
+	        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+		} 
 	}
 
 	@PostMapping("/addAll")
@@ -59,6 +64,8 @@ public class TacheController {
 		} catch (NoSuchElementException e) {
 			// return a response with status 404 if an object with id is not found
 			return ResponseEntity.notFound().build();
+		} catch (DuplicateElementException e) {
+	        return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
 	}
 

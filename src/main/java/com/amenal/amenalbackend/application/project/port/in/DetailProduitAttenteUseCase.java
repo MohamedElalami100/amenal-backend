@@ -1,5 +1,6 @@
 package com.amenal.amenalbackend.application.project.port.in;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.amenal.amenalbackend.application.project.domain.DetailProduitAttente;
@@ -18,11 +19,11 @@ public class DetailProduitAttenteUseCase {
 	}
 
 	public List<DetailProduitAttente> findAllDetailProduitAttentes() {
-		return banqueDao.findAllDetailProduitAttentes();
+		return updateErreurs(banqueDao.findAllDetailProduitAttentes()) ;
 	}
 	
 	public List<DetailProduitAttente> getDetailProduitAttentesByAvenantId(Integer id) {
-		return banqueDao.getDetailProduitAttentesByAvenantId(id);
+		return updateErreurs(banqueDao.getDetailProduitAttentesByAvenantId(id));
 	}
 	
 	public DetailProduitAttente saveDetailProduitAttente(DetailProduitAttente banque) {
@@ -34,11 +35,39 @@ public class DetailProduitAttenteUseCase {
 	}
 	
 	public DetailProduitAttente updateDetailProduitAttente(DetailProduitAttente banque) {
-		return banqueDao.updateDetailProduitAttente(banque);
-	}
+		DetailProduitAttente detailProduitAttente = banqueDao.updateDetailProduitAttente(banque);
+		return banqueDao.saveDetailProduitAttenteWithErreur(detailProduitAttente);	}
 	
 	public void deleteDetailProduitAttente(Integer id) {
 		banqueDao.deleteDetailProduitAttente(id);
+	}
+	
+	public List<DetailProduitAttente> saveAllDetailProduitAttente(List<DetailProduitAttente> detailProduitAttentes) {
+		List<DetailProduitAttente> addedDetails = new ArrayList<>();
+				
+		for(DetailProduitAttente detailProduitAttente: detailProduitAttentes) {
+			try {
+				DetailProduitAttente addedDetail = banqueDao.saveDetailProduitAttente(detailProduitAttente);
+				addedDetails.add(addedDetail);
+			} catch (Exception e) {
+			}
+		}	
+		
+		return updateErreurs(addedDetails) ;	
+	}
+	
+	private List<DetailProduitAttente> updateErreurs(List<DetailProduitAttente> detailProduitAttentes) {
+		List<DetailProduitAttente> addedDetailsWithErreurs = new ArrayList<>();
+
+		for(DetailProduitAttente detailProduitAttente: detailProduitAttentes) {
+			try {
+				DetailProduitAttente addedDetail = banqueDao.saveDetailProduitAttenteWithErreur(detailProduitAttente);
+				addedDetailsWithErreurs.add(addedDetail);
+			} catch (Exception e) {
+			}
+		}
+		
+		return addedDetailsWithErreurs;
 	}
 	
 

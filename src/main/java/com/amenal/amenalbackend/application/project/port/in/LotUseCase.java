@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.amenal.amenalbackend.application.project.domain.Lot;
 import com.amenal.amenalbackend.application.project.port.out.LotDao;
+import com.amenal.amenalbackend.infrastructure.exception.DuplicateElementException;
 
 public class LotUseCase {
 	
@@ -21,16 +22,31 @@ public class LotUseCase {
 	public List<Lot> getLotsByAvenantId(Integer id) {
 		return lotDao.getLotsByAvenantId(id);
 	}
+	
+	public List<Lot> getLotsByProjectId(Integer id) {
+		return lotDao.getLotsByProjectId(id);
+	}
 
 	public List<Lot> findAllLots() {
 		return lotDao.findAllLots();
 	}
 	
-	public Lot saveLot(Lot lot) {
-		return lotDao.saveLot(lot);
+	public Lot saveLot(Lot lot) throws DuplicateElementException {
+		//if lot existes:
+		List<Lot> currentLots = null;
+		try {
+			currentLots = lotDao.getLotsByProjectId(lot.getProject().getId());
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		Lot savedLot = lotDao.saveLot(lot);
+		if(currentLots != null && currentLots.stream().anyMatch(obj -> obj.getId() == lot.getId())) throw new DuplicateElementException("Lot Existe Deja") ; 
+		
+		//else:
+		return savedLot;
 	}
-	
-	public Lot updateLot(Lot lot) {
+
+	public Lot updateLot(Lot lot) throws DuplicateElementException {
 		return lotDao.updateLot(lot);
 	}
 	

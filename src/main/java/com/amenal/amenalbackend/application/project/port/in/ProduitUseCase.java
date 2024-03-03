@@ -5,44 +5,57 @@ import java.util.List;
 
 import com.amenal.amenalbackend.application.project.domain.Produit;
 import com.amenal.amenalbackend.application.project.port.out.ProduitDao;
+import com.amenal.amenalbackend.infrastructure.exception.DuplicateElementException;
 
 public class ProduitUseCase {
-	
+
 	private ProduitDao produitDao;
-	
+
 	public ProduitUseCase(ProduitDao produitDao) {
 		this.produitDao = produitDao;
 	}
 
 	public Produit findProduitById(Integer id) {
-	    return produitDao.findProduitById(id);
+		return produitDao.findProduitById(id);
 	}
 
 	public List<Produit> findAllProduits() {
 		return produitDao.findAllProduits();
 	}
-	
+
 	public List<Produit> getProduitsByAvenantId(Integer id) {
 		return produitDao.getProduitsByAvenantId(id);
 	}
-	
-	public Produit saveProduit(Produit produit) {
-		return produitDao.saveProduit(produit);
+
+	public Produit saveProduit(Produit produit) throws DuplicateElementException {
+		//if produit existes:
+		List<Produit> currentProduits = null;
+		try {
+			currentProduits = produitDao
+					.getProduitsByAvenantId(produit.getMetre().getBudget().getAvenant().getId());		
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		Produit savedProduit = produitDao.saveProduit(produit);
+		if(currentProduits != null && currentProduits.stream().anyMatch(obj -> obj.getId() == produit.getId())) throw new DuplicateElementException("Produit Existe Deja") ; 
+		
+		//else:
+		return savedProduit;
 	}
-	
-	public Produit updateProduit(Produit produit) {
+
+	public Produit updateProduit(Produit produit) throws DuplicateElementException {
 		return produitDao.updateProduit(produit);
 	}
-	
+
 	public void deleteProduit(Integer id) {
 		produitDao.deleteProduit(id);
 	}
-	
+
 	public List<Produit> saveProduits(List<Produit> produits) {
 		List<Produit> savedProduits = new ArrayList<Produit>();
-		for(Produit produit: produits )
+		for (Produit produit : produits)
 			savedProduits.add(produitDao.saveProduit(produit));
 		return savedProduits;
-	} 
+	}
 
 }

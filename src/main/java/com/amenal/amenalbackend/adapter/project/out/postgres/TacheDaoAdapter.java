@@ -12,6 +12,7 @@ import com.amenal.amenalbackend.adapter.project.out.postgres.entities.TacheEntit
 import com.amenal.amenalbackend.adapter.project.out.postgres.repositories.TacheRepository;
 import com.amenal.amenalbackend.application.project.domain.Tache;
 import com.amenal.amenalbackend.application.project.port.out.TacheDao;
+import com.amenal.amenalbackend.infrastructure.exception.DuplicateElementException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -43,7 +44,20 @@ public class TacheDaoAdapter implements TacheDao {
 	@Override
 	public Tache saveTache(Tache tache) {
 		try {
-			// if there is a Tache with the same activite and tache in the same avenant:
+			// TACHE EXISTE DANS UN AUTRE AVENANT
+			List<TacheEntity> tachesInOtherAvenantEntities = tacheRepository
+					.getTachesInOtherAvenants(tache.getProduit().getMetre().getBudget().getAvenant().getId());
+			List<Tache> tachesInOtherAvenants = tachesInOtherAvenantEntities.stream()
+					.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
+
+			for (Tache curTache : tachesInOtherAvenants) {
+				if (curTache.getTitreActivite().equalsIgnoreCase(tache.getTitreActivite())
+						&& tache.getLot().getDesignation().equalsIgnoreCase(tache.getLot().getDesignation())) {
+					return curTache;
+				}
+			}
+
+			// if there is a Tache with the same activite and lot in the same avenant:
 			List<TacheEntity> sameTacheEntities = tacheRepository.getTachesByAvenantIdAndLotAndActivite(
 					tache.getProduit().getMetre().getBudget().getAvenant().getId(), tache.getLot().getDesignation(),
 					tache.getTitreActivite());
@@ -51,7 +65,7 @@ public class TacheDaoAdapter implements TacheDao {
 					.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
 			if (!sameTaches.isEmpty()) {
 				return sameTaches.get(0);
-			} 
+			}
 		} catch (Exception e) {
 			System.out.print(e);
 		}
@@ -62,9 +76,41 @@ public class TacheDaoAdapter implements TacheDao {
 	}
 
 	@Override
-	public Tache updateTache(Tache tache) {
+	public Tache updateTache(Tache tache) throws DuplicateElementException {
 		TacheEntity existingEntity = tacheRepository.findById(tache.getId()).orElseThrow();
 
+		try {
+			if (tache.getProduit().getId() != existingEntity.getProduit().getId()
+					|| tache.getLot().getId() != existingEntity.getLot().getId()
+					|| tache.getTitreActivite() != existingEntity.getTitreActivite()) {
+				// TACHE EXISTE DANS UN AUTRE AVENANT
+				List<TacheEntity> tachesInOtherAvenantEntities = tacheRepository
+						.getTachesInOtherAvenants(tache.getProduit().getMetre().getBudget().getAvenant().getId());
+				List<Tache> tachesInOtherAvenants = tachesInOtherAvenantEntities.stream()
+						.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
+
+				for (Tache curTache : tachesInOtherAvenants) {
+					if (curTache.getTitreActivite().equalsIgnoreCase(tache.getTitreActivite())
+							&& tache.getLot().getDesignation().equalsIgnoreCase(tache.getLot().getDesignation())) {
+						throw new DuplicateElementException("Tache Existe Deja");
+					}
+				}
+
+				// if there is a Tache with the same activite and lot in the same avenant:
+				List<TacheEntity> sameTacheEntities = tacheRepository.getTachesByAvenantIdAndLotAndActivite(
+						tache.getProduit().getMetre().getBudget().getAvenant().getId(), tache.getLot().getDesignation(),
+						tache.getTitreActivite());
+				List<Tache> sameTaches = sameTacheEntities.stream()
+						.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
+				if (!sameTaches.isEmpty()) {
+					throw new DuplicateElementException("Tache Existe Deja");
+				}
+			}
+
+		} catch (NullPointerException e) {
+			System.out.print(e);
+		}
+		// if not:
 		// Use ModelMapper to map non-null properties from Tache to existingEntity
 		modelMapper.map(tache, existingEntity);
 
@@ -81,4 +127,10 @@ public class TacheDaoAdapter implements TacheDao {
 		tacheRepository.delete(tacheEntity);
 	}
 
+	@Override
+	public List<Tache> getTachesByAvenantId(Integer id) {
+		List<TacheEntity> tacheEntities = tacheRepository.getTachesByAvenantId(id);
+		return tacheEntities.stream().map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class))
+				.collect(Collectors.toList());
+	}
 }

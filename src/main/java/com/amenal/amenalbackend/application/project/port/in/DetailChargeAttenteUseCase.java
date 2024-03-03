@@ -1,5 +1,6 @@
 package com.amenal.amenalbackend.application.project.port.in;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.amenal.amenalbackend.application.project.domain.DetailChargeAttente;
@@ -18,11 +19,11 @@ public class DetailChargeAttenteUseCase {
 	}
 
 	public List<DetailChargeAttente> findAllDetailChargeAttentes() {
-		return banqueDao.findAllDetailChargeAttentes();
+		return updateErreurs(banqueDao.findAllDetailChargeAttentes());
 	}
 	
 	public List<DetailChargeAttente> getDetailChargeAttentesByAvenantId(Integer id) {
-		return banqueDao.getDetailChargeAttentesByAvenantId(id);
+		return updateErreurs(banqueDao.getDetailChargeAttentesByAvenantId(id));
 	}
 	
 	public DetailChargeAttente saveDetailChargeAttente(DetailChargeAttente banque) {
@@ -34,11 +35,40 @@ public class DetailChargeAttenteUseCase {
 	}
 	
 	public DetailChargeAttente updateDetailChargeAttente(DetailChargeAttente banque) {
-		return banqueDao.updateDetailChargeAttente(banque);
+		DetailChargeAttente detailChargeAttente = banqueDao.updateDetailChargeAttente(banque);
+		return banqueDao.saveDetailChargeAttenteWithErreur(detailChargeAttente);
 	}
 	
 	public void deleteDetailChargeAttente(Integer id) {
 		banqueDao.deleteDetailChargeAttente(id);
+	}
+	
+	public List<DetailChargeAttente> saveAllDetailChargeAttente(List<DetailChargeAttente> detailChargeAttentes) {
+		List<DetailChargeAttente> addedDetails = new ArrayList<>();
+				
+		for(DetailChargeAttente detailChargeAttente: detailChargeAttentes) {
+			try {
+				DetailChargeAttente addedDetail = banqueDao.saveDetailChargeAttente(detailChargeAttente);
+				addedDetails.add(addedDetail);
+			} catch (Exception e) {
+			}
+		}	
+		
+		return updateErreurs(addedDetails) ;	
+	}
+	
+	private List<DetailChargeAttente> updateErreurs(List<DetailChargeAttente> detailChargeAttentes) {
+		List<DetailChargeAttente> addedDetailsWithErreurs = new ArrayList<>();
+
+		for(DetailChargeAttente detailChargeAttente: detailChargeAttentes) {
+			try {
+				DetailChargeAttente addedDetail = banqueDao.saveDetailChargeAttenteWithErreur(detailChargeAttente);
+				addedDetailsWithErreurs.add(addedDetail);
+			} catch (Exception e) {
+			}
+		}
+		
+		return addedDetailsWithErreurs;
 	}
 	
 

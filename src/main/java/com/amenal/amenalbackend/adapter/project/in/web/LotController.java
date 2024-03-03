@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.amenal.amenalbackend.application.project.domain.Lot;
 import com.amenal.amenalbackend.application.project.port.in.LotUseCase;
+import com.amenal.amenalbackend.infrastructure.exception.DuplicateElementException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -46,10 +47,20 @@ public class LotController {
 	public ResponseEntity<List<Lot>> getLotsByAvenantId(@PathVariable("id") Integer id) {
 		return ResponseEntity.ok(lotUseCase.getLotsByAvenantId(id));
 	}
+	
+	@GetMapping("/project/{id}")
+	public ResponseEntity<List<Lot>> getLotsByProjectId(@PathVariable("id") Integer id) {
+		return ResponseEntity.ok(lotUseCase.getLotsByProjectId(id));
+	}
 
 	@PostMapping
 	public ResponseEntity<Lot> saveLot(@RequestBody Lot lot) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(lotUseCase.saveLot(lot));
+		try {
+			return ResponseEntity.status(HttpStatus.CREATED).body(lotUseCase.saveLot(lot));	
+		}
+		catch (DuplicateElementException e) {
+	        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+	    }
 	}
 	
 	@PostMapping("/addAll")
@@ -64,6 +75,8 @@ public class LotController {
 		} catch (NoSuchElementException e) {
 			// return a response with status 404 if an object with id is not found
 			return ResponseEntity.notFound().build();
+		} catch (DuplicateElementException e) {
+	        return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
 	}
 
@@ -71,7 +84,7 @@ public class LotController {
 	public ResponseEntity<Lot> deleteLot(@PathVariable("id") Integer id) {
 		try {
 			lotUseCase.deleteLot(id);
-			return ResponseEntity.noContent().build();
+			return ResponseEntity.status(HttpStatus.OK).build();
 		} catch (NoSuchElementException e) {
 			// return a response with status 404 if an object with id is not found
 			return ResponseEntity.notFound().build();

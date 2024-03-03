@@ -12,6 +12,7 @@ import com.amenal.amenalbackend.adapter.project.out.postgres.entities.ProduitEnt
 import com.amenal.amenalbackend.adapter.project.out.postgres.repositories.ProduitRepository;
 import com.amenal.amenalbackend.application.project.domain.Produit;
 import com.amenal.amenalbackend.application.project.port.out.ProduitDao;
+import com.amenal.amenalbackend.infrastructure.exception.DuplicateElementException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -39,7 +40,7 @@ public class ProduitDaoAdapter implements ProduitDao {
 		return produitEntities.stream().map(produitEntity -> modelMapper.map(produitEntity, Produit.class))
 				.collect(Collectors.toList());
 	}
-	
+
 	@Override
 	public List<Produit> getProduitsByAvenantId(Integer id) {
 		List<ProduitEntity> produitEntities = produitRepository.getProduitsByAvenantId(id);
@@ -68,9 +69,26 @@ public class ProduitDaoAdapter implements ProduitDao {
 	}
 
 	@Override
-	public Produit updateProduit(Produit produit) {
+	public Produit updateProduit(Produit produit) throws DuplicateElementException {
 		ProduitEntity existingEntity = produitRepository.findById(produit.getId()).orElseThrow();
 
+		try {
+			// if there is a produit with the same designation in the same avenant:
+			if (!produit.getDesignation().equals(existingEntity.getDesignation())) {
+				List<ProduitEntity> sameProduitEntities = produitRepository.getProduitsByAvenantIdAndDesignation(
+						produit.getMetre().getBudget().getAvenant().getId(), produit.getDesignation());
+				List<Produit> sameProduits = sameProduitEntities.stream()
+						.map(produitEntity -> modelMapper.map(produitEntity, Produit.class))
+						.collect(Collectors.toList());
+				if (!sameProduits.isEmpty()) {
+					throw new DuplicateElementException("Produit Existe Deja");
+				}
+			}
+		} catch (NullPointerException e) {
+			System.out.print(e);
+		}
+
+		// if not:
 		// Use ModelMapper to map non-null properties from Produit to existingEntity
 		modelMapper.map(produit, existingEntity);
 

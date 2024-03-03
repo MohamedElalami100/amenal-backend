@@ -1,5 +1,6 @@
 package com.amenal.amenalbackend.application.project.port.in;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.amenal.amenalbackend.application.project.domain.DetailQualiteAttente;
@@ -18,11 +19,11 @@ public class DetailQualiteAttenteUseCase {
 	}
 
 	public List<DetailQualiteAttente> findAllDetailQualiteAttentes() {
-		return banqueDao.findAllDetailQualiteAttentes();
+		return updateErreurs(banqueDao.findAllDetailQualiteAttentes());
 	}
 	
 	public List<DetailQualiteAttente> getDetailQualiteAttentesByAvenantId(Integer id) {
-		return banqueDao.getDetailQualiteAttentesByAvenantId(id);
+		return updateErreurs(banqueDao.getDetailQualiteAttentesByAvenantId(id));
 	}
 	
 	public DetailQualiteAttente saveDetailQualiteAttente(DetailQualiteAttente banque) {
@@ -34,12 +35,39 @@ public class DetailQualiteAttenteUseCase {
 	}
 	
 	public DetailQualiteAttente updateDetailQualiteAttente(DetailQualiteAttente banque) {
-		return banqueDao.updateDetailQualiteAttente(banque);
-	}
+		DetailQualiteAttente detailQualiteAttente = banqueDao.updateDetailQualiteAttente(banque);
+		return banqueDao.saveDetailQualiteAttenteWithErreur(detailQualiteAttente);	}
 	
 	public void deleteDetailQualiteAttente(Integer id) {
 		banqueDao.deleteDetailQualiteAttente(id);
 	}
 	
+	public List<DetailQualiteAttente> saveAllDetailQualiteAttente(List<DetailQualiteAttente> detailProduitAttentes) {
+		List<DetailQualiteAttente> addedDetails = new ArrayList<>();
+				
+		for(DetailQualiteAttente detailProduitAttente: detailProduitAttentes) {
+			try {
+				DetailQualiteAttente addedDetail = banqueDao.saveDetailQualiteAttente(detailProduitAttente);
+				addedDetails.add(addedDetail);
+			} catch (Exception e) {
+			}
+		}	
+		
+		return updateErreurs(addedDetails) ;	
+	}
+	
+	private List<DetailQualiteAttente> updateErreurs(List<DetailQualiteAttente> detailProduitAttentes) {
+		List<DetailQualiteAttente> addedDetailsWithErreurs = new ArrayList<>();
+
+		for(DetailQualiteAttente detailProduitAttente: detailProduitAttentes) {
+			try {
+				DetailQualiteAttente addedDetail = banqueDao.saveDetailQualiteAttenteWithErreur(detailProduitAttente);
+				addedDetailsWithErreurs.add(addedDetail);
+			} catch (Exception e) {
+			}
+		}
+		
+		return addedDetailsWithErreurs;
+	}
 
 }
