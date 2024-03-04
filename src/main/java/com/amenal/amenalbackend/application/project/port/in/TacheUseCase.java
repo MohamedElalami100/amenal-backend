@@ -32,10 +32,11 @@ public class TacheUseCase {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		if (currentTaches != null && currentTaches.stream().anyMatch(obj -> obj.getId() == tache.getId()))
+		Tache savedTache = tacheDao.saveTache(tache);
+
+		if (currentTaches != null && currentTaches.stream().anyMatch(obj -> obj.getId() == savedTache.getId()))
 			throw new DuplicateElementException("Tache Existe Deja");
 
-		Tache savedTache = tacheDao.saveTache(tache);
 		// else:
 		return savedTache;
 	}

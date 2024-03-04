@@ -9,13 +9,13 @@ import org.springframework.stereotype.Repository;
 import com.amenal.amenalbackend.adapter.project.out.postgres.entities.DetailProduitEntity;
 
 @Repository
-public interface DetailProduitRepository extends JpaRepository<DetailProduitEntity, Integer>{
-	   @Query("SELECT l FROM DetailProduitEntity l WHERE l.tache.id = :tacheId")
-	    List<DetailProduitEntity> getDetailProduitByTacheId(Integer tacheId);
-	   
-	    @Query("SELECT l FROM DetailProduitEntity l WHERE l.tache.produit.metre.budget.avenant.id = :avenantId")
-	    List<DetailProduitEntity> getDetailProduitsByAvenantId(Integer avenantId);
+public interface DetailProduitRepository extends JpaRepository<DetailProduitEntity, Integer> {
+	@Query("SELECT l FROM DetailProduitEntity l WHERE l.tache.id = :tacheId")
+	List<DetailProduitEntity> getDetailProduitByTacheId(Integer tacheId);
 
-		@Query("SELECT l FROM DetailProduitEntity l WHERE l.tache.id = :id AND l.reference = :reference")
-		List<DetailProduitEntity> getDetailProduitsByTacheIdAndDesignation(Integer id, String reference);
+	@Query("SELECT l FROM DetailProduitEntity l WHERE l.tache.produit.metre.budget.avenant.id = :avenantId")
+	List<DetailProduitEntity> getDetailProduitsByAvenantId(Integer avenantId);
+
+	@Query("SELECT l FROM DetailProduitEntity l WHERE l.tache.id = :id AND l.reference = :reference")
+	List<DetailProduitEntity> getDetailProduitsByTacheIdAndDesignation(Integer id, String reference);
 }

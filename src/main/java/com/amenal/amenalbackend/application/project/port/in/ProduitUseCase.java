@@ -28,18 +28,18 @@ public class ProduitUseCase {
 	}
 
 	public Produit saveProduit(Produit produit) throws DuplicateElementException {
-		//if produit existes:
+		// if produit existes:
 		List<Produit> currentProduits = null;
 		try {
-			currentProduits = produitDao
-					.getProduitsByAvenantId(produit.getMetre().getBudget().getAvenant().getId());		
+			currentProduits = produitDao.getProduitsByAvenantId(produit.getMetre().getBudget().getAvenant().getId());
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		Produit savedProduit = produitDao.saveProduit(produit);
-		if(currentProduits != null && currentProduits.stream().anyMatch(obj -> obj.getId() == produit.getId())) throw new DuplicateElementException("Produit Existe Deja") ; 
-		
-		//else:
+		if (currentProduits != null && currentProduits.stream().anyMatch(obj -> obj.getId() == savedProduit.getId()))
+			throw new DuplicateElementException("Produit Existe Deja");
+
+		// else:
 		return savedProduit;
 	}
 
