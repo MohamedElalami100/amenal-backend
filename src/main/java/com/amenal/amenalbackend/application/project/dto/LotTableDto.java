@@ -128,13 +128,21 @@ public class LotTableDto {
 	}
 
 	private LotTableDto sum(LotTableDto lotTableDto) {
-		Double sumMpm = this.mpm + lotTableDto.getMpm();
-		Double sumMpb = this.mpb + lotTableDto.getMpb();
-		Double sumMrg = this.mrg + lotTableDto.getMrg();
-		Double sumPrcRg = sumMrg / sumMpm;
-		LocalDate minDdb = (this.ddb.isAfter(lotTableDto.getDdb())) ? lotTableDto.getDdb() : this.ddb;
-		LocalDate maxDfb = (this.dfb.isAfter(lotTableDto.getDfb())) ? this.dfb : lotTableDto.getDfb();
+		// Handle null cases and replace with zero
+		Double sumMpm = (this.mpm != null ? this.mpm : 0.0) + (lotTableDto.getMpm() != null ? lotTableDto.getMpm() : 0.0);
+		Double sumMpb = (this.mpb != null ? this.mpb : 0.0) + (lotTableDto.getMpb() != null ? lotTableDto.getMpb() : 0.0);
+		Double sumMrg = (this.mrg != null ? this.mrg : 0.0) + (lotTableDto.getMrg() != null ? lotTableDto.getMrg() : 0.0);
+
+		// Ensure sumMpm is not zero to avoid division by zero
+		Double sumPrcRg = (sumMpm != 0.0) ? sumMrg / sumMpm : 0.0;
+
+		// Handle null cases for dates and replace with LocalDate.MIN
+		LocalDate minDdb = (this.ddb != null && lotTableDto.getDdb() != null) ? (this.ddb.isAfter(lotTableDto.getDdb()) ? lotTableDto.getDdb() : this.ddb) : LocalDate.MIN;
+		LocalDate maxDfb = (this.dfb != null && lotTableDto.getDfb() != null) ? (this.dfb.isAfter(lotTableDto.getDfb()) ? this.dfb : lotTableDto.getDfb()) : LocalDate.MIN;
+
+		// Calculate sumDlb after handling null cases for dates
 		Integer sumDlb = (int) ChronoUnit.DAYS.between(minDdb, maxDfb) + 1;
+
 		List<ActiviteDeLotDto> allActivites = new ArrayList<>();
 		allActivites.addAll(this.activite);
 		allActivites.addAll(lotTableDto.getActivite());

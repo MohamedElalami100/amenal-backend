@@ -180,17 +180,23 @@ public class ProduitTableDto {
 
 	// for sigma functionality
 	private ProduitTableDto sum(ProduitTableDto produitTableDto) {
-		Double sumQpm = this.qpm + produitTableDto.getQpm();
-		Double sumMpm = this.mpm + produitTableDto.getMpm();
-		Double sumPpm = sumMpm / sumQpm;
-		Double sumQpb = this.qpb + produitTableDto.getQpb();
-		Double sumMpb = this.mpb + produitTableDto.getMpb();
-		Double sumPpb = sumMpb / sumQpb;
-		Double sumMrg = this.mrg + produitTableDto.getMrg();
-		Double sumPrcRg = sumMrg / sumMpm;
-		LocalDate minDdb = (this.ddb.isAfter(produitTableDto.getDdb())) ? produitTableDto.getDdb() : this.ddb;
-		LocalDate maxDfb = (this.dfb.isAfter(produitTableDto.getDfb())) ? this.dfb : produitTableDto.getDfb();
+		// Handle null cases and replace with zero
+		Double sumQpm = (this.qpm != null ? this.qpm : 0.0) + (produitTableDto.getQpm() != null ? produitTableDto.getQpm() : 0.0);
+		Double sumMpm = (this.mpm != null ? this.mpm : 0.0) + (produitTableDto.getMpm() != null ? produitTableDto.getMpm() : 0.0);
+		Double sumPpm = (sumQpm != 0.0) ? sumMpm / sumQpm : 0.0;
+		Double sumQpb = (this.qpb != null ? this.qpb : 0.0) + (produitTableDto.getQpb() != null ? produitTableDto.getQpb() : 0.0);
+		Double sumMpb = (this.mpb != null ? this.mpb : 0.0) + (produitTableDto.getMpb() != null ? produitTableDto.getMpb() : 0.0);
+		Double sumPpb = (sumQpb != 0.0) ? sumMpb / sumQpb : 0.0;
+		Double sumMrg = (this.mrg != null ? this.mrg : 0.0) + (produitTableDto.getMrg() != null ? produitTableDto.getMrg() : 0.0);
+		Double sumPrcRg = (sumMpm != 0.0) ? sumMrg / sumMpm : 0.0;
+
+		// Handle null cases for dates and replace with LocalDate.MIN
+		LocalDate minDdb = (this.ddb != null && produitTableDto.getDdb() != null) ? (this.ddb.isAfter(produitTableDto.getDdb()) ? produitTableDto.getDdb() : this.ddb) : LocalDate.MIN;
+		LocalDate maxDfb = (this.dfb != null && produitTableDto.getDfb() != null) ? (this.dfb.isAfter(produitTableDto.getDfb()) ? this.dfb : produitTableDto.getDfb()) : LocalDate.MIN;
+
+		// Calculate sumDlb after handling null cases for dates
 		Integer sumDlb = (int) ChronoUnit.DAYS.between(minDdb, maxDfb) + 1;
+
 		List<LotTableDto> allLotDeProduits = new ArrayList<>();
 		allLotDeProduits.addAll(this.lotsDeProduit);
 		allLotDeProduits.addAll(produitTableDto.getLotsDeProduit());
