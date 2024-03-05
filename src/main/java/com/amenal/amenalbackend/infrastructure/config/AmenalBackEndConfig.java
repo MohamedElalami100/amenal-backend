@@ -19,6 +19,7 @@ import com.amenal.amenalbackend.application.project.port.in.DetailProduitUseCase
 import com.amenal.amenalbackend.application.project.port.in.DetailQualiteAttenteUseCase;
 import com.amenal.amenalbackend.application.project.port.in.DetailQualiteTableUseCase;
 import com.amenal.amenalbackend.application.project.port.in.DetailQualiteUseCase;
+import com.amenal.amenalbackend.application.project.port.in.DocumentUseCase;
 import com.amenal.amenalbackend.application.project.port.in.DossierUseCase;
 import com.amenal.amenalbackend.application.project.port.in.GetChartDataUseCase;
 import com.amenal.amenalbackend.application.project.port.in.GrpQualiteUseCase;
@@ -53,7 +54,9 @@ import com.amenal.amenalbackend.application.project.port.out.DetailProduitTableD
 import com.amenal.amenalbackend.application.project.port.out.DetailQualiteAttenteDao;
 import com.amenal.amenalbackend.application.project.port.out.DetailQualiteDao;
 import com.amenal.amenalbackend.application.project.port.out.DetailQualiteTableDao;
+import com.amenal.amenalbackend.application.project.port.out.DocumentDao;
 import com.amenal.amenalbackend.application.project.port.out.DossierDao;
+import com.amenal.amenalbackend.application.project.port.out.GoogleDriveDao;
 import com.amenal.amenalbackend.application.project.port.out.GrpQualiteDao;
 import com.amenal.amenalbackend.application.project.port.out.LotDao;
 import com.amenal.amenalbackend.application.project.port.out.LotTableDao;
@@ -252,6 +255,11 @@ public class AmenalBackEndConfig {
 	@Bean
 	public GetChartDataUseCase getChartDataUseCase(TacheTableDao tacheTableDao) {
 		return new GetChartDataUseCase(tacheTableDao);
+	}
+	
+	@Bean
+	public DocumentUseCase documentUseCase(GoogleDriveDao googleDriveDao, DocumentDao documentDao, AvenantDao avenantDao) {
+		return new DocumentUseCase(googleDriveDao, documentDao, avenantDao);
 	}
 
 }

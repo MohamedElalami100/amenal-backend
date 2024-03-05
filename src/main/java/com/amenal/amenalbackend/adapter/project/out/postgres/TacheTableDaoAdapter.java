@@ -52,7 +52,7 @@ public class TacheTableDaoAdapter implements TacheTableDao {
 
 		// Fetch all tacheEntities
 		List<TacheEntity> tacheEntities;
-		if(charge.equals("null"))
+		if (charge.equals("null"))
 			tacheEntities = tacheRepository.getTachesByAvenantId(id);
 		else
 			tacheEntities = tacheRepository.getTachesByAvenantIdAndCharge(id, charge);
@@ -85,7 +85,8 @@ public class TacheTableDaoAdapter implements TacheTableDao {
 					tache.getProduit().getDesignation(), tache.getLot().getDesignation(), tache.getTitreActivite(),
 					tache.getCleAttachement(), tache.getUnite(), tache.getQtePBdg(), tache.getPuRef(),
 					tache.getMntRefB(), tache.getQtePBdg(), tache.getPucBdg(), tache.getMncBdg(), tache.getMrgRefB(),
-					tache.getMrpRefB(), tache.getDateDebut(), tache.getDelai(), tache.getDateFin());
+					tache.getMrpRefB(), tache.getDateDebut(), tache.getDelai(), tache.getDateFin(),
+					tache.getProduit().getId(), tache.getLot().getId());
 			tacheTableDtos.add(tacheTableDto);
 		}
 		return tacheTableDtos;

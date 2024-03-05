@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "amenal-docs",
+  "private_key_id": "6822c99a9e050eeb55be785d56935d40088492ab",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDh5r08ttt6Nbzx\nz0VsEOf5WoRwJgctSqcGNJNx6x0Rtabs8kppPKAM+vUpcQhPx2zObYmfDI9mXtZE\nnysTVSbfgrgfGga7t/TRMAkd5KQZ2H+t5nRF8/Gd3JSZ95GSkiprQgEW+NcfSCih\n6HRPGXj43upjjfkM0YQcd2EqQ9ZHua7+jzXt0YJxO08O32+O0fwPbpd1H+OGa4r4\nBumbEXxlUmrGWdavSlwB2iSH86W3ZVB/EPoRj5FcVNAD8zsKiNR31lVta03NfAHF\nBHYjyUG/hpghusmVdvjZF8lZWzN915lBkQ9AEEJtWhQZKA+ngjMjjAicgosh0qpU\nRRiIuumrAgMBAAECggEABAQDBypE+oYsBqxlkoc2aHNYeVnjtMVn9K9Ik7TXPnJZ\nNksUUYyXV8O6SfNNb4WfBIhj8uTZQ7uZ2Xxu2pgf6cc8GKlwxzN88Z8F+ncPB7qW\ngnPfS0ML33+FULta5h0dDe0NcegYguDYgBBOyP0t7lagGgbzD2xGCe+BVawBCiNV\nUIoiCqjSvNQkwWOOGDZ7IXNRqGWEX/AkF4valcJW6UtYiszYF8KJ3jRkhtxOIXPt\n6jgxNIhwW4yZE+IWAWZ6QSsfWY6IUJiHs6HmIb/c7llPyz0/QZS5Cu5foCQwUBWW\nfb1tE1kxOadbj4a4hzqJcToPJF9LTo1pXNwEdZF28QKBgQD203jBzMLii7esU1gj\nZAi0rOwiMUoRGxvQ7aF2Yqdon2FfyC4v92AbGWlg32D9n3z+zqiBXlqRMHkt/YXJ\nx2NE5PxyfstvzIJHQN48rABBnXgl+k52tHexrg8rzsHQ1F0FYgBr865K/sKUJc6J\nH1alKjsB9qmplITUzQ2c9vG9IwKBgQDqTCukFB883oIwWXSDX54iQ21WyIVySq0c\nVY9kXOiAaA4VumeqGgBPP2a3E9gY39wnBr5MJxbrhKTHfs942K9qS5JbM6ZEmGmD\nGvr8rS8H/0ilc+Jvs/RforOsJqg6Y59eLyFE29DPeQLoIlAQipKvpXwDskbSpKib\nPKP3J+L92QKBgHZjFAaQeeFDdoOXLi07a9mNH21/CrGNuRfLAqjPxNAvsfrI/y5O\njrAwzhSCz/iWKNPmt3flk7cT8uuWMDeKBRkkY9le66DiDJK0kGO1dCIEr343wq64\n/LgibnBqqRfK5BsS2HTu2mhqLVX1lEy81Ug/KzJT5yjJbbTL7X2eDHDVAoGAVcTS\niPsQwGCX+gkVPO5o3hQe15EKQN+TZXbwygW02yS8WznkrwFbsab8+/IYvmpcljDC\nwu/gVRE2nQ0P+CYieN/3UMmkiSHeJi9fR9ZCDERonKDCeK/Auq295jw0g0Nq2Lia\nDjIFy5158e51rsh7kC8dKeE+SegbDNDzGQwR7WkCgYEAi+ZrqMUPwfYrrWJxR7IE\nW2tcF2Xl4DEqptuhhssPm5boG5JfCO9HiSsTr34RTRvcUREdyyaKH7hpaViQzhGG\nSlW4yXSb0GsF4UwD8SJP7AGuPiwgwacbHA0MAbDRDYShEk9XFoOQ2y/6pYq7zEay\nVkSr9aQCjYw7/9Wtnd9c0VY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "amenalgoogledriveupload@amenal-docs.iam.gserviceaccount.com",
+  "client_id": "118066400503167549767",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/amenalgoogledriveupload%40amenal-docs.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

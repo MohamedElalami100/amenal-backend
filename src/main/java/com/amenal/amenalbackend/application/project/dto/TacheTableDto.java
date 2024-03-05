@@ -21,10 +21,12 @@ public class TacheTableDto {
 	private LocalDate ddb;
 	private Integer dlb;
 	private LocalDate dfb;
+	private Integer produitId;
+	private Integer lotId;
 
 	public TacheTableDto(Integer id, Integer ordre, String produit, String lot, String activite, Boolean c, String upb, Double qpm,
 			Double ppm, Double mpm, Double qpb, Double ppb, Double mpb, Double mrg, Double prcRg, LocalDate ddb,
-			Integer dlb, LocalDate dfb) {
+			Integer dlb, LocalDate dfb, Integer produitId, Integer lotId) {
 		super();
 		this.id = id;
 		this.ordre = ordre;
@@ -44,6 +46,8 @@ public class TacheTableDto {
 		this.ddb = ddb;
 		this.dlb = dlb;
 		this.dfb = dfb;
+		this.produitId = produitId;
+		this.lotId = lotId;
 	}
 
 	public TacheTableDto() {
@@ -192,6 +196,22 @@ public class TacheTableDto {
 
 	public void setDfb(LocalDate dfb) {
 		this.dfb = dfb;
+	}
+
+	public Integer getProduitId() {
+		return produitId;
+	}
+
+	public void setProduitId(Integer produitId) {
+		this.produitId = produitId;
+	}
+
+	public Integer getLotId() {
+		return lotId;
+	}
+
+	public void setLotId(Integer lotId) {
+		this.lotId = lotId;
 	}
 
 }
