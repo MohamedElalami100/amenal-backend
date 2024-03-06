@@ -209,6 +209,9 @@ public class ProduitTableDto {
 	public static List<ProduitTableDto> removeDuplicatesAndSum(List<ProduitTableDto> produitTableDtos) {
 		List<ProduitTableDto> sigmaProduitTableDtos = new ArrayList<>();
 		
+		//remove produits with null designations:
+		sigmaProduitTableDtos.removeIf(produit -> produit.getDesignation() == null);
+		
 		if (produitTableDtos.size() == 0) 
 			return sigmaProduitTableDtos;
 		
