@@ -155,7 +155,7 @@ public class LotTableDto {
 		List<LotTableDto> sigmaLotTableDtos = new ArrayList<>();
 		
 		//remove lots with null designations:
-		sigmaLotTableDtos.removeIf(lot -> lot.getLot() == null);
+		lotTableDtos.removeIf(lot -> lot.getLot() == null);
 
 		if (lotTableDtos.size() == 0)
 			return sigmaLotTableDtos;

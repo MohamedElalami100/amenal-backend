@@ -210,7 +210,7 @@ public class ProduitTableDto {
 		List<ProduitTableDto> sigmaProduitTableDtos = new ArrayList<>();
 		
 		//remove produits with null designations:
-		sigmaProduitTableDtos.removeIf(produit -> produit.getDesignation() == null);
+		produitTableDtos.removeIf(produit -> produit.getDesignation() == null);
 		
 		if (produitTableDtos.size() == 0) 
 			return sigmaProduitTableDtos;
