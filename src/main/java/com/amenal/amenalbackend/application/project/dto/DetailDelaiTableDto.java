@@ -161,6 +161,10 @@ public class DetailDelaiTableDto {
 		detailDelaiTableDtos = detailDelaiTableDtos.stream()
 				.filter(detail -> detail.getDdb() != null && detail.getDfb() != null && detail.getDlb() != null)
 				.collect(Collectors.toList());
+		
+		if (detailDelaiTableDtos.isEmpty()) {
+			return rowDelaiDtos;
+		}
 
 		// Sorting the list by dateDebut
 		Collections.sort(detailDelaiTableDtos, Comparator.comparing(DetailDelaiTableDto::getDdb));

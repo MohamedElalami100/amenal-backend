@@ -6,7 +6,7 @@ import java.security.GeneralSecurityException;
 
 import com.amenal.amenalbackend.application.project.domain.Document;
 
-public interface GoogleDriveDao {
+public interface CloudStorageDao {
 
-	public Document uploadFileToDrive(File file) throws GeneralSecurityException, IOException;
+	public Document uploadFileToCloud(File file) throws GeneralSecurityException, IOException;
 }

@@ -11,21 +11,21 @@ import com.amenal.amenalbackend.application.project.domain.Avenant;
 import com.amenal.amenalbackend.application.project.domain.Document;
 import com.amenal.amenalbackend.application.project.port.out.AvenantDao;
 import com.amenal.amenalbackend.application.project.port.out.DocumentDao;
-import com.amenal.amenalbackend.application.project.port.out.GoogleDriveDao;
+import com.amenal.amenalbackend.application.project.port.out.CloudStorageDao;
 import org.springframework.util.StringUtils;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class DocumentUseCase {
-	private GoogleDriveDao googleDriveDao;
+	private CloudStorageDao cloudStorageDao;
 	
 	private DocumentDao documentDao;
 	
 	private AvenantDao avenantDao;
 
-	public DocumentUseCase(GoogleDriveDao googleDriveDao, DocumentDao documentDao, AvenantDao avenantDao) {
+	public DocumentUseCase(CloudStorageDao cloudStorageDao, DocumentDao documentDao, AvenantDao avenantDao) {
 		super();
-		this.googleDriveDao = googleDriveDao;
+		this.cloudStorageDao = cloudStorageDao;
 		this.documentDao = documentDao;		
 		this.avenantDao = avenantDao;
 	}
@@ -64,7 +64,7 @@ public class DocumentUseCase {
 	    }
 
 	    //upload file
-	    Document document = googleDriveDao.uploadFileToDrive(tempFilePath.toFile());
+	    Document document = cloudStorageDao.uploadFileToCloud(tempFilePath.toFile());
 
 		document.setAvenant(avenant);
 		

@@ -1,7 +1,7 @@
 package com.amenal.amenalbackend.adapter.project.out.googledrive;
 
 import com.amenal.amenalbackend.application.project.domain.Document;
-import com.amenal.amenalbackend.application.project.port.out.GoogleDriveDao;
+import com.amenal.amenalbackend.application.project.port.out.CloudStorageDao;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.FileContent;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 @SuppressWarnings("deprecation")
 @Service
-public class GoogleDriveDaoAdapter implements GoogleDriveDao{
+public class GoogleDriveDaoAdapter implements CloudStorageDao{
 
 	private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
 	private static final String SERVICE_ACOUNT_KEY_PATH = getPathToGoodleCredentials();
@@ -33,7 +33,7 @@ public class GoogleDriveDaoAdapter implements GoogleDriveDao{
 		return filePath.toString();
 	}
 
-	public Document uploadFileToDrive(File file) throws GeneralSecurityException, IOException {
+	public Document uploadFileToCloud(File file) throws GeneralSecurityException, IOException {
 		try {
 
 			String folderId = "1yqkhDExYAq4ajWM9JB9u4sjbUr9ONvGe";
