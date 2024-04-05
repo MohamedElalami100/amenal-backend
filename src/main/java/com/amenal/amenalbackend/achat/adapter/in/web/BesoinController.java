@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amenal.amenalbackend.achat.application.domain.Besoin;
+import com.amenal.amenalbackend.achat.application.dto.BesoinDto;
 import com.amenal.amenalbackend.achat.application.port.in.BesoinUseCase;
 
 import lombok.RequiredArgsConstructor;
@@ -29,12 +30,12 @@ public class BesoinController {
 	private BesoinUseCase besoinUseCase;
 
 	@GetMapping
-	public ResponseEntity<List<Besoin>> getAllBesoins() {
+	public ResponseEntity<List<BesoinDto>> getAllBesoins() {
 		return ResponseEntity.ok(besoinUseCase.findAllBesoins());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Besoin> getBesoinById(@PathVariable("id") Integer id) {
+	public ResponseEntity<BesoinDto> getBesoinById(@PathVariable("id") Integer id) {
 		try {
 			return ResponseEntity.ok(besoinUseCase.findBesoinById(id));
 		} catch (NoSuchElementException e) {

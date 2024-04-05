@@ -1,7 +1,7 @@
 package com.amenal.amenalbackend.achat.adapter.out.postgres;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.amenal.amenalbackend.achat.adapter.out.postgres.entities.DetailFactureEntity;
 import com.amenal.amenalbackend.achat.adapter.out.postgres.repositories.DetailFactureRepository;
 import com.amenal.amenalbackend.achat.application.domain.DetailFacture;
+import com.amenal.amenalbackend.achat.application.dto.DetailFactureDto;
 import com.amenal.amenalbackend.achat.application.port.out.DetailFactureDao;
 
 import lombok.RequiredArgsConstructor;
@@ -27,18 +28,40 @@ public class DetailFactureDaoAdapter implements DetailFactureDao {
 	private ModelMapper modelMapper;
 
 	@Override
-	public DetailFacture findDetailFactureById(Integer id) {
+	public DetailFactureDto findDetailFactureById(Integer id) {
 		DetailFactureEntity detailFactureEntity = detailFactureRepository.findById(id).get();
+		
+		DetailFactureDto detailFactureDto = modelMapper.map(detailFactureEntity, DetailFactureDto.class);
 		DetailFacture detailFacture = modelMapper.map(detailFactureEntity, DetailFacture.class);
-		return detailFacture;
+
+		// Set attributes for the DetailFactureDto object
+		detailFactureDto.setMntHt(detailFacture.getMntHt());
+		detailFactureDto.setMntTtc(detailFacture.getMntTtc());
+		detailFactureDto.setMntTva(detailFacture.getMntTva());
+
+		return detailFactureDto;
 	}
 
 	@Override
-	public List<DetailFacture> findAllDetailFactures() {
-		List<DetailFactureEntity> detailFactureEntities = detailFactureRepository.findAll();
-		return detailFactureEntities.stream().map(detailFactureEntity -> modelMapper.map(detailFactureEntity, DetailFacture.class))
-				.collect(Collectors.toList());
+	public List<DetailFactureDto> findAllDetailFactures() {
+	    List<DetailFactureEntity> detailFactureEntities = detailFactureRepository.findAll();
+	    List<DetailFactureDto> detailFactureDtos = new ArrayList<>();
+
+	    for (DetailFactureEntity detailFactureEntity : detailFactureEntities) {
+	        DetailFactureDto detailFactureDto = modelMapper.map(detailFactureEntity, DetailFactureDto.class);
+	        DetailFacture detailFacture = modelMapper.map(detailFactureEntity, DetailFacture.class);
+
+	        // Set attributes for the DetailFactureDto object
+	        detailFactureDto.setMntHt(detailFacture.getMntHt());
+	        detailFactureDto.setMntTtc(detailFacture.getMntTtc());
+	        detailFactureDto.setMntTva(detailFacture.getMntTva());
+
+	        detailFactureDtos.add(detailFactureDto);
+	    }
+
+	    return detailFactureDtos;
 	}
+
 
 	@Override
 	public DetailFacture saveDetailFacture(DetailFacture detailFacture) {

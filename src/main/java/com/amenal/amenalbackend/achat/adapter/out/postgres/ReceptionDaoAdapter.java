@@ -1,7 +1,7 @@
 package com.amenal.amenalbackend.achat.adapter.out.postgres;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.amenal.amenalbackend.achat.adapter.out.postgres.entities.ReceptionEntity;
 import com.amenal.amenalbackend.achat.adapter.out.postgres.repositories.ReceptionRepository;
 import com.amenal.amenalbackend.achat.application.domain.Reception;
+import com.amenal.amenalbackend.achat.application.dto.ReceptionDto;
 import com.amenal.amenalbackend.achat.application.port.out.ReceptionDao;
 
 import lombok.RequiredArgsConstructor;
@@ -27,17 +28,38 @@ public class ReceptionDaoAdapter implements ReceptionDao {
 	private ModelMapper modelMapper;
 
 	@Override
-	public Reception findReceptionById(Integer id) {
+	public ReceptionDto findReceptionById(Integer id) {
 		ReceptionEntity receptionEntity = receptionRepository.findById(id).get();
+		
+		ReceptionDto receptionDto = modelMapper.map(receptionEntity, ReceptionDto.class);
 		Reception reception = modelMapper.map(receptionEntity, Reception.class);
-		return reception;
+
+		// Set attributes for the ReceptionDto object
+		receptionDto.setMntHt(reception.getMntHt());
+		receptionDto.setMntTtc(reception.getMntTtc());
+		receptionDto.setMntTva(reception.getMntTva());
+
+		return receptionDto;
 	}
 
 	@Override
-	public List<Reception> findAllReceptions() {
-		List<ReceptionEntity> receptionEntities = receptionRepository.findAll();
-		return receptionEntities.stream().map(receptionEntity -> modelMapper.map(receptionEntity, Reception.class))
-				.collect(Collectors.toList());
+	public List<ReceptionDto> findAllReceptions() {
+	    List<ReceptionEntity> receptionEntities = receptionRepository.findAll();
+	    List<ReceptionDto> receptionDtos = new ArrayList<>();
+
+	    for (ReceptionEntity receptionEntity : receptionEntities) {
+	        ReceptionDto receptionDto = modelMapper.map(receptionEntity, ReceptionDto.class);
+	        Reception reception = modelMapper.map(receptionEntity, Reception.class);
+
+	        // Set attributes for the ReceptionDto object
+	        receptionDto.setMntHt(reception.getMntHt());
+	        receptionDto.setMntTtc(reception.getMntTtc());
+	        receptionDto.setMntTva(reception.getMntTva());
+
+	        receptionDtos.add(receptionDto);
+	    }
+
+	    return receptionDtos;
 	}
 
 	@Override

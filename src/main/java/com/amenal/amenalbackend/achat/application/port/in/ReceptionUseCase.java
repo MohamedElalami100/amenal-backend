@@ -3,6 +3,7 @@ package com.amenal.amenalbackend.achat.application.port.in;
 import java.util.List;
 
 import com.amenal.amenalbackend.achat.application.domain.Reception;
+import com.amenal.amenalbackend.achat.application.dto.ReceptionDto;
 import com.amenal.amenalbackend.achat.application.port.out.ReceptionDao;
 
 public class ReceptionUseCase {
@@ -13,11 +14,11 @@ public class ReceptionUseCase {
 		this.receptionDao = receptionDao;
 	}
 
-	public Reception findReceptionById(Integer id) {
+	public ReceptionDto findReceptionById(Integer id) {
 	    return receptionDao.findReceptionById(id);
 	}
 
-	public List<Reception> findAllReceptions() {
+	public List<ReceptionDto> findAllReceptions() {
 		return receptionDao.findAllReceptions();
 	}
 	

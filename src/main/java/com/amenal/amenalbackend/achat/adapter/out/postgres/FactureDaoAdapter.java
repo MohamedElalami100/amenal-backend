@@ -1,7 +1,7 @@
 package com.amenal.amenalbackend.achat.adapter.out.postgres;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.amenal.amenalbackend.achat.adapter.out.postgres.entities.FactureEntity;
 import com.amenal.amenalbackend.achat.adapter.out.postgres.repositories.FactureRepository;
 import com.amenal.amenalbackend.achat.application.domain.Facture;
+import com.amenal.amenalbackend.achat.application.dto.FactureDto;
 import com.amenal.amenalbackend.achat.application.port.out.FactureDao;
 
 import lombok.RequiredArgsConstructor;
@@ -27,18 +28,40 @@ public class FactureDaoAdapter implements FactureDao {
 	private ModelMapper modelMapper;
 
 	@Override
-	public Facture findFactureById(Integer id) {
+	public FactureDto findFactureById(Integer id) {
 		FactureEntity factureEntity = factureRepository.findById(id).get();
+		
+		FactureDto factureDto = modelMapper.map(factureEntity, FactureDto.class);
 		Facture facture = modelMapper.map(factureEntity, Facture.class);
-		return facture;
+
+		// Set attributes for the FactureDto object
+		factureDto.setMntHt(facture.getMntHt());
+		factureDto.setMntTtc(facture.getMntTtc());
+		factureDto.setMntTva(facture.getMntTva());
+
+		return factureDto;
 	}
 
 	@Override
-	public List<Facture> findAllFactures() {
-		List<FactureEntity> factureEntities = factureRepository.findAll();
-		return factureEntities.stream().map(factureEntity -> modelMapper.map(factureEntity, Facture.class))
-				.collect(Collectors.toList());
+	public List<FactureDto> findAllFactures() {
+	    List<FactureEntity> factureEntities = factureRepository.findAll();
+	    List<FactureDto> factureDtos = new ArrayList<>();
+
+	    for (FactureEntity factureEntity : factureEntities) {
+	        FactureDto factureDto = modelMapper.map(factureEntity, FactureDto.class);
+	        Facture facture = modelMapper.map(factureEntity, Facture.class);
+
+	        // Set attributes for the FactureDto object
+	        factureDto.setMntHt(facture.getMntHt());
+	        factureDto.setMntTtc(facture.getMntTtc());
+	        factureDto.setMntTva(facture.getMntTva());
+
+	        factureDtos.add(factureDto);
+	    }
+
+	    return factureDtos;
 	}
+
 
 	@Override
 	public Facture saveFacture(Facture facture) {

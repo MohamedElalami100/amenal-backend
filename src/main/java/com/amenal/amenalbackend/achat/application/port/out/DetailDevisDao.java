@@ -3,11 +3,12 @@ package com.amenal.amenalbackend.achat.application.port.out;
 import java.util.List;
 
 import com.amenal.amenalbackend.achat.application.domain.DetailDevis;
+import com.amenal.amenalbackend.achat.application.dto.DetailDevisDto;
 
 public interface DetailDevisDao {
-	DetailDevis findDetailDevisById(Integer id);
+	DetailDevisDto findDetailDevisById(Integer id);
 	
-	List<DetailDevis> findAllDetailDeviss();
+	List<DetailDevisDto> findAllDetailDeviss();
 	
 	DetailDevis saveDetailDevis(DetailDevis detailDevis);
 	

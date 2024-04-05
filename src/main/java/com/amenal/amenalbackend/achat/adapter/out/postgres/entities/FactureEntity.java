@@ -47,10 +47,13 @@ public class FactureEntity {
 
     @OneToMany(mappedBy = "facture")
     private List<ReceptionEntity> receptions;
+    
+    @OneToMany(mappedBy = "facture")
+	private List<DetailFactureEntity> detailFactures;
 
 	public FactureEntity(Integer id, LocalDate dateFcf, String reference, String lienPhotoFacture, Integer delaiFacture,
-			Double mntHtNote, Double mntTvaNote, Double mntTtcNote, FournisseurEntity fournisseur, List<PaiementEntity> paiements,
-			List<ReceptionEntity> receptions) {
+			Double mntHtNote, Double mntTvaNote, Double mntTtcNote, FournisseurEntity fournisseur,
+			List<PaiementEntity> paiements, List<ReceptionEntity> receptions, List<DetailFactureEntity> detailFactures) {
 		super();
 		this.id = id;
 		this.dateFcf = dateFcf;
@@ -63,6 +66,7 @@ public class FactureEntity {
 		this.fournisseur = fournisseur;
 		this.paiements = paiements;
 		this.receptions = receptions;
+		this.detailFactures = detailFactures;
 	}
 
 	public FactureEntity() {
@@ -155,6 +159,14 @@ public class FactureEntity {
 
 	public void setPaiements(List<PaiementEntity> paiements) {
 		this.paiements = paiements;
+	}
+
+	public List<DetailFactureEntity> getDetailFactures() {
+		return detailFactures;
+	}
+
+	public void setDetailFactures(List<DetailFactureEntity> detailFactures) {
+		this.detailFactures = detailFactures;
 	}
 
 }

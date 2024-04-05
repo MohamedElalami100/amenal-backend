@@ -1,7 +1,7 @@
 package com.amenal.amenalbackend.achat.adapter.out.postgres;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.amenal.amenalbackend.achat.adapter.out.postgres.entities.DetailDevisEntity;
 import com.amenal.amenalbackend.achat.adapter.out.postgres.repositories.DetailDevisRepository;
 import com.amenal.amenalbackend.achat.application.domain.DetailDevis;
+import com.amenal.amenalbackend.achat.application.dto.DetailDevisDto;
 import com.amenal.amenalbackend.achat.application.port.out.DetailDevisDao;
 
 import lombok.RequiredArgsConstructor;
@@ -27,17 +28,38 @@ public class DetailDevisDaoAdapter implements DetailDevisDao {
 	private ModelMapper modelMapper;
 
 	@Override
-	public DetailDevis findDetailDevisById(Integer id) {
+	public DetailDevisDto findDetailDevisById(Integer id) {
 		DetailDevisEntity detailDevisEntity = detailDevisRepository.findById(id).get();
+		
+		DetailDevisDto detailDevisDto = modelMapper.map(detailDevisEntity, DetailDevisDto.class);
 		DetailDevis detailDevis = modelMapper.map(detailDevisEntity, DetailDevis.class);
-		return detailDevis;
+
+		// Set attributes for the DetailDevisDto object
+		detailDevisDto.setMntHt(detailDevis.getMntHt());
+		detailDevisDto.setMntTtc(detailDevis.getMntTtc());
+		detailDevisDto.setMntTva(detailDevis.getMntTva());
+
+		return detailDevisDto;
 	}
 
 	@Override
-	public List<DetailDevis> findAllDetailDeviss() {
-		List<DetailDevisEntity> detailDevisEntities = detailDevisRepository.findAll();
-		return detailDevisEntities.stream().map(detailDevisEntity -> modelMapper.map(detailDevisEntity, DetailDevis.class))
-				.collect(Collectors.toList());
+	public List<DetailDevisDto> findAllDetailDeviss() {
+	    List<DetailDevisEntity> detailDevisEntities = detailDevisRepository.findAll();
+	    List<DetailDevisDto> detailDevisDtos = new ArrayList<>();
+
+	    for (DetailDevisEntity detailDevisEntity : detailDevisEntities) {
+	        DetailDevisDto detailDevisDto = modelMapper.map(detailDevisEntity, DetailDevisDto.class);
+	        DetailDevis detailDevis = modelMapper.map(detailDevisEntity, DetailDevis.class);
+
+	        // Set attributes for the DetailDevisDto object
+	        detailDevisDto.setMntHt(detailDevis.getMntHt());
+	        detailDevisDto.setMntTtc(detailDevis.getMntTtc());
+	        detailDevisDto.setMntTva(detailDevis.getMntTva());
+
+	        detailDevisDtos.add(detailDevisDto);
+	    }
+
+	    return detailDevisDtos;
 	}
 
 	@Override

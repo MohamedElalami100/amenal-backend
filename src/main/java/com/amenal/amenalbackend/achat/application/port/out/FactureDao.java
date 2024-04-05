@@ -3,11 +3,12 @@ package com.amenal.amenalbackend.achat.application.port.out;
 import java.util.List;
 
 import com.amenal.amenalbackend.achat.application.domain.Facture;
+import com.amenal.amenalbackend.achat.application.dto.FactureDto;
 
 public interface FactureDao {
-	Facture findFactureById(Integer id);
+	FactureDto findFactureById(Integer id);
 	
-	List<Facture> findAllFactures();
+	List<FactureDto> findAllFactures();
 	
 	Facture saveFacture(Facture facture);
 	

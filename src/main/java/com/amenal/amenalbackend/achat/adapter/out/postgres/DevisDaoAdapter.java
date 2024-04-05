@@ -1,7 +1,7 @@
 package com.amenal.amenalbackend.achat.adapter.out.postgres;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.amenal.amenalbackend.achat.adapter.out.postgres.entities.DevisEntity;
 import com.amenal.amenalbackend.achat.adapter.out.postgres.repositories.DevisRepository;
 import com.amenal.amenalbackend.achat.application.domain.Devis;
+import com.amenal.amenalbackend.achat.application.dto.DevisDto;
 import com.amenal.amenalbackend.achat.application.port.out.DevisDao;
 
 import lombok.RequiredArgsConstructor;
@@ -27,17 +28,38 @@ public class DevisDaoAdapter implements DevisDao {
 	private ModelMapper modelMapper;
 
 	@Override
-	public Devis findDevisById(Integer id) {
+	public DevisDto findDevisById(Integer id) {
 		DevisEntity devisEntity = devisRepository.findById(id).get();
+		
+		DevisDto devisDto = modelMapper.map(devisEntity, DevisDto.class);
 		Devis devis = modelMapper.map(devisEntity, Devis.class);
-		return devis;
+
+		// Set attributes for the DevisDto object
+		devisDto.setMntHt(devis.getMntHt());
+		devisDto.setMntTtc(devis.getMntTtc());
+		devisDto.setMntTva(devis.getMntTva());
+
+		return devisDto;
 	}
 
 	@Override
-	public List<Devis> findAllDeviss() {
-		List<DevisEntity> devisEntities = devisRepository.findAll();
-		return devisEntities.stream().map(devisEntity -> modelMapper.map(devisEntity, Devis.class))
-				.collect(Collectors.toList());
+	public List<DevisDto> findAllDeviss() {
+	    List<DevisEntity> devisEntities = devisRepository.findAll();
+	    List<DevisDto> devisDtos = new ArrayList<>();
+
+	    for (DevisEntity devisEntity : devisEntities) {
+	        DevisDto devisDto = modelMapper.map(devisEntity, DevisDto.class);
+	        Devis devis = modelMapper.map(devisEntity, Devis.class);
+
+	        // Set attributes for the DevisDto object
+	        devisDto.setMntHt(devis.getMntHt());
+	        devisDto.setMntTtc(devis.getMntTtc());
+	        devisDto.setMntTva(devis.getMntTva());
+
+	        devisDtos.add(devisDto);
+	    }
+
+	    return devisDtos;
 	}
 
 	@Override

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amenal.amenalbackend.achat.application.domain.Reception;
+import com.amenal.amenalbackend.achat.application.dto.ReceptionDto;
 import com.amenal.amenalbackend.achat.application.port.in.ReceptionUseCase;
 
 import lombok.RequiredArgsConstructor;
@@ -29,12 +30,12 @@ public class ReceptionController {
 	private ReceptionUseCase receptionUseCase;
 
 	@GetMapping
-	public ResponseEntity<List<Reception>> getAllReceptions() {
+	public ResponseEntity<List<ReceptionDto>> getAllReceptions() {
 		return ResponseEntity.ok(receptionUseCase.findAllReceptions());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Reception> getReceptionById(@PathVariable("id") Integer id) {
+	public ResponseEntity<ReceptionDto> getReceptionById(@PathVariable("id") Integer id) {
 		try {
 			return ResponseEntity.ok(receptionUseCase.findReceptionById(id));
 		} catch (NoSuchElementException e) {

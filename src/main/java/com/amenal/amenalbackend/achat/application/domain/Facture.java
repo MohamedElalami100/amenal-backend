@@ -16,10 +16,11 @@ public class Facture {
 	private Fournisseur fournisseur;
 	private List<Paiement> paiements;
 	private List<Reception> receptions;
+	private List<DetailFacture> detailFactures;
 
 	public Facture(Integer id, LocalDate dateFcf, String reference, String lienPhotoFacture, Integer delaiFacture,
 			Double mntHtNote, Double mntTvaNote, Double mntTtcNote, Fournisseur fournisseur, List<Paiement> paiements,
-			List<Reception> receptions) {
+			List<Reception> receptions, List<DetailFacture> detailFactures) {
 		super();
 		this.id = id;
 		this.dateFcf = dateFcf;
@@ -32,6 +33,7 @@ public class Facture {
 		this.fournisseur = fournisseur;
 		this.paiements = paiements;
 		this.receptions = receptions;
+		this.detailFactures = detailFactures;
 	}
 
 	public Facture() {
@@ -124,6 +126,39 @@ public class Facture {
 
 	public void setPaiements(List<Paiement> paiements) {
 		this.paiements = paiements;
+	}
+	
+	public List<DetailFacture> getDetailFactures() {
+		return detailFactures;
+	}
+
+	public void setDetailFactures(List<DetailFacture> detailFactures) {
+		this.detailFactures = detailFactures;
+	}
+
+	//Business methods:
+	public Double getMntHt() {
+		try {
+			return detailFactures.stream().mapToDouble(obj -> obj.getMntHt() != null ? obj.getMntHt() : 0).sum();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	public Double getMntTva() {
+		try {
+			return detailFactures.stream().mapToDouble(obj -> obj.getMntTva() != null ? obj.getMntTva() : 0).sum();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	public Double getMntTtc() {
+		try {
+			return detailFactures.stream().mapToDouble(obj -> obj.getMntTtc() != null ? obj.getMntTtc() : 0).sum();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }

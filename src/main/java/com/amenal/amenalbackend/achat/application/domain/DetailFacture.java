@@ -72,5 +72,27 @@ public class DetailFacture {
 	}
 
 	// ToDO: business methods for mntHt, mntTva, mntTtc
+	public Double getMntHt() {
+		try {
+			return 0.0;
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
+	public Double getMntTva() {
+		try {
+			return 0.0;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	public Double getMntTtc() {
+		try {
+			return 0.0;
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }

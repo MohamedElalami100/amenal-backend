@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amenal.amenalbackend.achat.application.domain.Devis;
+import com.amenal.amenalbackend.achat.application.dto.DevisDto;
 import com.amenal.amenalbackend.achat.application.port.in.DevisUseCase;
 
 import lombok.RequiredArgsConstructor;
@@ -29,12 +30,12 @@ public class DevisController {
 	private DevisUseCase devisUseCase;
 
 	@GetMapping
-	public ResponseEntity<List<Devis>> getAllDeviss() {
+	public ResponseEntity<List<DevisDto>> getAllDeviss() {
 		return ResponseEntity.ok(devisUseCase.findAllDeviss());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Devis> getDevisById(@PathVariable("id") Integer id) {
+	public ResponseEntity<DevisDto> getDevisById(@PathVariable("id") Integer id) {
 		try {
 			return ResponseEntity.ok(devisUseCase.findDevisById(id));
 		} catch (NoSuchElementException e) {

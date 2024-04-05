@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amenal.amenalbackend.achat.application.domain.DetailReception;
+import com.amenal.amenalbackend.achat.application.dto.DetailReceptionDto;
 import com.amenal.amenalbackend.achat.application.port.in.DetailReceptionUseCase;
 
 import lombok.RequiredArgsConstructor;
@@ -29,12 +30,12 @@ public class DetailReceptionController {
 	private DetailReceptionUseCase detailReceptionUseCase;
 
 	@GetMapping
-	public ResponseEntity<List<DetailReception>> getAllDetailReceptions() {
+	public ResponseEntity<List<DetailReceptionDto>> getAllDetailReceptions() {
 		return ResponseEntity.ok(detailReceptionUseCase.findAllDetailReceptions());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<DetailReception> getDetailReceptionById(@PathVariable("id") Integer id) {
+	public ResponseEntity<DetailReceptionDto> getDetailReceptionById(@PathVariable("id") Integer id) {
 		try {
 			return ResponseEntity.ok(detailReceptionUseCase.findDetailReceptionById(id));
 		} catch (NoSuchElementException e) {

@@ -3,11 +3,12 @@ package com.amenal.amenalbackend.achat.application.port.out;
 import java.util.List;
 
 import com.amenal.amenalbackend.achat.application.domain.DetailReception;
+import com.amenal.amenalbackend.achat.application.dto.DetailReceptionDto;
 
 public interface DetailReceptionDao {
-	DetailReception findDetailReceptionById(Integer id);
+	DetailReceptionDto findDetailReceptionById(Integer id);
 	
-	List<DetailReception> findAllDetailReceptions();
+	List<DetailReceptionDto> findAllDetailReceptions();
 	
 	DetailReception saveDetailReception(DetailReception detailReception);
 	

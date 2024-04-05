@@ -3,6 +3,7 @@ package com.amenal.amenalbackend.achat.application.port.in;
 import java.util.List;
 
 import com.amenal.amenalbackend.achat.application.domain.Besoin;
+import com.amenal.amenalbackend.achat.application.dto.BesoinDto;
 import com.amenal.amenalbackend.achat.application.port.out.BesoinDao;
 
 public class BesoinUseCase {
@@ -13,11 +14,11 @@ public class BesoinUseCase {
 		this.besoinDao = besoinDao;
 	}
 
-	public Besoin findBesoinById(Integer id) {
+	public BesoinDto findBesoinById(Integer id) {
 	    return besoinDao.findBesoinById(id);
 	}
 
-	public List<Besoin> findAllBesoins() {
+	public List<BesoinDto> findAllBesoins() {
 		return besoinDao.findAllBesoins();
 	}
 	

@@ -1,7 +1,7 @@
 package com.amenal.amenalbackend.achat.adapter.out.postgres;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.amenal.amenalbackend.achat.adapter.out.postgres.entities.BesoinEntity;
 import com.amenal.amenalbackend.achat.adapter.out.postgres.repositories.BesoinRepository;
 import com.amenal.amenalbackend.achat.application.domain.Besoin;
+import com.amenal.amenalbackend.achat.application.dto.BesoinDto;
 import com.amenal.amenalbackend.achat.application.port.out.BesoinDao;
 
 import lombok.RequiredArgsConstructor;
@@ -27,17 +28,38 @@ public class BesoinDaoAdapter implements BesoinDao {
 	private ModelMapper modelMapper;
 
 	@Override
-	public Besoin findBesoinById(Integer id) {
+	public BesoinDto findBesoinById(Integer id) {
 		BesoinEntity besoinEntity = besoinRepository.findById(id).get();
+		
+		BesoinDto besoinDto = modelMapper.map(besoinEntity, BesoinDto.class);
 		Besoin besoin = modelMapper.map(besoinEntity, Besoin.class);
-		return besoin;
+
+		// Set attributes for the BesoinDto object
+		besoinDto.setMntHt(besoin.getMntHt());
+		besoinDto.setMntTtc(besoin.getMntTtc());
+		besoinDto.setMntTva(besoin.getMntTva());
+
+		return besoinDto;
 	}
 
 	@Override
-	public List<Besoin> findAllBesoins() {
-		List<BesoinEntity> besoinEntities = besoinRepository.findAll();
-		return besoinEntities.stream().map(besoinEntity -> modelMapper.map(besoinEntity, Besoin.class))
-				.collect(Collectors.toList());
+	public List<BesoinDto> findAllBesoins() {
+	    List<BesoinEntity> besoinEntities = besoinRepository.findAll();
+	    List<BesoinDto> besoinDtos = new ArrayList<>();
+
+	    for (BesoinEntity besoinEntity : besoinEntities) {
+	        BesoinDto besoinDto = modelMapper.map(besoinEntity, BesoinDto.class);
+	        Besoin besoin = modelMapper.map(besoinEntity, Besoin.class);
+
+	        // Set attributes for the BesoinDto object
+	        besoinDto.setMntHt(besoin.getMntHt());
+	        besoinDto.setMntTtc(besoin.getMntTtc());
+	        besoinDto.setMntTva(besoin.getMntTva());
+
+	        besoinDtos.add(besoinDto);
+	    }
+
+	    return besoinDtos;
 	}
 
 	@Override

@@ -3,11 +3,12 @@ package com.amenal.amenalbackend.achat.application.port.out;
 import java.util.List;
 
 import com.amenal.amenalbackend.achat.application.domain.DetailFacture;
+import com.amenal.amenalbackend.achat.application.dto.DetailFactureDto;
 
 public interface DetailFactureDao {
-	DetailFacture findDetailFactureById(Integer id);
+	DetailFactureDto findDetailFactureById(Integer id);
 	
-	List<DetailFacture> findAllDetailFactures();
+	List<DetailFactureDto> findAllDetailFactures();
 	
 	DetailFacture saveDetailFacture(DetailFacture detailFacture);
 	

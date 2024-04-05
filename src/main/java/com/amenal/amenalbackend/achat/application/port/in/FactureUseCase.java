@@ -3,6 +3,7 @@ package com.amenal.amenalbackend.achat.application.port.in;
 import java.util.List;
 
 import com.amenal.amenalbackend.achat.application.domain.Facture;
+import com.amenal.amenalbackend.achat.application.dto.FactureDto;
 import com.amenal.amenalbackend.achat.application.port.out.FactureDao;
 
 public class FactureUseCase {
@@ -13,11 +14,11 @@ public class FactureUseCase {
 		this.factureDao = factureDao;
 	}
 
-	public Facture findFactureById(Integer id) {
+	public FactureDto findFactureById(Integer id) {
 	    return factureDao.findFactureById(id);
 	}
 
-	public List<Facture> findAllFactures() {
+	public List<FactureDto> findAllFactures() {
 		return factureDao.findAllFactures();
 	}
 	

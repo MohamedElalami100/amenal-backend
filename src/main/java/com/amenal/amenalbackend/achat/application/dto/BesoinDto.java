@@ -1,11 +1,13 @@
-package com.amenal.amenalbackend.achat.application.domain;
+package com.amenal.amenalbackend.achat.application.dto;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import com.amenal.amenalbackend.achat.application.domain.ChargeStandard;
+import com.amenal.amenalbackend.achat.application.domain.DetailBesoin;
 import com.amenal.amenalbackend.budget.application.domain.Tache;
 
-public class Besoin {
+public class BesoinDto {
 	private Integer id;
 	private LocalDate datePrevu;
 	private Double qte;
@@ -14,9 +16,14 @@ public class Besoin {
 	private Tache tache;
 
 	private List<DetailBesoin> detailBesoins;
+	
+	private Double prixUnitaire;
+	private Double mntHt;
+	private Double mntTva;
+	private Double mntTtc;
 
-	public Besoin(Integer id, LocalDate datePrevu, Double qte, ChargeStandard charge, Tache tache,
-			List<DetailBesoin> detailBesoins) {
+	public BesoinDto(Integer id, LocalDate datePrevu, Double qte, ChargeStandard charge, Tache tache,
+			List<DetailBesoin> detailBesoins, Double prixUnitaire, Double mntHt, Double mntTva, Double mntTtc) {
 		super();
 		this.id = id;
 		this.datePrevu = datePrevu;
@@ -24,9 +31,13 @@ public class Besoin {
 		this.charge = charge;
 		this.tache = tache;
 		this.detailBesoins = detailBesoins;
+		this.prixUnitaire = prixUnitaire;
+		this.mntHt = mntHt;
+		this.mntTva = mntTva;
+		this.mntTtc = mntTtc;
 	}
 
-	public Besoin() {
+	public BesoinDto() {
 		super();
 	}
 
@@ -78,37 +89,36 @@ public class Besoin {
 		this.detailBesoins = detailBesoins;
 	}
 
-	// business methods:
-	public Double getPrixUnitaireHT() {
-		try {
-			return charge.getPrixUnitaire();
-		} catch (Exception e) {
-			return null;
-		}
+	public Double getPrixUnitaire() {
+		return prixUnitaire;
+	}
+
+	public void setPrixUnitaire(Double prixUnitaire) {
+		this.prixUnitaire = prixUnitaire;
 	}
 
 	public Double getMntHt() {
-		try {
-			return getPrixUnitaireHT() * qte;
-		} catch (Exception e) {
-			return null;
-		}
+		return mntHt;
+	}
+
+	public void setMntHt(Double mntHt) {
+		this.mntHt = mntHt;
 	}
 
 	public Double getMntTva() {
-		try {
-			return getMntHt() * 0.2;
-		} catch (Exception e) {
-			return null;
-		}
+		return mntTva;
+	}
+
+	public void setMntTva(Double mntTva) {
+		this.mntTva = mntTva;
 	}
 
 	public Double getMntTtc() {
-		try {
-			return getMntHt() * 1.2;
-		} catch (Exception e) {
-			return null;
-		}
+		return mntTtc;
+	}
+
+	public void setMntTtc(Double mntTtc) {
+		this.mntTtc = mntTtc;
 	}
 
 }

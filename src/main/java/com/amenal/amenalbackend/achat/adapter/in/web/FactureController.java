@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amenal.amenalbackend.achat.application.domain.Facture;
+import com.amenal.amenalbackend.achat.application.dto.FactureDto;
 import com.amenal.amenalbackend.achat.application.port.in.FactureUseCase;
 
 import lombok.RequiredArgsConstructor;
@@ -29,12 +30,12 @@ public class FactureController {
 	private FactureUseCase factureUseCase;
 
 	@GetMapping
-	public ResponseEntity<List<Facture>> getAllFactures() {
+	public ResponseEntity<List<FactureDto>> getAllFactures() {
 		return ResponseEntity.ok(factureUseCase.findAllFactures());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Facture> getFactureById(@PathVariable("id") Integer id) {
+	public ResponseEntity<FactureDto> getFactureById(@PathVariable("id") Integer id) {
 		try {
 			return ResponseEntity.ok(factureUseCase.findFactureById(id));
 		} catch (NoSuchElementException e) {

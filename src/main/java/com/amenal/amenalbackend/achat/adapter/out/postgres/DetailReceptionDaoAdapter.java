@@ -1,7 +1,7 @@
 package com.amenal.amenalbackend.achat.adapter.out.postgres;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.amenal.amenalbackend.achat.adapter.out.postgres.entities.DetailReceptionEntity;
 import com.amenal.amenalbackend.achat.adapter.out.postgres.repositories.DetailReceptionRepository;
 import com.amenal.amenalbackend.achat.application.domain.DetailReception;
+import com.amenal.amenalbackend.achat.application.dto.DetailReceptionDto;
 import com.amenal.amenalbackend.achat.application.port.out.DetailReceptionDao;
 
 import lombok.RequiredArgsConstructor;
@@ -27,17 +28,38 @@ public class DetailReceptionDaoAdapter implements DetailReceptionDao {
 	private ModelMapper modelMapper;
 
 	@Override
-	public DetailReception findDetailReceptionById(Integer id) {
+	public DetailReceptionDto findDetailReceptionById(Integer id) {
 		DetailReceptionEntity detailReceptionEntity = detailReceptionRepository.findById(id).get();
+		
+		DetailReceptionDto detailReceptionDto = modelMapper.map(detailReceptionEntity, DetailReceptionDto.class);
 		DetailReception detailReception = modelMapper.map(detailReceptionEntity, DetailReception.class);
-		return detailReception;
+
+		// Set attributes for the DetailReceptionDto object
+		detailReceptionDto.setMntHt(detailReception.getMntHt());
+		detailReceptionDto.setMntTtc(detailReception.getMntTtc());
+		detailReceptionDto.setMntTva(detailReception.getMntTva());
+
+		return detailReceptionDto;
 	}
 
 	@Override
-	public List<DetailReception> findAllDetailReceptions() {
-		List<DetailReceptionEntity> detailReceptionEntities = detailReceptionRepository.findAll();
-		return detailReceptionEntities.stream().map(detailReceptionEntity -> modelMapper.map(detailReceptionEntity, DetailReception.class))
-				.collect(Collectors.toList());
+	public List<DetailReceptionDto> findAllDetailReceptions() {
+	    List<DetailReceptionEntity> detailReceptionEntities = detailReceptionRepository.findAll();
+	    List<DetailReceptionDto> detailReceptionDtos = new ArrayList<>();
+
+	    for (DetailReceptionEntity detailReceptionEntity : detailReceptionEntities) {
+	        DetailReceptionDto detailReceptionDto = modelMapper.map(detailReceptionEntity, DetailReceptionDto.class);
+	        DetailReception detailReception = modelMapper.map(detailReceptionEntity, DetailReception.class);
+
+	        // Set attributes for the DetailReceptionDto object
+	        detailReceptionDto.setMntHt(detailReception.getMntHt());
+	        detailReceptionDto.setMntTtc(detailReception.getMntTtc());
+	        detailReceptionDto.setMntTva(detailReception.getMntTva());
+
+	        detailReceptionDtos.add(detailReceptionDto);
+	    }
+
+	    return detailReceptionDtos;
 	}
 
 	@Override

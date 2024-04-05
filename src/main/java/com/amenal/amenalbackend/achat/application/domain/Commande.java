@@ -65,13 +65,4 @@ public class Commande {
 		this.contacts = contacts;
 	}
 
-	// business methods:
-	public List<DetailDevis> getDetailCommmande() {
-		try {
-			return devis.getDetailDevis();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
 }

@@ -3,6 +3,7 @@ package com.amenal.amenalbackend.achat.application.port.in;
 import java.util.List;
 
 import com.amenal.amenalbackend.achat.application.domain.DetailDevis;
+import com.amenal.amenalbackend.achat.application.dto.DetailDevisDto;
 import com.amenal.amenalbackend.achat.application.port.out.DetailDevisDao;
 
 public class DetailDevisUseCase {
@@ -13,11 +14,11 @@ public class DetailDevisUseCase {
 		this.detailDevisDao = detailDevisDao;
 	}
 
-	public DetailDevis findDetailDevisById(Integer id) {
+	public DetailDevisDto findDetailDevisById(Integer id) {
 	    return detailDevisDao.findDetailDevisById(id);
 	}
 
-	public List<DetailDevis> findAllDetailDeviss() {
+	public List<DetailDevisDto> findAllDetailDeviss() {
 		return detailDevisDao.findAllDetailDeviss();
 	}
 	
