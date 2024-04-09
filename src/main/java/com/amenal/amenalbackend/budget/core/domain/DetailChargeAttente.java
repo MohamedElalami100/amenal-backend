@@ -195,4 +195,8 @@ public class DetailChargeAttente {
 		this.metre = metre;
 	}
 
+	public void setMetre(MetreAv metre) {
+		this.metre = metre;
+	}
+
 }

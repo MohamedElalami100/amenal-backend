@@ -121,4 +121,8 @@ public class DetailQualiteAttente {
 		this.metre = metre;
 	}
 
+	public void setMetre(MetreAv metre) {
+		this.metre = metre;
+	}
+
 }

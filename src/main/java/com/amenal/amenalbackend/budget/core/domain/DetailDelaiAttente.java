@@ -132,5 +132,9 @@ public class DetailDelaiAttente {
 	public void setAvenant(MetreAv metre) {
 		this.metre = metre;
 	}
+
+	public void setMetre(MetreAv metre) {
+		this.metre = metre;
+	}
 	
 }
