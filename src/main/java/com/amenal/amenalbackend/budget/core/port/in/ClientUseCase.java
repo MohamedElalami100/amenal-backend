@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.Client;
-import com.amenal.amenalbackend.budget.application.port.out.ClientDao;
+import com.amenal.amenalbackend.budget.core.domain.Client;
+import com.amenal.amenalbackend.budget.core.port.out.ClientDao;
 
 public class ClientUseCase {
 	

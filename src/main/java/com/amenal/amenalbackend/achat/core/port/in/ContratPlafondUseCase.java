@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.port.in;
+package com.amenal.amenalbackend.achat.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.ContratPlafond;
-import com.amenal.amenalbackend.achat.application.port.out.ContratPlafondDao;
+import com.amenal.amenalbackend.achat.core.domain.ContratPlafond;
+import com.amenal.amenalbackend.achat.core.port.out.ContratPlafondDao;
 
 public class ContratPlafondUseCase {
 	

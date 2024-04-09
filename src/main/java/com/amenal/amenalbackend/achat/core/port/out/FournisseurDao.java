@@ -1,8 +1,8 @@
-package com.amenal.amenalbackend.achat.application.port.out;
+package com.amenal.amenalbackend.achat.core.port.out;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.Fournisseur;
+import com.amenal.amenalbackend.achat.core.domain.Fournisseur;
 
 public interface FournisseurDao {
 	Fournisseur findFournisseurById(Integer id);

@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.port.out;
+package com.amenal.amenalbackend.achat.core.port.out;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.DetailFacture;
-import com.amenal.amenalbackend.achat.application.dto.DetailFactureDto;
+import com.amenal.amenalbackend.achat.core.domain.DetailFacture;
+import com.amenal.amenalbackend.achat.infrastructure.dto.DetailFactureDto;
 
 public interface DetailFactureDao {
 	DetailFactureDto findDetailFactureById(Integer id);

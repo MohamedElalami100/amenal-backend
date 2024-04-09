@@ -1,6 +1,6 @@
-package com.amenal.amenalbackend.achat.application.domain;
+package com.amenal.amenalbackend.achat.core.domain;
 
-import com.amenal.amenalbackend.budget.application.domain.DetailProduit;
+import com.amenal.amenalbackend.budget.core.domain.DetailProduit;
 
 public class DetailBesoin {
 	private Integer id;

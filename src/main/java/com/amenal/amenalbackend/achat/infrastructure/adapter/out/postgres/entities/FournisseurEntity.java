@@ -1,10 +1,10 @@
-package com.amenal.amenalbackend.achat.adapter.out.postgres.entities;
+package com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.entities;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.adapter.out.postgres.entities.BanqueEntity;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.BanqueEntity;
 
 @Entity
 @Table(name = "fournisseur")

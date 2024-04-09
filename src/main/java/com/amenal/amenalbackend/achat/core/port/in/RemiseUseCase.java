@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.port.in;
+package com.amenal.amenalbackend.achat.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.Remise;
-import com.amenal.amenalbackend.achat.application.port.out.RemiseDao;
+import com.amenal.amenalbackend.achat.core.domain.Remise;
+import com.amenal.amenalbackend.achat.core.port.out.RemiseDao;
 
 public class RemiseUseCase {
 	

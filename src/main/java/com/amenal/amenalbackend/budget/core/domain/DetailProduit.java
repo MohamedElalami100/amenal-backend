@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.budget.application.domain;
+package com.amenal.amenalbackend.budget.core.domain;
 
 //détailslotav in Microsoft access database
 public class DetailProduit {

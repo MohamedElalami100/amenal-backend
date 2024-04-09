@@ -1,10 +1,10 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.DetailDelaiAttente;
-import com.amenal.amenalbackend.budget.application.port.out.DetailDelaiAttenteDao;
+import com.amenal.amenalbackend.budget.core.domain.DetailDelaiAttente;
+import com.amenal.amenalbackend.budget.core.port.out.DetailDelaiAttenteDao;
 
 public class DetailDelaiAttenteUseCase {
 	

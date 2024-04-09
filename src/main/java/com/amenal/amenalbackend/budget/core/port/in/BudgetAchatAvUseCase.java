@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.BudgetAchatAv;
-import com.amenal.amenalbackend.budget.application.port.out.BudgetAchatAvDao;
+import com.amenal.amenalbackend.budget.core.domain.BudgetAchatAv;
+import com.amenal.amenalbackend.budget.core.port.out.BudgetAchatAvDao;
 
 public class BudgetAchatAvUseCase {
 	

@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.ProduitStandard;
-import com.amenal.amenalbackend.budget.application.port.out.ProduitStandardDao;
+import com.amenal.amenalbackend.budget.core.domain.ProduitStandard;
+import com.amenal.amenalbackend.budget.core.port.out.ProduitStandardDao;
 
 public class ProduitStandardUseCase {
 	

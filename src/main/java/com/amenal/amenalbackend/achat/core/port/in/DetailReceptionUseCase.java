@@ -1,10 +1,10 @@
-package com.amenal.amenalbackend.achat.application.port.in;
+package com.amenal.amenalbackend.achat.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.DetailReception;
-import com.amenal.amenalbackend.achat.application.dto.DetailReceptionDto;
-import com.amenal.amenalbackend.achat.application.port.out.DetailReceptionDao;
+import com.amenal.amenalbackend.achat.core.domain.DetailReception;
+import com.amenal.amenalbackend.achat.core.port.out.DetailReceptionDao;
+import com.amenal.amenalbackend.achat.infrastructure.dto.DetailReceptionDto;
 
 public class DetailReceptionUseCase {
 	

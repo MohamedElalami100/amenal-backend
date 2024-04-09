@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.achat.adapter.in.web;
+package com.amenal.amenalbackend.achat.infrastructure.adapter.in.web;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amenal.amenalbackend.achat.application.domain.Facture;
-import com.amenal.amenalbackend.achat.application.dto.FactureDto;
-import com.amenal.amenalbackend.achat.application.port.in.FactureUseCase;
+import com.amenal.amenalbackend.achat.core.domain.Facture;
+import com.amenal.amenalbackend.achat.core.port.in.FactureUseCase;
+import com.amenal.amenalbackend.achat.infrastructure.dto.FactureDto;
 
 import lombok.RequiredArgsConstructor;
 

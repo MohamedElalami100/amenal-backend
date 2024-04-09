@@ -1,10 +1,10 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.dto.DetailDelaiTableDto;
-import com.amenal.amenalbackend.budget.application.dto.RowDelaiDto;
-import com.amenal.amenalbackend.budget.application.port.out.DetailDelaiTableDao;
+import com.amenal.amenalbackend.budget.core.port.out.DetailDelaiTableDao;
+import com.amenal.amenalbackend.budget.infrastructure.dto.DetailDelaiTableDto;
+import com.amenal.amenalbackend.budget.infrastructure.dto.RowDelaiDto;
 
 public class DetailDelaiTableUseCase {
 	

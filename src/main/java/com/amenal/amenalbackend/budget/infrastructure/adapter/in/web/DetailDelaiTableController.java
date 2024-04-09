@@ -1,8 +1,8 @@
-package com.amenal.amenalbackend.budget.adapter.in.web;
+package com.amenal.amenalbackend.budget.infrastructure.adapter.in.web;
 
-import com.amenal.amenalbackend.budget.application.dto.DetailDelaiTableDto;
-import com.amenal.amenalbackend.budget.application.dto.RowDelaiDto;
-import com.amenal.amenalbackend.budget.application.port.in.DetailDelaiTableUseCase;
+import com.amenal.amenalbackend.budget.core.port.in.DetailDelaiTableUseCase;
+import com.amenal.amenalbackend.budget.infrastructure.dto.DetailDelaiTableDto;
+import com.amenal.amenalbackend.budget.infrastructure.dto.RowDelaiDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

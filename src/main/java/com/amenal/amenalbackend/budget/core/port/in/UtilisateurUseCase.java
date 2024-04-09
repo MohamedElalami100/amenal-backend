@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.Utilisateur;
-import com.amenal.amenalbackend.budget.application.port.out.UtilisateurDao;
+import com.amenal.amenalbackend.budget.core.domain.Utilisateur;
+import com.amenal.amenalbackend.budget.core.port.out.UtilisateurDao;
 
 public class UtilisateurUseCase {
 	

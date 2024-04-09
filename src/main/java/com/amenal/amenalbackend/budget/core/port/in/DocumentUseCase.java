@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -7,11 +7,11 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.amenal.amenalbackend.budget.application.domain.Avenant;
-import com.amenal.amenalbackend.budget.application.domain.Document;
-import com.amenal.amenalbackend.budget.application.port.out.AvenantDao;
-import com.amenal.amenalbackend.budget.application.port.out.CloudStorageDao;
-import com.amenal.amenalbackend.budget.application.port.out.DocumentDao;
+import com.amenal.amenalbackend.budget.core.domain.Avenant;
+import com.amenal.amenalbackend.budget.core.domain.Document;
+import com.amenal.amenalbackend.budget.core.port.out.AvenantDao;
+import com.amenal.amenalbackend.budget.core.port.out.CloudStorageDao;
+import com.amenal.amenalbackend.budget.core.port.out.DocumentDao;
 
 import org.springframework.util.StringUtils;
 import java.nio.file.Files;

@@ -1,10 +1,10 @@
-package com.amenal.amenalbackend.achat.application.port.in;
+package com.amenal.amenalbackend.achat.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.DetailDevis;
-import com.amenal.amenalbackend.achat.application.dto.DetailDevisDto;
-import com.amenal.amenalbackend.achat.application.port.out.DetailDevisDao;
+import com.amenal.amenalbackend.achat.core.domain.DetailDevis;
+import com.amenal.amenalbackend.achat.core.port.out.DetailDevisDao;
+import com.amenal.amenalbackend.achat.infrastructure.dto.DetailDevisDto;
 
 public class DetailDevisUseCase {
 	

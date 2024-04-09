@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.budget.application.domain;
+package com.amenal.amenalbackend.budget.core.domain;
 
 public class DetailQualite {
 	private Integer id;

@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.achat.adapter.out.postgres.entities;
+package com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

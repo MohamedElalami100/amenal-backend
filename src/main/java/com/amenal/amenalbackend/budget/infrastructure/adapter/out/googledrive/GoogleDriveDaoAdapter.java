@@ -1,7 +1,7 @@
-package com.amenal.amenalbackend.budget.adapter.out.googledrive;
+package com.amenal.amenalbackend.budget.infrastructure.adapter.out.googledrive;
 
-import com.amenal.amenalbackend.budget.application.domain.Document;
-import com.amenal.amenalbackend.budget.application.port.out.CloudStorageDao;
+import com.amenal.amenalbackend.budget.core.domain.Document;
+import com.amenal.amenalbackend.budget.core.port.out.CloudStorageDao;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.FileContent;

@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.Avenant;
-import com.amenal.amenalbackend.budget.application.port.out.AvenantDao;
+import com.amenal.amenalbackend.budget.core.domain.Avenant;
+import com.amenal.amenalbackend.budget.core.port.out.AvenantDao;
 
 public class AvenantUseCase {
 	

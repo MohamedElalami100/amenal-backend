@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.budget.adapter.out.postgres.entities;
+package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities;
 
 import java.math.BigInteger;
 import java.time.LocalDate;

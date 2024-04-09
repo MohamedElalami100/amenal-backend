@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.port.in;
+package com.amenal.amenalbackend.achat.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.AttestationRgf;
-import com.amenal.amenalbackend.achat.application.port.out.AttestationRgfDao;
+import com.amenal.amenalbackend.achat.core.domain.AttestationRgf;
+import com.amenal.amenalbackend.achat.core.port.out.AttestationRgfDao;
 
 public class AttestationRgfUseCase {
 	

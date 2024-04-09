@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.achat.application.domain;
+package com.amenal.amenalbackend.achat.core.domain;
 
 import java.time.LocalDate;
 import java.util.List;

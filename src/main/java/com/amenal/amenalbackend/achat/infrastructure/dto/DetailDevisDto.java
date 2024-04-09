@@ -1,7 +1,7 @@
-package com.amenal.amenalbackend.achat.application.dto;
+package com.amenal.amenalbackend.achat.infrastructure.dto;
 
-import com.amenal.amenalbackend.achat.application.domain.ChargeStandard;
-import com.amenal.amenalbackend.achat.application.domain.Devis;
+import com.amenal.amenalbackend.achat.core.domain.ChargeStandard;
+import com.amenal.amenalbackend.achat.core.domain.Devis;
 
 public class DetailDevisDto {
     private Integer id;

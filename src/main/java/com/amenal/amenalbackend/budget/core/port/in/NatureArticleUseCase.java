@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.NatureArticle;
-import com.amenal.amenalbackend.budget.application.port.out.NatureArticleDao;
+import com.amenal.amenalbackend.budget.core.domain.NatureArticle;
+import com.amenal.amenalbackend.budget.core.port.out.NatureArticleDao;
 
 public class NatureArticleUseCase {
 	

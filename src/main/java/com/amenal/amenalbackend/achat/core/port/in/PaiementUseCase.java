@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.port.in;
+package com.amenal.amenalbackend.achat.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.Paiement;
-import com.amenal.amenalbackend.achat.application.port.out.PaiementDao;
+import com.amenal.amenalbackend.achat.core.domain.Paiement;
+import com.amenal.amenalbackend.achat.core.port.out.PaiementDao;
 
 public class PaiementUseCase {
 	

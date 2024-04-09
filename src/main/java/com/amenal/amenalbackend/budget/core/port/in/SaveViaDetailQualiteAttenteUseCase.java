@@ -1,19 +1,19 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.DetailQualite;
-import com.amenal.amenalbackend.budget.application.domain.DetailQualiteAttente;
-import com.amenal.amenalbackend.budget.application.domain.GrpQualite;
-import com.amenal.amenalbackend.budget.application.domain.Lot;
-import com.amenal.amenalbackend.budget.application.domain.Produit;
-import com.amenal.amenalbackend.budget.application.domain.Tache;
-import com.amenal.amenalbackend.budget.application.port.out.DetailQualiteAttenteDao;
-import com.amenal.amenalbackend.budget.application.port.out.DetailQualiteDao;
-import com.amenal.amenalbackend.budget.application.port.out.GrpQualiteDao;
-import com.amenal.amenalbackend.budget.application.port.out.LotDao;
-import com.amenal.amenalbackend.budget.application.port.out.ProduitDao;
-import com.amenal.amenalbackend.budget.application.port.out.TacheDao;
+import com.amenal.amenalbackend.budget.core.domain.DetailQualite;
+import com.amenal.amenalbackend.budget.core.domain.DetailQualiteAttente;
+import com.amenal.amenalbackend.budget.core.domain.GrpQualite;
+import com.amenal.amenalbackend.budget.core.domain.Lot;
+import com.amenal.amenalbackend.budget.core.domain.Produit;
+import com.amenal.amenalbackend.budget.core.domain.Tache;
+import com.amenal.amenalbackend.budget.core.port.out.DetailQualiteAttenteDao;
+import com.amenal.amenalbackend.budget.core.port.out.DetailQualiteDao;
+import com.amenal.amenalbackend.budget.core.port.out.GrpQualiteDao;
+import com.amenal.amenalbackend.budget.core.port.out.LotDao;
+import com.amenal.amenalbackend.budget.core.port.out.ProduitDao;
+import com.amenal.amenalbackend.budget.core.port.out.TacheDao;
 
 public class SaveViaDetailQualiteAttenteUseCase {
 	private TacheDao tacheDao;

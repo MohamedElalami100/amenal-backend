@@ -1,8 +1,8 @@
-package com.amenal.amenalbackend.achat.application.port.out;
+package com.amenal.amenalbackend.achat.core.port.out;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.ChargeStandard;
+import com.amenal.amenalbackend.achat.core.domain.ChargeStandard;
 
 public interface ChargeStandardDao {
 	ChargeStandard findChargeStandardById(Integer id);

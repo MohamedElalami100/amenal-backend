@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.budget.adapter.out.postgres;
+package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,18 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.budget.adapter.out.postgres.entities.AvenantEntity;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.entities.ProduitEntity;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.entities.TacheEntity;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.repositories.AvenantRepository;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.repositories.ProduitRepository;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.repositories.TacheRepository;
-import com.amenal.amenalbackend.budget.application.domain.Avenant;
-import com.amenal.amenalbackend.budget.application.domain.Produit;
-import com.amenal.amenalbackend.budget.application.domain.Tache;
-import com.amenal.amenalbackend.budget.application.dto.DetailDelaiTableDto;
-import com.amenal.amenalbackend.budget.application.dto.RowDelaiDto;
-import com.amenal.amenalbackend.budget.application.port.out.DetailDelaiTableDao;
+import com.amenal.amenalbackend.budget.core.domain.Avenant;
+import com.amenal.amenalbackend.budget.core.domain.Produit;
+import com.amenal.amenalbackend.budget.core.domain.Tache;
+import com.amenal.amenalbackend.budget.core.port.out.DetailDelaiTableDao;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.AvenantEntity;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.ProduitEntity;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.TacheEntity;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.AvenantRepository;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.ProduitRepository;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.TacheRepository;
+import com.amenal.amenalbackend.budget.infrastructure.dto.DetailDelaiTableDto;
+import com.amenal.amenalbackend.budget.infrastructure.dto.RowDelaiDto;
 
 import lombok.RequiredArgsConstructor;
 

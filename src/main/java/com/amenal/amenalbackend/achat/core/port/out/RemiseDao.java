@@ -1,8 +1,8 @@
-package com.amenal.amenalbackend.achat.application.port.out;
+package com.amenal.amenalbackend.achat.core.port.out;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.Remise;
+import com.amenal.amenalbackend.achat.core.domain.Remise;
 
 public interface RemiseDao {
 	Remise findRemiseById(Integer id);

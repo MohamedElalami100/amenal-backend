@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.Personnel;
-import com.amenal.amenalbackend.budget.application.port.out.PersonnelDao;
+import com.amenal.amenalbackend.budget.core.domain.Personnel;
+import com.amenal.amenalbackend.budget.core.port.out.PersonnelDao;
 
 public class PersonnelUseCase {
 	

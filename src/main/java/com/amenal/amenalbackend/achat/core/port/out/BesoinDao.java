@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.port.out;
+package com.amenal.amenalbackend.achat.core.port.out;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.Besoin;
-import com.amenal.amenalbackend.achat.application.dto.BesoinDto;
+import com.amenal.amenalbackend.achat.core.domain.Besoin;
+import com.amenal.amenalbackend.achat.infrastructure.dto.BesoinDto;
 
 public interface BesoinDao {
 	BesoinDto findBesoinById(Integer id);

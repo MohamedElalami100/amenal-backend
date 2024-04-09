@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.achat.adapter.out.postgres;
+package com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.achat.adapter.out.postgres.entities.DetailFactureEntity;
-import com.amenal.amenalbackend.achat.adapter.out.postgres.repositories.DetailFactureRepository;
-import com.amenal.amenalbackend.achat.application.domain.DetailFacture;
-import com.amenal.amenalbackend.achat.application.dto.DetailFactureDto;
-import com.amenal.amenalbackend.achat.application.port.out.DetailFactureDao;
+import com.amenal.amenalbackend.achat.core.domain.DetailFacture;
+import com.amenal.amenalbackend.achat.core.port.out.DetailFactureDao;
+import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.entities.DetailFactureEntity;
+import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.repositories.DetailFactureRepository;
+import com.amenal.amenalbackend.achat.infrastructure.dto.DetailFactureDto;
 
 import lombok.RequiredArgsConstructor;
 

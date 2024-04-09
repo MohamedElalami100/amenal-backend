@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.dto;
+package com.amenal.amenalbackend.achat.infrastructure.dto;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.Fournisseur;
+import com.amenal.amenalbackend.achat.core.domain.Fournisseur;
 
 public class DevisDto {
 	private Integer id;

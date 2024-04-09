@@ -1,10 +1,10 @@
-package com.amenal.amenalbackend.achat.application.port.in;
+package com.amenal.amenalbackend.achat.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.Facture;
-import com.amenal.amenalbackend.achat.application.dto.FactureDto;
-import com.amenal.amenalbackend.achat.application.port.out.FactureDao;
+import com.amenal.amenalbackend.achat.core.domain.Facture;
+import com.amenal.amenalbackend.achat.core.port.out.FactureDao;
+import com.amenal.amenalbackend.achat.infrastructure.dto.FactureDto;
 
 public class FactureUseCase {
 	

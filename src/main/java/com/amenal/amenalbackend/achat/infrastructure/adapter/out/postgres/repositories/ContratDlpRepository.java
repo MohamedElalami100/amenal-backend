@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.adapter.out.postgres.repositories;
+package com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.amenal.amenalbackend.achat.adapter.out.postgres.entities.ContratDlpEntity;
+import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.entities.ContratDlpEntity;
 
 @Repository
 public interface ContratDlpRepository extends JpaRepository<ContratDlpEntity, Integer>{

@@ -1,10 +1,10 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.Tache;
-import com.amenal.amenalbackend.budget.application.port.out.TacheDao;
+import com.amenal.amenalbackend.budget.core.domain.Tache;
+import com.amenal.amenalbackend.budget.core.port.out.TacheDao;
 import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementException;
 
 public class TacheUseCase {

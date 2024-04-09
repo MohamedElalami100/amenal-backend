@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.budget.adapter.in.web;
+package com.amenal.amenalbackend.budget.infrastructure.adapter.in.web;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amenal.amenalbackend.budget.application.domain.DetailQualiteAttente;
-import com.amenal.amenalbackend.budget.application.port.in.DetailQualiteAttenteUseCase;
-import com.amenal.amenalbackend.budget.application.port.in.SaveViaDetailQualiteAttenteUseCase;
+import com.amenal.amenalbackend.budget.core.domain.DetailQualiteAttente;
+import com.amenal.amenalbackend.budget.core.port.in.DetailQualiteAttenteUseCase;
+import com.amenal.amenalbackend.budget.core.port.in.SaveViaDetailQualiteAttenteUseCase;
 
 import lombok.RequiredArgsConstructor;
 

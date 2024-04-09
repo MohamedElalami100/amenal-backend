@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.budget.adapter.in.web;
+package com.amenal.amenalbackend.budget.infrastructure.adapter.in.web;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amenal.amenalbackend.budget.application.dto.TacheTableDto;
-import com.amenal.amenalbackend.budget.application.port.in.TacheTableUseCase;
+import com.amenal.amenalbackend.budget.core.port.in.TacheTableUseCase;
+import com.amenal.amenalbackend.budget.infrastructure.dto.TacheTableDto;
 
 import lombok.RequiredArgsConstructor;
 

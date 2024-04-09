@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.Project;
-import com.amenal.amenalbackend.budget.application.port.out.ProjectDao;
+import com.amenal.amenalbackend.budget.core.domain.Project;
+import com.amenal.amenalbackend.budget.core.port.out.ProjectDao;
 
 public class ProjectUseCase {
 	

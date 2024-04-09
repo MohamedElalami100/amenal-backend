@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.GrpQualite;
-import com.amenal.amenalbackend.budget.application.port.out.GrpQualiteDao;
+import com.amenal.amenalbackend.budget.core.domain.GrpQualite;
+import com.amenal.amenalbackend.budget.core.port.out.GrpQualiteDao;
 
 public class GrpQualiteUseCase {
 	

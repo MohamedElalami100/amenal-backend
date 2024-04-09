@@ -1,10 +1,10 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.DetailQualiteAttente;
-import com.amenal.amenalbackend.budget.application.port.out.DetailQualiteAttenteDao;
+import com.amenal.amenalbackend.budget.core.domain.DetailQualiteAttente;
+import com.amenal.amenalbackend.budget.core.port.out.DetailQualiteAttenteDao;
 
 public class DetailQualiteAttenteUseCase {
 	

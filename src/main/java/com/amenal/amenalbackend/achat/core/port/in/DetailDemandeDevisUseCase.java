@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.port.in;
+package com.amenal.amenalbackend.achat.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.DetailDemandeDevis;
-import com.amenal.amenalbackend.achat.application.port.out.DetailDemandeDevisDao;
+import com.amenal.amenalbackend.achat.core.domain.DetailDemandeDevis;
+import com.amenal.amenalbackend.achat.core.port.out.DetailDemandeDevisDao;
 
 public class DetailDemandeDevisUseCase {
 	

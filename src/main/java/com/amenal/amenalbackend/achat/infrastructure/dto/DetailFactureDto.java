@@ -1,6 +1,6 @@
-package com.amenal.amenalbackend.achat.application.dto;
+package com.amenal.amenalbackend.achat.infrastructure.dto;
 
-import com.amenal.amenalbackend.achat.application.domain.Facture;
+import com.amenal.amenalbackend.achat.core.domain.Facture;
 
 public class DetailFactureDto {
     private Integer id;

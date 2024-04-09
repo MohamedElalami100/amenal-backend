@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.achat.adapter.out.postgres;
+package com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.achat.adapter.out.postgres.entities.RemiseEntity;
-import com.amenal.amenalbackend.achat.adapter.out.postgres.repositories.RemiseRepository;
-import com.amenal.amenalbackend.achat.application.domain.Remise;
-import com.amenal.amenalbackend.achat.application.port.out.RemiseDao;
+import com.amenal.amenalbackend.achat.core.domain.Remise;
+import com.amenal.amenalbackend.achat.core.port.out.RemiseDao;
+import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.entities.RemiseEntity;
+import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.repositories.RemiseRepository;
 
 import lombok.RequiredArgsConstructor;
 

@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.domain;
+package com.amenal.amenalbackend.achat.core.domain;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.Banque;
+import com.amenal.amenalbackend.budget.core.domain.Banque;
 
 public class Fournisseur {
 	private Integer id;

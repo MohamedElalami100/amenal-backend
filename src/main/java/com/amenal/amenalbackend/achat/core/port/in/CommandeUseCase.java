@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.port.in;
+package com.amenal.amenalbackend.achat.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.Commande;
-import com.amenal.amenalbackend.achat.application.port.out.CommandeDao;
+import com.amenal.amenalbackend.achat.core.domain.Commande;
+import com.amenal.amenalbackend.achat.core.port.out.CommandeDao;
 
 public class CommandeUseCase {
 	

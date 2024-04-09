@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.budget.adapter.out.postgres;
+package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,28 +9,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.budget.adapter.out.postgres.entities.AvenantEntity;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.entities.DetailChargeEntity;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.entities.DetailProduitEntity;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.entities.LotEntity;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.entities.ProduitEntity;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.entities.TacheEntity;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.repositories.AvenantRepository;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.repositories.DetailChargeRepository;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.repositories.DetailProduitRepository;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.repositories.LotRepository;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.repositories.ProduitRepository;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.repositories.TacheRepository;
-import com.amenal.amenalbackend.budget.application.domain.Avenant;
-import com.amenal.amenalbackend.budget.application.domain.DetailCharge;
-import com.amenal.amenalbackend.budget.application.domain.DetailProduit;
-import com.amenal.amenalbackend.budget.application.domain.Lot;
-import com.amenal.amenalbackend.budget.application.domain.Produit;
-import com.amenal.amenalbackend.budget.application.domain.Tache;
-import com.amenal.amenalbackend.budget.application.dto.ActiviteDeLotDto;
-import com.amenal.amenalbackend.budget.application.dto.LotTableDto;
-import com.amenal.amenalbackend.budget.application.dto.ProduitTableDto;
-import com.amenal.amenalbackend.budget.application.port.out.ProduitTableDao;
+import com.amenal.amenalbackend.budget.core.domain.Avenant;
+import com.amenal.amenalbackend.budget.core.domain.DetailCharge;
+import com.amenal.amenalbackend.budget.core.domain.DetailProduit;
+import com.amenal.amenalbackend.budget.core.domain.Lot;
+import com.amenal.amenalbackend.budget.core.domain.Produit;
+import com.amenal.amenalbackend.budget.core.domain.Tache;
+import com.amenal.amenalbackend.budget.core.port.out.ProduitTableDao;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.AvenantEntity;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailChargeEntity;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailProduitEntity;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.LotEntity;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.ProduitEntity;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.TacheEntity;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.AvenantRepository;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.DetailChargeRepository;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.DetailProduitRepository;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.LotRepository;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.ProduitRepository;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.TacheRepository;
+import com.amenal.amenalbackend.budget.infrastructure.dto.ActiviteDeLotDto;
+import com.amenal.amenalbackend.budget.infrastructure.dto.LotTableDto;
+import com.amenal.amenalbackend.budget.infrastructure.dto.ProduitTableDto;
 
 import lombok.RequiredArgsConstructor;
 

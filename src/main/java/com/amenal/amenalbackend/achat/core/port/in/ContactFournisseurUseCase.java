@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.port.in;
+package com.amenal.amenalbackend.achat.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.ContactFournisseur;
-import com.amenal.amenalbackend.achat.application.port.out.ContactFournisseurDao;
+import com.amenal.amenalbackend.achat.core.domain.ContactFournisseur;
+import com.amenal.amenalbackend.achat.core.port.out.ContactFournisseurDao;
 
 public class ContactFournisseurUseCase {
 	

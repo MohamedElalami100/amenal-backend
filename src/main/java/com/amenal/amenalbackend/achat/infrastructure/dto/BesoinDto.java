@@ -1,11 +1,11 @@
-package com.amenal.amenalbackend.achat.application.dto;
+package com.amenal.amenalbackend.achat.infrastructure.dto;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.ChargeStandard;
-import com.amenal.amenalbackend.achat.application.domain.DetailBesoin;
-import com.amenal.amenalbackend.budget.application.domain.Tache;
+import com.amenal.amenalbackend.achat.core.domain.ChargeStandard;
+import com.amenal.amenalbackend.achat.core.domain.DetailBesoin;
+import com.amenal.amenalbackend.budget.core.domain.Tache;
 
 public class BesoinDto {
 	private Integer id;

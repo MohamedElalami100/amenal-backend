@@ -1,11 +1,11 @@
-package com.amenal.amenalbackend.achat.application.dto;
+package com.amenal.amenalbackend.achat.infrastructure.dto;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.Fournisseur;
-import com.amenal.amenalbackend.achat.application.domain.Paiement;
-import com.amenal.amenalbackend.achat.application.domain.Reception;
+import com.amenal.amenalbackend.achat.core.domain.Fournisseur;
+import com.amenal.amenalbackend.achat.core.domain.Paiement;
+import com.amenal.amenalbackend.achat.core.domain.Reception;
 
 public class FactureDto {
     private Integer id;

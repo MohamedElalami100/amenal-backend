@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.port.in;
+package com.amenal.amenalbackend.achat.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.Transport;
-import com.amenal.amenalbackend.achat.application.port.out.TransportDao;
+import com.amenal.amenalbackend.achat.core.domain.Transport;
+import com.amenal.amenalbackend.achat.core.port.out.TransportDao;
 
 public class TransportUseCase {
 	

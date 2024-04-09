@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.port.out;
+package com.amenal.amenalbackend.achat.core.port.out;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.DetailReception;
-import com.amenal.amenalbackend.achat.application.dto.DetailReceptionDto;
+import com.amenal.amenalbackend.achat.core.domain.DetailReception;
+import com.amenal.amenalbackend.achat.infrastructure.dto.DetailReceptionDto;
 
 public interface DetailReceptionDao {
 	DetailReceptionDto findDetailReceptionById(Integer id);

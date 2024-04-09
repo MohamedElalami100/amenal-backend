@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.dto.LotTableDto;
-import com.amenal.amenalbackend.budget.application.port.out.LotTableDao;
+import com.amenal.amenalbackend.budget.core.port.out.LotTableDao;
+import com.amenal.amenalbackend.budget.infrastructure.dto.LotTableDto;
 
 public class LotTableUseCase {
 	

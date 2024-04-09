@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.port.in;
+package com.amenal.amenalbackend.achat.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.EvaluationFournisseur;
-import com.amenal.amenalbackend.achat.application.port.out.EvaluationFournisseurDao;
+import com.amenal.amenalbackend.achat.core.domain.EvaluationFournisseur;
+import com.amenal.amenalbackend.achat.core.port.out.EvaluationFournisseurDao;
 
 public class EvaluationFournisseurUseCase {
 	

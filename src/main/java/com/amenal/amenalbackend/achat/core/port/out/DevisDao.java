@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.port.out;
+package com.amenal.amenalbackend.achat.core.port.out;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.Devis;
-import com.amenal.amenalbackend.achat.application.dto.DevisDto;
+import com.amenal.amenalbackend.achat.core.domain.Devis;
+import com.amenal.amenalbackend.achat.infrastructure.dto.DevisDto;
 
 public interface DevisDao {
 	DevisDto findDevisById(Integer id);

@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.port.in;
+package com.amenal.amenalbackend.achat.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.CompteBanquaire;
-import com.amenal.amenalbackend.achat.application.port.out.CompteBanquaireDao;
+import com.amenal.amenalbackend.achat.core.domain.CompteBanquaire;
+import com.amenal.amenalbackend.achat.core.port.out.CompteBanquaireDao;
 
 public class CompteBanquaireUseCase {
 	

@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.budget.adapter.out.postgres;
+package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.budget.adapter.out.postgres.entities.ProduitStandardEntity;
-import com.amenal.amenalbackend.budget.adapter.out.postgres.repositories.ProduitStandardRepository;
-import com.amenal.amenalbackend.budget.application.domain.ProduitStandard;
-import com.amenal.amenalbackend.budget.application.port.out.ProduitStandardDao;
+import com.amenal.amenalbackend.budget.core.domain.ProduitStandard;
+import com.amenal.amenalbackend.budget.core.port.out.ProduitStandardDao;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.ProduitStandardEntity;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.ProduitStandardRepository;
 
 import lombok.RequiredArgsConstructor;
 

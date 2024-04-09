@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.achat.application.domain;
+package com.amenal.amenalbackend.achat.core.domain;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.Tache;
+import com.amenal.amenalbackend.budget.core.domain.Tache;
 
 public class Besoin {
 	private Integer id;

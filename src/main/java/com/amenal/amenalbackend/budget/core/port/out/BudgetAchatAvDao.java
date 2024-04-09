@@ -1,8 +1,8 @@
-package com.amenal.amenalbackend.budget.application.port.out;
+package com.amenal.amenalbackend.budget.core.port.out;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.BudgetAchatAv;
+import com.amenal.amenalbackend.budget.core.domain.BudgetAchatAv;
 
 public interface BudgetAchatAvDao {
 	BudgetAchatAv findBudgetAchatAvById(Integer id);

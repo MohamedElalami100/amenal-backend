@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.budget.adapter.in.web;
+package com.amenal.amenalbackend.budget.infrastructure.adapter.in.web;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amenal.amenalbackend.budget.application.domain.BudgetAchatAv;
-import com.amenal.amenalbackend.budget.application.port.in.BudgetAchatAvUseCase;
+import com.amenal.amenalbackend.budget.core.domain.BudgetAchatAv;
+import com.amenal.amenalbackend.budget.core.port.in.BudgetAchatAvUseCase;
 
 import lombok.RequiredArgsConstructor;
 

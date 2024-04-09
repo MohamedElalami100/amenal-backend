@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.achat.adapter.out.postgres.entities;
+package com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.adapter.out.postgres.entities.TacheEntity;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.TacheEntity;
 
 @Entity
 @Table(name = "besoin")

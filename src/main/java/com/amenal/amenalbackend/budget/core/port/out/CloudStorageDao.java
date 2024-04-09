@@ -1,10 +1,10 @@
-package com.amenal.amenalbackend.budget.application.port.out;
+package com.amenal.amenalbackend.budget.core.port.out;
 
 import java.io.File;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
-import com.amenal.amenalbackend.budget.application.domain.Document;
+import com.amenal.amenalbackend.budget.core.domain.Document;
 
 public interface CloudStorageDao {
 

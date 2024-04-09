@@ -1,7 +1,7 @@
-package com.amenal.amenalbackend.achat.application.dto;
+package com.amenal.amenalbackend.achat.infrastructure.dto;
 
-import com.amenal.amenalbackend.achat.application.domain.DetailDevis;
-import com.amenal.amenalbackend.achat.application.domain.Reception;
+import com.amenal.amenalbackend.achat.core.domain.DetailDevis;
+import com.amenal.amenalbackend.achat.core.domain.Reception;
 
 public class DetailReceptionDto {
     private Integer id;

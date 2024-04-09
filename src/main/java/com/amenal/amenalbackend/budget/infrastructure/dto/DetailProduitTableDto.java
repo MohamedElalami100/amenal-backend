@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.budget.application.dto;
+package com.amenal.amenalbackend.budget.infrastructure.dto;
 
 public class DetailProduitTableDto {
 	private Integer id;

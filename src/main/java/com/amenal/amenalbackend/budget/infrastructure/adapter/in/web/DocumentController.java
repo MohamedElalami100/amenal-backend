@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.budget.adapter.in.web;
+package com.amenal.amenalbackend.budget.infrastructure.adapter.in.web;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.amenal.amenalbackend.budget.application.domain.Document;
-import com.amenal.amenalbackend.budget.application.port.in.DocumentUseCase;
+import com.amenal.amenalbackend.budget.core.domain.Document;
+import com.amenal.amenalbackend.budget.core.port.in.DocumentUseCase;
 
 import lombok.RequiredArgsConstructor;
 

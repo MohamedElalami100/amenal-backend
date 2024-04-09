@@ -1,4 +1,4 @@
-package com.amenal.amenalbackend.achat.application.domain;
+package com.amenal.amenalbackend.achat.core.domain;
 
 public class ContratDlp {
 	private Integer id;

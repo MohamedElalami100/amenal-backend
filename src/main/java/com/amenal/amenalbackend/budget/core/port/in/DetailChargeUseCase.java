@@ -1,9 +1,9 @@
-package com.amenal.amenalbackend.budget.application.port.in;
+package com.amenal.amenalbackend.budget.core.port.in;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.DetailCharge;
-import com.amenal.amenalbackend.budget.application.port.out.DetailChargeDao;
+import com.amenal.amenalbackend.budget.core.domain.DetailCharge;
+import com.amenal.amenalbackend.budget.core.port.out.DetailChargeDao;
 import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementException;
 
 public class DetailChargeUseCase {

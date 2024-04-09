@@ -1,11 +1,11 @@
-package com.amenal.amenalbackend.achat.application.dto;
+package com.amenal.amenalbackend.achat.infrastructure.dto;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import com.amenal.amenalbackend.achat.application.domain.Commande;
-import com.amenal.amenalbackend.achat.application.domain.Facture;
-import com.amenal.amenalbackend.achat.application.domain.Transport;
+import com.amenal.amenalbackend.achat.core.domain.Commande;
+import com.amenal.amenalbackend.achat.core.domain.Facture;
+import com.amenal.amenalbackend.achat.core.domain.Transport;
 
 public class ReceptionDto {
     private Integer id;

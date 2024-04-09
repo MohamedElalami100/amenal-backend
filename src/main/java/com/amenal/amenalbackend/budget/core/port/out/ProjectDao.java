@@ -1,8 +1,8 @@
-package com.amenal.amenalbackend.budget.application.port.out;
+package com.amenal.amenalbackend.budget.core.port.out;
 
 import java.util.List;
 
-import com.amenal.amenalbackend.budget.application.domain.Project;
+import com.amenal.amenalbackend.budget.core.domain.Project;
 
 public interface ProjectDao {
 	Project findProjectById(Integer id);
