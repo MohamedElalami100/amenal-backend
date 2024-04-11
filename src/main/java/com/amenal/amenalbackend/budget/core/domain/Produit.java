@@ -310,140 +310,10 @@ public class Produit {
 	}
 
 	// business methods:
-	public Double getMontant() {
-		try {
-			return pu * qte;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Boolean isValideTitre() {
-		return qte == null && unite == null;
-	}
-
-	public Boolean isValideArticle() {
-		return qte != null && unite != null;
-	}
-
-	public Double getQtepBdg() {
-		return getQteCum();
-	}
-
-	public Double getPucRls() {
-		try {
-			return (qtepRls == 0 || qtepRls == null) ? 0 : mncRls / qtepRls;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getPucBda() {
-		try {
-			return (qtepBda == 0 || qtepBda == null) ? 0 : mncBda / qtepBda;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
 	public Double getPucBdg() {
 		try {
 			Double qteCum = getQteCum();
 			return (qteCum == 0 || qteCum == null) ? 0 : getMncBdg() / qteCum;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMnpRls() {
-		try {
-			return pu * qtepRls;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMnpBda() {
-		try {
-			return pu * qtepBda;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMnpBdg() {
-		return getMontant();
-	}
-
-	public Double getMrgRls() {
-		try {
-			return getMnpRls() - mncRls;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrpRls() {
-		try {
-			double result;
-			if (getMnpRls() == 0) {
-				result = 0;
-			} else {
-				result = (getMnpRls() - mncRls) / getMnpRls();
-			}
-			return result;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrgBda() {
-		try {
-			return getMnpBda() - mncBda;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrpBda() {
-		try {
-			double result;
-			if (getMnpBda() == 0) {
-				result = 0;
-			} else {
-				result = (getMnpBda() - mncBda) / getMnpBda();
-			}
-			return result;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrgBdg() {
-		try {
-			return getMnpBdg() - getMncBdg();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrpBdg() {
-		try {
-			double result;
-			if (getMnpBdg() == 0) {
-				result = 0;
-			} else {
-				result = (getMnpBdg() - getMncBdg()) / getMnpBdg();
-			}
-			return result;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public LocalDate getDateFinFin() {
-		try {
-			return dateDbtFin.plusDays(dlaFin);
 		} catch (Exception e) {
 			return null;
 		}
@@ -459,7 +329,7 @@ public class Produit {
 
 	public Double getMrgRef() {
 		try {
-			return getMntRef() - getMncBdg();
+			return (getMntRef() == null ? 0 : getMntRef()) - (getMncBdg() == null ? 0 : getMncBdg());
 		} catch (Exception e) {
 			return null;
 		}
@@ -468,40 +338,10 @@ public class Produit {
 	public Double getMrpRef() {
 		try {
 			double result;
-			if (getMntRef() == 0) {
+			if (getMntRef() == null || getMntRef() == 0) {
 				result = 0;
 			} else {
 				result = (getMntRef() - getMncBdg()) / getMntRef();
-			}
-			return result;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getQteRefB() {
-		return getQteCum();
-	}
-
-	public Double getMntRefB() {
-		try {
-			return getQteRefB() * puRef;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrgRefB() {
-		return (getMntRefB() == null ? 0 : getMntRefB()) - (getMncBdg() == null ? 0 : getMncBdg());
-	}
-
-	public Double getMrpRefB() {
-		try {
-			double result;
-			if (getMntRefB() == 0 || getMntRefB() == null) {
-				result = 0;
-			} else {
-				result = getMrgRefB() / getMntRef();
 			}
 			return result;
 		} catch (Exception e) {
@@ -513,7 +353,7 @@ public class Produit {
 		try {
 			Double qteCumCalcule = 0.0;
 			for (Tache tache : taches) {
-				if (tache.getCleAttachement()) {
+				if (tache != null && tache.getCleAttachement() != null && tache.getCleAttachement()) {
 					qteCumCalcule += tache.getQtePBdg();
 				}
 			}
@@ -528,7 +368,7 @@ public class Produit {
 		try {
 			Double mncBdgCalcule = 0.0;
 			for (Tache tache : taches) {
-				if (tache.getCleAttachement()) {
+				if (tache != null && tache.getCleAttachement() != null && tache.getCleAttachement()) {
 					mncBdgCalcule += tache.getMncBdg();
 				}
 			}

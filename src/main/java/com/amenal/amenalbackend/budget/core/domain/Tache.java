@@ -32,7 +32,6 @@ public class Tache {
 	private String ordrePrt;
 	private String ordreMef;
 	private Integer ordre;
-	private Double puRef;
 
 	// Fk objects:
 	private Produit produit;
@@ -44,7 +43,7 @@ public class Tache {
 			String observation, Boolean cleAttachement, LocalDate dateSaisie, Integer delai, LocalDate dateDebut,
 			Integer idPrdParent, String defPrix, Double mncRls, Double mncBda, Double qtePRls, Double qtePBda,
 			Double avp, Integer id2, Integer delaiReel, Boolean choisi, Integer idProcedureDetail,
-			Boolean maj, String descriptif, String ordrePrt, String ordreMef, Integer ordre, Double puRef,
+			Boolean maj, String descriptif, String ordrePrt, String ordreMef, Integer ordre,
 			Produit produit, Lot lot) {
 		super();
 		this.id = id;
@@ -74,7 +73,6 @@ public class Tache {
 		this.ordrePrt = ordrePrt;
 		this.ordreMef = ordreMef;
 		this.ordre = ordre;
-		this.puRef = puRef;
 		this.produit = produit;
 		this.lot = lot;
 	}
@@ -315,14 +313,6 @@ public class Tache {
 		this.ordre = ordre;
 	}
 
-	public Double getPuRef() {
-		return puRef;
-	}
-
-	public void setPuRef(Double puRef) {
-		this.puRef = puRef;
-	}
-
 	public Produit getProduit() {
 		return produit;
 	}
@@ -340,97 +330,17 @@ public class Tache {
 	}
 
 	// business methods:
-	public Double getMontantVnt() {
+
+	public Double getPuRef(){
 		try {
-			return prix * qte;
-		} catch (Exception e) {
+			return produit.getPuRef();
+		}catch (Exception e){
 			return null;
 		}
 	}
-
-	public Double getMontantAchat() {
-		try {
-			return prix * qte;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public String getLienPrdAtt() {
-		try {
-			return lot.getId() + "$" + produit.getId();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
 	public LocalDate getDateFin() {
 		try {
 			return (delai < 0) ? null : dateDebut.plusDays(delai - 1);
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getPucRls() {
-		try {
-			return mncRls / qtePRls;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getPucBda() {
-		try {
-			return mncBda / qtePBda;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMnpRls() {
-		try {
-			return qtePRls * prix;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMnpBda() {
-		try {
-			return qtePBda * prix;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrgRls() {
-		try {
-			return getMnpRls() - mncRls;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrpRls() {
-		try {
-			return (getMnpRls() == 0 || getMnpRls() == null) ? 0 : (getMnpRls() - mncRls) / getMnpRls();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrgBda() {
-		try {
-			return getMnpBda() - mncBda;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrpBda() {
-		try {
-			return (getMnpBda() == 0 || getMnpBda() == null) ? 0 : (getMnpBda() - mncBda) / getMnpRls();
 		} catch (Exception e) {
 			return null;
 		}
@@ -444,57 +354,9 @@ public class Tache {
 		}
 	}
 
-	public Double getMnpBdg() {
-		return getMontantVnt();
-	}
-
-	public Double getMrpBdg() {
-		try {
-			return (getMnpBdg() == 0 || getMnpBdg() == null) ? 0 : (getMnpBdg() - getMncBdg()) / getMnpBdg();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrgBdg() {
-		try {
-			return getMnpBdg() - getMncBdg();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Integer getDelaiPrevu() {
-		try {
-			return (int) (getDateFin().toEpochDay() - dateDebut.toEpochDay() + 1);
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getQteRef() {
-		return qte;
-	}
-
-	public Double getMntRef() {
-		try {
-			return puRef * getQteRef();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-	
 	public Double getMntRefB() {
 		try {
-			return puRef * getQtePBdg();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrgRef() {
-		try {
-			return getMntRef() - getMncBdg();
+			return getPuRef() * getQtePBdg();
 		} catch (Exception e) {
 			return null;
 		}
@@ -503,14 +365,6 @@ public class Tache {
 	public Double getMrgRefB() {
 		try {
 			return getMntRefB() - getMncBdg();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public Double getMrpRef() {
-		try {
-			return (getMntRef() == 0 || getMntRef() == null) ? 0 : (getMntRef() - getMncBdg()) / getMntRef();
 		} catch (Exception e) {
 			return null;
 		}
@@ -529,7 +383,6 @@ public class Tache {
 			Double qteRefBCalcule = 0.0;
 			for (DetailProduit detail : detailProduits) {
 				qteRefBCalcule += detail.getQte();
-				
 			}
 			return qteRefBCalcule;
 		} catch (Exception e) {

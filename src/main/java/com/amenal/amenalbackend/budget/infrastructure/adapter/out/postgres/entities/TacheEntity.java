@@ -101,9 +101,6 @@ public class TacheEntity {
     @Column(name = "ordre")
     private Integer ordre;
 
-    @Column(name = "pu_ref")
-    private Double puRef;
-
     // Fk objects:
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_produit")
@@ -118,7 +115,7 @@ public class TacheEntity {
 			LocalDate dateDebut, Integer idPrdParent, String defPrix, Double mncRls, Double mncBda, Double qtePRls,
 			Double qtePBda, Double avp, Integer id2, Double mncBdg, Integer delaiReel, Boolean choisi,
 			Integer idProcedureDetail, Boolean maj, String descriptif, String ordrePrt, String ordreMef, Integer ordre,
-			Double puRef, ProduitEntity produit, LotEntity lot) {
+			ProduitEntity produit, LotEntity lot) {
 		super();
 		this.id = id;
 		this.titreActivite = titreActivite;
@@ -148,7 +145,6 @@ public class TacheEntity {
 		this.ordrePrt = ordrePrt;
 		this.ordreMef = ordreMef;
 		this.ordre = ordre;
-		this.puRef = puRef;
 		this.produit = produit;
 		this.lot = lot;
 	}
@@ -379,14 +375,6 @@ public class TacheEntity {
 
 	public void setOrdre(Integer ordre) {
 		this.ordre = ordre;
-	}
-
-	public Double getPuRef() {
-		return puRef;
-	}
-
-	public void setPuRef(Double puRef) {
-		this.puRef = puRef;
 	}
 
 	public ProduitEntity getProduit() {

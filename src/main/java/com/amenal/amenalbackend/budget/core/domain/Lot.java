@@ -309,6 +309,8 @@ public class Lot {
 		this.project = project;
 	}
 
+
+
 	//business methods:
 	public Double getMntRefB() {
 		try {
@@ -328,7 +330,7 @@ public class Lot {
 		try {
 			Double mncBdgCalcule = 0.0;
 			for (Tache tache : taches) {
-				if (tache.getCleAttachement()) {
+				if (tache != null && tache.getCleAttachement() != null && tache.getCleAttachement()) {
 					mncBdgCalcule += tache.getMncBdg();
 				}
 			}
@@ -345,7 +347,7 @@ public class Lot {
 	public Double getMrpRefB() {
 		try {
 			double result;
-			if (getMntRefB() == 0 || getMntRefB() == null) {
+			if (getMntRefB() == null || getMntRefB() == 0) {
 				result = 0;
 			} else {
 				result = getMrgRefB() / getMntRefB();

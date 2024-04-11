@@ -22,7 +22,6 @@ public class Commande {
 
 	public Commande() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getId() {

@@ -2,7 +2,6 @@ package com.amenal.amenalbackend.budget.core.domain;
 
 import java.time.LocalDate;
 
-//décompositionBudgetAchatav in Microsoft access database
 public class DetailCharge {
 	private Integer id;
 	private Double prix;
@@ -185,21 +184,5 @@ public class DetailCharge {
 		}
 	}
 
-	public Double getMontantAchat() {
-		try {
-			return prix * qte;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public String getLienHhd() {
-		try {
-			return tache.getId() + "$" + designation.toUpperCase() + Math.round(prix * 100.0) / 100.0
-					+ unite.toUpperCase();
-		} catch (Exception e) {
-			return null;
-		}
-	}
 
 }
