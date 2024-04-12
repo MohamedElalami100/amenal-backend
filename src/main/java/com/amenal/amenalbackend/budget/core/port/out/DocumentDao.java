@@ -5,7 +5,7 @@ import java.util.List;
 import com.amenal.amenalbackend.budget.core.domain.Document;
 
 public interface DocumentDao {
-	Document findDocumentById(Integer id);
+	Document findDocumentByUrl(String url);
 	
 	List<Document> findAllDocuments();
 	
@@ -13,7 +13,7 @@ public interface DocumentDao {
 	
 	Document updateDocument(Document document);
 	
-	void deleteDocument(Integer id);
+	void deleteDocument(String url);
 
 	List<Document> getDocumentsByAvenantId(Integer id);
 	

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.amenal.amenalbackend.budget.core.domain.DetailQualite;
 import com.amenal.amenalbackend.budget.core.port.in.DetailQualiteUseCase;
+import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -39,12 +40,19 @@ public class DetailQualiteController {
 			return ResponseEntity.ok(detailQualiteUseCase.findDetailQualiteById(id));
 		} catch (NoSuchElementException e) {
 			return ResponseEntity.notFound().build();
+		} catch (DataIntegrityViolationException  e) {
+			// Return a response with status 400 Bad Request for data integrity violation
+		    return ResponseEntity.badRequest().build();
 		}
 	}
 
 	@PostMapping
 	public ResponseEntity<DetailQualite> saveDetailQualite(@RequestBody DetailQualite detailQualite) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(detailQualiteUseCase.saveDetailQualite(detailQualite));
+		try {
+			return ResponseEntity.status(HttpStatus.CREATED).body(detailQualiteUseCase.saveDetailQualite(detailQualite));
+		} catch (DuplicateElementException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+		}
 	}
 
 	@PutMapping
@@ -54,6 +62,8 @@ public class DetailQualiteController {
 		} catch (NoSuchElementException e) {
 			// return a response with status 404 if an object with id is not found
 			return ResponseEntity.notFound().build();
+		}  catch (DuplicateElementException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
 	}
 
@@ -65,9 +75,6 @@ public class DetailQualiteController {
 		} catch (NoSuchElementException e) {
 			// return a response with status 404 if an object with id is not found
 			return ResponseEntity.notFound().build();
-		} catch (DataIntegrityViolationException  e) {
-			// Return a response with status 400 Bad Request for data integrity violation
-		    return ResponseEntity.badRequest().build();
 		}
 	}
 

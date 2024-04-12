@@ -27,8 +27,8 @@ public class DocumentDaoAdapter implements DocumentDao {
 	private ModelMapper modelMapper;
 
 	@Override
-	public Document findDocumentById(Integer id) {
-		DocumentEntity documentEntity = documentRepository.findById(id).get();
+	public Document findDocumentByUrl(String url) {
+		DocumentEntity documentEntity = documentRepository.findByUrl(url).get();
 		Document document = modelMapper.map(documentEntity, Document.class);
 		return document;
 	}
@@ -59,9 +59,9 @@ public class DocumentDaoAdapter implements DocumentDao {
 	}
 
 	@Override
-	public void deleteDocument(Integer id) {
+	public void deleteDocument(String url) {
 		// Check if Document with the given ID exists
-		DocumentEntity documentEntity = documentRepository.findById(id).orElseThrow();
+		DocumentEntity documentEntity = documentRepository.findByUrl(url).orElseThrow();
 
 		// Delete the entity
 		documentRepository.delete(documentEntity);

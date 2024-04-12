@@ -1,5 +1,6 @@
 package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,20 +44,27 @@ public class TacheDaoAdapter implements TacheDao {
 
 	@Override
 	public Tache saveTache(Tache tache) {
+		List<Tache> tachesInOtherAvenants = new ArrayList<>();
 		try {
 			// TACHE EXISTE DANS UN AUTRE AVENANT
 			List<TacheEntity> tachesInOtherAvenantEntities = tacheRepository
 					.getTachesInOtherAvenants(tache.getProduit().getMetre().getBudget().getAvenant().getId());
-			List<Tache> tachesInOtherAvenants = tachesInOtherAvenantEntities.stream()
+			tachesInOtherAvenants = tachesInOtherAvenantEntities.stream()
 					.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
+		} catch (NullPointerException e) {
+		}
 
-			for (Tache curTache : tachesInOtherAvenants) {
+		for (Tache curTache : tachesInOtherAvenants) {
+			try {
 				if (curTache.getTitreActivite().equalsIgnoreCase(tache.getTitreActivite())
 						&& tache.getLot().getDesignation().equalsIgnoreCase(tache.getLot().getDesignation())) {
 					return curTache;
 				}
+			} catch (NullPointerException e) {
 			}
+		}
 
+		try {
 			// if there is a Tache with the same activite and lot in the same avenant:
 			List<TacheEntity> sameTacheEntities = tacheRepository.getTachesByAvenantIdAndLotAndActivite(
 					tache.getProduit().getMetre().getBudget().getAvenant().getId(), tache.getLot().getDesignation(),
@@ -66,8 +74,7 @@ public class TacheDaoAdapter implements TacheDao {
 			if (!sameTaches.isEmpty()) {
 				return sameTaches.get(0);
 			}
-		} catch (Exception e) {
-			System.out.print(e);
+		} catch (NullPointerException e) {
 		}
 		// if not:
 		TacheEntity tacheEntity = modelMapper.map(tache, TacheEntity.class);
@@ -82,12 +89,16 @@ public class TacheDaoAdapter implements TacheDao {
 		try {
 			if (tache.getProduit().getId() != existingEntity.getProduit().getId()
 					|| tache.getLot().getId() != existingEntity.getLot().getId()
-					|| tache.getTitreActivite() != existingEntity.getTitreActivite()) {
-				// TACHE EXISTE DANS UN AUTRE AVENANT
-				List<TacheEntity> tachesInOtherAvenantEntities = tacheRepository
-						.getTachesInOtherAvenants(tache.getProduit().getMetre().getBudget().getAvenant().getId());
-				List<Tache> tachesInOtherAvenants = tachesInOtherAvenantEntities.stream()
-						.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
+					|| !tache.getTitreActivite().equalsIgnoreCase(existingEntity.getTitreActivite())) {
+				List<Tache> tachesInOtherAvenants = new ArrayList<>();
+				try {
+					// TACHE EXISTE DANS UN AUTRE AVENANT
+					List<TacheEntity> tachesInOtherAvenantEntities = tacheRepository
+							.getTachesInOtherAvenants(tache.getProduit().getMetre().getBudget().getAvenant().getId());
+					tachesInOtherAvenants = tachesInOtherAvenantEntities.stream()
+							.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
+				} catch (NullPointerException e) {
+				}
 
 				for (Tache curTache : tachesInOtherAvenants) {
 					if (curTache.getTitreActivite().equalsIgnoreCase(tache.getTitreActivite())
@@ -96,25 +107,27 @@ public class TacheDaoAdapter implements TacheDao {
 					}
 				}
 
-				// if there is a Tache with the same activite and lot in the same avenant:
-				List<TacheEntity> sameTacheEntities = tacheRepository.getTachesByAvenantIdAndLotAndActivite(
-						tache.getProduit().getMetre().getBudget().getAvenant().getId(), tache.getLot().getDesignation(),
-						tache.getTitreActivite());
-				List<Tache> sameTaches = sameTacheEntities.stream()
-						.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
-				if (!sameTaches.isEmpty()) {
-					throw new DuplicateElementException("Tache Existe Deja");
+				try {
+					// if there is a Tache with the same activite and lot in the same avenant:
+					List<TacheEntity> sameTacheEntities = tacheRepository.getTachesByAvenantIdAndLotAndActivite(
+							tache.getProduit().getMetre().getBudget().getAvenant().getId(),
+							tache.getLot().getDesignation(), tache.getTitreActivite());
+					List<Tache> sameTaches = sameTacheEntities.stream()
+							.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
+					if (!sameTaches.isEmpty()) {
+						throw new DuplicateElementException("Tache Existe Deja");
+					}
+				} catch (NullPointerException e) {
 				}
-			}
-
+			} 
 		} catch (NullPointerException e) {
-			System.out.print(e);
 		}
 		// if not:
 		// Use ModelMapper to map non-null properties from Tache to existingEntity
 		modelMapper.map(tache, existingEntity);
 
 		TacheEntity updatedEntity = tacheRepository.save(existingEntity);
+
 		return modelMapper.map(updatedEntity, Tache.class);
 	}
 

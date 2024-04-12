@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.amenal.amenalbackend.budget.core.domain.GrpQualite;
 import com.amenal.amenalbackend.budget.core.port.in.GrpQualiteUseCase;
+import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -39,12 +40,19 @@ public class GrpQualiteController {
 			return ResponseEntity.ok(grpQualiteUseCase.findGrpQualiteById(id));
 		} catch (NoSuchElementException e) {
 			return ResponseEntity.notFound().build();
+		} catch (DataIntegrityViolationException  e) {
+			// Return a response with status 400 Bad Request for data integrity violation
+		    return ResponseEntity.badRequest().build();
 		}
 	}
 
 	@PostMapping
 	public ResponseEntity<GrpQualite> saveGrpQualite(@RequestBody GrpQualite grpQualite) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(grpQualiteUseCase.saveGrpQualite(grpQualite));
+		try {
+			return ResponseEntity.status(HttpStatus.CREATED).body(grpQualiteUseCase.saveGrpQualite(grpQualite));
+		} catch (DuplicateElementException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+		}
 	}
 
 	@PutMapping
@@ -54,6 +62,8 @@ public class GrpQualiteController {
 		} catch (NoSuchElementException e) {
 			// return a response with status 404 if an object with id is not found
 			return ResponseEntity.notFound().build();
+		}  catch (DuplicateElementException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
 	}
 
@@ -65,9 +75,6 @@ public class GrpQualiteController {
 		} catch (NoSuchElementException e) {
 			// return a response with status 404 if an object with id is not found
 			return ResponseEntity.notFound().build();
-		} catch (DataIntegrityViolationException  e) {
-			// Return a response with status 400 Bad Request for data integrity violation
-		    return ResponseEntity.badRequest().build();
 		}
 	}
 

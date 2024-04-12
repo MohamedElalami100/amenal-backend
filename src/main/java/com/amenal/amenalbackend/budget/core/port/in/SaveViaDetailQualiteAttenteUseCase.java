@@ -14,6 +14,7 @@ import com.amenal.amenalbackend.budget.core.port.out.GrpQualiteDao;
 import com.amenal.amenalbackend.budget.core.port.out.LotDao;
 import com.amenal.amenalbackend.budget.core.port.out.ProduitDao;
 import com.amenal.amenalbackend.budget.core.port.out.TacheDao;
+import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementException;
 
 public class SaveViaDetailQualiteAttenteUseCase {
 	private TacheDao tacheDao;
@@ -84,16 +85,19 @@ public class SaveViaDetailQualiteAttenteUseCase {
 		groupe.setTitre(detailQualiteAttente.getGroupe());
 		groupe.setTache(tache);
 		
-		// Save GrpQualite
-		groupe = grpQualiteDao.saveGrpQualite(groupe);
-
+		
+		groupe = grpQualiteDao.saveGrpQualiteAndReturnItIfExists(groupe);
+		
 		// Save DetailQualite:
 		DetailQualite detailQualite = new DetailQualite();
 		detailQualite.setAffaire(detailQualiteAttente.getPointDeControle());
 		detailQualite.setGroupe(groupe);
 
-		// Save DetailQualite:
-		detailQualiteDao.saveDetailQualite(detailQualite);
+		try {
+			// Save DetailQualite:
+			detailQualiteDao.saveDetailQualite(detailQualite);
+		} catch (DuplicateElementException e) {
+		}
 
 	}
 

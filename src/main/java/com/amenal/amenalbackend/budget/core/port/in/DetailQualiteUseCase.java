@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.amenal.amenalbackend.budget.core.domain.DetailQualite;
 import com.amenal.amenalbackend.budget.core.port.out.DetailQualiteDao;
+import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementException;
 
 public class DetailQualiteUseCase {
 	
@@ -21,11 +22,11 @@ public class DetailQualiteUseCase {
 		return detailQualiteDao.findAllDetailQualites();
 	}
 	
-	public DetailQualite saveDetailQualite(DetailQualite detailQualite) {
+	public DetailQualite saveDetailQualite(DetailQualite detailQualite) throws DuplicateElementException  {
 		return detailQualiteDao.saveDetailQualite(detailQualite);
 	}
 	
-	public DetailQualite updateDetailQualite(DetailQualite detailQualite) {
+	public DetailQualite updateDetailQualite(DetailQualite detailQualite) throws DuplicateElementException {
 		return detailQualiteDao.updateDetailQualite(detailQualite);
 	}
 	

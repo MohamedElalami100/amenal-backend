@@ -37,10 +37,10 @@ public class DocumentController {
 		return ResponseEntity.ok(documentUseCase.findAllDocuments());
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<Document> getDocumentById(@PathVariable("id") Integer id) {
+	@GetMapping("/{url}")
+	public ResponseEntity<Document> getDocumentById(@PathVariable("url") String url) {
 		try {
-			return ResponseEntity.ok(documentUseCase.findDocumentById(id));
+			return ResponseEntity.ok(documentUseCase.findDocumentByUrl(url));
 		} catch (NoSuchElementException e) {
 			return ResponseEntity.notFound().build();
 		}
@@ -87,10 +87,10 @@ public class DocumentController {
 		}
 	}
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Document> deleteDocument(@PathVariable("id") Integer id) {
+	@DeleteMapping("/{url}")
+	public ResponseEntity<Document> deleteDocument(@PathVariable("url") String url) {
 		try {
-			documentUseCase.deleteDocument(id);
+			documentUseCase.deleteDocument(url);
 			return ResponseEntity.noContent().build();
 		} catch (NoSuchElementException e) {
 			// return a response with status 404 if an object with id is not found

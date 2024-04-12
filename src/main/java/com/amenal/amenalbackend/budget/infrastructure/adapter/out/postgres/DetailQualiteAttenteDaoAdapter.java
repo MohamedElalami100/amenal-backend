@@ -1,5 +1,6 @@
 package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -103,41 +104,60 @@ public class DetailQualiteAttenteDaoAdapter implements DetailQualiteAttenteDao {
 		// set error message:
 
 		// check if a one of the first fields is null or contain an empty string
-		String erreur = (detailQualiteAttente.getProduit() == null || detailQualiteAttente.getProduit() == ""
-				? "| Produit Vide "
-				: "")
-				+ (detailQualiteAttente.getLot() == null || detailQualiteAttente.getLot() == "" ? "| Lot Vide " : "")
-				+ (detailQualiteAttente.getActivite() == null || detailQualiteAttente.getActivite() == ""
-						? "| Activite Vide "
-						: "")
-				+ (detailQualiteAttente.getUpb() == null || detailQualiteAttente.getUpb() == "" ? "| Unite Vide " : "");
-		if (erreur != "")
-			return "(1)" + erreur;
-
-		// TACHE EXISTE DANS UN AUTRE AVENANT
-		List<TacheEntity> tachesInOtherAvenantEntities = tacheRepository
-				.getTachesInOtherAvenants(detailQualiteAttente.getMetre().getBudget().getAvenant().getId());
-		List<Tache> tachesInOtherAvenants = tachesInOtherAvenantEntities.stream()
-				.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
+		String erreur = "";
+		try {
+			erreur = (detailQualiteAttente.getProduit() == null || detailQualiteAttente.getProduit().isEmpty()
+					? "| Produit Vide "
+					: "")
+					+ (detailQualiteAttente.getLot() == null || detailQualiteAttente.getLot().isEmpty() ? "| Lot Vide "
+							: "")
+					+ (detailQualiteAttente.getActivite() == null || detailQualiteAttente.getActivite().isEmpty()
+							? "| Activite Vide "
+							: "")
+					+ (detailQualiteAttente.getUpb() == null || detailQualiteAttente.getUpb().isEmpty()
+							? "| Unite Vide "
+							: "");
+			if (!erreur.isEmpty())
+				return "(1)" + erreur;
+		} catch (NullPointerException e) {
+		}
+		
+		List<Tache> tachesInOtherAvenants = new ArrayList<>();
+		try {
+			// TACHE EXISTE DANS UN AUTRE AVENANT
+			List<TacheEntity> tachesInOtherAvenantEntities = tacheRepository
+					.getTachesInOtherAvenants(detailQualiteAttente.getMetre().getBudget().getAvenant().getId());
+			tachesInOtherAvenants = tachesInOtherAvenantEntities.stream()
+					.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
+		} catch (NullPointerException e) {
+		}
 
 		for (Tache tache : tachesInOtherAvenants) {
-			if (tache.getTitreActivite().equalsIgnoreCase(detailQualiteAttente.getActivite())
-					&& tache.getLot().getDesignation().equalsIgnoreCase(detailQualiteAttente.getLot())) {
-				return "(2)TACHE EXISTE DANS UN AUTRE AVENANT";
+			try {
+				if (tache.getTitreActivite().equalsIgnoreCase(detailQualiteAttente.getActivite())
+						&& tache.getLot().getDesignation().equalsIgnoreCase(detailQualiteAttente.getLot())) {
+					return "(2)TACHE EXISTE DANS UN AUTRE AVENANT";
+				} 
+			} catch (NullPointerException e) {
 			}
 		}
 
-		// get taches in same avenant:
-		List<TacheEntity> tachesInSameAvenantEntities = tacheRepository
-				.getTachesByAvenantId(detailQualiteAttente.getMetre().getBudget().getAvenant().getId());
-		List<Tache> tachesInSameAvenants = tachesInSameAvenantEntities.stream()
-				.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
+		List<Tache> tachesInSameAvenants = new ArrayList<>();
 
-		List<DetailQualiteAttenteEntity> otherDetailEntities = detailQualiteAttenteRepository
-				.getOtherDetailsById(detailQualiteAttente.getId(), detailQualiteAttente.getMetre().getBudget().getAvenant().getId());
-		List<DetailQualiteAttente> otherDetailsInAttente = otherDetailEntities.stream()
-				.map(detailEntity -> modelMapper.map(detailEntity, DetailQualiteAttente.class))
-				.collect(Collectors.toList());
+		List<DetailQualiteAttente> otherDetailsInAttente = new ArrayList<>();
+		try {
+			// get taches in same avenant:
+			List<TacheEntity> tachesInSameAvenantEntities = tacheRepository
+					.getTachesByAvenantId(detailQualiteAttente.getMetre().getBudget().getAvenant().getId());
+			tachesInSameAvenants = tachesInSameAvenantEntities.stream()
+					.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
+			List<DetailQualiteAttenteEntity> otherDetailEntities = detailQualiteAttenteRepository.getOtherDetailsById(
+					detailQualiteAttente.getId(), detailQualiteAttente.getMetre().getBudget().getAvenant().getId());
+			otherDetailsInAttente = otherDetailEntities.stream()
+					.map(detailEntity -> modelMapper.map(detailEntity, DetailQualiteAttente.class))
+					.collect(Collectors.toList());
+		} catch (NullPointerException e) {
+		}
 
 		for (DetailQualiteAttente detail : otherDetailsInAttente) {
 			Produit produit = new Produit();
@@ -158,67 +178,89 @@ public class DetailQualiteAttenteDaoAdapter implements DetailQualiteAttenteDao {
 		}
 		// TACHE LIEE A DEUX PRODUITS DIFFERENTS
 		for (Tache tache : tachesInSameAvenants) {
-			if (tache.getTitreActivite().equalsIgnoreCase(detailQualiteAttente.getActivite())
-					&& tache.getLot().getDesignation().equalsIgnoreCase(detailQualiteAttente.getLot())
-					&& !tache.getProduit().getDesignation().equalsIgnoreCase(detailQualiteAttente.getProduit())) {
-				return "(3)TACHE LIEE A DEUX PRODUITS DIFFERENTS";
+			try {
+				if (tache.getTitreActivite().equalsIgnoreCase(detailQualiteAttente.getActivite())
+						&& tache.getLot().getDesignation().equalsIgnoreCase(detailQualiteAttente.getLot())
+						&& !tache.getProduit().getDesignation().equalsIgnoreCase(detailQualiteAttente.getProduit())) {
+					return "(3)TACHE LIEE A DEUX PRODUITS DIFFERENTS";
+				} 
+			} catch (NullPointerException e) {
+				// TODO: handle exception
 			}
 		}
 
 		// TACHE DECLAREE AVEC DEUX UNITES DIFFERENTES
 		for (Tache tache : tachesInSameAvenants) {
-			if (tache.getTitreActivite().equalsIgnoreCase(detailQualiteAttente.getActivite())
-					&& tache.getLot().getDesignation().equalsIgnoreCase(detailQualiteAttente.getLot())
-					&& tache.getProduit().getDesignation().equalsIgnoreCase(detailQualiteAttente.getProduit())
-					&& !tache.getUnite().equalsIgnoreCase(detailQualiteAttente.getUpb())) {
-				return "(4)TACHE DECLAREE AVEC DEUX UNITES DIFFERENTES";
+			try {
+				if (tache.getTitreActivite().equalsIgnoreCase(detailQualiteAttente.getActivite())
+						&& tache.getLot().getDesignation().equalsIgnoreCase(detailQualiteAttente.getLot())
+						&& tache.getProduit().getDesignation().equalsIgnoreCase(detailQualiteAttente.getProduit())
+						&& !tache.getUnite().equalsIgnoreCase(detailQualiteAttente.getUpb())) {
+					return "(4)TACHE DECLAREE AVEC DEUX UNITES DIFFERENTES";
+				} 
+			} catch (NullPointerException e) {
+				// TODO: handle exception
 			}
 		}
 
 		// TACHE DECLAREE EN TANT QUE CLE PRIMAIRE ET SECONDAIRE
 		for (Tache tache : tachesInSameAvenants) {
-			if (tache.getTitreActivite().equalsIgnoreCase(detailQualiteAttente.getActivite())
-					&& tache.getLot().getDesignation().equalsIgnoreCase(detailQualiteAttente.getLot())
-					&& tache.getProduit().getDesignation().equalsIgnoreCase(detailQualiteAttente.getProduit())
-					&& tache.getCleAttachement() != detailQualiteAttente.getCle()) {
-				return "(5)TACHE DECLAREE EN TANT QUE CLE PRIMAIRE ET SECONDAIRE";
-			}
-		}
-
-		// TACHE LIEE A UN PRODUIT/LOT SANS CLE PRIMAIRE
-		Boolean activitePrincipaleExist = false;
-
-		if (!detailQualiteAttente.getCle()) {
-			for (Tache tache : tachesInSameAvenants) {
+			try {
 				if (tache.getTitreActivite().equalsIgnoreCase(detailQualiteAttente.getActivite())
 						&& tache.getLot().getDesignation().equalsIgnoreCase(detailQualiteAttente.getLot())
-						&& tache.getProduit().getDesignation().equalsIgnoreCase(detailQualiteAttente.getProduit())) {
-					if (tache.getCleAttachement()) {
-						activitePrincipaleExist = true;
-					}
-				}
+						&& tache.getProduit().getDesignation().equalsIgnoreCase(detailQualiteAttente.getProduit())
+						&& tache.getCleAttachement() != detailQualiteAttente.getCle()) {
+					return "(5)TACHE DECLAREE EN TANT QUE CLE PRIMAIRE ET SECONDAIRE";
+				} 
+			} catch (NullPointerException e) {
+				// TODO: handle exception
 			}
-		} else {
-			activitePrincipaleExist = true;
 		}
 
-		if (!activitePrincipaleExist)
-			return "(6)TACHE LIEE A UN PRODUIT/LOT SANS CLE PRIMAIRE";
-
+		try {
+			// TACHE LIEE A UN PRODUIT/LOT SANS CLE PRIMAIRE
+			Boolean activitePrincipaleExist = false;
+			if (!detailQualiteAttente.getCle()) {
+				for (Tache tache : tachesInSameAvenants) {
+					try {
+						if (tache.getTitreActivite().equalsIgnoreCase(detailQualiteAttente.getActivite())
+								&& tache.getLot().getDesignation().equalsIgnoreCase(detailQualiteAttente.getLot())
+								&& tache.getProduit().getDesignation()
+										.equalsIgnoreCase(detailQualiteAttente.getProduit())) {
+							if (tache.getCleAttachement()) {
+								activitePrincipaleExist = true;
+							}
+						} 
+					} catch (NullPointerException e) {
+					}
+				}
+			} else {
+				activitePrincipaleExist = true;
+			}
+			if (!activitePrincipaleExist)
+				return "(6)TACHE LIEE A UN PRODUIT/LOT SANS CLE PRIMAIRE";
+		} catch (NullPointerException e) {
+		}
+		
 		// check if a one of the last fields is null or contain an empty string
-		erreur = (detailQualiteAttente.getGroupe() == null || detailQualiteAttente.getGroupe() == "" ? "| Groupe Vide "
+		erreur = (detailQualiteAttente.getGroupe() == null || detailQualiteAttente.getGroupe().isEmpty() ? "| Groupe Vide "
 				: "")
-				+ (detailQualiteAttente.getPointDeControle() == null || detailQualiteAttente.getPointDeControle() == ""
+				+ (detailQualiteAttente.getPointDeControle() == null || detailQualiteAttente.getPointDeControle().isEmpty()
 						? "| Point de controle Vide "
 						: "");
-		if (erreur != "")
+		if (!erreur.isEmpty())
 			return "(7)" + erreur;
 
-		// get detailQualites in same avenant:
-		List<DetailQualiteEntity> otherDetailQualiteEntities = detailQualiteRepository
-				.getDetailQualitesByAvenantId(detailQualiteAttente.getMetre().getBudget().getAvenant().getId());
-		List<DetailQualite> otherDetailQualites = otherDetailQualiteEntities.stream()
-				.map(detailEntity -> modelMapper.map(detailEntity, DetailQualite.class)).collect(Collectors.toList());
+		List<DetailQualite> otherDetailQualites = new ArrayList<>();
+		try {
+			// get detailQualites in same avenant:
+			List<DetailQualiteEntity> otherDetailQualiteEntities = detailQualiteRepository
+					.getDetailQualitesByAvenantId(detailQualiteAttente.getMetre().getBudget().getAvenant().getId());
+			otherDetailQualites = otherDetailQualiteEntities.stream()
+					.map(detailEntity -> modelMapper.map(detailEntity, DetailQualite.class))
+					.collect(Collectors.toList());
+		} catch (NullPointerException e) {
+		}
 
 		for (DetailQualiteAttente detail : otherDetailsInAttente) {
 			Produit produit = new Produit();
@@ -249,15 +291,18 @@ public class DetailQualiteAttenteDaoAdapter implements DetailQualiteAttenteDao {
 
 		// DOUBLONS DE LIGNES
 		for (DetailQualite detailQualite : otherDetailQualites) {
-			if (detailQualite.getGroupe().getTache().getTitreActivite()
-					.equalsIgnoreCase(detailQualiteAttente.getActivite())
-					&& detailQualite.getGroupe().getTache().getLot().getDesignation()
-							.equalsIgnoreCase(detailQualiteAttente.getLot())
-					&& detailQualite.getGroupe().getTache().getProduit().getDesignation()
-							.equalsIgnoreCase(detailQualiteAttente.getProduit())
-					&& detailQualite.getGroupe().getTitre().equalsIgnoreCase(detailQualiteAttente.getGroupe())
-					&& detailQualite.getAffaire().equalsIgnoreCase(detailQualiteAttente.getPointDeControle())) {
-				return "(8)DOUBLONS DE LIGNES";
+			try {
+				if (detailQualite.getGroupe().getTache().getTitreActivite()
+						.equalsIgnoreCase(detailQualiteAttente.getActivite())
+						&& detailQualite.getGroupe().getTache().getLot().getDesignation()
+								.equalsIgnoreCase(detailQualiteAttente.getLot())
+						&& detailQualite.getGroupe().getTache().getProduit().getDesignation()
+								.equalsIgnoreCase(detailQualiteAttente.getProduit())
+						&& detailQualite.getGroupe().getTitre().equalsIgnoreCase(detailQualiteAttente.getGroupe())
+						&& detailQualite.getAffaire().equalsIgnoreCase(detailQualiteAttente.getPointDeControle())) {
+					return "(8)DOUBLONS DE LIGNES";
+				} 
+			} catch (NullPointerException e) {
 			}
 		}
 

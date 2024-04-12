@@ -12,6 +12,7 @@ import com.amenal.amenalbackend.budget.core.domain.GrpQualite;
 import com.amenal.amenalbackend.budget.core.port.out.GrpQualiteDao;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.GrpQualiteEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.GrpQualiteRepository;
+import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,17 +42,18 @@ public class GrpQualiteDaoAdapter implements GrpQualiteDao {
 	}
 
 	@Override
-	public GrpQualite saveGrpQualite(GrpQualite grpQualite) {
-		// if there is a grpQualite with the same designation in the same avenant:
-		List<GrpQualiteEntity> sameGrpQualiteEntities = grpQualiteRepository.getGrpQualitesByAvenantIdAndTitre(
-				grpQualite.getTache().getProduit().getMetre().getBudget().getAvenant().getId(),
-				grpQualite.getTitre());
-		List<GrpQualite> sameGrpQualites = sameGrpQualiteEntities.stream()
-				.map(grpQualiteEntity -> modelMapper.map(grpQualiteEntity, GrpQualite.class))
-				.collect(Collectors.toList());
-
-		if (!sameGrpQualites.isEmpty()) {
-			return sameGrpQualites.get(0);
+	public GrpQualite saveGrpQualite(GrpQualite grpQualite) throws DuplicateElementException {
+		try {
+			// if there is a grpQualite with the same designation in the same avenant:
+			List<GrpQualiteEntity> sameGrpQualiteEntities = grpQualiteRepository.getGrpQualitesByTacheIdAndTitre(
+					grpQualite.getTache().getId(), grpQualite.getTitre());
+			List<GrpQualite> sameGrpQualites = sameGrpQualiteEntities.stream()
+					.map(grpQualiteEntity -> modelMapper.map(grpQualiteEntity, GrpQualite.class)).collect(Collectors.toList());
+			if (!sameGrpQualites.isEmpty()) {
+				throw new DuplicateElementException("Charge existe deja");
+			}
+		} catch (NullPointerException e) {
+			System.out.print(e);
 		}
 		// if not:
 		GrpQualiteEntity grpQualiteEntity = modelMapper.map(grpQualite, GrpQualiteEntity.class);
@@ -60,15 +62,31 @@ public class GrpQualiteDaoAdapter implements GrpQualiteDao {
 	}
 
 	@Override
-	public GrpQualite updateGrpQualite(GrpQualite grpQualite) {
+	public GrpQualite updateGrpQualite(GrpQualite grpQualite) throws DuplicateElementException {
 		GrpQualiteEntity existingEntity = grpQualiteRepository.findById(grpQualite.getId()).orElseThrow();
 
+		try {
+			// if there is a grpQualite with the same designation in the same avenant:
+			if(!grpQualite.getTitre().equals(existingEntity.getTitre())) {
+				List<GrpQualiteEntity> sameGrpQualiteEntities = grpQualiteRepository.getGrpQualitesByTacheIdAndTitre(
+						grpQualite.getTache().getId(), grpQualite.getTitre());
+				List<GrpQualite> sameGrpQualites = sameGrpQualiteEntities.stream()
+						.map(grpQualiteEntity -> modelMapper.map(grpQualiteEntity, GrpQualite.class)).collect(Collectors.toList());
+				if (!sameGrpQualites.isEmpty()) {
+					throw new DuplicateElementException("Charge existe deja");
+				}
+			}
+		} catch (NullPointerException e) {
+			System.out.print(e);
+		}
+		// if not:
 		// Use ModelMapper to map non-null properties from GrpQualite to existingEntity
 		modelMapper.map(grpQualite, existingEntity);
 
 		GrpQualiteEntity updatedEntity = grpQualiteRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, GrpQualite.class);
 	}
+
 
 	@Override
 	public void deleteGrpQualite(Integer id) {
@@ -77,6 +95,26 @@ public class GrpQualiteDaoAdapter implements GrpQualiteDao {
 
 		// Delete the entity
 		grpQualiteRepository.delete(grpQualiteEntity);
+	}
+
+	@Override
+	public GrpQualite saveGrpQualiteAndReturnItIfExists(GrpQualite grpQualite) {
+		try {
+			// if there is a grpQualite with the same designation in the same avenant:
+			List<GrpQualiteEntity> sameGrpQualiteEntities = grpQualiteRepository.getGrpQualitesByTacheIdAndTitre(
+					grpQualite.getTache().getId(), grpQualite.getTitre());
+			List<GrpQualite> sameGrpQualites = sameGrpQualiteEntities.stream()
+					.map(grpQualiteEntity -> modelMapper.map(grpQualiteEntity, GrpQualite.class)).collect(Collectors.toList());
+			if (!sameGrpQualites.isEmpty()) {
+				return sameGrpQualites.get(0);
+			}
+		} catch (NullPointerException e) {
+			System.out.print(e);
+		}
+		// if not:
+		GrpQualiteEntity grpQualiteEntity = modelMapper.map(grpQualite, GrpQualiteEntity.class);
+		GrpQualiteEntity savedEntity = grpQualiteRepository.save(grpQualiteEntity);
+		return modelMapper.map(savedEntity, GrpQualite.class);
 	}
 
 }

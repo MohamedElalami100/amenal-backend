@@ -91,8 +91,9 @@ public class ProduitDaoAdapter implements ProduitDao {
 		// if not:
 		// Use ModelMapper to map non-null properties from Produit to existingEntity
 		modelMapper.map(produit, existingEntity);
-
+		System.out.println(produit.getId());
 		ProduitEntity updatedEntity = produitRepository.save(existingEntity);
+		System.out.println(updatedEntity.getId());
 		return modelMapper.map(updatedEntity, Produit.class);
 	}
 

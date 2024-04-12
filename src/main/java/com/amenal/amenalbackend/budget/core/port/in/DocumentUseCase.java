@@ -31,20 +31,20 @@ public class DocumentUseCase {
 		this.avenantDao = avenantDao;
 	}
 	
-	public Document findDocumentById(Integer id) {
-	    return documentDao.findDocumentById(id);
+	public Document findDocumentByUrl(String url) {
+	    return documentDao.findDocumentByUrl(url);
 	}
 
 	public List<Document> findAllDocuments() {
 		return documentDao.findAllDocuments();
 	}
-	
+
 	public Document updateDocument(Document document) {
 		return documentDao.updateDocument(document);
 	}
 	
-	public void deleteDocument(Integer id) {
-		documentDao.deleteDocument(id);
+	public void deleteDocument(String url) {
+		documentDao.deleteDocument(url);
 	}
 	
 	public Document uploadFileAndSaveDocument(MultipartFile file, Integer AvenantId) throws GeneralSecurityException, IOException {

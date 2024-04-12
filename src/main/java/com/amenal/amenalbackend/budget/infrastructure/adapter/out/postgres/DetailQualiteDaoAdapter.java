@@ -12,6 +12,7 @@ import com.amenal.amenalbackend.budget.core.domain.DetailQualite;
 import com.amenal.amenalbackend.budget.core.port.out.DetailQualiteDao;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailQualiteEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.DetailQualiteRepository;
+import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,22 +42,51 @@ public class DetailQualiteDaoAdapter implements DetailQualiteDao {
 	}
 
 	@Override
-	public DetailQualite saveDetailQualite(DetailQualite detailQualite) {
+	public DetailQualite saveDetailQualite(DetailQualite detailQualite) throws DuplicateElementException {
+		try {
+			// if there is a detailQualite with the same designation in the same grpQualite:
+			List<DetailQualiteEntity> sameDetailQualiteEntities = detailQualiteRepository.getDetailQualitesByGrpQualiteIdAndAffaire(
+					detailQualite.getGroupe().getId(), detailQualite.getAffaire());
+			List<DetailQualite> sameDetailQualites = sameDetailQualiteEntities.stream()
+					.map(detailQualiteEntity -> modelMapper.map(detailQualiteEntity, DetailQualite.class)).collect(Collectors.toList());
+			if (!sameDetailQualites.isEmpty()) {
+				throw new DuplicateElementException("Qualite existe deja");
+			}
+		} catch (NullPointerException e) {
+			System.out.print(e);
+		}
+		// if not:
 		DetailQualiteEntity detailQualiteEntity = modelMapper.map(detailQualite, DetailQualiteEntity.class);
 		DetailQualiteEntity savedEntity = detailQualiteRepository.save(detailQualiteEntity);
 		return modelMapper.map(savedEntity, DetailQualite.class);
 	}
 
 	@Override
-	public DetailQualite updateDetailQualite(DetailQualite detailQualite) {
+	public DetailQualite updateDetailQualite(DetailQualite detailQualite) throws DuplicateElementException {
 		DetailQualiteEntity existingEntity = detailQualiteRepository.findById(detailQualite.getId()).orElseThrow();
 
+		try {
+			// if there is a detailQualite with the same designation in the same avenant:
+			if(!detailQualite.getAffaire().equals(existingEntity.getAffaire())) {
+				List<DetailQualiteEntity> sameDetailQualiteEntities = detailQualiteRepository.getDetailQualitesByGrpQualiteIdAndAffaire(
+						detailQualite.getGroupe().getId(), detailQualite.getAffaire());
+				List<DetailQualite> sameDetailQualites = sameDetailQualiteEntities.stream()
+						.map(detailQualiteEntity -> modelMapper.map(detailQualiteEntity, DetailQualite.class)).collect(Collectors.toList());
+				if (!sameDetailQualites.isEmpty()) {
+					throw new DuplicateElementException("Qualite existe deja");
+				}
+			}
+		} catch (NullPointerException e) {
+			System.out.print(e);
+		}
+		// if not:
 		// Use ModelMapper to map non-null properties from DetailQualite to existingEntity
 		modelMapper.map(detailQualite, existingEntity);
 
 		DetailQualiteEntity updatedEntity = detailQualiteRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, DetailQualite.class);
 	}
+
 
 	@Override
 	public void deleteDetailQualite(Integer id) {
