@@ -14,12 +14,11 @@ public class Facture {
 	private Double mntTtcNote;
 
 	private Fournisseur fournisseur;
-	private List<Paiement> paiements;
 	private List<Reception> receptions;
 	private List<DetailFacture> detailFactures;
 
 	public Facture(Integer id, LocalDate dateFcf, String reference, String lienPhotoFacture, Integer delaiFacture,
-			Double mntHtNote, Double mntTvaNote, Double mntTtcNote, Fournisseur fournisseur, List<Paiement> paiements,
+			Double mntHtNote, Double mntTvaNote, Double mntTtcNote, Fournisseur fournisseur,
 			List<Reception> receptions, List<DetailFacture> detailFactures) {
 		super();
 		this.id = id;
@@ -31,7 +30,6 @@ public class Facture {
 		this.mntTvaNote = mntTvaNote;
 		this.mntTtcNote = mntTtcNote;
 		this.fournisseur = fournisseur;
-		this.paiements = paiements;
 		this.receptions = receptions;
 		this.detailFactures = detailFactures;
 	}
@@ -120,14 +118,6 @@ public class Facture {
 		this.fournisseur = fournisseur;
 	}
 
-	public List<Paiement> getPaiements() {
-		return paiements;
-	}
-
-	public void setPaiements(List<Paiement> paiements) {
-		this.paiements = paiements;
-	}
-	
 	public List<DetailFacture> getDetailFactures() {
 		return detailFactures;
 	}

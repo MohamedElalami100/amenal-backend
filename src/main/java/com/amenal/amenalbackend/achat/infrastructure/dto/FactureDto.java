@@ -18,7 +18,6 @@ public class FactureDto {
     private Double mntTtcNote;
 
     private Fournisseur fournisseur;
-    private List<Paiement> paiements;
     private List<Reception> receptions;
     private List<DetailFactureDto> detailFactures;
 
@@ -27,7 +26,7 @@ public class FactureDto {
     private Double mntTtc;
 
     public FactureDto(Integer id, LocalDate dateFcf, String reference, String lienPhotoFacture, Integer delaiFacture,
-                      Double mntHtNote, Double mntTvaNote, Double mntTtcNote, Fournisseur fournisseur, List<Paiement> paiements,
+                      Double mntHtNote, Double mntTvaNote, Double mntTtcNote, Fournisseur fournisseur,
                       List<Reception> receptions, List<DetailFactureDto> detailFactures, Double mntHt, Double mntTva, Double mntTtc) {
         super();
         this.id = id;
@@ -39,7 +38,6 @@ public class FactureDto {
         this.mntTvaNote = mntTvaNote;
         this.mntTtcNote = mntTtcNote;
         this.fournisseur = fournisseur;
-        this.paiements = paiements;
         this.receptions = receptions;
         this.detailFactures = detailFactures;
         this.mntHt = mntHt;
@@ -121,14 +119,6 @@ public class FactureDto {
 
     public void setFournisseur(Fournisseur fournisseur) {
         this.fournisseur = fournisseur;
-    }
-
-    public List<Paiement> getPaiements() {
-        return paiements;
-    }
-
-    public void setPaiements(List<Paiement> paiements) {
-        this.paiements = paiements;
     }
 
     public List<Reception> getReceptions() {

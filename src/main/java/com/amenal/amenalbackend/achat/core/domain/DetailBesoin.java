@@ -6,14 +6,12 @@ public class DetailBesoin {
 	private Integer id;
 	private DetailProduit produit;
 	private Double qte;
-	private Besoin besoin;
 
-	public DetailBesoin(Integer id, DetailProduit produit, Double qte, Besoin besoin) {
+	public DetailBesoin(Integer id, DetailProduit produit, Double qte) {
 		super();
 		this.id = id;
 		this.produit = produit;
 		this.qte = qte;
-		this.besoin = besoin;
 	}
 
 	public DetailBesoin() {
@@ -42,14 +40,6 @@ public class DetailBesoin {
 
 	public void setQte(Double qte) {
 		this.qte = qte;
-	}
-
-	public Besoin getBesoin() {
-		return besoin;
-	}
-
-	public void setBesoin(Besoin besoin) {
-		this.besoin = besoin;
 	}
 
 }

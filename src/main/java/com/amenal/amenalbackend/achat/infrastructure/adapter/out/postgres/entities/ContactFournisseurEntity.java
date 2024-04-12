@@ -1,5 +1,6 @@
 package com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -33,7 +34,8 @@ public class ContactFournisseurEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_fournisseur")
-    private FournisseurEntity fournisseur;
+	@JsonIgnore
+	private FournisseurEntity fournisseur;
 
 	public ContactFournisseurEntity(Integer id, String nomComplet, String fonction, String email, String tel,
 			FournisseurEntity fournisseur) {

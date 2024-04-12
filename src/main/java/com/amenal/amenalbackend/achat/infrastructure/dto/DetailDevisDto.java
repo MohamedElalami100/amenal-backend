@@ -8,20 +8,17 @@ public class DetailDevisDto {
     private ChargeStandard charge;
     private Double qte;
     private Double prixUnitaire;
-    private Devis devis;
-
     private Double mntHt;
     private Double mntTva;
     private Double mntTtc;
 
-    public DetailDevisDto(Integer id, ChargeStandard charge, Double qte, Double prixUnitaire, Devis devis,
+    public DetailDevisDto(Integer id, ChargeStandard charge, Double qte, Double prixUnitaire,
                           Double mntHt, Double mntTva, Double mntTtc) {
         super();
         this.id = id;
         this.charge = charge;
         this.qte = qte;
         this.prixUnitaire = prixUnitaire;
-        this.devis = devis;
         this.mntHt = mntHt;
         this.mntTva = mntTva;
         this.mntTtc = mntTtc;
@@ -61,14 +58,6 @@ public class DetailDevisDto {
 
     public void setPrixUnitaire(Double prixUnitaire) {
         this.prixUnitaire = prixUnitaire;
-    }
-
-    public Devis getDevis() {
-        return devis;
-    }
-
-    public void setDevis(Devis devis) {
-        this.devis = devis;
     }
 
     public Double getMntHt() {

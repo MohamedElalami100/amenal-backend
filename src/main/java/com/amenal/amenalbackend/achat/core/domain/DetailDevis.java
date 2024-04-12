@@ -5,15 +5,12 @@ public class DetailDevis {
 	private ChargeStandard charge;
 	private Double qte;
 	private Double prixUnitaire;
-	private Devis devis;
-
-	public DetailDevis(Integer id, ChargeStandard charge, Double qte, Double prixUnitaire, Devis devis) {
+	public DetailDevis(Integer id, ChargeStandard charge, Double qte, Double prixUnitaire) {
 		super();
 		this.id = id;
 		this.charge = charge;
 		this.qte = qte;
 		this.prixUnitaire = prixUnitaire;
-		this.devis = devis;
 	}
 
 	public DetailDevis() {
@@ -26,14 +23,6 @@ public class DetailDevis {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Devis getDevis() {
-		return devis;
-	}
-
-	public void setDevis(Devis devis) {
-		this.devis = devis;
 	}
 
 	public ChargeStandard getCharge() {

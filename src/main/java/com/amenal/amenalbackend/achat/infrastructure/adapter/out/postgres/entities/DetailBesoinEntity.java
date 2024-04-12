@@ -2,6 +2,7 @@ package com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.entit
 
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailProduitEntity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,6 +31,7 @@ public class DetailBesoinEntity {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_besoin")
+	@JsonIgnore
     private BesoinEntity besoin;
 
 	public DetailBesoinEntity(Integer id, DetailProduitEntity produit, Double qte, BesoinEntity besoin) {

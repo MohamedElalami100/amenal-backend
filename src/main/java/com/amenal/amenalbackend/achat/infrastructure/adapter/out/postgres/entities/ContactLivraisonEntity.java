@@ -1,5 +1,6 @@
 package com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,6 +32,7 @@ public class ContactLivraisonEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_commande")
+	@JsonIgnore
     private CommandeEntity commande;
 
 	public ContactLivraisonEntity(Integer id, String nom, String lieuLivraison, LocalDate dateLivraison,

@@ -1,5 +1,6 @@
 package com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -43,6 +44,7 @@ public class FactureEntity {
             name = "facture_paiement",
             joinColumns = @JoinColumn(name = "id_facture"),
             inverseJoinColumns = @JoinColumn(name = "id_paiement"))
+	@JsonIgnore
     private List<PaiementEntity> paiements;
 
     @OneToMany(mappedBy = "facture")

@@ -6,17 +6,14 @@ public class ContactFournisseur {
 	private String fonction;
 	private String email;
 	private String tel;
-	private Fournisseur fournisseur;
 
-	public ContactFournisseur(Integer id, String nomComplet, String fonction, String email, String tel,
-			Fournisseur fournisseur) {
+	public ContactFournisseur(Integer id, String nomComplet, String fonction, String email, String tel) {
 		super();
 		this.id = id;
 		this.nomComplet = nomComplet;
 		this.fonction = fonction;
 		this.email = email;
 		this.tel = tel;
-		this.fournisseur = fournisseur;
 	}
 
 	public ContactFournisseur() {
@@ -63,12 +60,6 @@ public class ContactFournisseur {
 		this.tel = tel;
 	}
 
-	public Fournisseur getFournisseur() {
-		return fournisseur;
-	}
 
-	public void setFournisseur(Fournisseur fournisseur) {
-		this.fournisseur = fournisseur;
-	}
 
 }

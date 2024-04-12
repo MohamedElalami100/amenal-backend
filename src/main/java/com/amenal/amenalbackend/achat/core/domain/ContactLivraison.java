@@ -7,16 +7,13 @@ public class ContactLivraison {
 	private String nom;
 	private String lieuLivraison;
 	private LocalDate dateLivraison;
-	private Commande commande;
 
-	public ContactLivraison(Integer id, String nom, String lieuLivraison, LocalDate dateLivraison,
-			Commande commande) {
+	public ContactLivraison(Integer id, String nom, String lieuLivraison, LocalDate dateLivraison) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.lieuLivraison = lieuLivraison;
 		this.dateLivraison = dateLivraison;
-		this.commande = commande;
 	}
 
 	public ContactLivraison() {
@@ -53,14 +50,6 @@ public class ContactLivraison {
 
 	public void setDateLivraison(LocalDate dateLivaraison) {
 		this.dateLivraison = dateLivaraison;
-	}
-
-	public Commande getCommande() {
-		return commande;
-	}
-
-	public void setCommande(Commande commande) {
-		this.commande = commande;
 	}
 
 }

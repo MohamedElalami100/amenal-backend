@@ -10,8 +10,6 @@ public class Remise {
 	private String remiseVia;
 	private String lienPhotoRemise;
 
-	private Paiement paiement;
-
 	public Remise() {
 		super();
 	}
@@ -25,7 +23,6 @@ public class Remise {
 		this.remiseA = remiseA;
 		this.remiseVia = remiseVia;
 		this.lienPhotoRemise = lienPhotoRemise;
-		this.paiement = paiement;
 	}
 
 	public Integer getId() {
@@ -74,14 +71,6 @@ public class Remise {
 
 	public void setLienPhotoRemise(String lienPhotoRemise) {
 		this.lienPhotoRemise = lienPhotoRemise;
-	}
-
-	public Paiement getPaiement() {
-		return paiement;
-	}
-
-	public void setPaiement(Paiement paiement) {
-		this.paiement = paiement;
 	}
 
 }

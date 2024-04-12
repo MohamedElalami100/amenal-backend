@@ -8,21 +8,17 @@ public class DetailReceptionDto {
     private DetailDevis detailCommande;
     private Double qte;
     private String lienPhotoArticle;
-
-    private Reception reception;
-
     private Double mntHt;
     private Double mntTva;
     private Double mntTtc;
 
     public DetailReceptionDto(Integer id, DetailDevis detailCommande, Double qte, String lienPhotoArticle,
-                              Reception reception, Double mntHt, Double mntTva, Double mntTtc) {
+                              Double mntHt, Double mntTva, Double mntTtc) {
         super();
         this.id = id;
         this.detailCommande = detailCommande;
         this.qte = qte;
         this.lienPhotoArticle = lienPhotoArticle;
-        this.reception = reception;
         this.mntHt = mntHt;
         this.mntTva = mntTva;
         this.mntTtc = mntTtc;
@@ -62,14 +58,6 @@ public class DetailReceptionDto {
 
     public void setLienPhotoArticle(String lienPhotoArticle) {
         this.lienPhotoArticle = lienPhotoArticle;
-    }
-
-    public Reception getReception() {
-        return reception;
-    }
-
-    public void setReception(Reception reception) {
-        this.reception = reception;
     }
 
     public Double getMntHt() {

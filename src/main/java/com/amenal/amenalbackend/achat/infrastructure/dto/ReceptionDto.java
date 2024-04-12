@@ -14,8 +14,6 @@ public class ReceptionDto {
     private String lienImageBonLivraison;
 
     private Commande commande;
-    private Facture facture;
-
     private List<Transport> transports;
     private List<DetailReceptionDto> detailReceptions;
 
@@ -24,7 +22,7 @@ public class ReceptionDto {
     private Double mntTtc;
 
     public ReceptionDto(Integer id, LocalDate dateRcf, String reference, String lienImageBonLivraison, Commande commande,
-                        Facture facture, List<Transport> transports, List<DetailReceptionDto> detailReceptions,
+                        List<Transport> transports, List<DetailReceptionDto> detailReceptions,
                         Double mntHt, Double mntTva, Double mntTtc) {
         super();
         this.id = id;
@@ -32,7 +30,6 @@ public class ReceptionDto {
         this.reference = reference;
         this.lienImageBonLivraison = lienImageBonLivraison;
         this.commande = commande;
-        this.facture = facture;
         this.transports = transports;
         this.detailReceptions = detailReceptions;
         this.mntHt = mntHt;
@@ -98,14 +95,6 @@ public class ReceptionDto {
 
     public void setDetailReceptions(List<DetailReceptionDto> detailReceptions) {
         this.detailReceptions = detailReceptions;
-    }
-
-    public Facture getFacture() {
-        return facture;
-    }
-
-    public void setFacture(Facture facture) {
-        this.facture = facture;
     }
 
     public Double getMntHt() {

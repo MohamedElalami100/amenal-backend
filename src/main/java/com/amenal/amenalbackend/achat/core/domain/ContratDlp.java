@@ -5,14 +5,11 @@ public class ContratDlp {
 	private Integer plafond;
 	private String lienContrat;
 
-	private Fournisseur fournisseur;
-
-	public ContratDlp(Integer id, Integer plafond, String lienContrat, Fournisseur fournisseur) {
+	public ContratDlp(Integer id, Integer plafond, String lienContrat) {
 		super();
 		this.id = id;
 		this.plafond = plafond;
 		this.lienContrat = lienContrat;
-		this.fournisseur = fournisseur;
 	}
 
 	public ContratDlp() {
@@ -43,12 +40,6 @@ public class ContratDlp {
 		this.lienContrat = lienContrat;
 	}
 
-	public Fournisseur getFournisseur() {
-		return fournisseur;
-	}
 
-	public void setFournisseur(Fournisseur fournisseur) {
-		this.fournisseur = fournisseur;
-	}
 
 }

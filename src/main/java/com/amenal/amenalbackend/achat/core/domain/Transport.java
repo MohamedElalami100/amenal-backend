@@ -12,11 +12,9 @@ public class Transport {
 	private String matricule;
 	private String chauffeur;
 	private String chauffeurCin;
-	
-	private Reception reception;
 
 	public Transport(Integer id, LocalDate dateDepart, LocalDate dateArrive, String prisEnChargePar, String lienPhoto,
-			String type, String matricule, String chauffeur, String chauffeurCin, Reception reception) {
+			String type, String matricule, String chauffeur, String chauffeurCin) {
 		super();
 		this.id = id;
 		this.dateDepart = dateDepart;
@@ -27,7 +25,6 @@ public class Transport {
 		this.matricule = matricule;
 		this.chauffeur = chauffeur;
 		this.chauffeurCin = chauffeurCin;
-		this.reception = reception;
 	}
 
 	public Transport() {
@@ -106,12 +103,5 @@ public class Transport {
 		this.chauffeurCin = chauffeurCin;
 	}
 
-	public Reception getReception() {
-		return reception;
-	}
-
-	public void setReception(Reception reception) {
-		this.reception = reception;
-	}
 	
 }

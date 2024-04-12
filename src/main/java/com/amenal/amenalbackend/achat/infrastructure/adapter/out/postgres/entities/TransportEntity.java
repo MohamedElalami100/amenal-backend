@@ -1,5 +1,6 @@
 package com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -38,6 +39,7 @@ public class TransportEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_reception")
+	@JsonIgnore
     private ReceptionEntity reception;
 
 	public TransportEntity(Integer id, LocalDate dateDepart, LocalDate dateArrive, String prisEnChargePar, String lienPhoto,

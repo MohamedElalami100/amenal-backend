@@ -1,5 +1,6 @@
 package com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -26,6 +27,7 @@ public class DetailFactureEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_facture")
+	@JsonIgnore
     private FactureEntity facture;
 
 	public DetailFactureEntity(Integer id, DetailReceptionEntity detailReception, Double qteAFacture,

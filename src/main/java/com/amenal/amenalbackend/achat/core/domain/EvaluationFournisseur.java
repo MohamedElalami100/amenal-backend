@@ -6,14 +6,12 @@ public class EvaluationFournisseur {
 	private Integer id;
 	private LocalDate date;
 	private String evaluation;
-	private Fournisseur fournisseur;
 
 	public EvaluationFournisseur(Integer id, LocalDate date, String evaluation, Fournisseur fournisseur) {
 		super();
 		this.id = id;
 		this.date = date;
 		this.evaluation = evaluation;
-		this.fournisseur = fournisseur;
 	}
 
 	public EvaluationFournisseur() {
@@ -44,12 +42,6 @@ public class EvaluationFournisseur {
 		this.evaluation = evaluation;
 	}
 
-	public Fournisseur getFournisseur() {
-		return fournisseur;
-	}
 
-	public void setFournisseur(Fournisseur fournisseur) {
-		this.fournisseur = fournisseur;
-	}
 
 }

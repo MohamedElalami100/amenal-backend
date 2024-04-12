@@ -10,20 +10,17 @@ public class Reception {
 	private String lienImageBonLivraison;
 
 	private Commande commande;
-	private Facture facture;
-
 	private List<Transport> transports;
 	private List<DetailReception> detailReceptions;
 
 	public Reception(Integer id, LocalDate dateRcf, String reference, String lienImageBonLivraison, Commande commande,
-			Facture facture, List<Transport> transports, List<DetailReception> detailReceptions) {
+					 List<Transport> transports, List<DetailReception> detailReceptions) {
 		super();
 		this.id = id;
 		this.dateRcf = dateRcf;
 		this.reference = reference;
 		this.lienImageBonLivraison = lienImageBonLivraison;
 		this.commande = commande;
-		this.facture = facture;
 		this.transports = transports;
 		this.detailReceptions = detailReceptions;
 	}
@@ -86,14 +83,6 @@ public class Reception {
 
 	public void setDetailReceptions(List<DetailReception> detailReceptions) {
 		this.detailReceptions = detailReceptions;
-	}
-
-	public Facture getFacture() {
-		return facture;
-	}
-
-	public void setFacture(Facture facture) {
-		this.facture = facture;
 	}
 
 	// business methods:

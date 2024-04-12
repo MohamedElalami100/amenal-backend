@@ -7,16 +7,13 @@ public class AttestationRgf {
 	private LocalDate dateDebut;
 	private LocalDate dateFin;
 	private String lienAttestation;
-	private Fournisseur fournisseur;
 
-	public AttestationRgf(Integer id, LocalDate dateDebut, LocalDate dateFin, String lienAttestation,
-			Fournisseur fournisseur) {
+	public AttestationRgf(Integer id, LocalDate dateDebut, LocalDate dateFin, String lienAttestation) {
 		super();
 		this.id = id;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.lienAttestation = lienAttestation;
-		this.fournisseur = fournisseur;
 	}
 
 	public AttestationRgf() {
@@ -53,14 +50,6 @@ public class AttestationRgf {
 
 	public void setLienAttestation(String lienAttestation) {
 		this.lienAttestation = lienAttestation;
-	}
-
-	public Fournisseur getFournisseur() {
-		return fournisseur;
-	}
-
-	public void setFournisseur(Fournisseur fournisseur) {
-		this.fournisseur = fournisseur;
 	}
 
 }

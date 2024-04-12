@@ -4,14 +4,11 @@ public class DetailDemandeDevis {
 	private Integer id;
 	private ChargeStandard charge;
 	private Double qte;
-	private DemandeDevis demandeDevis;
-
-	public DetailDemandeDevis(Integer id, ChargeStandard charge, Double qte, DemandeDevis demandeDevis) {
+	public DetailDemandeDevis(Integer id, ChargeStandard charge, Double qte) {
 		super();
 		this.id = id;
 		this.charge = charge;
 		this.qte = qte;
-		this.demandeDevis = demandeDevis;
 	}
 
 	public DetailDemandeDevis() {
@@ -24,14 +21,6 @@ public class DetailDemandeDevis {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public DemandeDevis getDemandeDevis() {
-		return demandeDevis;
-	}
-
-	public void setDemandeDevis(DemandeDevis demandeDevis) {
-		this.demandeDevis = demandeDevis;
 	}
 
 	public ChargeStandard getCharge() {

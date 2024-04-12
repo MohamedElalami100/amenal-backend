@@ -8,21 +8,18 @@ public class DetailFactureDto {
     private Double qteAFacture;
     private Double qteRectifie;
     private Double prixUnitaireHtRectifie;
-    private Facture facture;
-
     private Double mntHt;
     private Double mntTva;
     private Double mntTtc;
 
     public DetailFactureDto(Integer id, DetailReceptionDto detailReception, Double qteAFacture, Double qteRectifie,
-                            Double prixUnitaireHtRectifie, Facture facture, Double mntHt, Double mntTva, Double mntTtc) {
+                            Double prixUnitaireHtRectifie ,Double mntHt, Double mntTva, Double mntTtc) {
         super();
         this.id = id;
         this.detailReception = detailReception;
         this.qteAFacture = qteAFacture;
         this.qteRectifie = qteRectifie;
         this.prixUnitaireHtRectifie = prixUnitaireHtRectifie;
-        this.facture = facture;
         this.mntHt = mntHt;
         this.mntTva = mntTva;
         this.mntTtc = mntTtc;
@@ -70,14 +67,6 @@ public class DetailFactureDto {
 
     public void setPrixUnitaireHtRectifie(Double prixUnitaireHtRectifie) {
         this.prixUnitaireHtRectifie = prixUnitaireHtRectifie;
-    }
-
-    public Facture getFacture() {
-        return facture;
-    }
-
-    public void setFacture(Facture facture) {
-        this.facture = facture;
     }
 
     public Double getMntHt() {

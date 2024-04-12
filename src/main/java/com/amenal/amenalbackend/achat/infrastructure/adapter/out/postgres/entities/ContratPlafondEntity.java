@@ -1,5 +1,6 @@
 package com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -34,7 +35,8 @@ public class ContratPlafondEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_fournisseur")
-    private FournisseurEntity fournisseur;
+	@JsonIgnore
+	private FournisseurEntity fournisseur;
 
 	public ContratPlafondEntity(Integer id, LocalDate dateDebut, LocalDate dateFin, Integer delaiReglement,
 			String lienContrat, FournisseurEntity fournisseur) {

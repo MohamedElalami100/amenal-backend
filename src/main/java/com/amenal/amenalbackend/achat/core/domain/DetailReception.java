@@ -6,8 +6,6 @@ public class DetailReception {
 	private Double qte;
 	private String lienPhotoArticle;
 
-	private Reception reception;
-
 	public DetailReception() {
 		super();
 	}
@@ -19,7 +17,6 @@ public class DetailReception {
 		this.detailCommande = detailCommande;
 		this.qte = qte;
 		this.lienPhotoArticle = lienPhotoArticle;
-		this.reception = reception;
 	}
 
 	public Integer getId() {
@@ -52,14 +49,6 @@ public class DetailReception {
 
 	public void setLienPhotoArticle(String lienPhotoArticle) {
 		this.lienPhotoArticle = lienPhotoArticle;
-	}
-
-	public Reception getReception() {
-		return reception;
-	}
-
-	public void setReception(Reception reception) {
-		this.reception = reception;
 	}
 
 	// business methods:

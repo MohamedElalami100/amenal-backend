@@ -6,8 +6,6 @@ public class DetailFacture {
 	private Double qteAFacture;
 	private Double qteRectifie;
 	private Double prixUnitaireHtRectifie;
-	private Facture facture;
-
 	public DetailFacture(Integer id, DetailReception detailReception, Double qteAFacture, Double qteRectifie,
 			Double prixUnitaireHtRectifie, Facture facture) {
 		super();
@@ -16,7 +14,6 @@ public class DetailFacture {
 		this.qteAFacture = qteAFacture;
 		this.qteRectifie = qteRectifie;
 		this.prixUnitaireHtRectifie = prixUnitaireHtRectifie;
-		this.facture = facture;
 	}
 
 	public DetailFacture() {
@@ -29,14 +26,6 @@ public class DetailFacture {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Facture getFacture() {
-		return facture;
-	}
-
-	public void setFacture(Facture facture) {
-		this.facture = facture;
 	}
 
 	public DetailReception getDetailReception() {

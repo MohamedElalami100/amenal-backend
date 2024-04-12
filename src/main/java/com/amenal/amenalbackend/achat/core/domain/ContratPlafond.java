@@ -9,17 +9,14 @@ public class ContratPlafond {
 	private Integer delaiReglement;
 	private String lienContrat;
 
-	private Fournisseur fournisseur;
-
 	public ContratPlafond(Integer id, LocalDate dateDebut, LocalDate dateFin, Integer delaiReglement,
-			String lienContrat, Fournisseur fournisseur) {
+			String lienContrat) {
 		super();
 		this.id = id;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.delaiReglement = delaiReglement;
 		this.lienContrat = lienContrat;
-		this.fournisseur = fournisseur;
 	}
 
 	public ContratPlafond() {
@@ -56,22 +53,6 @@ public class ContratPlafond {
 
 	public void setDelaiReglement(Integer delaiReglement) {
 		this.delaiReglement = delaiReglement;
-	}
-
-	public String getLienContrat() {
-		return lienContrat;
-	}
-
-	public void setLienContrat(String lienContrat) {
-		this.lienContrat = lienContrat;
-	}
-
-	public Fournisseur getFournisseur() {
-		return fournisseur;
-	}
-
-	public void setFournisseur(Fournisseur fournisseur) {
-		this.fournisseur = fournisseur;
 	}
 
 }
