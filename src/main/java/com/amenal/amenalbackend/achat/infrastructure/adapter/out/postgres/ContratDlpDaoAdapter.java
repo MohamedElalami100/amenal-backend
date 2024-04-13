@@ -52,9 +52,9 @@ public class ContratDlpDaoAdapter implements ContratDlpDao {
 		ContratDlpEntity existingEntity = contratDlpRepository.findById(contratDlp.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from ContratDlp to existingEntity
-		modelMapper.map(contratDlp, existingEntity);
+		ContratDlpEntity newEntity = modelMapper.map(contratDlp, ContratDlpEntity.class);
 
-		ContratDlpEntity updatedEntity = contratDlpRepository.save(existingEntity);
+		ContratDlpEntity updatedEntity = contratDlpRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, ContratDlp.class);
 	}
 

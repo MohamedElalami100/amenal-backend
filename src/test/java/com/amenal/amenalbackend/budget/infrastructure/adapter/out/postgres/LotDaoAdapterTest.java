@@ -109,7 +109,7 @@ public class LotDaoAdapterTest {
         lot.setId(1);
         lot.setDesignation("test");
         LotEntity existingEntity = new LotEntity();
-        lot.setId(1);
+        existingEntity.setId(1);
         existingEntity.setDesignation("test");
 
         when(lotRepository.findById(1)).thenReturn(Optional.of(existingEntity));
@@ -152,7 +152,7 @@ public class LotDaoAdapterTest {
         lot.setId(1);
         lot.setDesignation("test");
         LotEntity existingEntity = new LotEntity();
-        lot.setId(1);
+        existingEntity.setId(1);
         existingEntity.setDesignation("test");
 
         when(lotRepository.findById(1)).thenReturn(Optional.of(existingEntity));

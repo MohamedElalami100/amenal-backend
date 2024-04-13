@@ -138,7 +138,7 @@ public class TacheDaoAdapterTest {
         tache.setId(1);
         tache.setTitreActivite("test");
         TacheEntity existingEntity = new TacheEntity();
-        tache.setId(1);
+        existingEntity.setId(1);
         existingEntity.setTitreActivite("test");
 
         when(tacheRepository.findById(1)).thenReturn(Optional.of(existingEntity));
@@ -203,7 +203,7 @@ public class TacheDaoAdapterTest {
         tache.setId(1);
         tache.setTitreActivite("test");
         TacheEntity existingEntity = new TacheEntity();
-        tache.setId(1);
+        existingEntity.setId(1);
         existingEntity.setTitreActivite("test");
 
         when(tacheRepository.findById(1)).thenReturn(Optional.of(existingEntity));

@@ -3,6 +3,8 @@ package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.Banque;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.BanqueEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,12 +51,11 @@ public class BanqueDaoAdapter implements BanqueDao {
 
 	@Override
 	public Banque updateBanque(Banque banque) {
-		BanqueEntity existingEntity = banqueRepository.findById(banque.getId()).orElseThrow();
+		banqueRepository.findById(banque.getId()).orElseThrow();
 
-		// Use ModelMapper to map non-null properties from Banque to existingEntity
-		modelMapper.map(banque, existingEntity);
+		BanqueEntity newEntity = modelMapper.map(banque, BanqueEntity.class);
 
-		BanqueEntity updatedEntity = banqueRepository.save(existingEntity);
+		BanqueEntity updatedEntity = banqueRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Banque.class);
 	}
 

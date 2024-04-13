@@ -3,6 +3,8 @@ package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.DetailProduit;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailProduitEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,9 +58,10 @@ public class DetailProduitDaoAdapter implements DetailProduitDao {
 			System.out.print(e);
 		}
 		// if not:
-		DetailProduitEntity detailProduitEntity = modelMapper.map(detailProduit, DetailProduitEntity.class);
-		DetailProduitEntity savedEntity = detailProduitRepository.save(detailProduitEntity);
-		return modelMapper.map(savedEntity, DetailProduit.class);
+		DetailProduitEntity newEntity = modelMapper.map(detailProduit, DetailProduitEntity.class);
+
+		DetailProduitEntity updatedEntity = detailProduitRepository.save(newEntity);
+		return modelMapper.map(updatedEntity, DetailProduit.class);
 	}
 
 	@Override

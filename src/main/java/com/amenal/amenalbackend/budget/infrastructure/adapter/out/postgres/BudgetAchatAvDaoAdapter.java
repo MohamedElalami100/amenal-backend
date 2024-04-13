@@ -49,12 +49,11 @@ public class BudgetAchatAvDaoAdapter implements BudgetAchatAvDao {
 
 	@Override
 	public BudgetAchatAv updateBudgetAchatAv(BudgetAchatAv budgetAchatAv) {
-		BudgetAchatAvEntity existingEntity = budgetAchatAvRepository.findById(budgetAchatAv.getId()).orElseThrow();
+		budgetAchatAvRepository.findById(budgetAchatAv.getId()).orElseThrow();
 
-		// Use ModelMapper to map non-null properties from BudgetAchatAv to existingEntity
-		modelMapper.map(budgetAchatAv, existingEntity);
+		BudgetAchatAvEntity newEntity = modelMapper.map(budgetAchatAv, BudgetAchatAvEntity.class);
 
-		BudgetAchatAvEntity updatedEntity = budgetAchatAvRepository.save(existingEntity);
+		BudgetAchatAvEntity updatedEntity = budgetAchatAvRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, BudgetAchatAv.class);
 	}
 

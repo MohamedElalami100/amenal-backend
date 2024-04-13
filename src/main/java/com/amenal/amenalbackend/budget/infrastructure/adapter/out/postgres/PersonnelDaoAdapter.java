@@ -3,6 +3,8 @@ package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.Personnel;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.PersonnelEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,9 +55,9 @@ public class PersonnelDaoAdapter implements PersonnelDao {
 		PersonnelEntity existingEntity = personnelRepository.findById(personnel.getMatricule()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from Personnel to existingEntity
-		modelMapper.map(personnel, existingEntity);
+		PersonnelEntity newEntity = modelMapper.map(personnel, PersonnelEntity.class);
 
-		PersonnelEntity updatedEntity = personnelRepository.save(existingEntity);
+		PersonnelEntity updatedEntity = personnelRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Personnel.class);
 	}
 

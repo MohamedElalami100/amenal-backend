@@ -74,9 +74,9 @@ public class DetailReceptionDaoAdapter implements DetailReceptionDao {
 		DetailReceptionEntity existingEntity = detailReceptionRepository.findById(detailReception.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from DetailReception to existingEntity
-		modelMapper.map(detailReception, existingEntity);
+		DetailReceptionEntity newEntity = modelMapper.map(detailReception, DetailReceptionEntity.class);
 
-		DetailReceptionEntity updatedEntity = detailReceptionRepository.save(existingEntity);
+		DetailReceptionEntity updatedEntity = detailReceptionRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, DetailReception.class);
 	}
 

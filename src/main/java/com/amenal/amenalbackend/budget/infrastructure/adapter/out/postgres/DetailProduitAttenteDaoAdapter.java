@@ -4,18 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.*;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailProduitAttenteEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.budget.core.domain.DetailProduit;
-import com.amenal.amenalbackend.budget.core.domain.DetailProduitAttente;
-import com.amenal.amenalbackend.budget.core.domain.Lot;
-import com.amenal.amenalbackend.budget.core.domain.Produit;
-import com.amenal.amenalbackend.budget.core.domain.Tache;
 import com.amenal.amenalbackend.budget.core.port.out.DetailProduitAttenteDao;
-import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailProduitAttenteEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailProduitEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.TacheEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.DetailProduitAttenteRepository;
@@ -77,15 +73,14 @@ public class DetailProduitAttenteDaoAdapter implements DetailProduitAttenteDao {
 
 	@Override
 	public DetailProduitAttente updateDetailProduitAttente(DetailProduitAttente detailProduitAttente) {
-		DetailProduitAttenteEntity existingEntity = detailProduitAttenteRepository
-				.findById(detailProduitAttente.getId()).orElseThrow();
+		detailProduitAttenteRepository.findById(detailProduitAttente.getId())
+				.orElseThrow();
 		detailProduitAttente.setErreur(getErreurMessage(detailProduitAttente));
-
 		// Use ModelMapper to map non-null properties from DetailProduitAttente to
 		// existingEntity
-		modelMapper.map(detailProduitAttente, existingEntity);
+		DetailProduitAttenteEntity newEntity = modelMapper.map(detailProduitAttente, DetailProduitAttenteEntity.class);
 
-		DetailProduitAttenteEntity updatedEntity = detailProduitAttenteRepository.save(existingEntity);
+		DetailProduitAttenteEntity updatedEntity = detailProduitAttenteRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, DetailProduitAttente.class);
 	}
 

@@ -3,6 +3,8 @@ package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.GrpQualite;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.GrpQualiteEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,9 +83,9 @@ public class GrpQualiteDaoAdapter implements GrpQualiteDao {
 		}
 		// if not:
 		// Use ModelMapper to map non-null properties from GrpQualite to existingEntity
-		modelMapper.map(grpQualite, existingEntity);
+		GrpQualiteEntity newEntity = modelMapper.map(grpQualite, GrpQualiteEntity.class);
 
-		GrpQualiteEntity updatedEntity = grpQualiteRepository.save(existingEntity);
+		GrpQualiteEntity updatedEntity = grpQualiteRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, GrpQualite.class);
 	}
 

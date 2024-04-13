@@ -74,9 +74,9 @@ public class ReceptionDaoAdapter implements ReceptionDao {
 		ReceptionEntity existingEntity = receptionRepository.findById(reception.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from Reception to existingEntity
-		modelMapper.map(reception, existingEntity);
+		ReceptionEntity newEntity = modelMapper.map(reception, ReceptionEntity.class);
 
-		ReceptionEntity updatedEntity = receptionRepository.save(existingEntity);
+		ReceptionEntity updatedEntity = receptionRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Reception.class);
 	}
 

@@ -86,8 +86,8 @@ public class AchatTestDataUtil {
 
     public static List<DetailDevis> createDetailDevisList() {
         List<DetailDevis> detailDevisList = new ArrayList<>();
-        detailDevisList.add(new DetailDevis(null, null, 5.0, 10.0, null));
-        detailDevisList.add(new DetailDevis(null, null, 3.0, 15.0, null));
+        detailDevisList.add(new DetailDevis(null, null, 5.0, 10.0));
+        detailDevisList.add(new DetailDevis(null, null, 3.0, 15.0));
         return detailDevisList;
     }
 

@@ -3,6 +3,8 @@ package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.DetailQualite;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailQualiteEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,9 +58,10 @@ public class DetailQualiteDaoAdapter implements DetailQualiteDao {
 			System.out.print(e);
 		}
 		// if not:
-		DetailQualiteEntity detailQualiteEntity = modelMapper.map(detailQualite, DetailQualiteEntity.class);
-		DetailQualiteEntity savedEntity = detailQualiteRepository.save(detailQualiteEntity);
-		return modelMapper.map(savedEntity, DetailQualite.class);
+		DetailQualiteEntity newEntity = modelMapper.map(detailQualite, DetailQualiteEntity.class);
+
+		DetailQualiteEntity updatedEntity = detailQualiteRepository.save(newEntity);
+		return modelMapper.map(updatedEntity, DetailQualite.class);
 	}
 
 	@Override

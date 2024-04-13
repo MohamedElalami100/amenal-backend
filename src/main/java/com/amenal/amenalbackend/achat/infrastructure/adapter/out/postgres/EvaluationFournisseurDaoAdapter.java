@@ -52,9 +52,9 @@ public class EvaluationFournisseurDaoAdapter implements EvaluationFournisseurDao
 		EvaluationFournisseurEntity existingEntity = evaluationFournisseurRepository.findById(evaluationFournisseur.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from EvaluationFournisseur to existingEntity
-		modelMapper.map(evaluationFournisseur, existingEntity);
+		EvaluationFournisseurEntity newEntity = modelMapper.map(evaluationFournisseur, EvaluationFournisseurEntity.class);
 
-		EvaluationFournisseurEntity updatedEntity = evaluationFournisseurRepository.save(existingEntity);
+		EvaluationFournisseurEntity updatedEntity = evaluationFournisseurRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, EvaluationFournisseur.class);
 	}
 

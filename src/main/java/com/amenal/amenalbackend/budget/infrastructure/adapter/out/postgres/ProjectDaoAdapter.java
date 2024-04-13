@@ -3,6 +3,8 @@ package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.Project;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.ProjectEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,9 +54,9 @@ public class ProjectDaoAdapter implements ProjectDao {
 		ProjectEntity existingEntity = projectRepository.findById(project.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from Project to existingEntity
-		modelMapper.map(project, existingEntity);
+		ProjectEntity newEntity = modelMapper.map(project, ProjectEntity.class);
 
-		ProjectEntity updatedEntity = projectRepository.save(existingEntity);
+		ProjectEntity updatedEntity = projectRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Project.class);
 	}
 

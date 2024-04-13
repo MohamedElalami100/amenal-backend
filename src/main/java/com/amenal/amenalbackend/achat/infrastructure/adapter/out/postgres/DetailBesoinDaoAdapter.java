@@ -52,9 +52,9 @@ public class DetailBesoinDaoAdapter implements DetailBesoinDao {
 		DetailBesoinEntity existingEntity = detailBesoinRepository.findById(detailBesoin.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from DetailBesoin to existingEntity
-		modelMapper.map(detailBesoin, existingEntity);
+		DetailBesoinEntity newEntity = modelMapper.map(detailBesoin, DetailBesoinEntity.class);
 
-		DetailBesoinEntity updatedEntity = detailBesoinRepository.save(existingEntity);
+		DetailBesoinEntity updatedEntity = detailBesoinRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, DetailBesoin.class);
 	}
 

@@ -3,6 +3,8 @@ package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.MetreAv;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.MetreAvEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,9 +54,9 @@ public class MetreAvDaoAdapter implements MetreAvDao {
 		MetreAvEntity existingEntity = metreAvRepository.findById(metreAv.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from MetreAv to existingEntity
-		modelMapper.map(metreAv, existingEntity);
+		MetreAvEntity newEntity = modelMapper.map(metreAv, MetreAvEntity.class);
 
-		MetreAvEntity updatedEntity = metreAvRepository.save(existingEntity);
+		MetreAvEntity updatedEntity = metreAvRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, MetreAv.class);
 	}
 

@@ -75,9 +75,9 @@ public class DetailFactureDaoAdapter implements DetailFactureDao {
 		DetailFactureEntity existingEntity = detailFactureRepository.findById(detailFacture.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from DetailFacture to existingEntity
-		modelMapper.map(detailFacture, existingEntity);
+		DetailFactureEntity newEntity = modelMapper.map(detailFacture, DetailFactureEntity.class);
 
-		DetailFactureEntity updatedEntity = detailFactureRepository.save(existingEntity);
+		DetailFactureEntity updatedEntity = detailFactureRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, DetailFacture.class);
 	}
 

@@ -52,9 +52,9 @@ public class CompteBanquaireDaoAdapter implements CompteBanquaireDao {
 		CompteBanquaireEntity existingEntity = compteBanquaireRepository.findById(compteBanquaire.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from CompteBanquaire to existingEntity
-		modelMapper.map(compteBanquaire, existingEntity);
+		CompteBanquaireEntity newEntity = modelMapper.map(compteBanquaire, CompteBanquaireEntity.class);
 
-		CompteBanquaireEntity updatedEntity = compteBanquaireRepository.save(existingEntity);
+		CompteBanquaireEntity updatedEntity = compteBanquaireRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, CompteBanquaire.class);
 	}
 

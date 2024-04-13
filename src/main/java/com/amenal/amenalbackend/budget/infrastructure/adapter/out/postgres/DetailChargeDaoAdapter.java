@@ -3,14 +3,14 @@ package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.DetailCharge;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailChargeEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.budget.core.domain.DetailCharge;
 import com.amenal.amenalbackend.budget.core.port.out.DetailChargeDao;
-import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailChargeEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.DetailChargeRepository;
 import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementException;
 
@@ -44,7 +44,7 @@ public class DetailChargeDaoAdapter implements DetailChargeDao {
 	@Override
 	public DetailCharge saveDetailCharge(DetailCharge detailCharge) throws DuplicateElementException {
 		try {
-			// if there is a detailCharge with the same designation in the same avenant:
+			// if there is a detailCharge with the same designation in the same detailCharge:
 			List<DetailChargeEntity> sameDetailChargeEntities = detailChargeRepository.getDetailChargesByTacheIdAndDesignation(
 					detailCharge.getTache().getId(), detailCharge.getDesignation());
 			List<DetailCharge> sameDetailCharges = sameDetailChargeEntities.stream()
@@ -66,7 +66,7 @@ public class DetailChargeDaoAdapter implements DetailChargeDao {
 		DetailChargeEntity existingEntity = detailChargeRepository.findById(detailCharge.getId()).orElseThrow();
 
 		try {
-			// if there is a detailCharge with the same designation in the same avenant:
+			// if there is a detailCharge with the same designation in the same detailCharge:
 			if(!detailCharge.getDesignation().equals(existingEntity.getDesignation())) {
 				List<DetailChargeEntity> sameDetailChargeEntities = detailChargeRepository.getDetailChargesByTacheIdAndDesignation(
 						detailCharge.getTache().getId(), detailCharge.getDesignation());
@@ -81,9 +81,9 @@ public class DetailChargeDaoAdapter implements DetailChargeDao {
 		}
 		// if not:
 		// Use ModelMapper to map non-null properties from DetailCharge to existingEntity
-		modelMapper.map(detailCharge, existingEntity);
+		DetailChargeEntity newEntity = modelMapper.map(detailCharge, DetailChargeEntity.class);
 
-		DetailChargeEntity updatedEntity = detailChargeRepository.save(existingEntity);
+		DetailChargeEntity updatedEntity = detailChargeRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, DetailCharge.class);
 	}
 

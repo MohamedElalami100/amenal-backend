@@ -109,7 +109,7 @@ public class DetailChargeDaoAdapterTest {
         detailCharge.setId(1);
         detailCharge.setDesignation("test");
         DetailChargeEntity existingEntity = new DetailChargeEntity();
-        detailCharge.setId(1);
+        existingEntity.setId(1);
         existingEntity.setDesignation("test");
 
         when(detailChargeRepository.findById(1)).thenReturn(Optional.of(existingEntity));
@@ -152,7 +152,7 @@ public class DetailChargeDaoAdapterTest {
         detailCharge.setId(1);
         detailCharge.setDesignation("test");
         DetailChargeEntity existingEntity = new DetailChargeEntity();
-        detailCharge.setId(1);
+        existingEntity.setId(1);
         existingEntity.setDesignation("test");
 
         when(detailChargeRepository.findById(1)).thenReturn(Optional.of(existingEntity));

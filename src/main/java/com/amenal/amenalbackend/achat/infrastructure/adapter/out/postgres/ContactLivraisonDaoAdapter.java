@@ -52,9 +52,9 @@ public class ContactLivraisonDaoAdapter implements ContactLivraisonDao {
 		ContactLivraisonEntity existingEntity = contactLivraisonRepository.findById(contactLivraison.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from ContactLivraison to existingEntity
-		modelMapper.map(contactLivraison, existingEntity);
+		ContactLivraisonEntity newEntity = modelMapper.map(contactLivraison, ContactLivraisonEntity.class);
 
-		ContactLivraisonEntity updatedEntity = contactLivraisonRepository.save(existingEntity);
+		ContactLivraisonEntity updatedEntity = contactLivraisonRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, ContactLivraison.class);
 	}
 

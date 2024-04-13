@@ -3,6 +3,8 @@ package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.Utilisateur;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.UtilisateurEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,9 +54,9 @@ public class UtilisateurDaoAdapter implements UtilisateurDao {
 		UtilisateurEntity existingEntity = utilisateurRepository.findById(utilisateur.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from Utilisateur to existingEntity
-		modelMapper.map(utilisateur, existingEntity);
+		UtilisateurEntity newEntity = modelMapper.map(utilisateur, UtilisateurEntity.class);
 
-		UtilisateurEntity updatedEntity = utilisateurRepository.save(existingEntity);
+		UtilisateurEntity updatedEntity = utilisateurRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Utilisateur.class);
 	}
 

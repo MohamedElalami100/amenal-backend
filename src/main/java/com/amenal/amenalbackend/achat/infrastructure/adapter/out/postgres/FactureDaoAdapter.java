@@ -75,9 +75,9 @@ public class FactureDaoAdapter implements FactureDao {
 		FactureEntity existingEntity = factureRepository.findById(facture.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from Facture to existingEntity
-		modelMapper.map(facture, existingEntity);
+		FactureEntity newEntity = modelMapper.map(facture, FactureEntity.class);
 
-		FactureEntity updatedEntity = factureRepository.save(existingEntity);
+		FactureEntity updatedEntity = factureRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Facture.class);
 	}
 

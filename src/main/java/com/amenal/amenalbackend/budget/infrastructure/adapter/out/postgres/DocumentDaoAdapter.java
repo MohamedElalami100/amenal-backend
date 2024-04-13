@@ -3,6 +3,8 @@ package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.Document;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DocumentEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,9 +54,9 @@ public class DocumentDaoAdapter implements DocumentDao {
 		DocumentEntity existingEntity = documentRepository.findByUrl(document.getUrl()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from Document to existingEntity
-		modelMapper.map(document, existingEntity);
+		DocumentEntity newEntity = modelMapper.map(document, DocumentEntity.class);
 
-		DocumentEntity updatedEntity = documentRepository.save(existingEntity);
+		DocumentEntity updatedEntity = documentRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Document.class);
 	}
 

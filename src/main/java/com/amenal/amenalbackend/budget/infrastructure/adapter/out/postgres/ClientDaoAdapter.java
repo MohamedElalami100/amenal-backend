@@ -3,6 +3,8 @@ package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.Client;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.ClientEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,15 +51,13 @@ public class ClientDaoAdapter implements ClientDao {
 
 	@Override
 	public Client updateClient(Client client) {
-		ClientEntity existingEntity = clientRepository.findById(client.getId()).orElseThrow();
+		clientRepository.findById(client.getId()).orElseThrow();
 
-		// Use ModelMapper to map non-null properties from Client to existingEntity
-		modelMapper.map(client, existingEntity);
+		ClientEntity newEntity = modelMapper.map(client, ClientEntity.class);
 
-		ClientEntity updatedEntity = clientRepository.save(existingEntity);
+		ClientEntity updatedEntity = clientRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Client.class);
 	}
-
 	@Override
 	public void deleteClient(Integer id) {
 		// Check if Client with the given ID exists

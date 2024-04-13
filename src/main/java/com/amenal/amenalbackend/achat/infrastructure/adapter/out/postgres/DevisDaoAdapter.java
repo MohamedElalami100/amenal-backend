@@ -74,9 +74,9 @@ public class DevisDaoAdapter implements DevisDao {
 		DevisEntity existingEntity = devisRepository.findById(devis.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from Devis to existingEntity
-		modelMapper.map(devis, existingEntity);
+		DevisEntity newEntity = modelMapper.map(devis, DevisEntity.class);
 
-		DevisEntity updatedEntity = devisRepository.save(existingEntity);
+		DevisEntity updatedEntity = devisRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Devis.class);
 	}
 

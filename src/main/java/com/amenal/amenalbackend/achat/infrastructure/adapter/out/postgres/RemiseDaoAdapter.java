@@ -52,9 +52,9 @@ public class RemiseDaoAdapter implements RemiseDao {
 		RemiseEntity existingEntity = remiseRepository.findById(remise.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from Remise to existingEntity
-		modelMapper.map(remise, existingEntity);
+		RemiseEntity newEntity = modelMapper.map(remise, RemiseEntity.class);
 
-		RemiseEntity updatedEntity = remiseRepository.save(existingEntity);
+		RemiseEntity updatedEntity = remiseRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Remise.class);
 	}
 

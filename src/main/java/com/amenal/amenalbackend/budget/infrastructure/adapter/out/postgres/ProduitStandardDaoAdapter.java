@@ -3,6 +3,8 @@ package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.ProduitStandard;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.ProduitStandardEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,9 +54,9 @@ public class ProduitStandardDaoAdapter implements ProduitStandardDao {
 		ProduitStandardEntity existingEntity = produitStandardRepository.findById(produitStandard.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from ProduitStandard to existingEntity
-		modelMapper.map(produitStandard, existingEntity);
+		ProduitStandardEntity newEntity = modelMapper.map(produitStandard, ProduitStandardEntity.class);
 
-		ProduitStandardEntity updatedEntity = produitStandardRepository.save(existingEntity);
+		ProduitStandardEntity updatedEntity = produitStandardRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, ProduitStandard.class);
 	}
 

@@ -52,9 +52,9 @@ public class ContactFournisseurDaoAdapter implements ContactFournisseurDao {
 		ContactFournisseurEntity existingEntity = contactFournisseurRepository.findById(contactFournisseur.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from ContactFournisseur to existingEntity
-		modelMapper.map(contactFournisseur, existingEntity);
+		ContactFournisseurEntity newEntity = modelMapper.map(contactFournisseur, ContactFournisseurEntity.class);
 
-		ContactFournisseurEntity updatedEntity = contactFournisseurRepository.save(existingEntity);
+		ContactFournisseurEntity updatedEntity = contactFournisseurRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, ContactFournisseur.class);
 	}
 

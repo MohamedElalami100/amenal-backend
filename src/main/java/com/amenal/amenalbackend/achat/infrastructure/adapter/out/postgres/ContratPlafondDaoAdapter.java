@@ -52,9 +52,9 @@ public class ContratPlafondDaoAdapter implements ContratPlafondDao {
 		ContratPlafondEntity existingEntity = contratPlafondRepository.findById(contratPlafond.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from ContratPlafond to existingEntity
-		modelMapper.map(contratPlafond, existingEntity);
+		ContratPlafondEntity newEntity = modelMapper.map(contratPlafond, ContratPlafondEntity.class);
 
-		ContratPlafondEntity updatedEntity = contratPlafondRepository.save(existingEntity);
+		ContratPlafondEntity updatedEntity = contratPlafondRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, ContratPlafond.class);
 	}
 

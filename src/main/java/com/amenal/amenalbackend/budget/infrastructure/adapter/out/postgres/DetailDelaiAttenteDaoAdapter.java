@@ -4,17 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.*;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailDelaiAttenteEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.budget.core.domain.DetailDelaiAttente;
-import com.amenal.amenalbackend.budget.core.domain.Lot;
-import com.amenal.amenalbackend.budget.core.domain.Produit;
-import com.amenal.amenalbackend.budget.core.domain.Tache;
 import com.amenal.amenalbackend.budget.core.port.out.DetailDelaiAttenteDao;
-import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailDelaiAttenteEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.TacheEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.DetailDelaiAttenteRepository;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.TacheRepository;
@@ -71,15 +68,14 @@ public class DetailDelaiAttenteDaoAdapter implements DetailDelaiAttenteDao {
 
 	@Override
 	public DetailDelaiAttente updateDetailDelaiAttente(DetailDelaiAttente detailDelaiAttente) {
-		DetailDelaiAttenteEntity existingEntity = detailDelaiAttenteRepository.findById(detailDelaiAttente.getId())
+		detailDelaiAttenteRepository.findById(detailDelaiAttente.getId())
 				.orElseThrow();
 		detailDelaiAttente.setErreur(getErreurMessage(detailDelaiAttente));
-
 		// Use ModelMapper to map non-null properties from DetailDelaiAttente to
 		// existingEntity
-		modelMapper.map(detailDelaiAttente, existingEntity);
+		DetailDelaiAttenteEntity newEntity = modelMapper.map(detailDelaiAttente, DetailDelaiAttenteEntity.class);
 
-		DetailDelaiAttenteEntity updatedEntity = detailDelaiAttenteRepository.save(existingEntity);
+		DetailDelaiAttenteEntity updatedEntity = detailDelaiAttenteRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, DetailDelaiAttente.class);
 	}
 

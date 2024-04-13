@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailChargeAttenteEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,14 +77,14 @@ public class DetailChargeAttenteDaoAdapter implements DetailChargeAttenteDao {
 
 	@Override
 	public DetailChargeAttente updateDetailChargeAttente(DetailChargeAttente detailChargeAttente) {
-		DetailChargeAttenteEntity existingEntity = detailChargeAttenteRepository.findById(detailChargeAttente.getId())
+		detailChargeAttenteRepository.findById(detailChargeAttente.getId())
 				.orElseThrow();
 		detailChargeAttente.setErreur(getErreurMessage(detailChargeAttente));
 		// Use ModelMapper to map non-null properties from DetailChargeAttente to
 		// existingEntity
-		modelMapper.map(detailChargeAttente, existingEntity);
+		DetailChargeAttenteEntity newEntity = modelMapper.map(detailChargeAttente, DetailChargeAttenteEntity.class);
 
-		DetailChargeAttenteEntity updatedEntity = detailChargeAttenteRepository.save(existingEntity);
+		DetailChargeAttenteEntity updatedEntity = detailChargeAttenteRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, DetailChargeAttente.class);
 	}
 

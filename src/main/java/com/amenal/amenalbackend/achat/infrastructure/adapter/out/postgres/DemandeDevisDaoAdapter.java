@@ -52,9 +52,9 @@ public class DemandeDevisDaoAdapter implements DemandeDevisDao {
 		DemandeDevisEntity existingEntity = demandeDevisRepository.findById(demandeDevis.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from DemandeDevis to existingEntity
-		modelMapper.map(demandeDevis, existingEntity);
+		DemandeDevisEntity newEntity = modelMapper.map(demandeDevis, DemandeDevisEntity.class);
 
-		DemandeDevisEntity updatedEntity = demandeDevisRepository.save(existingEntity);
+		DemandeDevisEntity updatedEntity = demandeDevisRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, DemandeDevis.class);
 	}
 

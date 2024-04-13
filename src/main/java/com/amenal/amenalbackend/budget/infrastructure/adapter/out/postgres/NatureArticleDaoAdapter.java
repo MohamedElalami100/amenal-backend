@@ -3,14 +3,14 @@ package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.NatureArticle;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.NatureArticleEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.budget.core.domain.NatureArticle;
 import com.amenal.amenalbackend.budget.core.port.out.NatureArticleDao;
-import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.NatureArticleEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.NatureArticleRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -52,9 +52,9 @@ public class NatureArticleDaoAdapter implements NatureArticleDao {
 		NatureArticleEntity existingEntity = natureArticleRepository.findById(natureArticle.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from NatureArticle to existingEntity
-		modelMapper.map(natureArticle, existingEntity);
+		NatureArticleEntity newEntity = modelMapper.map(natureArticle, NatureArticleEntity.class);
 
-		NatureArticleEntity updatedEntity = natureArticleRepository.save(existingEntity);
+		NatureArticleEntity updatedEntity = natureArticleRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, NatureArticle.class);
 	}
 

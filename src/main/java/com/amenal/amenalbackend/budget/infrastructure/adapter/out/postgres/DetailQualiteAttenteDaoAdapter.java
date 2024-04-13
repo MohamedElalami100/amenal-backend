@@ -4,19 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.*;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailQualiteAttenteEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.budget.core.domain.DetailQualite;
-import com.amenal.amenalbackend.budget.core.domain.DetailQualiteAttente;
-import com.amenal.amenalbackend.budget.core.domain.GrpQualite;
-import com.amenal.amenalbackend.budget.core.domain.Lot;
-import com.amenal.amenalbackend.budget.core.domain.Produit;
-import com.amenal.amenalbackend.budget.core.domain.Tache;
 import com.amenal.amenalbackend.budget.core.port.out.DetailQualiteAttenteDao;
-import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailQualiteAttenteEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailQualiteEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.TacheEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.DetailQualiteAttenteRepository;
@@ -78,18 +73,17 @@ public class DetailQualiteAttenteDaoAdapter implements DetailQualiteAttenteDao {
 
 	@Override
 	public DetailQualiteAttente updateDetailQualiteAttente(DetailQualiteAttente detailQualiteAttente) {
-		DetailQualiteAttenteEntity existingEntity = detailQualiteAttenteRepository
-				.findById(detailQualiteAttente.getId()).orElseThrow();
+		detailQualiteAttenteRepository.findById(detailQualiteAttente.getId())
+				.orElseThrow();
 		detailQualiteAttente.setErreur(getErreurMessage(detailQualiteAttente));
-
 		// Use ModelMapper to map non-null properties from DetailQualiteAttente to
 		// existingEntity
-		modelMapper.map(detailQualiteAttente, existingEntity);
+		DetailQualiteAttenteEntity newEntity = modelMapper.map(detailQualiteAttente, DetailQualiteAttenteEntity.class);
 
-		DetailQualiteAttenteEntity updatedEntity = detailQualiteAttenteRepository.save(existingEntity);
+		DetailQualiteAttenteEntity updatedEntity = detailQualiteAttenteRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, DetailQualiteAttente.class);
 	}
-
+	
 	@Override
 	public void deleteDetailQualiteAttente(Integer id) {
 		// Check if DetailQualiteAttente with the given ID exists

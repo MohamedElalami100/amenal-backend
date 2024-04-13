@@ -52,9 +52,9 @@ public class ChargeStandardDaoAdapter implements ChargeStandardDao {
 		ChargeStandardEntity existingEntity = chargeStandardRepository.findById(chargeStandard.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from ChargeStandard to existingEntity
-		modelMapper.map(chargeStandard, existingEntity);
+		ChargeStandardEntity newEntity = modelMapper.map(chargeStandard, ChargeStandardEntity.class);
 
-		ChargeStandardEntity updatedEntity = chargeStandardRepository.save(existingEntity);
+		ChargeStandardEntity updatedEntity = chargeStandardRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, ChargeStandard.class);
 	}
 

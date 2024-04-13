@@ -74,9 +74,9 @@ public class BesoinDaoAdapter implements BesoinDao {
 		BesoinEntity existingEntity = besoinRepository.findById(besoin.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from Besoin to existingEntity
-		modelMapper.map(besoin, existingEntity);
+		BesoinEntity newEntity = modelMapper.map(besoin, BesoinEntity.class);
 
-		BesoinEntity updatedEntity = besoinRepository.save(existingEntity);
+		BesoinEntity updatedEntity = besoinRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Besoin.class);
 	}
 

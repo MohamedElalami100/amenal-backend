@@ -52,9 +52,9 @@ public class DetailDemandeDevisDaoAdapter implements DetailDemandeDevisDao {
 		DetailDemandeDevisEntity existingEntity = detailDemandeDevisRepository.findById(detailDemandeDevis.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from DetailDemandeDevis to existingEntity
-		modelMapper.map(detailDemandeDevis, existingEntity);
+		DetailDemandeDevisEntity newEntity = modelMapper.map(detailDemandeDevis, DetailDemandeDevisEntity.class);
 
-		DetailDemandeDevisEntity updatedEntity = detailDemandeDevisRepository.save(existingEntity);
+		DetailDemandeDevisEntity updatedEntity = detailDemandeDevisRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, DetailDemandeDevis.class);
 	}
 

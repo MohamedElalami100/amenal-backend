@@ -109,7 +109,7 @@ public class GrpQualiteDaoAdapterTest {
         grpQualite.setId(1);
         grpQualite.setTitre("test");
         GrpQualiteEntity existingEntity = new GrpQualiteEntity();
-        grpQualite.setId(1);
+        existingEntity.setId(1);
         existingEntity.setTitre("test");
 
         when(grpQualiteRepository.findById(1)).thenReturn(Optional.of(existingEntity));
@@ -152,7 +152,7 @@ public class GrpQualiteDaoAdapterTest {
         grpQualite.setId(1);
         grpQualite.setTitre("test");
         GrpQualiteEntity existingEntity = new GrpQualiteEntity();
-        grpQualite.setId(1);
+        existingEntity.setId(1);
         existingEntity.setTitre("test");
 
         when(grpQualiteRepository.findById(1)).thenReturn(Optional.of(existingEntity));

@@ -3,6 +3,8 @@ package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.Lot;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.LotEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,9 +97,9 @@ public class LotDaoAdapter implements LotDao {
 		}
 
 		// Use ModelMapper to map non-null properties from Lot to existingEntity
-		modelMapper.map(lot, existingEntity);
+		LotEntity newEntity = modelMapper.map(lot, LotEntity.class);
 
-		LotEntity updatedEntity = lotRepository.save(existingEntity);
+		LotEntity updatedEntity = lotRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Lot.class);
 	}
 

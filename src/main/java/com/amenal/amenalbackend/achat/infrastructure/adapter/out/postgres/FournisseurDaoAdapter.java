@@ -52,9 +52,9 @@ public class FournisseurDaoAdapter implements FournisseurDao {
 		FournisseurEntity existingEntity = fournisseurRepository.findById(fournisseur.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from Fournisseur to existingEntity
-		modelMapper.map(fournisseur, existingEntity);
+		FournisseurEntity newEntity = modelMapper.map(fournisseur, FournisseurEntity.class);
 
-		FournisseurEntity updatedEntity = fournisseurRepository.save(existingEntity);
+		FournisseurEntity updatedEntity = fournisseurRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Fournisseur.class);
 	}
 

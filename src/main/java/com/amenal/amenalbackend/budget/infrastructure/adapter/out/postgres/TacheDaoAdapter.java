@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.Tache;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.TacheEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -124,10 +126,9 @@ public class TacheDaoAdapter implements TacheDao {
 		}
 		// if not:
 		// Use ModelMapper to map non-null properties from Tache to existingEntity
-		modelMapper.map(tache, existingEntity);
+		TacheEntity newEntity = modelMapper.map(tache, TacheEntity.class);
 
-		TacheEntity updatedEntity = tacheRepository.save(existingEntity);
-
+		TacheEntity updatedEntity = tacheRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Tache.class);
 	}
 

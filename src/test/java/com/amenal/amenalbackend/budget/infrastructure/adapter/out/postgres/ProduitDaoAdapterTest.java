@@ -120,7 +120,7 @@ public class ProduitDaoAdapterTest {
         produit.setId(1);
         produit.setDesignation("test");
         ProduitEntity existingEntity = new ProduitEntity();
-        produit.setId(1);
+        existingEntity.setId(1);
         existingEntity.setDesignation("test");
 
         when(produitRepository.findById(1)).thenReturn(Optional.of(existingEntity));
@@ -169,7 +169,7 @@ public class ProduitDaoAdapterTest {
         produit.setId(1);
         produit.setDesignation("test");
         ProduitEntity existingEntity = new ProduitEntity();
-        produit.setId(1);
+        existingEntity.setId(1);
         existingEntity.setDesignation("test");
 
         when(produitRepository.findById(1)).thenReturn(Optional.of(existingEntity));

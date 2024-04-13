@@ -52,9 +52,9 @@ public class PaiementDaoAdapter implements PaiementDao {
 		PaiementEntity existingEntity = paiementRepository.findById(paiement.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from Paiement to existingEntity
-		modelMapper.map(paiement, existingEntity);
+		PaiementEntity newEntity = modelMapper.map(paiement, PaiementEntity.class);
 
-		PaiementEntity updatedEntity = paiementRepository.save(existingEntity);
+		PaiementEntity updatedEntity = paiementRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Paiement.class);
 	}
 

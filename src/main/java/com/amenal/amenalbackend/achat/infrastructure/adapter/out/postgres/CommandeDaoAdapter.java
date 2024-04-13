@@ -52,9 +52,9 @@ public class CommandeDaoAdapter implements CommandeDao {
 		CommandeEntity existingEntity = commandeRepository.findById(commande.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from Commande to existingEntity
-		modelMapper.map(commande, existingEntity);
+		CommandeEntity newEntity = modelMapper.map(commande, CommandeEntity.class);
 
-		CommandeEntity updatedEntity = commandeRepository.save(existingEntity);
+		CommandeEntity updatedEntity = commandeRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Commande.class);
 	}
 

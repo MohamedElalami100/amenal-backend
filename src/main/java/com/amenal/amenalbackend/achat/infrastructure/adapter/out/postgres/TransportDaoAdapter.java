@@ -52,9 +52,9 @@ public class TransportDaoAdapter implements TransportDao {
 		TransportEntity existingEntity = transportRepository.findById(transport.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from Transport to existingEntity
-		modelMapper.map(transport, existingEntity);
+		TransportEntity newEntity = modelMapper.map(transport, TransportEntity.class);
 
-		TransportEntity updatedEntity = transportRepository.save(existingEntity);
+		TransportEntity updatedEntity = transportRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Transport.class);
 	}
 

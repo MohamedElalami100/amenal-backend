@@ -52,9 +52,9 @@ public class AttestationRgfDaoAdapter implements AttestationRgfDao {
 		AttestationRgfEntity existingEntity = attestationRgfRepository.findById(attestationRgf.getId()).orElseThrow();
 
 		// Use ModelMapper to map non-null properties from AttestationRgf to existingEntity
-		modelMapper.map(attestationRgf, existingEntity);
+		AttestationRgfEntity newEntity = modelMapper.map(attestationRgf, AttestationRgfEntity.class);
 
-		AttestationRgfEntity updatedEntity = attestationRgfRepository.save(existingEntity);
+		AttestationRgfEntity updatedEntity = attestationRgfRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, AttestationRgf.class);
 	}
 
