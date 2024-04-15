@@ -15,5 +15,6 @@ public interface DetailProduitDao {
 	DetailProduit updateDetailProduit(DetailProduit detailProduit) throws DuplicateElementException;
 	
 	void deleteDetailProduit(Integer id);
-	
+
+    List<DetailProduit> getDetailProduitsByAvenantId(Integer id);
 }

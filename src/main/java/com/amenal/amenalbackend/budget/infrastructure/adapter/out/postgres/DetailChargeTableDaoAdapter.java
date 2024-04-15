@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.core.domain.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.budget.core.domain.Avenant;
-import com.amenal.amenalbackend.budget.core.domain.DetailCharge;
-import com.amenal.amenalbackend.budget.core.domain.Produit;
-import com.amenal.amenalbackend.budget.core.domain.Tache;
 import com.amenal.amenalbackend.budget.core.port.out.DetailChargeTableDao;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.AvenantEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailChargeEntity;
@@ -119,10 +116,12 @@ public class DetailChargeTableDaoAdapter implements DetailChargeTableDao {
 					.collect(Collectors.toList());
 
 			for (DetailCharge detailCharge : detailCharges) {
+				String natureArticle = "";
+				if (detailCharge.getNature() != null) natureArticle = detailCharge.getNature().getNature();
 				DetailChargeTableDto detailChargeTableDto = new DetailChargeTableDto(detailCharge.getId(), detailCharge.getOrdreMef(),
 						tache.getProduit().getDesignation(), tache.getLot().getDesignation(), tache.getTitreActivite(),
 						tache.getUnite(), tache.getCleAttachement(), detailCharge.getDesignation(),
-						detailCharge.getNature().getNature(), detailCharge.getUnite(), detailCharge.getQte(),
+						natureArticle, detailCharge.getUnite(), detailCharge.getQte(),
 						detailCharge.getPrix(), detailCharge.getMontant(), detailCharge.getLaUnitePrd(),
 						detailCharge.getLaQtePrd(), detailCharge.getDateSaisie(), tache.getProduit().getId(),
 						tache.getLot().getId(), tache.getId());

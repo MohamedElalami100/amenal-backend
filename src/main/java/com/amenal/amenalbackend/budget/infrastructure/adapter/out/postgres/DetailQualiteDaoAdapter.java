@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.budget.core.domain.DetailQualite;
 import com.amenal.amenalbackend.budget.core.port.out.DetailQualiteDao;
-import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailQualiteEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.DetailQualiteRepository;
 import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementException;
 
@@ -98,6 +96,13 @@ public class DetailQualiteDaoAdapter implements DetailQualiteDao {
 
 		// Delete the entity
 		detailQualiteRepository.delete(detailQualiteEntity);
+	}
+
+	@Override
+	public List<DetailQualite> getDetailQualitesByAvenantId(Integer id) {
+		List<DetailQualiteEntity> detailQualiteEntities = detailQualiteRepository.getDetailQualitesByAvenantId(id);
+		return detailQualiteEntities.stream().map(detailQualiteEntity -> modelMapper.map(detailQualiteEntity, DetailQualite.class))
+				.collect(Collectors.toList());
 	}
 
 }

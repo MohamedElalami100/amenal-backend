@@ -15,5 +15,6 @@ public interface DetailChargeDao {
 	DetailCharge updateDetailCharge(DetailCharge detailCharge) throws DuplicateElementException;
 	
 	void deleteDetailCharge(Integer id);
-	
+
+    List<DetailCharge> getDetailChargesByAvenantId(Integer id);
 }

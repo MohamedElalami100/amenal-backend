@@ -96,4 +96,11 @@ public class DetailChargeDaoAdapter implements DetailChargeDao {
 		detailChargeRepository.delete(detailChargeEntity);
 	}
 
+	@Override
+	public List<DetailCharge> getDetailChargesByAvenantId(Integer id) {
+		List<DetailChargeEntity> detailChargeEntities = detailChargeRepository.getDetailChargesByAvenantId(id);
+		return detailChargeEntities.stream().map(detailChargeEntity -> modelMapper.map(detailChargeEntity, DetailCharge.class))
+				.collect(Collectors.toList());
+	}
+
 }

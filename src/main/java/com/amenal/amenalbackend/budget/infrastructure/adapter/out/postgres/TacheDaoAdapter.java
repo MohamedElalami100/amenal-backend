@@ -147,4 +147,11 @@ public class TacheDaoAdapter implements TacheDao {
 		return tacheEntities.stream().map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class))
 				.collect(Collectors.toList());
 	}
+
+	@Override
+	public List<Tache> getTachesInOtherAvenants(Integer id) {
+		List<TacheEntity> tacheEntities = tacheRepository.getTachesInOtherAvenants(id);
+		return tacheEntities.stream().map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class))
+				.collect(Collectors.toList());
+	}
 }

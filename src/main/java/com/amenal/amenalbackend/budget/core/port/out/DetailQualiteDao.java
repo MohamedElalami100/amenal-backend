@@ -15,5 +15,6 @@ public interface DetailQualiteDao {
 	DetailQualite updateDetailQualite(DetailQualite detailQualite) throws DuplicateElementException;
 	
 	void deleteDetailQualite(Integer id);
-	
+
+    List<DetailQualite> getDetailQualitesByAvenantId(Integer id);
 }

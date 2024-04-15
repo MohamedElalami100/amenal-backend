@@ -17,5 +17,6 @@ public interface TacheDao {
 	void deleteTache(Integer id);
 
 	List<Tache> getTachesByAvenantId(Integer id);
-	
+
+    List<Tache> getTachesInOtherAvenants(Integer id);
 }

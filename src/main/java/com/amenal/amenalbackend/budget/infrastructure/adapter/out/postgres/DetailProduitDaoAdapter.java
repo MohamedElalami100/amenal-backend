@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.budget.core.domain.DetailProduit;
 import com.amenal.amenalbackend.budget.core.port.out.DetailProduitDao;
-import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailProduitEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.DetailProduitRepository;
 import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementException;
 
@@ -97,6 +95,13 @@ public class DetailProduitDaoAdapter implements DetailProduitDao {
 
 		// Delete the entity
 		detailProduitRepository.delete(detailProduitEntity);
+	}
+
+	@Override
+	public List<DetailProduit> getDetailProduitsByAvenantId(Integer id) {
+		List<DetailProduitEntity> detailProduitEntities = detailProduitRepository.getDetailProduitsByAvenantId(id);
+		return detailProduitEntities.stream().map(detailProduitEntity -> modelMapper.map(detailProduitEntity, DetailProduit.class))
+				.collect(Collectors.toList());
 	}
 
 }
