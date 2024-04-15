@@ -96,7 +96,6 @@ public class DetailDelaiAttenteUseCase {
 	private List<DetailDelaiAttente> updateErreurs(List<DetailDelaiAttente> detailDelaiAttentes) {
 
 		if (detailDelaiAttentes.size() == 0) return new ArrayList<>();
-		int i = 0;
 		List<DetailDelaiAttente> addedDetailsWithErreurs = new ArrayList<>();
 
 		//get data needed for getting error message:
@@ -151,8 +150,6 @@ public class DetailDelaiAttenteUseCase {
 				//save detail with error
 				DetailDelaiAttente addedDetail = detailDelaiAttenteDao.saveDetailDelaiAttente(detailDelaiAttente);
 				addedDetailsWithErreurs.add(addedDetail);
-				System.out.println(i);
-				i++;
 			} catch (Exception e) {
 			}
 		}

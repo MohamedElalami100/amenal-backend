@@ -72,7 +72,6 @@ public class DetailProduitTableDaoAdapter implements DetailProduitTableDao {
 	@Override
 	public List<DetailProduitTableDto> getFilteredDetailProduitTableByProduitAndProject(Integer projectId,String produitDesignation) {
 		List<DetailProduitTableDto> detailProduitTableDtos = getDetailProduitTableByProjectId(projectId);
-		System.out.print(detailProduitTableDtos.get(0).getProduit());
 		List<DetailProduitTableDto> filteredDetailProduit = detailProduitTableDtos.stream()
 				.filter(obj -> obj.getProduit().equalsIgnoreCase(produitDesignation)).collect(Collectors.toList());
 		return filteredDetailProduit;

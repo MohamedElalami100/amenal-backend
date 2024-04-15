@@ -51,6 +51,32 @@ public class ProduitDaoAdapter implements ProduitDao {
 	}
 
 	@Override
+	public Produit saveOrUpdateIfExists(Produit produit) {
+		try {
+			// if there is a produit with the same designation in the same avenant:
+			List<ProduitEntity> sameProduitEntities = produitRepository.getProduitsByAvenantIdAndDesignation(
+					produit.getMetre().getBudget().getAvenant().getId(), produit.getDesignation());
+			List<Produit> sameProduits = sameProduitEntities.stream()
+					.map(produitEntity -> modelMapper.map(produitEntity, Produit.class)).collect(Collectors.toList());
+			if (!sameProduits.isEmpty()) {
+				//update the sameProduit if exists by produit inserted
+				Produit sameProduit = sameProduits.get(0);
+				produit.setId(sameProduit.getId());
+
+				ProduitEntity newEntity = modelMapper.map(produit, ProduitEntity.class);
+				ProduitEntity updatedEntity = produitRepository.save(newEntity);
+				return modelMapper.map(updatedEntity, Produit.class);
+			}
+		} catch (Exception e) {
+			System.out.print(e);
+		}
+		// if not:
+		ProduitEntity produitEntity = modelMapper.map(produit, ProduitEntity.class);
+		ProduitEntity savedEntity = produitRepository.save(produitEntity);
+		return modelMapper.map(savedEntity, Produit.class);
+	}
+
+	@Override
 	public Produit saveProduit(Produit produit) {
 		try {
 			// if there is a produit with the same designation in the same avenant:

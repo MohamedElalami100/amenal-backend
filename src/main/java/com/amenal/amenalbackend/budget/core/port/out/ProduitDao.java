@@ -17,5 +17,6 @@ public interface ProduitDao {
 	void deleteProduit(Integer id);
 
 	List<Produit> getProduitsByAvenantId(Integer id);
-	
+
+	Produit saveOrUpdateIfExists(Produit produit);
 }
