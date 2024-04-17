@@ -2,28 +2,20 @@ package com.amenal.amenalbackend.budget.core.domain;
 
 public class DetailQualite {
 	private Integer id;
-	private String affaire;
+	private String pointDeControle;
 	private String importance;
-	private Integer ordre;
-	private String ordreMef;
-	private String ordrePrt;
-	private Integer id2;
-	private Boolean maj;
+	private String ordre;
 
 	// Fk objects:
 	private GrpQualite groupe;
 
-	public DetailQualite(Integer id, String affaire, String importance, Integer ordre, String ordreMef, String ordrePrt,
-			Integer id2, Boolean maj, GrpQualite groupe) {
+	public DetailQualite(Integer id, String pointDeControle, String importance, String ordreMef, String ordrePrt,
+			Integer id2, Boolean maj,String ordre, GrpQualite groupe) {
 		super();
 		this.id = id;
-		this.affaire = affaire;
+		this.pointDeControle = pointDeControle;
 		this.importance = importance;
 		this.ordre = ordre;
-		this.ordreMef = ordreMef;
-		this.ordrePrt = ordrePrt;
-		this.id2 = id2;
-		this.maj = maj;
 		this.groupe = groupe;
 	}
 
@@ -39,12 +31,20 @@ public class DetailQualite {
 		this.id = id;
 	}
 
-	public String getAffaire() {
-		return affaire;
+	public String getPointDeControle() {
+		return pointDeControle;
 	}
 
-	public void setAffaire(String affaire) {
-		this.affaire = affaire;
+	public void setPointDeControle(String pointDeControle) {
+		this.pointDeControle = pointDeControle;
+	}
+
+	public String getOrdre() {
+		return ordre;
+	}
+
+	public void setOrdre(String ordre) {
+		this.ordre = ordre;
 	}
 
 	public String getImportance() {
@@ -53,46 +53,6 @@ public class DetailQualite {
 
 	public void setImportance(String importance) {
 		this.importance = importance;
-	}
-
-	public Integer getOrdre() {
-		return ordre;
-	}
-
-	public void setOrdre(Integer ordre) {
-		this.ordre = ordre;
-	}
-
-	public String getOrdreMef() {
-		return ordreMef;
-	}
-
-	public void setOrdreMef(String ordreMef) {
-		this.ordreMef = ordreMef;
-	}
-
-	public String getOrdrePrt() {
-		return ordrePrt;
-	}
-
-	public void setOrdrePrt(String ordrePrt) {
-		this.ordrePrt = ordrePrt;
-	}
-
-	public Integer getId2() {
-		return id2;
-	}
-
-	public void setId2(Integer id2) {
-		this.id2 = id2;
-	}
-
-	public Boolean getMaj() {
-		return maj;
-	}
-
-	public void setMaj(Boolean maj) {
-		this.maj = maj;
 	}
 
 	public GrpQualite getGroupe() {

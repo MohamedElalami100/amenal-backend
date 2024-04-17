@@ -65,12 +65,12 @@ public class SaveViaDetailChargeAttenteUseCase {
 
 		// Set Tache:
 		Tache tache = new Tache();
-		tache.setOrdreMef(detailChargeAttente.getOrdre());
+		tache.setOrdre(detailChargeAttente.getOrdre());
 		tache.setTitreActivite(detailChargeAttente.getActivite());
 		tache.setProduit(produit);
 		tache.setLot(lot);
-		tache.setUnite(detailChargeAttente.getUpb());
-		tache.setCleAttachement(detailChargeAttente.getCle());
+		tache.setUpb(detailChargeAttente.getUpb());
+		tache.setCle(detailChargeAttente.getCle());
 
 		// Save Tache:
 		tache = tacheDao.saveTache(tache);
@@ -78,13 +78,14 @@ public class SaveViaDetailChargeAttenteUseCase {
 		// Set DetailCharge:
 		DetailCharge detailCharge = new DetailCharge();
 		detailCharge.setTache(tache);
-		detailCharge.setDesignation(detailChargeAttente.getCharge());
-		detailCharge.setUnite(detailChargeAttente.getUcb());
-		detailCharge.setQte(detailChargeAttente.getQcb());
-		detailCharge.setPrix(detailChargeAttente.getPcb());
-		detailCharge.setLaUnitePrd(detailChargeAttente.getRcb());
-		detailCharge.setLaQtePrd(detailChargeAttente.getQpb());
-		detailCharge.setDateSaisie(detailChargeAttente.getDdb());
+		detailCharge.setOrdre(detailChargeAttente.getOrdre());
+		detailCharge.setCharge(detailChargeAttente.getCharge());
+		detailCharge.setUcb(detailChargeAttente.getUcb());
+		detailCharge.setQcb(detailChargeAttente.getQcb());
+		detailCharge.setPcb(detailChargeAttente.getPcb());
+		detailCharge.setRcb(detailChargeAttente.getRcb());
+		detailCharge.setQpb(detailChargeAttente.getQpb());
+		detailCharge.setDdb(detailChargeAttente.getDdb());
 
 		// Save DetailCharge:
 		try {

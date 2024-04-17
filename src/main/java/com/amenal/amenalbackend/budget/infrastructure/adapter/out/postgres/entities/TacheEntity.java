@@ -22,84 +22,21 @@ public class TacheEntity {
 
     @Column(name = "titre_activite")
     private String titreActivite;
+	
+    @Column(name = "upb")
+    private String upb;
 
-    @Column(name = "qte")
-    private Double qte;
+    @Column(name = "cle")
+    private Boolean cle;
 
-    @Column(name = "prix")
-    private Double prix;
+    @Column(name = "dlb")
+    private Integer dlb;
 
-    @Column(name = "article")
-    private String article;
-
-    @Column(name = "unite")
-    private String unite;
-
-    @Column(name = "observation")
-    private String observation;
-
-    @Column(name = "cle_attachement")
-    private Boolean cleAttachement;
-
-    @Column(name = "date_saisie")
-    private LocalDate dateSaisie;
-
-    @Column(name = "delai")
-    private Integer delai;
-
-    @Column(name = "date_debut")
-    private LocalDate dateDebut;
-
-    @Column(name = "id_prd_parent")
-    private Integer idPrdParent;
-
-    @Column(name = "def_prix")
-    private String defPrix;
-
-    @Column(name = "mnc_rls")
-    private Double mncRls;
-
-    @Column(name = "mnc_bda")
-    private Double mncBda;
-
-    @Column(name = "qte_p_rls")
-    private Double qtePRls;
-
-    @Column(name = "qte_p_bda")
-    private Double qtePBda;
-
-    @Column(name = "avp")
-    private Double avp;
-
-    @Column(name = "id2")
-    private Integer id2;
-
-    @Column(name = "mnc_bdg")
-    private Double mncBdg;
-
-    @Column(name = "delai_reel")
-    private Integer delaiReel;
-
-    @Column(name = "choisi")
-    private Boolean choisi;
-
-    @Column(name = "id_procedure_detail")
-    private Integer idProcedureDetail;
-
-    @Column(name = "maj")
-    private Boolean maj;
-
-    @Column(name = "descriptif")
-    private String descriptif;
-
-    @Column(name = "ordre_prt")
-    private String ordrePrt;
-
-    @Column(name = "ordre_mef")
-    private String ordreMef;
+    @Column(name = "ddb")
+    private LocalDate ddb;
 
     @Column(name = "ordre")
-    private Integer ordre;
+    private String ordre;
 
     // Fk objects:
     @ManyToOne(fetch = FetchType.LAZY)
@@ -110,40 +47,13 @@ public class TacheEntity {
     @JoinColumn(name = "id_lot")
     private LotEntity lot;
 
-	public TacheEntity(Integer id, String titreActivite, Double qte, Double prix, String article, String unite,
-			String observation, Boolean cleAttachement, LocalDate dateSaisie, Integer delai,
-			LocalDate dateDebut, Integer idPrdParent, String defPrix, Double mncRls, Double mncBda, Double qtePRls,
-			Double qtePBda, Double avp, Integer id2, Double mncBdg, Integer delaiReel, Boolean choisi,
-			Integer idProcedureDetail, Boolean maj, String descriptif, String ordrePrt, String ordreMef, Integer ordre,
-			ProduitEntity produit, LotEntity lot) {
-		super();
+	public TacheEntity(Integer id, String titreActivite, String upb, Boolean cle, Integer dlb, LocalDate ddb, String ordre, ProduitEntity produit, LotEntity lot) {
 		this.id = id;
 		this.titreActivite = titreActivite;
-		this.qte = qte;
-		this.prix = prix;
-		this.article = article;
-		this.unite = unite;
-		this.observation = observation;
-		this.cleAttachement = cleAttachement;
-		this.dateSaisie = dateSaisie;
-		this.delai = delai;
-		this.dateDebut = dateDebut;
-		this.idPrdParent = idPrdParent;
-		this.defPrix = defPrix;
-		this.mncRls = mncRls;
-		this.mncBda = mncBda;
-		this.qtePRls = qtePRls;
-		this.qtePBda = qtePBda;
-		this.avp = avp;
-		this.id2 = id2;
-		this.mncBdg = mncBdg;
-		this.delaiReel = delaiReel;
-		this.choisi = choisi;
-		this.idProcedureDetail = idProcedureDetail;
-		this.maj = maj;
-		this.descriptif = descriptif;
-		this.ordrePrt = ordrePrt;
-		this.ordreMef = ordreMef;
+		this.upb = upb;
+		this.cle = cle;
+		this.dlb = dlb;
+		this.ddb = ddb;
 		this.ordre = ordre;
 		this.produit = produit;
 		this.lot = lot;
@@ -169,211 +79,43 @@ public class TacheEntity {
 		this.titreActivite = titreActivite;
 	}
 
-	public Double getQte() {
-		return qte;
+	public String getUpb() {
+		return upb;
 	}
 
-	public void setQte(Double qte) {
-		this.qte = qte;
+	public void setUpb(String upb) {
+		this.upb = upb;
 	}
 
-	public Double getPrix() {
-		return prix;
+	public Boolean getCle() {
+		return cle;
 	}
 
-	public void setPrix(Double prix) {
-		this.prix = prix;
+	public void setCle(Boolean cle) {
+		this.cle = cle;
 	}
 
-	public String getArticle() {
-		return article;
+	public Integer getDlb() {
+		return dlb;
 	}
 
-	public void setArticle(String article) {
-		this.article = article;
+	public void setDlb(Integer dlb) {
+		this.dlb = dlb;
 	}
 
-	public String getUnite() {
-		return unite;
+	public LocalDate getDdb() {
+		return ddb;
 	}
 
-	public void setUnite(String unite) {
-		this.unite = unite;
+	public void setDdb(LocalDate ddb) {
+		this.ddb = ddb;
 	}
 
-	public String getObservation() {
-		return observation;
-	}
-
-	public void setObservation(String observation) {
-		this.observation = observation;
-	}
-
-	public Boolean getCleAttachement() {
-		return cleAttachement;
-	}
-
-	public void setCleAttachement(Boolean cleAttachement) {
-		this.cleAttachement = cleAttachement;
-	}
-
-	public LocalDate getDateSaisie() {
-		return dateSaisie;
-	}
-
-	public void setDateSaisie(LocalDate dateSaisie) {
-		this.dateSaisie = dateSaisie;
-	}
-
-	public Integer getDelai() {
-		return delai;
-	}
-
-	public void setDelai(Integer delai) {
-		this.delai = delai;
-	}
-
-	public LocalDate getDateDebut() {
-		return dateDebut;
-	}
-
-	public void setDateDebut(LocalDate dateDebut) {
-		this.dateDebut = dateDebut;
-	}
-
-	public Integer getIdPrdParent() {
-		return idPrdParent;
-	}
-
-	public void setIdPrdParent(Integer idPrdParent) {
-		this.idPrdParent = idPrdParent;
-	}
-
-	public String getDefPrix() {
-		return defPrix;
-	}
-
-	public void setDefPrix(String defPrix) {
-		this.defPrix = defPrix;
-	}
-
-	public Double getMncRls() {
-		return mncRls;
-	}
-
-	public void setMncRls(Double mncRls) {
-		this.mncRls = mncRls;
-	}
-
-	public Double getMncBda() {
-		return mncBda;
-	}
-
-	public void setMncBda(Double mncBda) {
-		this.mncBda = mncBda;
-	}
-
-	public Double getQtePRls() {
-		return qtePRls;
-	}
-
-	public void setQtePRls(Double qtePRls) {
-		this.qtePRls = qtePRls;
-	}
-
-	public Double getQtePBda() {
-		return qtePBda;
-	}
-
-	public void setQtePBda(Double qtePBda) {
-		this.qtePBda = qtePBda;
-	}
-
-	public Double getAvp() {
-		return avp;
-	}
-
-	public void setAvp(Double avp) {
-		this.avp = avp;
-	}
-
-	public Integer getId2() {
-		return id2;
-	}
-
-	public void setId2(Integer id2) {
-		this.id2 = id2;
-	}
-
-	public Double getMncBdg() {
-		return mncBdg;
-	}
-
-	public void setMncBdg(Double mncBdg) {
-		this.mncBdg = mncBdg;
-	}
-
-	public Integer getDelaiReel() {
-		return delaiReel;
-	}
-
-	public void setDelaiReel(Integer delaiReel) {
-		this.delaiReel = delaiReel;
-	}
-
-	public Boolean getChoisi() {
-		return choisi;
-	}
-
-	public void setChoisi(Boolean choisi) {
-		this.choisi = choisi;
-	}
-
-	public Integer getIdProcedureDetail() {
-		return idProcedureDetail;
-	}
-
-	public void setIdProcedureDetail(Integer idProcedureDetail) {
-		this.idProcedureDetail = idProcedureDetail;
-	}
-
-	public Boolean getMaj() {
-		return maj;
-	}
-
-	public void setMaj(Boolean maj) {
-		this.maj = maj;
-	}
-
-	public String getDescriptif() {
-		return descriptif;
-	}
-
-	public void setDescriptif(String descriptif) {
-		this.descriptif = descriptif;
-	}
-
-	public String getOrdrePrt() {
-		return ordrePrt;
-	}
-
-	public void setOrdrePrt(String ordrePrt) {
-		this.ordrePrt = ordrePrt;
-	}
-
-	public String getOrdreMef() {
-		return ordreMef;
-	}
-
-	public void setOrdreMef(String ordreMef) {
-		this.ordreMef = ordreMef;
-	}
-
-	public Integer getOrdre() {
+	public String getOrdre() {
 		return ordre;
 	}
 
-	public void setOrdre(Integer ordre) {
+	public void setOrdre(String ordre) {
 		this.ordre = ordre;
 	}
 

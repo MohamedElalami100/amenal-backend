@@ -31,6 +31,6 @@ public interface TacheRepository extends JpaRepository<TacheEntity, Integer> {
 	@Query("SELECT l FROM TacheEntity l WHERE l.produit.metre.budget.avenant.id = :id AND l.lot.designation = :lotDesignation AND l.titreActivite = :titreActivite")
 	List<TacheEntity> getTachesByAvenantIdAndLotAndActivite(Integer id, String lotDesignation, String titreActivite);
 
-	@Query("SELECT l FROM TacheEntity l WHERE l.produit.metre.budget.avenant.id = :id And :charge IN (SELECT c.designation FROM DetailChargeEntity c WHERE c.tache.id = l.id)")
+	@Query("SELECT l FROM TacheEntity l WHERE l.produit.metre.budget.avenant.id = :id And :charge IN (SELECT c.charge FROM DetailChargeEntity c WHERE c.tache.id = l.id)")
 	List<TacheEntity> getTachesByAvenantIdAndCharge(Integer id, String charge);
 }

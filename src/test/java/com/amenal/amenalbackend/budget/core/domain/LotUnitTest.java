@@ -50,7 +50,7 @@ public class LotUnitTest {
     public void testGetMncBdg_WithNonNullSecondaryTaches() {
         // Given
         Lot lot = BudgetTestDataUtil.createLotWithTaches();
-        lot.getTaches().get(0).setCleAttachement(false);
+        lot.getTaches().get(0).setCle(false);
 
         // When
         Double result = lot.getMncBdg();
@@ -63,7 +63,7 @@ public class LotUnitTest {
     public void testGetMncBdg_WithNullSecondaryTaches() {
         // Given
         Lot lot = BudgetTestDataUtil.createLotWithTaches();
-        lot.getTaches().get(0).setCleAttachement(null);
+        lot.getTaches().get(0).setCle(null);
 
         // When
         Double result = lot.getMncBdg();

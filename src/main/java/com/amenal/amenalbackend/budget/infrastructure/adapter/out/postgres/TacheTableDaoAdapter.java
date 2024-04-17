@@ -83,9 +83,9 @@ public class TacheTableDaoAdapter implements TacheTableDao {
 			tache.setDetailProduits(detailProduits);
 			TacheTableDto tacheTableDto = new TacheTableDto(tache.getId(), tache.getOrdre(),
 					tache.getProduit().getDesignation(), tache.getLot().getDesignation(), tache.getTitreActivite(),
-					tache.getCleAttachement(), tache.getUnite(), tache.getQtePBdg(), tache.getPuRef(),
+					tache.getCle(), tache.getUpb(), tache.getQtePBdg(), tache.getPuRef(),
 					tache.getMntRefB(), tache.getQtePBdg(), tache.getPucBdg(), tache.getMncBdg(), tache.getMrgRefB(),
-					tache.getMrpRefB(), tache.getDateDebut(), tache.getDelai(), tache.getDateFin(),
+					tache.getMrpRefB(), tache.getDdb(), tache.getDlb(), tache.getDateFin(),
 					tache.getProduit().getId(), tache.getLot().getId());
 			tacheTableDtos.add(tacheTableDto);
 		}

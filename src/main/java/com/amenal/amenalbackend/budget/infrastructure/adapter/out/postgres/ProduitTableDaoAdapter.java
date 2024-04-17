@@ -123,11 +123,11 @@ public class ProduitTableDaoAdapter implements ProduitTableDao {
 					allProduitTaches.add(tache);
 
 					// Create ActivitePrincipaleDto and add it to the list
-					ActiviteDeLotDto activiteDeLotDto = new ActiviteDeLotDto(tache.getId(), tache.getCleAttachement(),
-							tache.getOrdre(), tache.getTitreActivite(), tache.getUnite(), tache.getQtePBdg(),
+					ActiviteDeLotDto activiteDeLotDto = new ActiviteDeLotDto(tache.getId(), tache.getCle(),
+							tache.getOrdre(), tache.getTitreActivite(), tache.getUpb(), tache.getQtePBdg(),
 							tache.getPuRef(), tache.getMntRefB(), tache.getQtePBdg(), tache.getPucBdg(),
-							tache.getMncBdg(), tache.getMrgRefB(), tache.getMrpRefB(), tache.getDateDebut(),
-							tache.getDelai(), tache.getDateFin());
+							tache.getMncBdg(), tache.getMrgRefB(), tache.getMrpRefB(), tache.getDdb(),
+							tache.getDlb(), tache.getDateFin());
 					activiteDeLotDtos.add(activiteDeLotDto);
 				}
 
@@ -145,8 +145,8 @@ public class ProduitTableDaoAdapter implements ProduitTableDao {
 			produit.setTaches(allProduitTaches);
 
 			// Create ProduitTableDto and add it to the list
-			ProduitTableDto produitTableDto = new ProduitTableDto(produit.getId(), produit.getArticle(),
-					produit.getDesignation(), produit.getUnite(), produit.getQteRef(), produit.getPuRef(),
+			ProduitTableDto produitTableDto = new ProduitTableDto(produit.getId(), produit.getArt(),
+					produit.getDesignation(), produit.getUnite(), produit.getQpm(), produit.getPpm(),
 					produit.getMntRef(), produit.getPucBdg(), produit.getQteCum(), produit.getMncBdg(),
 					produit.getMrgRef(), produit.getMrpRef(), produit.getDateDbtIni(), produit.getDlaIni(),
 					produit.getDateFinIni(), lotTableDtos);

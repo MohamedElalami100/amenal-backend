@@ -66,7 +66,7 @@ public class DetailChargeDaoAdapterTest {
         Tache tache = new Tache();
         tache.setId(1);
         detailCharge.setTache(tache);
-        detailCharge.setDesignation("test");
+        detailCharge.setCharge("test");
         DetailChargeEntity entity = new DetailChargeEntity();
         entity.setId(1);
         DetailChargeEntity entity2 = new DetailChargeEntity();
@@ -90,7 +90,7 @@ public class DetailChargeDaoAdapterTest {
         Tache tache = new Tache();
         tache.setId(1);
         detailCharge.setTache(tache);
-        detailCharge.setDesignation("test");
+        detailCharge.setCharge("test");
         DetailChargeEntity entity = new DetailChargeEntity();
         entity.setId(1);
         List<DetailChargeEntity> sameEntities = new ArrayList<>();
@@ -107,10 +107,10 @@ public class DetailChargeDaoAdapterTest {
     void testUpdateDetailChargeWhenDuplicateNotExists() throws DuplicateElementException{
         DetailCharge detailCharge = new DetailCharge();
         detailCharge.setId(1);
-        detailCharge.setDesignation("test");
+        detailCharge.setCharge("test");
         DetailChargeEntity existingEntity = new DetailChargeEntity();
         existingEntity.setId(1);
-        existingEntity.setDesignation("test");
+        existingEntity.setCharge("test");
 
         when(detailChargeRepository.findById(1)).thenReturn(Optional.of(existingEntity));
         when(detailChargeRepository.save(any(DetailChargeEntity.class))).thenReturn(existingEntity);
@@ -128,10 +128,10 @@ public class DetailChargeDaoAdapterTest {
         Tache tache = new Tache();
         tache.setId(1);
         detailCharge.setTache(tache);
-        detailCharge.setDesignation("test");
+        detailCharge.setCharge("test");
         DetailChargeEntity entity = new DetailChargeEntity();
         entity.setId(1);
-        entity.setDesignation("test2");
+        entity.setCharge("test2");
         DetailChargeEntity entity2 = new DetailChargeEntity();
         entity2.setId(2);
         List<DetailChargeEntity> sameEntities = new ArrayList<>();
@@ -150,10 +150,10 @@ public class DetailChargeDaoAdapterTest {
     void testSavDetailChargeWhenDuplicateNotExists() throws DuplicateElementException{
         DetailCharge detailCharge = new DetailCharge();
         detailCharge.setId(1);
-        detailCharge.setDesignation("test");
+        detailCharge.setCharge("test");
         DetailChargeEntity existingEntity = new DetailChargeEntity();
         existingEntity.setId(1);
-        existingEntity.setDesignation("test");
+        existingEntity.setCharge("test");
 
         when(detailChargeRepository.findById(1)).thenReturn(Optional.of(existingEntity));
         when(detailChargeRepository.save(any(DetailChargeEntity.class))).thenReturn(existingEntity);

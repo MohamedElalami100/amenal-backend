@@ -66,7 +66,7 @@ public class DetailQualiteDaoAdapterTest {
         GrpQualite grp = new GrpQualite();
         grp.setId(1);
         detailQualite.setGroupe(grp);
-        detailQualite.setAffaire("test");
+        detailQualite.setPointDeControle("test");
         DetailQualiteEntity entity = new DetailQualiteEntity();
         entity.setId(1);
         DetailQualiteEntity entity2 = new DetailQualiteEntity();
@@ -90,7 +90,7 @@ public class DetailQualiteDaoAdapterTest {
         GrpQualite grp = new GrpQualite();
         grp.setId(1);
         detailQualite.setGroupe(grp);
-        detailQualite.setAffaire("test");
+        detailQualite.setPointDeControle("test");
         DetailQualiteEntity entity = new DetailQualiteEntity();
         entity.setId(1);
         List<DetailQualiteEntity> sameEntities = new ArrayList<>();
@@ -107,10 +107,10 @@ public class DetailQualiteDaoAdapterTest {
     void testUpdateDetailQualiteWhenDuplicateNotExists() throws DuplicateElementException{
         DetailQualite detailQualite = new DetailQualite();
         detailQualite.setId(1);
-        detailQualite.setAffaire("test");
+        detailQualite.setPointDeControle("test");
         DetailQualiteEntity existingEntity = new DetailQualiteEntity();
         detailQualite.setId(1);
-        existingEntity.setAffaire("test");
+        existingEntity.setPointDeControle("test");
 
         when(detailQualiteRepository.findById(1)).thenReturn(Optional.of(existingEntity));
         when(detailQualiteRepository.save(any(DetailQualiteEntity.class))).thenReturn(existingEntity);
@@ -128,10 +128,10 @@ public class DetailQualiteDaoAdapterTest {
         GrpQualite grp = new GrpQualite();
         grp.setId(1);
         detailQualite.setGroupe(grp);
-        detailQualite.setAffaire("test");
+        detailQualite.setPointDeControle("test");
         DetailQualiteEntity entity = new DetailQualiteEntity();
         entity.setId(1);
-        entity.setAffaire("test2");
+        entity.setPointDeControle("test2");
         DetailQualiteEntity entity2 = new DetailQualiteEntity();
         entity2.setId(2);
         List<DetailQualiteEntity> sameEntities = new ArrayList<>();
@@ -150,10 +150,10 @@ public class DetailQualiteDaoAdapterTest {
     void testSavDetailQualiteWhenDuplicateNotExists() throws DuplicateElementException{
         DetailQualite detailQualite = new DetailQualite();
         detailQualite.setId(1);
-        detailQualite.setAffaire("test");
+        detailQualite.setPointDeControle("test");
         DetailQualiteEntity existingEntity = new DetailQualiteEntity();
         detailQualite.setId(1);
-        existingEntity.setAffaire("test");
+        existingEntity.setPointDeControle("test");
 
         when(detailQualiteRepository.findById(1)).thenReturn(Optional.of(existingEntity));
         when(detailQualiteRepository.save(any(DetailQualiteEntity.class))).thenReturn(existingEntity);

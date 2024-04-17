@@ -66,12 +66,12 @@ public class SaveViaDetailProduitAttenteUseCase {
 
 		// Set Tache:
 		Tache tache = new Tache();
-		tache.setOrdreMef(detailProduitAttente.getOrdre());
+		tache.setOrdre(detailProduitAttente.getOrdre());
 		tache.setTitreActivite(detailProduitAttente.getActivite());
 		tache.setProduit(produit);
 		tache.setLot(lot);
-		tache.setUnite(detailProduitAttente.getUpb());
-		tache.setCleAttachement(detailProduitAttente.getCle());
+		tache.setUpb(detailProduitAttente.getUpb());
+		tache.setCle(detailProduitAttente.getCle());
 
 		// Save Tache:
 		tache = tacheDao.saveTache(tache);

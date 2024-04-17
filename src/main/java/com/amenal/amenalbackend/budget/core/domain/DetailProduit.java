@@ -8,17 +8,12 @@ public class DetailProduit {
 	private Double dim1;
 	private Double dim2;
 	private Double dim3;
-	private Integer id2;
-	private Boolean maj;
-	private Integer ordre;
-	private String ordreMef;
-	private String ordrePrt;
+	private String ordre;
 
 	// Fk objects:
 	private Tache tache;
 
-	public DetailProduit(Integer id, String reference, Double nbr, Double dim1, Double dim2, Double dim3,
-			Integer id2, Boolean maj, Integer ordre, String ordreMef, String ordrePrt, Tache tache) {
+	public DetailProduit(Integer id, String reference, Double nbr, Double dim1, Double dim2, Double dim3, String ordre, String ordreMef, String ordrePrt, Tache tache) {
 		super();
 		this.id = id;
 		this.reference = reference;
@@ -26,11 +21,7 @@ public class DetailProduit {
 		this.dim1 = dim1;
 		this.dim2 = dim2;
 		this.dim3 = dim3;
-		this.id2 = id2;
-		this.maj = maj;
 		this.ordre = ordre;
-		this.ordreMef = ordreMef;
-		this.ordrePrt = ordrePrt;
 		this.tache = tache;
 	}
 
@@ -40,6 +31,14 @@ public class DetailProduit {
 
 	public Integer getId() {
 		return id;
+	}
+
+	public String getOrdre() {
+		return ordre;
+	}
+
+	public void setOrdre(String ordre) {
+		this.ordre = ordre;
 	}
 
 	public void setId(Integer id) {
@@ -84,46 +83,6 @@ public class DetailProduit {
 
 	public void setDim3(Double dim3) {
 		this.dim3 = dim3;
-	}
-
-	public Integer getId2() {
-		return id2;
-	}
-
-	public void setId2(Integer id2) {
-		this.id2 = id2;
-	}
-
-	public Boolean getMaj() {
-		return maj;
-	}
-
-	public void setMaj(Boolean maj) {
-		this.maj = maj;
-	}
-
-	public Integer getOrdre() {
-		return ordre;
-	}
-
-	public void setOrdre(Integer ordre) {
-		this.ordre = ordre;
-	}
-
-	public String getOrdreMef() {
-		return ordreMef;
-	}
-
-	public void setOrdreMef(String ordreMef) {
-		this.ordreMef = ordreMef;
-	}
-
-	public String getOrdrePrt() {
-		return ordrePrt;
-	}
-
-	public void setOrdrePrt(String ordrePrt) {
-		this.ordrePrt = ordrePrt;
 	}
 
 	public Tache getTache() {

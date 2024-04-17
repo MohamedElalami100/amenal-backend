@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class ActiviteDeLotDto {
 	private Integer id;
 	private Boolean c;
-	private Integer ordre;
+	private String ordre;
 	private String activite;
 	private String upb;
 	private Double qpm;
@@ -20,7 +20,7 @@ public class ActiviteDeLotDto {
 	private Integer dlb;
 	private LocalDate dfb;
 
-	public ActiviteDeLotDto(Integer id, Boolean c, Integer ordre, String activite, String upb, Double qpm, Double ppm, Double mpm,
+	public ActiviteDeLotDto(Integer id, Boolean c, String ordre, String activite, String upb, Double qpm, Double ppm, Double mpm,
 			Double qpb, Double ppb, Double mpb, Double mrg, Double prcRg, LocalDate ddb, Integer dlb, LocalDate dfb) {
 		super();
 		this.id =id;
@@ -61,11 +61,11 @@ public class ActiviteDeLotDto {
 		this.c = c;
 	}
 
-	public Integer getOrdre() {
+	public String getOrdre() {
 		return ordre;
 	}
 
-	public void setOrdre(Integer ordre) {
+	public void setOrdre(String ordre) {
 		this.ordre = ordre;
 	}
 

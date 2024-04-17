@@ -116,14 +116,12 @@ public class DetailChargeTableDaoAdapter implements DetailChargeTableDao {
 					.collect(Collectors.toList());
 
 			for (DetailCharge detailCharge : detailCharges) {
-				String natureArticle = "";
-				if (detailCharge.getNature() != null) natureArticle = detailCharge.getNature().getNature();
-				DetailChargeTableDto detailChargeTableDto = new DetailChargeTableDto(detailCharge.getId(), detailCharge.getOrdreMef(),
+				DetailChargeTableDto detailChargeTableDto = new DetailChargeTableDto(detailCharge.getId(), detailCharge.getOrdre(),
 						tache.getProduit().getDesignation(), tache.getLot().getDesignation(), tache.getTitreActivite(),
-						tache.getUnite(), tache.getCleAttachement(), detailCharge.getDesignation(),
-						natureArticle, detailCharge.getUnite(), detailCharge.getQte(),
-						detailCharge.getPrix(), detailCharge.getMontant(), detailCharge.getLaUnitePrd(),
-						detailCharge.getLaQtePrd(), detailCharge.getDateSaisie(), tache.getProduit().getId(),
+						tache.getUpb(), tache.getCle(), detailCharge.getCharge(),
+						detailCharge.getNature(), detailCharge.getUcb(), detailCharge.getQcb(),
+						detailCharge.getPcb(), detailCharge.getMontant(), detailCharge.getRcb(),
+						detailCharge.getQpb(), detailCharge.getDdb(), tache.getProduit().getId(),
 						tache.getLot().getId(), tache.getId());
 				detailChargeTableDtos.add(detailChargeTableDto);
 			}

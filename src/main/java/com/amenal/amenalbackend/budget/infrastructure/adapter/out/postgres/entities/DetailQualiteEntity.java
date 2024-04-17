@@ -18,43 +18,27 @@ public class DetailQualiteEntity {
     @Column(name = "id_detail_qualite")
     private Integer id;
 
-    @Column(name = "affaire")
-    private String affaire;
+    @Column(name = "pointDeControle")
+    private String pointDeControle;
 
     @Column(name = "importance")
     private String importance;
 
     @Column(name = "ordre")
-    private Integer ordre;
-
-    @Column(name = "ordre_mef")
-    private String ordreMef;
-
-    @Column(name = "ordre_prt")
-    private String ordrePrt;
-
-    @Column(name = "id2")
-    private Integer id2;
-
-    @Column(name = "maj")
-    private Boolean maj;
+    private String ordre;
 
     // Fk objects:
     @ManyToOne
     @JoinColumn(name = "id_grp_qualite")
     private GrpQualiteEntity groupe;
 
-	public DetailQualiteEntity(Integer id, String affaire, String importance, Integer ordre, String ordreMef, String ordrePrt,
-			Integer id2, Boolean maj, GrpQualiteEntity groupe) {
+	public DetailQualiteEntity(Integer id, String pointDeControle, String importance, String ordre,
+			GrpQualiteEntity groupe) {
 		super();
 		this.id = id;
-		this.affaire = affaire;
+		this.pointDeControle = pointDeControle;
 		this.importance = importance;
-		this.ordre = ordre;
-		this.ordreMef = ordreMef;
-		this.ordrePrt = ordrePrt;
-		this.id2 = id2;
-		this.maj = maj;
+		this.ordre = ordre;;
 		this.groupe = groupe;
 	}
 
@@ -70,12 +54,12 @@ public class DetailQualiteEntity {
 		this.id = id;
 	}
 
-	public String getAffaire() {
-		return affaire;
+	public String getPointDeControle() {
+		return pointDeControle;
 	}
 
-	public void setAffaire(String affaire) {
-		this.affaire = affaire;
+	public void setPointDeControle(String pointDeControle) {
+		this.pointDeControle = pointDeControle;
 	}
 
 	public String getImportance() {
@@ -86,44 +70,12 @@ public class DetailQualiteEntity {
 		this.importance = importance;
 	}
 
-	public Integer getOrdre() {
+	public String getOrdre() {
 		return ordre;
 	}
 
-	public void setOrdre(Integer ordre) {
+	public void setOrdre(String ordre) {
 		this.ordre = ordre;
-	}
-
-	public String getOrdreMef() {
-		return ordreMef;
-	}
-
-	public void setOrdreMef(String ordreMef) {
-		this.ordreMef = ordreMef;
-	}
-
-	public String getOrdrePrt() {
-		return ordrePrt;
-	}
-
-	public void setOrdrePrt(String ordrePrt) {
-		this.ordrePrt = ordrePrt;
-	}
-
-	public Integer getId2() {
-		return id2;
-	}
-
-	public void setId2(Integer id2) {
-		this.id2 = id2;
-	}
-
-	public Boolean getMaj() {
-		return maj;
-	}
-
-	public void setMaj(Boolean maj) {
-		this.maj = maj;
 	}
 
 	public GrpQualiteEntity getGroupe() {

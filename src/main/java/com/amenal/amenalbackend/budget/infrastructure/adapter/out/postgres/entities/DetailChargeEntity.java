@@ -20,44 +20,29 @@ public class DetailChargeEntity {
     @Column(name = "id_detail_charge")
     private Integer id;
 
-    @Column(name = "prix")
-    private Double prix;
+    @Column(name = "pcb")
+    private Double pcb;
 
-    @Column(name = "qte")
-    private Double qte;
+    @Column(name = "qcb")
+    private Double qcb;
 
-    @Column(name = "unite")
-    private String unite;
-
-    @Column(name = "article")
-    private String article;
-
-    @Column(name = "designation")
-    private String designation;
+    @Column(name = "ucb")
+    private String ucb;
+	
+    @Column(name = "charge")
+    private String charge;
 
     @Column(name = "date_saisie")
-    private LocalDate dateSaisie;
-
-    @Column(name = "id2")
-    private Integer id2;
-
-    @Column(name = "maj")
-    private Boolean maj;
-
-    @Column(name = "ordre_mef")
-    private String ordreMef;
-
-    @Column(name = "ordre_prt")
-    private String ordrePrt;
+    private LocalDate ddb;
 
     @Column(name = "ordre")
-    private Integer ordre;
+    private String ordre;
 
-    @Column(name = "la_qte_prd")
-    private Double laQtePrd;
+    @Column(name = "la_qcb_prd")
+    private Double qpb;
 
-    @Column(name = "la_unite_prd")
-    private String laUnitePrd;
+    @Column(name = "la_ucb_prd")
+    private String rcb;
 
     // Fk objects:
     @ManyToOne(fetch = FetchType.LAZY)
@@ -68,24 +53,19 @@ public class DetailChargeEntity {
     @JoinColumn(name = "id_tache")
     private TacheEntity tache;
 
-	public DetailChargeEntity(Integer id, Double prix, Double qte, String unite, String article, String designation,
-			LocalDate dateSaisie, Integer id2, Boolean maj, String ordreMef, String ordrePrt, Integer ordre,
-			Double laQtePrd, String laUnitePrd, NatureArticleEntity nature, TacheEntity tache) {
+	public DetailChargeEntity(Integer id, Double pcb, Double qcb, String ucb, String charge,
+			LocalDate ddb, String ordre,
+			Double qpb, String rcb, NatureArticleEntity nature, TacheEntity tache) {
 		super();
 		this.id = id;
-		this.prix = prix;
-		this.qte = qte;
-		this.unite = unite;
-		this.article = article;
-		this.designation = designation;
-		this.dateSaisie = dateSaisie;
-		this.id2 = id2;
-		this.maj = maj;
-		this.ordreMef = ordreMef;
-		this.ordrePrt = ordrePrt;
+		this.pcb = pcb;
+		this.qcb = qcb;
+		this.ucb = ucb;
+		this.charge = charge;
+		this.ddb = ddb;
 		this.ordre = ordre;
-		this.laQtePrd = laQtePrd;
-		this.laUnitePrd = laUnitePrd;
+		this.qpb = qpb;
+		this.rcb = rcb;
 		this.nature = nature;
 		this.tache = tache;
 	}
@@ -102,108 +82,68 @@ public class DetailChargeEntity {
 		this.id = id;
 	}
 
-	public Double getPrix() {
-		return prix;
+	public Double getPcb() {
+		return pcb;
 	}
 
-	public void setPrix(Double prix) {
-		this.prix = prix;
+	public void setPcb(Double pcb) {
+		this.pcb = pcb;
 	}
 
-	public Double getQte() {
-		return qte;
+	public Double getQcb() {
+		return qcb;
 	}
 
-	public void setQte(Double qte) {
-		this.qte = qte;
+	public void setQcb(Double qcb) {
+		this.qcb = qcb;
 	}
 
-	public String getUnite() {
-		return unite;
+	public String getUcb() {
+		return ucb;
 	}
 
-	public void setUnite(String unite) {
-		this.unite = unite;
+	public void setUcb(String ucb) {
+		this.ucb = ucb;
 	}
 
-	public String getArticle() {
-		return article;
+	public String getCharge() {
+		return charge;
 	}
 
-	public void setArticle(String article) {
-		this.article = article;
+	public void setCharge(String charge) {
+		this.charge = charge;
 	}
 
-	public String getDesignation() {
-		return designation;
+	public LocalDate getDdb() {
+		return ddb;
 	}
 
-	public void setDesignation(String designation) {
-		this.designation = designation;
+	public void setDdb(LocalDate ddb) {
+		this.ddb = ddb;
 	}
 
-	public LocalDate getDateSaisie() {
-		return dateSaisie;
-	}
-
-	public void setDateSaisie(LocalDate dateSaisie) {
-		this.dateSaisie = dateSaisie;
-	}
-
-	public Integer getId2() {
-		return id2;
-	}
-
-	public void setId2(Integer id2) {
-		this.id2 = id2;
-	}
-
-	public Boolean getMaj() {
-		return maj;
-	}
-
-	public void setMaj(Boolean maj) {
-		this.maj = maj;
-	}
-
-	public String getOrdreMef() {
-		return ordreMef;
-	}
-
-	public void setOrdreMef(String ordreMef) {
-		this.ordreMef = ordreMef;
-	}
-
-	public String getOrdrePrt() {
-		return ordrePrt;
-	}
-
-	public void setOrdrePrt(String ordrePrt) {
-		this.ordrePrt = ordrePrt;
-	}
-
-	public Integer getOrdre() {
+	public String getOrdre() {
 		return ordre;
 	}
 
-	public void setOrdre(Integer ordre) {
+	public void setOrdre(String ordre) {
 		this.ordre = ordre;
 	}
 
-	public Double getLaQtePrd() {
-		return laQtePrd;
+	public Double getQpb() {
+		return qpb;
 	}
 
-	public void setLaQtePrd(Double laQtePrd) {
-		this.laQtePrd = laQtePrd;
+	public void setQpb(Double qpb) {
+		this.qpb = qpb;
 	}
 
-	public String getLaUnitePrd() {
-		return laUnitePrd;
+	public String getRcb() {
+		return rcb;
 	}
 
-	public void setLaUnitePrd(String laUnitePrd) {
-		this.laUnitePrd = laUnitePrd;
+	public void setRcb(String rcb) {
+		this.rcb = rcb;
 	}
 
 	public NatureArticleEntity getNature() {
@@ -225,7 +165,7 @@ public class DetailChargeEntity {
 	// business methods:
 	public Double getMontant() {
 		try {
-			return prix * qte;
+			return pcb * qcb;
 		} catch (Exception e) {
 			return null;
 		}
@@ -233,7 +173,7 @@ public class DetailChargeEntity {
 
 	public Double getMontantAchat() {
 		try {
-			return prix * qte;
+			return pcb * qcb;
 		} catch (Exception e) {
 			return null;
 		}
@@ -241,8 +181,8 @@ public class DetailChargeEntity {
 
 	public String getLienHhd() {
 		try {
-			return tache.getId() + "$" + designation.toUpperCase() + Math.round(prix * 100.0) / 100.0
-					+ unite.toUpperCase();
+			return tache.getId() + "$" + charge.toUpperCase() + Math.round(pcb * 100.0) / 100.0
+					+ ucb.toUpperCase();
 		} catch (Exception e) {
 			return null;
 		}

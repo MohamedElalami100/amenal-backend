@@ -9,7 +9,7 @@ import java.util.List;
 public class LotTableDto {
 	private Integer id;
 	private Integer ordre;
-	private String lot;
+	private String designation;
 	private Double mpm;
 	private Double mpb;
 	private Double mrg;
@@ -19,12 +19,12 @@ public class LotTableDto {
 	private LocalDate dfb;
 	private List<ActiviteDeLotDto> activite;
 
-	public LotTableDto(Integer id, Integer ordre, String lot, Double mpm, Double mpb, Double mrg, Double prcRg,
+	public LotTableDto(Integer id, Integer ordre, String designation, Double mpm, Double mpb, Double mrg, Double prcRg,
 			LocalDate ddb, Integer dlb, LocalDate dfb, List<ActiviteDeLotDto> activite) {
 		super();
 		this.id = id;
 		this.ordre = ordre;
-		this.lot = lot;
+		this.designation = designation;
 		this.mpm = mpm;
 		this.mpb = mpb;
 		this.mrg = mrg;
@@ -55,12 +55,12 @@ public class LotTableDto {
 		this.ordre = ordre;
 	}
 
-	public String getLot() {
-		return lot;
+	public String getDesignation() {
+		return designation;
 	}
 
-	public void setLot(String lot) {
-		this.lot = lot;
+	public void setDesignation(String designation) {
+		this.designation = designation;
 	}
 
 	public Double getMpm() {
@@ -147,7 +147,7 @@ public class LotTableDto {
 		allActivites.addAll(this.activite);
 		allActivites.addAll(lotTableDto.getActivite());
 
-		return new LotTableDto(this.id, this.ordre, this.lot, sumMpm, sumMpb, sumMrg, sumPrcRg, minDdb, sumDlb, maxDfb,
+		return new LotTableDto(this.id, this.ordre, this.designation, sumMpm, sumMpb, sumMrg, sumPrcRg, minDdb, sumDlb, maxDfb,
 				allActivites);
 	}
 
@@ -155,20 +155,20 @@ public class LotTableDto {
 		List<LotTableDto> sigmaLotTableDtos = new ArrayList<>();
 		
 		//remove lots with null designations:
-		lotTableDtos.removeIf(lot -> lot.getLot() == null);
+		lotTableDtos.removeIf(lot -> lot.getDesignation() == null);
 
 		if (lotTableDtos.size() == 0)
 			return sigmaLotTableDtos;
 
 		// sort lotTableDtos by designation:
-		lotTableDtos.sort(Comparator.comparing(LotTableDto::getLot));
+		lotTableDtos.sort(Comparator.comparing(LotTableDto::getDesignation));
 
 		LotTableDto prevLot = lotTableDtos.get(0);
 
 		for (int i = 1; i < lotTableDtos.size(); i++) {
 			LotTableDto curLot = lotTableDtos.get(i);
 
-			if (prevLot.getLot().equalsIgnoreCase(curLot.getLot())) {
+			if (prevLot.getDesignation().equalsIgnoreCase(curLot.getDesignation())) {
 				prevLot = prevLot.sum(curLot);
 			} else {
 				sigmaLotTableDtos.add(prevLot);

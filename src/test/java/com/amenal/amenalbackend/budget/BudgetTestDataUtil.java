@@ -9,32 +9,32 @@ import java.util.List;
 public class BudgetTestDataUtil {
     public static DetailCharge createDetailChargeWithNonNullPriceAndQte() {
         DetailCharge detailCharge = new DetailCharge();
-        detailCharge.setPrix(10.0);
-        detailCharge.setQte(5.0);
+        detailCharge.setPcb(10.0);
+        detailCharge.setQcb(5.0);
 
         return detailCharge;
     }
 
     public static DetailCharge createDetailChargeWithNullPrice() {
         DetailCharge detailCharge = new DetailCharge();
-        detailCharge.setPrix(null);
-        detailCharge.setQte(5.0);
+        detailCharge.setPcb(null);
+        detailCharge.setQcb(5.0);
 
         return detailCharge;
     }
 
     public static DetailCharge createDetailChargeWithNullQte() {
         DetailCharge detailCharge = new DetailCharge();
-        detailCharge.setPrix(10.0);
-        detailCharge.setQte(null);
+        detailCharge.setPcb(10.0);
+        detailCharge.setQcb(null);
 
         return detailCharge;
     }
 
     public static DetailCharge createDetailChargeWithNullPriceAndQte() {
         DetailCharge detailCharge = new DetailCharge();
-        detailCharge.setPrix(null);
-        detailCharge.setQte(null);
+        detailCharge.setPcb(null);
+        detailCharge.setQcb(null);
 
         return detailCharge;
     }
@@ -73,23 +73,23 @@ public class BudgetTestDataUtil {
 
     public static Tache createTacheWithDetailChargesAndDetailProduits() {
         Tache tache = new Tache();
-        tache.setCleAttachement(true);
-        tache.setDelai(10);
-        tache.setDateDebut(LocalDate.of(2024, 4, 1));
+        tache.setCle(true);
+        tache.setDlb(10);
+        tache.setDdb(LocalDate.of(2024, 4, 1));
 
         Produit produit = new Produit();
-        produit.setPuRef(10.0);
+        produit.setPpm(10.0);
 
         tache.setProduit(produit);
 
         List<DetailCharge> detailCharges = new ArrayList<>();
 
         DetailCharge detailCharge1 = new DetailCharge();
-        detailCharge1.setPrix(10.0);
-        detailCharge1.setQte(2.0);
+        detailCharge1.setPcb(10.0);
+        detailCharge1.setQcb(2.0);
         DetailCharge detailCharge2 = new DetailCharge();
-        detailCharge2.setPrix(15.0);
-        detailCharge2.setQte(3.0);
+        detailCharge2.setPcb(15.0);
+        detailCharge2.setQcb(3.0);
 
         detailCharges.add(detailCharge1);
         detailCharges.add(detailCharge2);
@@ -97,8 +97,8 @@ public class BudgetTestDataUtil {
         tache.setDetailCharges(detailCharges);
 
         List<DetailProduit> detailProduits = new ArrayList<>();
-        detailProduits.add(new DetailProduit(1, "Reference1", 2.0, 3.0, 4.0, 5.0, 1, true, 1, "ordreMef1", "ordrePrt1", null));
-        detailProduits.add(new DetailProduit(2, "Reference2", 3.0, 4.0, 5.0, 6.0, 2, true, 2, "ordreMef2", "ordrePrt2", null));
+        detailProduits.add(new DetailProduit(1, "Reference1", 2.0, 3.0, 4.0, 5.0, null, null, null, null));
+        detailProduits.add(new DetailProduit(2, "Reference2", 3.0, 4.0, 5.0, 6.0, null, null, null, null));
         tache.setDetailProduits(detailProduits);
 
         return tache;
@@ -106,11 +106,11 @@ public class BudgetTestDataUtil {
 
     public static Tache createTacheWithNullDetailChargesAndDetailProduits() {
         Tache tache = new Tache();
-        tache.setDelai(10);
-        tache.setDateDebut(LocalDate.of(2024, 4, 1));
+        tache.setDlb(10);
+        tache.setDdb(LocalDate.of(2024, 4, 1));
 
         Produit produit = new Produit();
-        produit.setPuRef(10.0);
+        produit.setPpm(10.0);
 
         tache.setProduit(produit);
 
@@ -121,7 +121,7 @@ public class BudgetTestDataUtil {
 
     public static Tache createSecondaryTacheWithDetailChargesAndDetailProduits() {
         Tache tache = createTacheWithDetailChargesAndDetailProduits();
-        tache.setCleAttachement(false);
+        tache.setCle(false);
         return tache;
     }
 
@@ -165,8 +165,8 @@ public class BudgetTestDataUtil {
 
     public static Produit createProduitWithTaches() {
         Produit produit = new Produit();
-        produit.setQteRef(100.0);
-        produit.setPuRef(2.0);
+        produit.setQpm(100.0);
+        produit.setPpm(2.0);
 
         // Add taches
         List<Tache> taches = new ArrayList<>();

@@ -247,12 +247,12 @@ public class DetailChargeAttente {
 				lot.setDesignation(detail.getLot());
 
 				Tache tache = new Tache();
-				tache.setOrdreMef(detail.getOrdre());
+				tache.setOrdre(detail.getOrdre());
 				tache.setTitreActivite(detail.getActivite());
 				tache.setProduit(produit);
 				tache.setLot(lot);
-				tache.setUnite(detail.getUpb());
-				tache.setCleAttachement(detail.getCle());
+				tache.setUpb(detail.getUpb());
+				tache.setCle(detail.getCle());
 
 				tachesInSameAvenants.add(tache);
 			}
@@ -274,7 +274,7 @@ public class DetailChargeAttente {
 					if (tache.getTitreActivite().equalsIgnoreCase(this.getActivite())
 							&& tache.getLot().getDesignation().equalsIgnoreCase(this.getLot())
 							&& tache.getProduit().getDesignation().equalsIgnoreCase(this.getProduit())
-							&& !tache.getUnite().equalsIgnoreCase(this.getUpb())) {
+							&& !tache.getUpb().equalsIgnoreCase(this.getUpb())) {
 						return "(4)TACHE DECLAREE AVEC DEUX UNITES DIFFERENTES";
 					}
 				} catch (NullPointerException e) {
@@ -286,7 +286,7 @@ public class DetailChargeAttente {
 					if (tache.getTitreActivite().equalsIgnoreCase(this.getActivite())
 							&& tache.getLot().getDesignation().equalsIgnoreCase(this.getLot())
 							&& tache.getProduit().getDesignation().equalsIgnoreCase(this.getProduit())
-							&& tache.getCleAttachement() != this.getCle()) {
+							&& tache.getCle() != this.getCle()) {
 						return "(5)TACHE DECLAREE EN TANT QUE CLE PRIMAIRE ET SECONDAIRE";
 					}
 				} catch (NullPointerException e) {
@@ -303,7 +303,7 @@ public class DetailChargeAttente {
 									&& tache.getLot().getDesignation().equalsIgnoreCase(this.getLot())
 									&& tache.getProduit().getDesignation()
 									.equalsIgnoreCase(this.getProduit())) {
-								if (tache.getCleAttachement()) {
+								if (tache.getCle()) {
 									activitePrincipaleExist = true;
 								}
 							}
@@ -342,17 +342,17 @@ public class DetailChargeAttente {
 			lot.setDesignation(detail.getLot());
 
 			Tache tache = new Tache();
-			tache.setOrdreMef(detail.getOrdre());
+			tache.setOrdre(detail.getOrdre());
 			tache.setTitreActivite(detail.getActivite());
 			tache.setProduit(produit);
 			tache.setLot(lot);
-			tache.setUnite(detail.getUpb());
-			tache.setCleAttachement(detail.getCle());
+			tache.setUpb(detail.getUpb());
+			tache.setCle(detail.getCle());
 
 			DetailCharge detailCharge = new DetailCharge();
 			detailCharge.setTache(tache);
-			detailCharge.setDesignation(detail.getCharge());
-			detailCharge.setUnite(detail.getUcb());
+			detailCharge.setCharge(detail.getCharge());
+			detailCharge.setUcb(detail.getUcb());
 
 			otherDetailCharges.add(detailCharge);
 
@@ -366,7 +366,7 @@ public class DetailChargeAttente {
 						.equalsIgnoreCase(this.getLot())
 						&& detailCharge.getTache().getProduit().getDesignation()
 						.equalsIgnoreCase(this.getProduit())
-						&& detailCharge.getDesignation().equalsIgnoreCase(this.getCharge())) {
+						&& detailCharge.getCharge().equalsIgnoreCase(this.getCharge())) {
 					return "(8)DOUBLONS DE LIGNES";
 				}
 			} catch (NullPointerException e) {

@@ -62,19 +62,19 @@ public class SaveViaDetailDelaiAttenteUseCase {
 
 		// Set Tache:
 		Tache tache = new Tache();
-		tache.setOrdreMef(detailDelaiAttente.getOrdre());
+		tache.setOrdre(detailDelaiAttente.getOrdre());
 		tache.setTitreActivite(detailDelaiAttente.getActivite());
 		tache.setProduit(produit);
 		tache.setLot(lot);
-		tache.setUnite(detailDelaiAttente.getUpb());
-		tache.setCleAttachement(detailDelaiAttente.getCle());
+		tache.setUpb(detailDelaiAttente.getUpb());
+		tache.setCle(detailDelaiAttente.getCle());
 
 		// Save Tache:
 		tache = tacheDao.saveTache(tache);
 
 		// Set DetailDelai:
-		tache.setDateDebut(detailDelaiAttente.getDdb());
-		tache.setDelai(detailDelaiAttente.getDlb());
+		tache.setDdb(detailDelaiAttente.getDdb());
+		tache.setDlb(detailDelaiAttente.getDlb());
 		
 		// Save DetailDelai:
 		try {

@@ -172,12 +172,12 @@ public class DetailQualiteAttente {
 				lot.setDesignation(detail.getLot());
 
 				Tache tache = new Tache();
-				tache.setOrdreMef(detail.getOrdre());
+				tache.setUpb(detail.getOrdre());
 				tache.setTitreActivite(detail.getActivite());
 				tache.setProduit(produit);
 				tache.setLot(lot);
-				tache.setUnite(detail.getUpb());
-				tache.setCleAttachement(detail.getCle());
+				tache.setUpb(detail.getUpb());
+				tache.setCle(detail.getCle());
 
 				tachesInSameAvenants.add(tache);
 			}
@@ -199,7 +199,7 @@ public class DetailQualiteAttente {
 					if (tache.getTitreActivite().equalsIgnoreCase(this.getActivite())
 							&& tache.getLot().getDesignation().equalsIgnoreCase(this.getLot())
 							&& tache.getProduit().getDesignation().equalsIgnoreCase(this.getProduit())
-							&& !tache.getUnite().equalsIgnoreCase(this.getUpb())) {
+							&& !tache.getUpb().equalsIgnoreCase(this.getUpb())) {
 						return "(4)TACHE DECLAREE AVEC DEUX UNITES DIFFERENTES";
 					}
 				} catch (NullPointerException e) {
@@ -211,7 +211,7 @@ public class DetailQualiteAttente {
 					if (tache.getTitreActivite().equalsIgnoreCase(this.getActivite())
 							&& tache.getLot().getDesignation().equalsIgnoreCase(this.getLot())
 							&& tache.getProduit().getDesignation().equalsIgnoreCase(this.getProduit())
-							&& tache.getCleAttachement() != this.getCle()) {
+							&& tache.getCle() != this.getCle()) {
 						return "(5)TACHE DECLAREE EN TANT QUE CLE PRIMAIRE ET SECONDAIRE";
 					}
 				} catch (NullPointerException e) {
@@ -228,7 +228,7 @@ public class DetailQualiteAttente {
 									&& tache.getLot().getDesignation().equalsIgnoreCase(this.getLot())
 									&& tache.getProduit().getDesignation()
 									.equalsIgnoreCase(this.getProduit())) {
-								if (tache.getCleAttachement()) {
+								if (tache.getCle()) {
 									activitePrincipaleExist = true;
 								}
 							}
@@ -261,19 +261,19 @@ public class DetailQualiteAttente {
 			lot.setDesignation(detail.getLot());
 
 			Tache tache = new Tache();
-			tache.setOrdreMef(detail.getOrdre());
+			tache.setOrdre(detail.getOrdre());
 			tache.setTitreActivite(detail.getActivite());
 			tache.setProduit(produit);
 			tache.setLot(lot);
-			tache.setUnite(detail.getUpb());
-			tache.setCleAttachement(detail.getCle());
+			tache.setUpb(detail.getUpb());
+			tache.setCle(detail.getCle());
 
 			GrpQualite groupe = new GrpQualite();
 			groupe.setTitre(detail.getGroupe());
 			groupe.setTache(tache);
 
 			DetailQualite detailQualite = new DetailQualite();
-			detailQualite.setAffaire(detail.getPointDeControle());
+			detailQualite.setPointDeControle(detail.getPointDeControle());
 			detailQualite.setGroupe(groupe);
 
 			otherDetailQualites.add(detailQualite);
@@ -290,7 +290,7 @@ public class DetailQualiteAttente {
 						&& detailQualite.getGroupe().getTache().getProduit().getDesignation()
 						.equalsIgnoreCase(this.getProduit())
 						&& detailQualite.getGroupe().getTitre().equalsIgnoreCase(this.getGroupe())
-						&& detailQualite.getAffaire().equalsIgnoreCase(this.getPointDeControle())) {
+						&& detailQualite.getPointDeControle().equalsIgnoreCase(this.getPointDeControle())) {
 					return "(8)DOUBLONS DE LIGNES";
 				}
 			} catch (NullPointerException e) {

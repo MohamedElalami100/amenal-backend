@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 public class TacheTableDto {
 	private Integer id;
-	private Integer ordre;
+	private String ordre;
 	private String produit;
 	private String lot;
 	private String activite;
-	private Boolean c;
+	private Boolean cle;
 	private String upb;
 	private Double qpm;
 	private Double ppm;
@@ -24,7 +24,7 @@ public class TacheTableDto {
 	private Integer produitId;
 	private Integer lotId;
 
-	public TacheTableDto(Integer id, Integer ordre, String produit, String lot, String activite, Boolean c, String upb, Double qpm,
+	public TacheTableDto(Integer id, String ordre, String produit, String lot, String activite, Boolean cle, String upb, Double qpm,
 			Double ppm, Double mpm, Double qpb, Double ppb, Double mpb, Double mrg, Double prcRg, LocalDate ddb,
 			Integer dlb, LocalDate dfb, Integer produitId, Integer lotId) {
 		super();
@@ -33,7 +33,7 @@ public class TacheTableDto {
 		this.produit = produit;
 		this.lot = lot;
 		this.activite = activite;
-		this.c = c;
+		this.cle = cle;
 		this.upb = upb;
 		this.qpm = qpm;
 		this.ppm = ppm;
@@ -62,11 +62,11 @@ public class TacheTableDto {
 		this.id = id;
 	}
 
-	public Integer getOrdre() {
+	public String getOrdre() {
 		return ordre;
 	}
 
-	public void setOrdre(Integer ordre) {
+	public void setOrdre(String ordre) {
 		this.ordre = ordre;
 	}
 
@@ -94,12 +94,12 @@ public class TacheTableDto {
 		this.activite = activite;
 	}
 
-	public Boolean getC() {
-		return c;
+	public Boolean getCle() {
+		return cle;
 	}
 
-	public void setC(Boolean c) {
-		this.c = c;
+	public void setCle(Boolean c) {
+		this.cle = cle;
 	}
 
 	public String getUpb() {

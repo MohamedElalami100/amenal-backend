@@ -24,8 +24,8 @@ public class TacheUnitTest {
     public void testGetDateFin_WithNegativeDelai() {
         // Given
         Tache tache = new Tache();
-        tache.setDelai(-5);
-        tache.setDateDebut(LocalDate.of(2024, 4, 1));
+        tache.setDlb(-5);
+        tache.setDdb(LocalDate.of(2024, 4, 1));
 
         // When
         LocalDate result = tache.getDateFin();

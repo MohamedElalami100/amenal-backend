@@ -48,7 +48,7 @@ class ProduitUnitTest {
     public void testGetMncBdg_WithNonNullSecondaryTaches() {
         // Given
         Produit produit = BudgetTestDataUtil.createProduitWithTaches();
-        produit.getTaches().get(0).setCleAttachement(false);
+        produit.getTaches().get(0).setCle(false);
 
         // When
         Double result = produit.getMncBdg();
@@ -61,7 +61,7 @@ class ProduitUnitTest {
     public void testGetMncBdg_WithNullSecondaryTaches() {
         // Given
         Produit produit = BudgetTestDataUtil.createProduitWithTaches();
-        produit.getTaches().get(0).setCleAttachement(null);
+        produit.getTaches().get(0).setCle(null);
 
         // When
         Double result = produit.getMncBdg();

@@ -70,12 +70,12 @@ public class SaveViaDetailQualiteAttenteUseCase {
 
 		// Set Tache:
 		Tache tache = new Tache();
-		tache.setOrdreMef(detailQualiteAttente.getOrdre());
+		tache.setOrdre(detailQualiteAttente.getOrdre());
 		tache.setTitreActivite(detailQualiteAttente.getActivite());
 		tache.setProduit(produit);
 		tache.setLot(lot);
-		tache.setUnite(detailQualiteAttente.getUpb());
-		tache.setCleAttachement(detailQualiteAttente.getCle());
+		tache.setUpb(detailQualiteAttente.getUpb());
+		tache.setCle(detailQualiteAttente.getCle());
 
 		// Save Tache:
 		tache = tacheDao.saveTache(tache);
@@ -90,7 +90,7 @@ public class SaveViaDetailQualiteAttenteUseCase {
 		
 		// Save DetailQualite:
 		DetailQualite detailQualite = new DetailQualite();
-		detailQualite.setAffaire(detailQualiteAttente.getPointDeControle());
+		detailQualite.setPointDeControle(detailQualiteAttente.getPointDeControle());
 		detailQualite.setGroupe(groupe);
 
 		try {

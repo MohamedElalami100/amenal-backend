@@ -46,7 +46,7 @@ public class DetailChargeDaoAdapter implements DetailChargeDao {
 		try {
 			// if there is a detailCharge with the same designation in the same detailCharge:
 			List<DetailChargeEntity> sameDetailChargeEntities = detailChargeRepository.getDetailChargesByTacheIdAndDesignation(
-					detailCharge.getTache().getId(), detailCharge.getDesignation());
+					detailCharge.getTache().getId(), detailCharge.getCharge());
 			List<DetailCharge> sameDetailCharges = sameDetailChargeEntities.stream()
 					.map(detailChargeEntity -> modelMapper.map(detailChargeEntity, DetailCharge.class)).collect(Collectors.toList());
 			if (!sameDetailCharges.isEmpty()) {
@@ -67,9 +67,9 @@ public class DetailChargeDaoAdapter implements DetailChargeDao {
 
 		try {
 			// if there is a detailCharge with the same designation in the same detailCharge:
-			if(!detailCharge.getDesignation().equals(existingEntity.getDesignation())) {
+			if(!detailCharge.getCharge().equals(existingEntity.getCharge())) {
 				List<DetailChargeEntity> sameDetailChargeEntities = detailChargeRepository.getDetailChargesByTacheIdAndDesignation(
-						detailCharge.getTache().getId(), detailCharge.getDesignation());
+						detailCharge.getTache().getId(), detailCharge.getCharge());
 				List<DetailCharge> sameDetailCharges = sameDetailChargeEntities.stream()
 						.map(detailChargeEntity -> modelMapper.map(detailChargeEntity, DetailCharge.class)).collect(Collectors.toList());
 				if (!sameDetailCharges.isEmpty()) {

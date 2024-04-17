@@ -4,41 +4,31 @@ import java.time.LocalDate;
 
 public class DetailCharge {
 	private Integer id;
-	private Double prix;
-	private Double qte;
-	private String unite;
-	private String article;
-	private String designation;
-	private LocalDate dateSaisie;
-	private Integer id2;
-	private Boolean maj;
-	private String ordreMef;
-	private String ordrePrt;
-	private Integer ordre;
-	private Double laQtePrd;
-	private String laUnitePrd;
+	private Double pcb;
+	private Double qcb;
+	private String ucb;
+	private String charge;
+	private String nature;
+	private LocalDate ddb;
+	private String ordre;
+	private Double qpb;
+	private String rcb;
 	// Fk objects:
-	private NatureArticle nature;
 	private Tache tache;
 
-	public DetailCharge(Integer id, Double prix, Double qte, String unite, String article, String designation,
-			LocalDate dateSaisie, Integer id2, Boolean maj, String ordreMef, String ordrePrt, Integer ordre,
-			Double laQtePrd, String laUnitePrd, NatureArticle nature, Tache tache) {
+	public DetailCharge(Integer id, Double pcb, Double qcb, String ucb, String charge,
+			LocalDate ddb, String ordre,
+			Double qpb, String rcb, String nature, Tache tache) {
 		super();
 		this.id = id;
-		this.prix = prix;
-		this.qte = qte;
-		this.unite = unite;
-		this.article = article;
-		this.designation = designation;
-		this.dateSaisie = dateSaisie;
-		this.id2 = id2;
-		this.maj = maj;
-		this.ordreMef = ordreMef;
-		this.ordrePrt = ordrePrt;
+		this.pcb = pcb;
+		this.qcb = qcb;
+		this.ucb = ucb;
+		this.charge = charge;
+		this.ddb = ddb;
 		this.ordre = ordre;
-		this.laQtePrd = laQtePrd;
-		this.laUnitePrd = laUnitePrd;
+		this.qpb = qpb;
+		this.rcb = rcb;
 		this.nature = nature;
 		this.tache = tache;
 	}
@@ -55,115 +45,75 @@ public class DetailCharge {
 		this.id = id;
 	}
 
-	public Double getPrix() {
-		return prix;
+	public Double getPcb() {
+		return pcb;
 	}
 
-	public void setPrix(Double prix) {
-		this.prix = prix;
+	public void setPcb(Double pcb) {
+		this.pcb = pcb;
 	}
 
-	public Double getQte() {
-		return qte;
+	public Double getQcb() {
+		return qcb;
 	}
 
-	public void setQte(Double qte) {
-		this.qte = qte;
+	public void setQcb(Double qcb) {
+		this.qcb = qcb;
 	}
 
-	public String getUnite() {
-		return unite;
+	public String getUcb() {
+		return ucb;
 	}
 
-	public void setUnite(String unite) {
-		this.unite = unite;
+	public void setUcb(String ucb) {
+		this.ucb = ucb;
 	}
 
-	public String getArticle() {
-		return article;
+	public String getCharge() {
+		return charge;
 	}
 
-	public void setArticle(String article) {
-		this.article = article;
+	public void setCharge(String charge) {
+		this.charge = charge;
 	}
 
-	public String getDesignation() {
-		return designation;
+	public LocalDate getDdb() {
+		return ddb;
 	}
 
-	public void setDesignation(String designation) {
-		this.designation = designation;
+	public void setDdb(LocalDate ddb) {
+		this.ddb = ddb;
 	}
 
-	public LocalDate getDateSaisie() {
-		return dateSaisie;
-	}
-
-	public void setDateSaisie(LocalDate dateSaisie) {
-		this.dateSaisie = dateSaisie;
-	}
-
-	public Integer getId2() {
-		return id2;
-	}
-
-	public void setId2(Integer id2) {
-		this.id2 = id2;
-	}
-
-	public Boolean getMaj() {
-		return maj;
-	}
-
-	public void setMaj(Boolean maj) {
-		this.maj = maj;
-	}
-
-	public String getOrdreMef() {
-		return ordreMef;
-	}
-
-	public void setOrdreMef(String ordreMef) {
-		this.ordreMef = ordreMef;
-	}
-
-	public String getOrdrePrt() {
-		return ordrePrt;
-	}
-
-	public void setOrdrePrt(String ordrePrt) {
-		this.ordrePrt = ordrePrt;
-	}
-
-	public Integer getOrdre() {
+	public String getOrdre() {
 		return ordre;
 	}
 
-	public void setOrdre(Integer ordre) {
+	public void setOrdre(String ordre) {
 		this.ordre = ordre;
 	}
 
-	public Double getLaQtePrd() {
-		return laQtePrd;
+	public Double getQpb() {
+		return qpb;
 	}
 
-	public void setLaQtePrd(Double laQtePrd) {
-		this.laQtePrd = laQtePrd;
+	public void setQpb(Double qpb) {
+		this.qpb = qpb;
 	}
 
-	public String getLaUnitePrd() {
-		return laUnitePrd;
+	public String getRcb() {
+		return rcb;
 	}
 
-	public void setLaUnitePrd(String laUnitePrd) {
-		this.laUnitePrd = laUnitePrd;
+	public void setRcb(String rcb) {
+		this.rcb = rcb;
 	}
 
-	public NatureArticle getNature() {
+	public String getNature() {
 		return nature;
 	}
 
-	public void setNature(NatureArticle nature) {
+	public void setNature(String nature) {
 		this.nature = nature;
 	}
 
@@ -178,7 +128,7 @@ public class DetailCharge {
 	// business methods:
 	public Double getMontant() {
 		try {
-			return prix * qte;
+			return pcb * qcb;
 		} catch (Exception e) {
 			return null;
 		}

@@ -46,7 +46,7 @@ public class DetailQualiteDaoAdapter implements DetailQualiteDao {
 		try {
 			// if there is a detailQualite with the same designation in the same grpQualite:
 			List<DetailQualiteEntity> sameDetailQualiteEntities = detailQualiteRepository.getDetailQualitesByGrpQualiteIdAndAffaire(
-					detailQualite.getGroupe().getId(), detailQualite.getAffaire());
+					detailQualite.getGroupe().getId(), detailQualite.getPointDeControle());
 			List<DetailQualite> sameDetailQualites = sameDetailQualiteEntities.stream()
 					.map(detailQualiteEntity -> modelMapper.map(detailQualiteEntity, DetailQualite.class)).collect(Collectors.toList());
 			if (!sameDetailQualites.isEmpty()) {
@@ -68,9 +68,9 @@ public class DetailQualiteDaoAdapter implements DetailQualiteDao {
 
 		try {
 			// if there is a detailQualite with the same designation in the same avenant:
-			if(!detailQualite.getAffaire().equals(existingEntity.getAffaire())) {
+			if(!detailQualite.getPointDeControle().equals(existingEntity.getPointDeControle())) {
 				List<DetailQualiteEntity> sameDetailQualiteEntities = detailQualiteRepository.getDetailQualitesByGrpQualiteIdAndAffaire(
-						detailQualite.getGroupe().getId(), detailQualite.getAffaire());
+						detailQualite.getGroupe().getId(), detailQualite.getPointDeControle());
 				List<DetailQualite> sameDetailQualites = sameDetailQualiteEntities.stream()
 						.map(detailQualiteEntity -> modelMapper.map(detailQualiteEntity, DetailQualite.class)).collect(Collectors.toList());
 				if (!sameDetailQualites.isEmpty()) {

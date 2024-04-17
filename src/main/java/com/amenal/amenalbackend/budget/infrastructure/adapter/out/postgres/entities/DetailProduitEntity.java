@@ -34,20 +34,8 @@ public class DetailProduitEntity {
     @Column(name = "dim3")
     private Double dim3;
 
-    @Column(name = "id2")
-    private Integer id2;
-
-    @Column(name = "maj")
-    private Boolean maj;
-
     @Column(name = "ordre")
-    private Integer ordre;
-
-    @Column(name = "ordre_mef")
-    private String ordreMef;
-
-    @Column(name = "ordre_prt")
-    private String ordrePrt;
+    private String ordre;
 
     // Fk objects:
     @ManyToOne(fetch = FetchType.LAZY)
@@ -55,7 +43,7 @@ public class DetailProduitEntity {
     private TacheEntity tache;
 
 	public DetailProduitEntity(Integer id, String reference, Double nbr, Double dim1, Double dim2, Double dim3,
-			Integer id2, Boolean maj, Integer ordre, String ordreMef, String ordrePrt, TacheEntity tache) {
+			String ordre, TacheEntity tache) {
 		super();
 		this.id = id;
 		this.reference = reference;
@@ -63,11 +51,7 @@ public class DetailProduitEntity {
 		this.dim1 = dim1;
 		this.dim2 = dim2;
 		this.dim3 = dim3;
-		this.id2 = id2;
-		this.maj = maj;
 		this.ordre = ordre;
-		this.ordreMef = ordreMef;
-		this.ordrePrt = ordrePrt;
 		this.tache = tache;
 	}
 
@@ -123,44 +107,12 @@ public class DetailProduitEntity {
 		this.dim3 = dim3;
 	}
 
-	public Integer getId2() {
-		return id2;
-	}
-
-	public void setId2(Integer id2) {
-		this.id2 = id2;
-	}
-
-	public Boolean getMaj() {
-		return maj;
-	}
-
-	public void setMaj(Boolean maj) {
-		this.maj = maj;
-	}
-
-	public Integer getOrdre() {
+	public String getOrdre() {
 		return ordre;
 	}
 
-	public void setOrdre(Integer ordre) {
+	public void setOrdre(String ordre) {
 		this.ordre = ordre;
-	}
-
-	public String getOrdreMef() {
-		return ordreMef;
-	}
-
-	public void setOrdreMef(String ordreMef) {
-		this.ordreMef = ordreMef;
-	}
-
-	public String getOrdrePrt() {
-		return ordrePrt;
-	}
-
-	public void setOrdrePrt(String ordrePrt) {
-		this.ordrePrt = ordrePrt;
 	}
 
 	public TacheEntity getTache() {

@@ -97,10 +97,10 @@ public class LotTableDaoAdapter implements LotTableDao {
 
 				// Set list of DetailProduit to ActivitePrincipale
 				tache.setDetailProduits(detailProduits);
-				ActiviteDeLotDto activiteDeLotDto = new ActiviteDeLotDto(tache.getId(), tache.getCleAttachement(),
-						tache.getOrdre(), tache.getTitreActivite(), tache.getUnite(), tache.getQtePBdg(),
+				ActiviteDeLotDto activiteDeLotDto = new ActiviteDeLotDto(tache.getId(), tache.getCle(),
+						tache.getOrdre(), tache.getTitreActivite(), tache.getUpb(), tache.getQtePBdg(),
 						tache.getPuRef(), tache.getMntRefB(), tache.getQtePBdg(), tache.getPucBdg(), tache.getMncBdg(),
-						tache.getMrgRefB(), tache.getMrpRefB(), tache.getDateDebut(), tache.getDelai(),
+						tache.getMrgRefB(), tache.getMrpRefB(), tache.getDdb(), tache.getDlb(),
 						tache.getDateFin());
 				activiteDeLotDtos.add(activiteDeLotDto);
 			}
