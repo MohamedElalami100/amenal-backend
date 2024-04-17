@@ -7,18 +7,18 @@ public class Produit {
 	private Integer id;
 	private String art;
 	private String designation;
-	private String unite;
+	private String upb;
 	private Double ppm;
 	private Double qpm;
 	// Fk objects:
 	private MetreAv metre;
 	private List<Tache> taches;
 
-	public Produit(Integer id, String art, String designation, String unite, Double ppm, Double qpm, MetreAv metre, List<Tache> taches) {
+	public Produit(Integer id, String art, String designation, String upb, Double ppm, Double qpm, MetreAv metre, List<Tache> taches) {
 		this.id = id;
 		this.art = art;
 		this.designation = designation;
-		this.unite = unite;
+		this.upb = upb;
 		this.ppm = ppm;
 		this.qpm = qpm;
 		this.metre = metre;
@@ -52,12 +52,12 @@ public class Produit {
 		this.designation = designation;
 	}
 
-	public String getUnite() {
-		return unite;
+	public String getUpb() {
+		return upb;
 	}
 
-	public void setUnite(String unite) {
-		this.unite = unite;
+	public void setUpb(String upb) {
+		this.upb = upb;
 	}
 
 	public Double getPpm() {

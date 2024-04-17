@@ -26,30 +26,30 @@ public class ProduitEntity {
     @Column(name = "designation")
     private String designation;
 
-    @Column(name = "unite")
-    private String unite;
+    @Column(name = "upb")
+    private String upb;
 
-    @Column(name = "article")
-    private String article;
+    @Column(name = "art")
+    private String art;
 
-    @Column(name = "pu_ref")
-    private Double puRef;
+    @Column(name = "ppm")
+    private Double ppm;
 
-    @Column(name = "qte_ref")
-    private Double qteRef;
+    @Column(name = "qpm")
+    private Double qpm;
 
     // Fk objects:
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_metre_av")
     private MetreAvEntity metre;
 
-	public ProduitEntity(Integer id, String article, String designation, String unite, Double puRef, Double qteRef, MetreAvEntity metre) {
+	public ProduitEntity(Integer id, String art, String designation, String upb, Double ppm, Double qpm, MetreAvEntity metre) {
 		this.id = id;
-		this.article = article;
+		this.art = art;
 		this.designation = designation;
-		this.unite = unite;
-		this.puRef = puRef;
-		this.qteRef = qteRef;
+		this.upb = upb;
+		this.ppm = ppm;
+		this.qpm = qpm;
 		this.metre = metre;
 	}
 
@@ -64,12 +64,12 @@ public class ProduitEntity {
 		this.id = id;
 	}
 
-	public String getArticle() {
-		return article;
+	public String getArt() {
+		return art;
 	}
 
-	public void setArticle(String article) {
-		this.article = article;
+	public void setArt(String art) {
+		this.art = art;
 	}
 
 	public String getDesignation() {
@@ -80,28 +80,28 @@ public class ProduitEntity {
 		this.designation = designation;
 	}
 
-	public String getUnite() {
-		return unite;
+	public String getUpb() {
+		return upb;
 	}
 
-	public void setUnite(String unite) {
-		this.unite = unite;
+	public void setUpb(String upb) {
+		this.upb = upb;
 	}
 
-	public Double getPuRef() {
-		return puRef;
+	public Double getPpm() {
+		return ppm;
 	}
 
-	public void setPuRef(Double puRef) {
-		this.puRef = puRef;
+	public void setPpm(Double ppm) {
+		this.ppm = ppm;
 	}
 
-	public Double getQteRef() {
-		return qteRef;
+	public Double getQpm() {
+		return qpm;
 	}
 
-	public void setQteRef(Double qteRef) {
-		this.qteRef = qteRef;
+	public void setQpm(Double qpm) {
+		this.qpm = qpm;
 	}
 
 	public MetreAvEntity getMetre() {
