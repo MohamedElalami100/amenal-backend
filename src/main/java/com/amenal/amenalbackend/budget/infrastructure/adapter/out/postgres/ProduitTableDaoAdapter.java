@@ -146,7 +146,7 @@ public class ProduitTableDaoAdapter implements ProduitTableDao {
 
 			// Create ProduitTableDto and add it to the list
 			ProduitTableDto produitTableDto = new ProduitTableDto(produit.getId(), produit.getArt(),
-					produit.getDesignation(), produit.getUnite(), produit.getQpm(), produit.getPpm(),
+					produit.getDesignation(), produit.getUpb(), produit.getQpm(), produit.getPpm(),
 					produit.getMntRef(), produit.getPucBdg(), produit.getQteCum(), produit.getMncBdg(),
 					produit.getMrgRef(), produit.getMrpRef(), produit.getDateDbtIni(), produit.getDlaIni(),
 					produit.getDateFinIni(), lotTableDtos);
