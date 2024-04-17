@@ -56,9 +56,9 @@ public class LotUseCase {
 	}
 
 	public List<Lot> saveLots(List<Lot> lots) {
-		List<Lot> savedLots = new ArrayList<>();
+		List<Lot> savedLots = new ArrayList<Lot>();
 		for (Lot lot : lots)
-			savedLots.add(lotDao.saveOrUpdateIfExists(lot));
+			savedLots.add(lotDao.saveLot(lot));
 		return savedLots;
 	}
 

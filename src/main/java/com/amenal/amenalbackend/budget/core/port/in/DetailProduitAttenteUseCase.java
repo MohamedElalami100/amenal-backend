@@ -100,6 +100,7 @@ public class DetailProduitAttenteUseCase {
 	private List<DetailProduitAttente> updateErreurs(List<DetailProduitAttente> detailProduitAttentes) {
 
 		if (detailProduitAttentes.size() == 0) return new ArrayList<>();
+		int i = 0;
 		List<DetailProduitAttente> addedDetailsWithErreurs = new ArrayList<>();
 
 		//get data needed for getting error message:
@@ -157,6 +158,8 @@ public class DetailProduitAttenteUseCase {
 				//save detail with error
 				DetailProduitAttente addedDetail = detailProduitAttenteDao.saveDetailProduitAttente(detailProduitAttente);
 				addedDetailsWithErreurs.add(addedDetail);
+				System.out.println(i);
+				i++;
 			} catch (Exception e) {
 			}
 		}

@@ -19,6 +19,5 @@ public interface LotDao {
 	List<Lot> getLotsByAvenantId(Integer id);
 	
 	List<Lot> getLotsByProjectId(Integer id);
-
-    Lot saveOrUpdateIfExists(Lot lot);
+	
 }

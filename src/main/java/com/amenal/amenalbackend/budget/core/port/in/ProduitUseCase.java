@@ -54,7 +54,7 @@ public class ProduitUseCase {
 	public List<Produit> saveProduits(List<Produit> produits) {
 		List<Produit> savedProduits = new ArrayList<Produit>();
 		for (Produit produit : produits)
-			savedProduits.add(produitDao.saveOrUpdateIfExists(produit));
+			savedProduits.add(produitDao.saveProduit(produit));
 		return savedProduits;
 	}
 

@@ -43,6 +43,7 @@ public class SaveViaDetailProduitAttenteUseCase {
 		}
 		Integer codeErreur = Integer.parseInt(erreur.charAt(1) + "");
 
+		System.out.println(codeErreur);
 		if (codeErreur <= 8) {
 			return;
 		}

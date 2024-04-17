@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.amenal.amenalbackend.budget.core.domain.Lot;
 import com.amenal.amenalbackend.budget.core.port.out.LotDao;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.LotEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.LotRepository;
 import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementException;
 
@@ -53,32 +55,6 @@ public class LotDaoAdapter implements LotDao {
 		List<LotEntity> lotEntities = lotRepository.getLotsByProjectId(id);
 		return lotEntities.stream().map(lotEntity -> modelMapper.map(lotEntity, Lot.class))
 				.collect(Collectors.toList());
-	}
-
-	@Override
-	public Lot saveOrUpdateIfExists(Lot lot) {
-		try {
-			// if there is a lot with the same designation in the same project:
-			List<LotEntity> sameLotEntities = lotRepository.getLotsByProjectIdAndDesignation(lot.getProject().getId(),
-					lot.getDesignation());
-			List<Lot> sameLots = sameLotEntities.stream().map(lotEntity -> modelMapper.map(lotEntity, Lot.class))
-					.collect(Collectors.toList());
-			if (!sameLots.isEmpty()) {
-				//update the sameLot if exists by lot inserted
-				Lot sameLot = sameLots.get(0);
-				lot.setId(sameLot.getId());
-
-				LotEntity newEntity = modelMapper.map(lot, LotEntity.class);
-				LotEntity updatedEntity = lotRepository.save(newEntity);
-				return modelMapper.map(updatedEntity, Lot.class);
-			}
-		} catch (Exception e) {
-			System.out.print(e);
-		}
-		// if not:
-		LotEntity lotEntity = modelMapper.map(lot, LotEntity.class);
-		LotEntity savedEntity = lotRepository.save(lotEntity);
-		return modelMapper.map(savedEntity, Lot.class);
 	}
 
 	@Override

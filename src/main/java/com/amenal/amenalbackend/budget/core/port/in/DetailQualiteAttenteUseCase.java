@@ -100,7 +100,7 @@ public class DetailQualiteAttenteUseCase {
 	private List<DetailQualiteAttente> updateErreurs(List<DetailQualiteAttente> detailQualiteAttentes) {
 
 		if (detailQualiteAttentes.size() == 0) return new ArrayList<>();
-
+		int i = 0;
 		List<DetailQualiteAttente> addedDetailsWithErreurs = new ArrayList<>();
 
 		//get data needed for getting error message:
@@ -158,6 +158,8 @@ public class DetailQualiteAttenteUseCase {
 				//save detail with error
 				DetailQualiteAttente addedDetail = detailQualiteAttenteDao.saveDetailQualiteAttente(detailQualiteAttente);
 				addedDetailsWithErreurs.add(addedDetail);
+				System.out.println(i);
+				i++;
 			} catch (Exception e) {
 			}
 		}
