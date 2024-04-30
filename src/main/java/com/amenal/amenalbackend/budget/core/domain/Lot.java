@@ -1,9 +1,12 @@
 package com.amenal.amenalbackend.budget.core.domain;
 
+import com.amenal.amenalbackend.utils.core.domain.Colorable;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Lot {
+public class Lot extends Colorable {
 	private Integer id;
 	private String designation;
 	private Integer ordre;
@@ -18,6 +21,16 @@ public class Lot {
 		this.ordre = ordre;
 		this.project = project;
 		this.taches = taches;
+	}
+
+	@Override
+	public List<List<Colorable>> getSons() {
+		return new ArrayList<>();
+	}
+
+	@Override
+	public List<String> getErrors() {
+		return new ArrayList<>();
 	}
 
 	public Lot() {
@@ -64,9 +77,7 @@ public class Lot {
 		this.project = project;
 	}
 
-
-
-	//business methods:
+	// business methods:
 	public Double getMntRefB() {
 		try {
 			Double mntRefCalcule = 0.0;
@@ -112,29 +123,29 @@ public class Lot {
 			return null;
 		}
 	}
-	
+
 	public LocalDate getDateDbtIni() {
 		try {
 			return taches.stream()
-            .map(Tache::getDdb)
-            .filter(date -> date != null) // Filter out null dates
-            .min(LocalDate::compareTo).get();
+					.map(Tache::getDdb)
+					.filter(date -> date != null) // Filter out null dates
+					.min(LocalDate::compareTo).get();
 		} catch (Exception e) {
-			return null;	
+			return null;
 		}
 	}
-	
+
 	public LocalDate getDateFinIni() {
 		try {
 			return taches.stream()
-            .map(Tache::getDateFin)
-            .filter(date -> date != null) // Filter out null dates
-            .max(LocalDate::compareTo).get();
+					.map(Tache::getDateFin)
+					.filter(date -> date != null) // Filter out null dates
+					.max(LocalDate::compareTo).get();
 		} catch (Exception e) {
-			return null;	
+			return null;
 		}
 	}
-	
+
 	public Integer getDlaIni() {
 		try {
 			if (getDateDbtIni() == null && getDateFinIni() == null)

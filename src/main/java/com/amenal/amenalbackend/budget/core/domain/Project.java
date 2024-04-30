@@ -1,8 +1,13 @@
 package com.amenal.amenalbackend.budget.core.domain;
 
-import java.time.LocalDate;
+import com.amenal.amenalbackend.utils.core.domain.Colorable;
 
-public class Project {
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Project extends Colorable {
 	private Integer id;
 	private String project;
 	private String abreviation;
@@ -43,6 +48,10 @@ public class Project {
 	private Client client;
 	private Dossier dossier;
 	private Personnel responsable;
+
+	private List<Lot> lots;
+
+	private List<Avenant> avenants;
 
 	public Project(Integer id, String project, String abreviation, Boolean envoiAlrt, Boolean cloture, String object,
 			String lieu, String personneDeContact, String nomAgent, Boolean valide, String cCode, String vCode,
@@ -92,6 +101,32 @@ public class Project {
 		this.client = client;
 		this.dossier = dossier;
 		this.responsable = responsable;
+	}
+
+	@Override
+	public List<List<Colorable>> getSons() {
+		List<List<Colorable>> sons = new ArrayList<>();
+		List<Colorable> colorableAvenants = new ArrayList<>();
+		List<Colorable> colorableLots = new ArrayList<>();
+		if (avenants != null)
+			colorableAvenants = avenants.stream()
+					.map(avenant -> (Colorable) avenant)
+					.collect(Collectors.toList());
+		if (lots != null)
+			colorableLots = lots.stream()
+					.map(lot -> (Colorable) lot)
+					.collect(Collectors.toList());
+		sons.add(colorableAvenants);
+		sons.add(colorableLots);
+		return sons;
+	}
+
+	@Override
+	public List<String> getErrors() {
+		List<String> errors = new ArrayList<>();
+		errors.add("pas de avenants associé");
+		errors.add("pas de lots associé");
+		return errors;
 	}
 
 	public Project() {
@@ -410,28 +445,19 @@ public class Project {
 		this.responsable = responsable;
 	}
 
-	// business methods:
-	public LocalDate getDateFinIni() {
-		try {
-			return dateDbtIni.plusDays(dlaIni - 1);
-		} catch (Exception e) {
-			return null;
-		}
+	public List<Avenant> getAvenants() {
+		return avenants;
 	}
 
-	public LocalDate getDateFinFin() {
-		try {
-			return dateDbtFin.plusDays(dlaFin - 1);
-		} catch (Exception e) {
-			return null;
-		}
+	public void setAvenants(List<Avenant> avenants) {
+		this.avenants = avenants;
 	}
 
-	public LocalDate getDateFinCntr() {
-		try {
-			return dateDbtCnt.plusDays(dlaCntr - 1);
-		} catch (Exception e) {
-			return null;
-		}
+	public List<Lot> getLots() {
+		return lots;
+	}
+
+	public void setLots(List<Lot> lots) {
+		this.lots = lots;
 	}
 }

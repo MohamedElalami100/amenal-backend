@@ -1,7 +1,12 @@
 package com.amenal.amenalbackend.budget.core.domain;
 
+import com.amenal.amenalbackend.utils.core.domain.Colorable;
+
+import java.util.ArrayList;
+import java.util.List;
+
 //détailslotav in Microsoft access database
-public class DetailProduit {
+public class DetailProduit extends Colorable {
 	private Integer id;
 	private String reference;
 	private Double nbr;
@@ -13,7 +18,8 @@ public class DetailProduit {
 	// Fk objects:
 	private Tache tache;
 
-	public DetailProduit(Integer id, String reference, Double nbr, Double dim1, Double dim2, Double dim3, String ordre, String ordreMef, String ordrePrt, Tache tache) {
+	public DetailProduit(Integer id, String reference, Double nbr, Double dim1, Double dim2, Double dim3, String ordre,
+			String ordreMef, String ordrePrt, Tache tache) {
 		super();
 		this.id = id;
 		this.reference = reference;
@@ -23,6 +29,16 @@ public class DetailProduit {
 		this.dim3 = dim3;
 		this.ordre = ordre;
 		this.tache = tache;
+	}
+
+	@Override
+	public List<List<Colorable>> getSons() {
+		return new ArrayList<>();
+	}
+
+	@Override
+	public List<String> getErrors() {
+		return new ArrayList<>();
 	}
 
 	public DetailProduit() {

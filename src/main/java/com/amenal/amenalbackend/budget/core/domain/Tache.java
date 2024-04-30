@@ -1,10 +1,14 @@
 package com.amenal.amenalbackend.budget.core.domain;
 
+import com.amenal.amenalbackend.utils.core.domain.Colorable;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 //SousProduitAv in Microsoft access database
-public class Tache {
+public class Tache extends Colorable {
 	private Integer id;
 	private String titreActivite;
 	private String upb;
@@ -20,7 +24,8 @@ public class Tache {
 	private List<DetailCharge> detailCharges;
 
 	public Tache(Integer id, String titreActivite, String upb, Boolean cle, Integer dlb, LocalDate ddb,
-				 String ordre, Produit produit, Lot lot, List<DetailProduit> detailProduits, List<DetailCharge> detailCharges) {
+			String ordre, Produit produit, Lot lot, List<DetailProduit> detailProduits,
+			List<DetailCharge> detailCharges) {
 		this.id = id;
 		this.titreActivite = titreActivite;
 		this.upb = upb;
@@ -32,6 +37,32 @@ public class Tache {
 		this.lot = lot;
 		this.detailProduits = detailProduits;
 		this.detailCharges = detailCharges;
+	}
+
+	@Override
+	public List<List<Colorable>> getSons() {
+		List<List<Colorable>> sons = new ArrayList<>();
+		List<Colorable> colorableDetailProduits = new ArrayList<>();
+		List<Colorable> colorableDetailCharges = new ArrayList<>();
+		if (detailProduits != null)
+			colorableDetailProduits = detailProduits.stream()
+					.map(detailProduit -> (Colorable) detailProduit)
+					.collect(Collectors.toList());
+		if (detailCharges != null)
+			colorableDetailCharges = detailCharges.stream()
+					.map(detailCharge -> (Colorable) detailCharge)
+					.collect(Collectors.toList());
+		sons.add(colorableDetailProduits);
+		sons.add(colorableDetailCharges);
+		return sons;
+	}
+
+	@Override
+	public List<String> getErrors() {
+		List<String> errors = new ArrayList<>();
+		errors.add("pas de detailProduits associé");
+		errors.add("pas de detailCharges associé");
+		return errors;
 	}
 
 	public Tache() {
@@ -128,13 +159,14 @@ public class Tache {
 
 	// business methods:
 
-	public Double getPuRef(){
+	public Double getPuRef() {
 		try {
 			return produit.getPpm();
-		}catch (Exception e){
+		} catch (Exception e) {
 			return null;
 		}
 	}
+
 	public LocalDate getDateFin() {
 		try {
 			return (dlb < 0) ? null : ddb.plusDays(dlb - 1);
@@ -158,7 +190,7 @@ public class Tache {
 			return null;
 		}
 	}
-	
+
 	public Double getMrgRefB() {
 		try {
 			return getMntRefB() - getMncBdg();
@@ -166,7 +198,7 @@ public class Tache {
 			return null;
 		}
 	}
-	
+
 	public Double getMrpRefB() {
 		try {
 			return (getMntRefB() == 0 || getMntRefB() == null) ? 0 : (getMntRefB() - getMncBdg()) / getMntRefB();
@@ -174,7 +206,7 @@ public class Tache {
 			return null;
 		}
 	}
-	
+
 	public Double getQtePBdg() {
 		try {
 			Double qteRefBCalcule = 0.0;
@@ -191,7 +223,7 @@ public class Tache {
 		try {
 			Double qteRefBCalcule = 0.0;
 			for (DetailCharge detail : detailCharges) {
-				qteRefBCalcule += detail.getMontant();		
+				qteRefBCalcule += detail.getMontant();
 			}
 			return qteRefBCalcule;
 		} catch (Exception e) {

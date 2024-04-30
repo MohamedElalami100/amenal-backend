@@ -1,8 +1,12 @@
 package com.amenal.amenalbackend.budget.core.domain;
 
-import java.time.LocalDate;
+import com.amenal.amenalbackend.utils.core.domain.Colorable;
 
-public class DetailCharge {
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class DetailCharge extends Colorable {
 	private Integer id;
 	private Double pcb;
 	private Double qcb;
@@ -31,6 +35,16 @@ public class DetailCharge {
 		this.rcb = rcb;
 		this.nature = nature;
 		this.tache = tache;
+	}
+
+	@Override
+	public List<List<Colorable>> getSons() {
+		return new ArrayList<>();
+	}
+
+	@Override
+	public List<String> getErrors() {
+		return new ArrayList<>();
 	}
 
 	public DetailCharge() {
@@ -133,6 +147,5 @@ public class DetailCharge {
 			return null;
 		}
 	}
-
 
 }

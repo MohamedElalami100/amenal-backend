@@ -17,4 +17,6 @@ public interface DetailProduitDao {
 	void deleteDetailProduit(Integer id);
 
     List<DetailProduit> getDetailProduitsByAvenantId(Integer id);
+
+    List<DetailProduit> getDetailProduitsByTacheId(Integer id);
 }

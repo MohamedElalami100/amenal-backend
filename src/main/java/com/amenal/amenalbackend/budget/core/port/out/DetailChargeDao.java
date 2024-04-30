@@ -17,4 +17,6 @@ public interface DetailChargeDao {
 	void deleteDetailCharge(Integer id);
 
     List<DetailCharge> getDetailChargesByAvenantId(Integer id);
+
+    List<DetailCharge> getDetailChargesByTacheId(Integer id);
 }

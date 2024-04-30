@@ -104,4 +104,11 @@ public class DetailProduitDaoAdapter implements DetailProduitDao {
 				.collect(Collectors.toList());
 	}
 
+	@Override
+	public List<DetailProduit> getDetailProduitsByTacheId(Integer id) {
+		List<DetailProduitEntity> detailProduitEntities = detailProduitRepository.getDetailProduitByTacheId(id);
+		return detailProduitEntities.stream().map(detailProduitEntity -> modelMapper.map(detailProduitEntity, DetailProduit.class))
+				.collect(Collectors.toList());
+	}
+
 }

@@ -103,4 +103,11 @@ public class DetailChargeDaoAdapter implements DetailChargeDao {
 				.collect(Collectors.toList());
 	}
 
+	@Override
+	public List<DetailCharge> getDetailChargesByTacheId(Integer id) {
+		List<DetailChargeEntity> detailChargeEntities = detailChargeRepository.getDetailChargeByTacheId(id);
+		return detailChargeEntities.stream().map(detailChargeEntity -> modelMapper.map(detailChargeEntity, DetailCharge.class))
+				.collect(Collectors.toList());
+	}
+
 }

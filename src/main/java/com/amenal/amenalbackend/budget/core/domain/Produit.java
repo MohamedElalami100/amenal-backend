@@ -1,9 +1,12 @@
 package com.amenal.amenalbackend.budget.core.domain;
 
+import com.amenal.amenalbackend.utils.core.domain.Colorable;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Produit {
+public class Produit extends Colorable {
 	private Integer id;
 	private String art;
 	private String designation;
@@ -14,7 +17,8 @@ public class Produit {
 	private MetreAv metre;
 	private List<Tache> taches;
 
-	public Produit(Integer id, String art, String designation, String upb, Double ppm, Double qpm, MetreAv metre, List<Tache> taches) {
+	public Produit(Integer id, String art, String designation, String upb, Double ppm, Double qpm, MetreAv metre,
+			List<Tache> taches) {
 		this.id = id;
 		this.art = art;
 		this.designation = designation;
@@ -23,6 +27,16 @@ public class Produit {
 		this.qpm = qpm;
 		this.metre = metre;
 		this.taches = taches;
+	}
+
+	@Override
+	public List<List<Colorable>> getSons() {
+		return new ArrayList<>();
+	}
+
+	@Override
+	public List<String> getErrors() {
+		return new ArrayList<>();
 	}
 
 	public Produit() {
@@ -145,7 +159,6 @@ public class Produit {
 			return null;
 		}
 	}
-	
 
 	public Double getMncBdg() {
 		try {
@@ -160,29 +173,29 @@ public class Produit {
 			return null;
 		}
 	}
-	
+
 	public LocalDate getDateDbtIni() {
 		try {
 			return taches.stream()
-            .map(Tache::getDdb)
-            .filter(date -> date != null) // Filter out null dates
-            .min(LocalDate::compareTo).get();
+					.map(Tache::getDdb)
+					.filter(date -> date != null) // Filter out null dates
+					.min(LocalDate::compareTo).get();
 		} catch (Exception e) {
-			return null;	
+			return null;
 		}
 	}
-	
+
 	public LocalDate getDateFinIni() {
 		try {
 			return taches.stream()
-            .map(Tache::getDateFin)
-            .filter(date -> date != null) // Filter out null dates
-            .max(LocalDate::compareTo).get();
+					.map(Tache::getDateFin)
+					.filter(date -> date != null) // Filter out null dates
+					.max(LocalDate::compareTo).get();
 		} catch (Exception e) {
-			return null;	
+			return null;
 		}
 	}
-	
+
 	public Integer getDlaIni() {
 		try {
 			if (getDateDbtIni() == null && getDateFinIni() == null)
@@ -193,7 +206,5 @@ public class Produit {
 			return null;
 		}
 	}
-	
-
 
 }

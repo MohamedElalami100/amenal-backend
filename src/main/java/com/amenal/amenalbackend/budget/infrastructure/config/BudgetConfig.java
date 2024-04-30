@@ -149,8 +149,10 @@ public class BudgetConfig {
 	}
 
 	@Bean
-	public ProjectUseCase projectUseCase(ProjectDao projectDao) {
-		return new ProjectUseCase(projectDao);
+	public ProjectUseCase projectUseCase(ProjectDao projectDao, AvenantDao avenantDao, LotDao lotDao, TacheDao tacheDao,
+										 ProduitDao produitDao, DetailProduitDao detailProduitDao, DetailChargeDao detailChargeDao) {
+		return new ProjectUseCase(projectDao, avenantDao, lotDao, tacheDao,
+				 produitDao, detailProduitDao, detailChargeDao);
 	}
 
 	@Bean

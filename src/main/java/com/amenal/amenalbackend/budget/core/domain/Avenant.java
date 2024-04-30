@@ -1,8 +1,13 @@
 package com.amenal.amenalbackend.budget.core.domain;
 
-import java.time.LocalDate;
+import com.amenal.amenalbackend.utils.core.domain.Colorable;
 
-public class Avenant {
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Avenant extends Colorable {
 	private Integer id;
 	private String titre;
 	private LocalDate dateDebut;
@@ -13,6 +18,10 @@ public class Avenant {
 	private LocalDate dateAvenant;
 	// Fk objects:
 	private Project project;
+
+	private List<Produit> produits;
+
+	private List<Tache> taches;
 
 	public Avenant(Integer id, String titre, LocalDate dateDebut, Integer delai, Boolean valide, String reference,
 			Integer idCmc, LocalDate dateAvenant, Project project) {
@@ -26,6 +35,34 @@ public class Avenant {
 		this.idCmc = idCmc;
 		this.dateAvenant = dateAvenant;
 		this.project = project;
+	}
+
+	@Override
+	public List<List<Colorable>> getSons() {
+		List<List<Colorable>> sons = new ArrayList<>();
+		List<Colorable> colorableProduits = new ArrayList<>();
+		List<Colorable> colorableTaches = new ArrayList<>();
+		if (produits != null)
+			colorableProduits = produits.stream()
+					.map(produit -> (Colorable) produit)
+					.collect(Collectors.toList());
+		if (taches != null)
+			colorableTaches = taches.stream()
+					.map(tache -> (Colorable) tache)
+					.collect(Collectors.toList());
+		sons.add(colorableProduits);
+		sons.add(colorableTaches);
+		return sons;
+	}
+	// "pas de produits associé"
+	//
+
+	public List<String> getErrors() {
+		List<String> errors = new ArrayList<>();
+
+		errors.add("pas de produits associé");
+		errors.add("pas de taches associé");
+		return errors;
 	}
 
 	public Avenant() {
@@ -102,6 +139,22 @@ public class Avenant {
 
 	public void setProject(Project project) {
 		this.project = project;
+	}
+
+	public List<Produit> getProduits() {
+		return produits;
+	}
+
+	public void setProduits(List<Produit> produits) {
+		this.produits = produits;
+	}
+
+	public List<Tache> getTaches() {
+		return taches;
+	}
+
+	public void setTaches(List<Tache> taches) {
+		this.taches = taches;
 	}
 
 	// business methods:
