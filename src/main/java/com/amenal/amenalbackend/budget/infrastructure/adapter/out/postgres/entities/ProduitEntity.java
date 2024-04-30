@@ -1,7 +1,5 @@
 package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities;
 
-import com.amenal.amenalbackend.budget.core.domain.MetreAv;
-import com.amenal.amenalbackend.budget.core.domain.Tache;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -11,39 +9,38 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "produit")
 public class ProduitEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_produit")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_produit")
+	private Integer id;
 
-    @Column(name = "designation")
-    private String designation;
+	@Column(name = "designation")
+	private String designation;
 
-    @Column(name = "upb")
-    private String upb;
+	@Column(name = "upb")
+	private String upb;
 
-    @Column(name = "art")
-    private String art;
+	@Column(name = "art")
+	private String art;
 
-    @Column(name = "ppm")
-    private Double ppm;
+	@Column(name = "ppm")
+	private Double ppm;
 
-    @Column(name = "qpm")
-    private Double qpm;
+	@Column(name = "qpm")
+	private Double qpm;
 
-    // Fk objects:
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_metre_av")
-    private MetreAvEntity metre;
+	// Fk objects:
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_metre_av")
+	private MetreAvEntity metre;
 
-	public ProduitEntity(Integer id, String art, String designation, String upb, Double ppm, Double qpm, MetreAvEntity metre) {
+	public ProduitEntity(Integer id, String art, String designation, String upb, Double ppm, Double qpm,
+			MetreAvEntity metre) {
 		this.id = id;
 		this.art = art;
 		this.designation = designation;

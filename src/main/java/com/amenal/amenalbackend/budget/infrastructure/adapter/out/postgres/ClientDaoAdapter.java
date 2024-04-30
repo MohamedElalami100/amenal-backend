@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.budget.core.domain.Client;
 import com.amenal.amenalbackend.budget.core.port.out.ClientDao;
-import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.ClientEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.ClientRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -58,6 +56,7 @@ public class ClientDaoAdapter implements ClientDao {
 		ClientEntity updatedEntity = clientRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, Client.class);
 	}
+
 	@Override
 	public void deleteClient(Integer id) {
 		// Check if Client with the given ID exists

@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.budget.core.domain.GrpQualite;
 import com.amenal.amenalbackend.budget.core.port.out.GrpQualiteDao;
-import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.GrpQualiteEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.GrpQualiteRepository;
 import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementException;
 
@@ -50,7 +48,8 @@ public class GrpQualiteDaoAdapter implements GrpQualiteDao {
 			List<GrpQualiteEntity> sameGrpQualiteEntities = grpQualiteRepository.getGrpQualitesByTacheIdAndTitre(
 					grpQualite.getTache().getId(), grpQualite.getTitre());
 			List<GrpQualite> sameGrpQualites = sameGrpQualiteEntities.stream()
-					.map(grpQualiteEntity -> modelMapper.map(grpQualiteEntity, GrpQualite.class)).collect(Collectors.toList());
+					.map(grpQualiteEntity -> modelMapper.map(grpQualiteEntity, GrpQualite.class))
+					.collect(Collectors.toList());
 			if (!sameGrpQualites.isEmpty()) {
 				throw new DuplicateElementException("Charge existe deja");
 			}
@@ -69,11 +68,12 @@ public class GrpQualiteDaoAdapter implements GrpQualiteDao {
 
 		try {
 			// if there is a grpQualite with the same designation in the same avenant:
-			if(!grpQualite.getTitre().equals(existingEntity.getTitre())) {
+			if (!grpQualite.getTitre().equals(existingEntity.getTitre())) {
 				List<GrpQualiteEntity> sameGrpQualiteEntities = grpQualiteRepository.getGrpQualitesByTacheIdAndTitre(
 						grpQualite.getTache().getId(), grpQualite.getTitre());
 				List<GrpQualite> sameGrpQualites = sameGrpQualiteEntities.stream()
-						.map(grpQualiteEntity -> modelMapper.map(grpQualiteEntity, GrpQualite.class)).collect(Collectors.toList());
+						.map(grpQualiteEntity -> modelMapper.map(grpQualiteEntity, GrpQualite.class))
+						.collect(Collectors.toList());
 				if (!sameGrpQualites.isEmpty()) {
 					throw new DuplicateElementException("Charge existe deja");
 				}
@@ -88,7 +88,6 @@ public class GrpQualiteDaoAdapter implements GrpQualiteDao {
 		GrpQualiteEntity updatedEntity = grpQualiteRepository.save(newEntity);
 		return modelMapper.map(updatedEntity, GrpQualite.class);
 	}
-
 
 	@Override
 	public void deleteGrpQualite(Integer id) {
@@ -106,7 +105,8 @@ public class GrpQualiteDaoAdapter implements GrpQualiteDao {
 			List<GrpQualiteEntity> sameGrpQualiteEntities = grpQualiteRepository.getGrpQualitesByTacheIdAndTitre(
 					grpQualite.getTache().getId(), grpQualite.getTitre());
 			List<GrpQualite> sameGrpQualites = sameGrpQualiteEntities.stream()
-					.map(grpQualiteEntity -> modelMapper.map(grpQualiteEntity, GrpQualite.class)).collect(Collectors.toList());
+					.map(grpQualiteEntity -> modelMapper.map(grpQualiteEntity, GrpQualite.class))
+					.collect(Collectors.toList());
 			if (!sameGrpQualites.isEmpty()) {
 				return sameGrpQualites.get(0);
 			}

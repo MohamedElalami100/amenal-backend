@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.budget.core.domain.Document;
 import com.amenal.amenalbackend.budget.core.port.out.DocumentDao;
-import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DocumentEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.DocumentRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -48,7 +46,7 @@ public class DocumentDaoAdapter implements DocumentDao {
 		DocumentEntity savedEntity = documentRepository.save(documentEntity);
 		return modelMapper.map(savedEntity, Document.class);
 	}
-	
+
 	@Override
 	public Document updateDocument(Document document) {
 		DocumentEntity existingEntity = documentRepository.findByUrl(document.getUrl()).orElseThrow();

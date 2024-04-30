@@ -9,26 +9,25 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "lot")
 public class LotEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_lot")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_lot")
+	private Integer id;
 
-    @Column(name = "designation")
-    private String designation;
+	@Column(name = "designation")
+	private String designation;
 
-    @Column(name = "ordre")
-    private Integer ordre;
+	@Column(name = "ordre")
+	private Integer ordre;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_project")
-    private ProjectEntity project;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_project")
+	private ProjectEntity project;
 
 	public LotEntity(Integer id, String designation, Integer ordre, ProjectEntity project) {
 		this.id = id;

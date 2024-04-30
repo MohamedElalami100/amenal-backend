@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.budget.core.domain.Banque;
 import com.amenal.amenalbackend.budget.core.port.out.BanqueDao;
-import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.BanqueEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.BanqueRepository;
 
 import lombok.RequiredArgsConstructor;

@@ -1,10 +1,6 @@
 package com.amenal.amenalbackend.budget.core.domain;
 
-import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailQualiteEntity;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DetailQualiteAttente {
 	private Integer id;
@@ -19,7 +15,8 @@ public class DetailQualiteAttente {
 	private String erreur;
 	private MetreAv metre;
 
-	public DetailQualiteAttente(Integer id, String ordre, String produit, String lot, String activite, String upb, Boolean cle,
+	public DetailQualiteAttente(Integer id, String ordre, String produit, String lot, String activite, String upb,
+			Boolean cle,
 			String groupe, String pointDeControle, String erreur, MetreAv metre) {
 		super();
 		this.id = id;
@@ -132,10 +129,10 @@ public class DetailQualiteAttente {
 	}
 
 	public String getAndCalculateErreurMessage(List<Tache> tachesInOtherAvenants, List<Tache> tachesInSameAvenants,
-											   List<DetailQualiteAttente> otherDetailsInAttente,
-											   List<DetailQualite> otherDetailQualites, boolean skipTacheError) {
+			List<DetailQualiteAttente> otherDetailsInAttente,
+			List<DetailQualite> otherDetailQualites, boolean skipTacheError) {
 		// set error message:
-		if (!skipTacheError){
+		if (!skipTacheError) {
 			// check if a one of the first fields is null or contain an empty string
 			String erreur = "";
 			try {
@@ -143,12 +140,12 @@ public class DetailQualiteAttente {
 						? "| Produit Vide "
 						: "")
 						+ (this.getLot() == null || this.getLot().isEmpty() ? "| Lot Vide "
-						: "")
+								: "")
 						+ (this.getActivite() == null || this.getActivite() == ""
-						? "| Activite Vide "
-						: "")
+								? "| Activite Vide "
+								: "")
 						+ (this.getUpb() == null || this.getUpb().isEmpty() ? "| Unite Vide "
-						: "");
+								: "");
 				if (!erreur.isEmpty())
 					return "(1)" + erreur;
 			} catch (NullPointerException e) {
@@ -227,7 +224,7 @@ public class DetailQualiteAttente {
 							if (tache.getTitreActivite().equalsIgnoreCase(this.getActivite())
 									&& tache.getLot().getDesignation().equalsIgnoreCase(this.getLot())
 									&& tache.getProduit().getDesignation()
-									.equalsIgnoreCase(this.getProduit())) {
+											.equalsIgnoreCase(this.getProduit())) {
 								if (tache.getCle()) {
 									activitePrincipaleExist = true;
 								}
@@ -248,8 +245,8 @@ public class DetailQualiteAttente {
 		erreur = (this.getGroupe() == null || this.getGroupe().isEmpty() ? "| Groupe Vide "
 				: "")
 				+ (this.getPointDeControle() == null || this.getPointDeControle().isEmpty()
-				? "| Point de controle Vide "
-				: "");
+						? "| Point de controle Vide "
+						: "");
 		if (!erreur.isEmpty())
 			return "(7)" + erreur;
 
@@ -286,9 +283,9 @@ public class DetailQualiteAttente {
 				if (detailQualite.getGroupe().getTache().getTitreActivite()
 						.equalsIgnoreCase(this.getActivite())
 						&& detailQualite.getGroupe().getTache().getLot().getDesignation()
-						.equalsIgnoreCase(this.getLot())
+								.equalsIgnoreCase(this.getLot())
 						&& detailQualite.getGroupe().getTache().getProduit().getDesignation()
-						.equalsIgnoreCase(this.getProduit())
+								.equalsIgnoreCase(this.getProduit())
 						&& detailQualite.getGroupe().getTitre().equalsIgnoreCase(this.getGroupe())
 						&& detailQualite.getPointDeControle().equalsIgnoreCase(this.getPointDeControle())) {
 					return "(8)DOUBLONS DE LIGNES";

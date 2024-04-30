@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amenal.amenalbackend.budget.core.domain.Lot;
 import com.amenal.amenalbackend.budget.core.port.out.LotDao;
-import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.LotEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.LotRepository;
 import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementException;
 

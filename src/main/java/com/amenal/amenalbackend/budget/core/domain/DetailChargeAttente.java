@@ -1,13 +1,7 @@
 package com.amenal.amenalbackend.budget.core.domain;
 
-import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailChargeAttenteEntity;
-import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailChargeEntity;
-import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.TacheEntity;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DetailChargeAttente {
 	private Integer id;
@@ -33,7 +27,8 @@ public class DetailChargeAttente {
 		super();
 	}
 
-	public DetailChargeAttente(Integer id, String ordre, String produit, String lot, String activite, String upb, Boolean cle,
+	public DetailChargeAttente(Integer id, String ordre, String produit, String lot, String activite, String upb,
+			Boolean cle,
 			String charge, String nature, String ucb, Double qcb, Double pcb, Double mcb, String rcb, Double qpb,
 			LocalDate ddb, String erreur, MetreAv metre) {
 		super();
@@ -57,7 +52,6 @@ public class DetailChargeAttente {
 		this.metre = metre;
 	}
 
-	
 	public Integer getId() {
 		return id;
 	}
@@ -193,7 +187,7 @@ public class DetailChargeAttente {
 	public void setErreur(String erreur) {
 		this.erreur = erreur;
 	}
-	
+
 	public MetreAv getMetre() {
 		return metre;
 	}
@@ -206,11 +200,11 @@ public class DetailChargeAttente {
 		this.metre = metre;
 	}
 
-	public String getAndCalculateErreurMessage(List<Tache> tachesInOtherAvenants,List<Tache> tachesInSameAvenants,
-								   List<DetailChargeAttente> otherDetailsInAttente,
-									List<DetailCharge> otherDetailCharges, boolean skipTacheError) {
+	public String getAndCalculateErreurMessage(List<Tache> tachesInOtherAvenants, List<Tache> tachesInSameAvenants,
+			List<DetailChargeAttente> otherDetailsInAttente,
+			List<DetailCharge> otherDetailCharges, boolean skipTacheError) {
 		// set error message:
-		if (!skipTacheError){
+		if (!skipTacheError) {
 			// check if a one of the first fields is null or contain an empty string
 			String erreur = "";
 			try {
@@ -218,12 +212,12 @@ public class DetailChargeAttente {
 						? "| Produit Vide "
 						: "")
 						+ (this.getLot() == null || this.getLot().isEmpty() ? "| Lot Vide "
-						: "")
+								: "")
 						+ (this.getActivite() == null || this.getActivite() == ""
-						? "| Activite Vide "
-						: "")
+								? "| Activite Vide "
+								: "")
 						+ (this.getUpb() == null || this.getUpb().isEmpty() ? "| Unite Vide "
-						: "");
+								: "");
 				if (!erreur.isEmpty())
 					return "(1)" + erreur;
 			} catch (NullPointerException e) {
@@ -302,7 +296,7 @@ public class DetailChargeAttente {
 							if (tache.getTitreActivite().equalsIgnoreCase(this.getActivite())
 									&& tache.getLot().getDesignation().equalsIgnoreCase(this.getLot())
 									&& tache.getProduit().getDesignation()
-									.equalsIgnoreCase(this.getProduit())) {
+											.equalsIgnoreCase(this.getProduit())) {
 								if (tache.getCle()) {
 									activitePrincipaleExist = true;
 								}
@@ -325,8 +319,8 @@ public class DetailChargeAttente {
 					? "| Charge Vide "
 					: "")
 					+ (this.getUcb() == null || this.getUcb().isEmpty()
-					? "| Unite Charge Vide "
-					: "")
+							? "| Unite Charge Vide "
+							: "")
 					+ (this.getQcb() == null || this.getQcb() == 0 ? "| Qcb null " : "")
 					+ (this.getPcb() == null || this.getPcb() == 0 ? "| Pcb null " : "");
 			if (!erreur.isEmpty())
@@ -363,9 +357,9 @@ public class DetailChargeAttente {
 			try {
 				if (detailCharge.getTache().getTitreActivite().equalsIgnoreCase(this.getActivite())
 						&& detailCharge.getTache().getLot().getDesignation()
-						.equalsIgnoreCase(this.getLot())
+								.equalsIgnoreCase(this.getLot())
 						&& detailCharge.getTache().getProduit().getDesignation()
-						.equalsIgnoreCase(this.getProduit())
+								.equalsIgnoreCase(this.getProduit())
 						&& detailCharge.getCharge().equalsIgnoreCase(this.getCharge())) {
 					return "(8)DOUBLONS DE LIGNES";
 				}
