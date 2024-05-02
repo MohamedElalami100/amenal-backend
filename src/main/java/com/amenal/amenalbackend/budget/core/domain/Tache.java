@@ -1,6 +1,6 @@
 package com.amenal.amenalbackend.budget.core.domain;
 
-import com.amenal.amenalbackend.utils.core.domain.Colorable;
+import com.amenal.amenalbackend.utils.core.domain.HasSons;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 //SousProduitAv in Microsoft access database
-public class Tache extends Colorable {
+public class Tache implements HasSons{
 	private Integer id;
 	private String titreActivite;
 	private String upb;
@@ -40,17 +40,17 @@ public class Tache extends Colorable {
 	}
 
 	@Override
-	public List<List<Colorable>> getSons() {
-		List<List<Colorable>> sons = new ArrayList<>();
-		List<Colorable> colorableDetailProduits = new ArrayList<>();
-		List<Colorable> colorableDetailCharges = new ArrayList<>();
+	public List<List<HasSons>> getSons() {
+		List<List<HasSons>> sons = new ArrayList<>();
+		List<HasSons> colorableDetailProduits = new ArrayList<>();
+		List<HasSons> colorableDetailCharges = new ArrayList<>();
 		if (detailProduits != null)
 			colorableDetailProduits = detailProduits.stream()
-					.map(detailProduit -> (Colorable) detailProduit)
+					.map(detailProduit -> (HasSons) detailProduit)
 					.collect(Collectors.toList());
 		if (detailCharges != null)
 			colorableDetailCharges = detailCharges.stream()
-					.map(detailCharge -> (Colorable) detailCharge)
+					.map(detailCharge -> (HasSons) detailCharge)
 					.collect(Collectors.toList());
 		sons.add(colorableDetailProduits);
 		sons.add(colorableDetailCharges);

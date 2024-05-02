@@ -1,13 +1,13 @@
 package com.amenal.amenalbackend.budget.core.domain;
 
-import com.amenal.amenalbackend.utils.core.domain.Colorable;
+import com.amenal.amenalbackend.utils.core.domain.HasSons;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Avenant extends Colorable {
+public class Avenant implements HasSons{
 	private Integer id;
 	private String titre;
 	private LocalDate dateDebut;
@@ -38,17 +38,17 @@ public class Avenant extends Colorable {
 	}
 
 	@Override
-	public List<List<Colorable>> getSons() {
-		List<List<Colorable>> sons = new ArrayList<>();
-		List<Colorable> colorableProduits = new ArrayList<>();
-		List<Colorable> colorableTaches = new ArrayList<>();
+	public List<List<HasSons>> getSons() {
+		List<List<HasSons>> sons = new ArrayList<>();
+		List<HasSons> colorableProduits = new ArrayList<>();
+		List<HasSons> colorableTaches = new ArrayList<>();
 		if (produits != null)
 			colorableProduits = produits.stream()
-					.map(produit -> (Colorable) produit)
+					.map(produit -> (HasSons) produit)
 					.collect(Collectors.toList());
 		if (taches != null)
 			colorableTaches = taches.stream()
-					.map(tache -> (Colorable) tache)
+					.map(tache -> (HasSons) tache)
 					.collect(Collectors.toList());
 		sons.add(colorableProduits);
 		sons.add(colorableTaches);

@@ -1,12 +1,12 @@
 package com.amenal.amenalbackend.budget.core.domain;
 
-import com.amenal.amenalbackend.utils.core.domain.Colorable;
+import com.amenal.amenalbackend.utils.core.domain.HasSons;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //détailslotav in Microsoft access database
-public class DetailProduit extends Colorable {
+public class DetailProduit implements HasSons{
 	private Integer id;
 	private String reference;
 	private Double nbr;
@@ -32,7 +32,7 @@ public class DetailProduit extends Colorable {
 	}
 
 	@Override
-	public List<List<Colorable>> getSons() {
+	public List<List<HasSons>> getSons() {
 		return new ArrayList<>();
 	}
 

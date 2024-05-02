@@ -1,12 +1,12 @@
 package com.amenal.amenalbackend.budget.core.domain;
 
-import com.amenal.amenalbackend.utils.core.domain.Colorable;
+import com.amenal.amenalbackend.utils.core.domain.HasSons;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Produit extends Colorable {
+public class Produit implements HasSons{
 	private Integer id;
 	private String art;
 	private String designation;
@@ -30,7 +30,7 @@ public class Produit extends Colorable {
 	}
 
 	@Override
-	public List<List<Colorable>> getSons() {
+	public List<List<HasSons>> getSons() {
 		return new ArrayList<>();
 	}
 

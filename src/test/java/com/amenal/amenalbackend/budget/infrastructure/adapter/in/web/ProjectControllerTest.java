@@ -2,7 +2,11 @@ package com.amenal.amenalbackend.budget.infrastructure.adapter.in.web;
 
 import com.amenal.amenalbackend.budget.core.domain.Project;
 import com.amenal.amenalbackend.budget.core.port.in.ProjectUseCase;
+import com.amenal.amenalbackend.security.auth.AuthenticationService;
+import com.amenal.amenalbackend.security.auth.RegisterRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +16,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.List;
 
+import static com.amenal.amenalbackend.security.user.Role.ADMIN;
 import static org.hamcrest.Matchers.containsString;
 
 @SpringBootTest
@@ -32,11 +35,32 @@ public class ProjectControllerTest {
 
         private ProjectUseCase projectDaoAdapter;
 
+        private AuthenticationService authenticationService;
+
+        private String adminToken;
+
         @Autowired
-        public ProjectControllerTest(MockMvc mockMvc, ProjectUseCase projectDaoAdapter) {
+        public ProjectControllerTest(MockMvc mockMvc, ProjectUseCase projectDaoAdapter,
+                                     AuthenticationService authenticationService) {
                 this.mockMvc = mockMvc;
                 this.projectDaoAdapter = projectDaoAdapter;
+                this.authenticationService = authenticationService;
                 this.objectMapper = new ObjectMapper();
+        }
+
+        @BeforeEach
+        public void setUp() throws Exception {
+                // Create admin user before each test
+                RegisterRequest adminRequest = RegisterRequest.builder()
+                        .firstname("Admin")
+                        .lastname("Admin")
+                        .email("admino@mail.com")
+                        .password("password")
+                        .role(ADMIN)
+                        .build();
+
+                // Register admin user and retrieve JWT token
+                adminToken = authenticationService.register(adminRequest).getAccessToken();
         }
 
         @Test
@@ -44,12 +68,14 @@ public class ProjectControllerTest {
                 Project project = new Project();
                 project.setId(1);
                 project.setDoc("doc");
+                project.setCreatedBy(1);
+
 
                 Project savedProject = projectDaoAdapter.saveProject(project);
 
                 mockMvc.perform(
                                 MockMvcRequestBuilders.get("/projects/{id}", savedProject.getId())
-                                                .contentType(MediaType.APPLICATION_JSON))
+                                        .header("Authorization", "Bearer " + adminToken))
                                 .andExpect(
                                                 MockMvcResultMatchers.status().isOk())
                                 .andExpect(
@@ -61,12 +87,13 @@ public class ProjectControllerTest {
                 Project project = new Project();
                 project.setId(1);
                 project.setDoc("doc");
+                project.setCreatedBy(1);
 
                 projectDaoAdapter.saveProject(project);
 
                 mockMvc.perform(
                                 MockMvcRequestBuilders.get("/projects")
-                                                .contentType(MediaType.APPLICATION_JSON))
+                                        .header("Authorization", "Bearer " + adminToken))
                                 .andExpect(
                                                 MockMvcResultMatchers.status().isOk())
                                 .andExpect(
@@ -77,6 +104,7 @@ public class ProjectControllerTest {
         public void testSaveProject() throws Exception {
                 Project project = new Project();
                 project.setDoc("doc");
+                project.setCreatedBy(1);
 
                 mockMvc.perform(
                                 MockMvcRequestBuilders.post("/projects")
@@ -92,6 +120,7 @@ public class ProjectControllerTest {
         public void testUpdateProject() throws Exception {
                 Project project = new Project();
                 project.setDoc("doc");
+                project.setCreatedBy(1);
 
                 Project savedProject = projectDaoAdapter.saveProject(project);
 
@@ -110,6 +139,7 @@ public class ProjectControllerTest {
                 Project project = new Project();
                 project.setId(1);
                 project.setDoc("doc");
+                project.setCreatedBy(1);
 
                 Project savedProject = projectDaoAdapter.saveProject(project);
 
@@ -122,6 +152,7 @@ public class ProjectControllerTest {
         public void testFigerProjectWithNoSons() throws Exception {
                 Project project = new Project();
                 project.setDoc("doc");
+                project.setCreatedBy(1);
 
                 Project savedProject = projectDaoAdapter.saveProject(project);
 
