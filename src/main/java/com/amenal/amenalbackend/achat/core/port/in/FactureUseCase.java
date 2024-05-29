@@ -23,6 +23,7 @@ public class FactureUseCase {
 	}
 	
 	public Facture saveFacture(Facture facture) {
+		facture.setPayee(false);
 		return factureDao.saveFacture(facture);
 	}
 	

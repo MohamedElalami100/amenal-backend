@@ -1,15 +1,11 @@
 package com.amenal.amenalbackend.utils.core.domain;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.stream.Collectors;
+import com.amenal.amenalbackend.security.auditing.AuditableEntity;
 
-public abstract class Colorable {
+public abstract class Colorable extends AuditableEntity implements HasSons{
     private Integer status;
-
-    public abstract List<List<Colorable>> getSons();
-
-    public abstract List<String> getErrors();
 
     public Colorable() {
         this.status = 0;
@@ -21,21 +17,6 @@ public abstract class Colorable {
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    private HashSet<String> checkIfOneSonIsEmptyAndReturnError() {
-        HashSet<String> errorsSet = new HashSet<>();
-        int idx = 0;
-        for (List<Colorable> sonList : this.getSons()) {
-            if (sonList.size() == 0)
-                errorsSet.add(this.getErrors().get(idx));
-
-            for (Colorable son : sonList) {
-                errorsSet.addAll(son.checkIfOneSonIsEmptyAndReturnError());
-            }
-            idx++;
-        }
-        return errorsSet;
     }
 
     public String peutEtreFiger() {

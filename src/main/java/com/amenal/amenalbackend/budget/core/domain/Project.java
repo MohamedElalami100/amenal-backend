@@ -1,6 +1,8 @@
 package com.amenal.amenalbackend.budget.core.domain;
 
 import com.amenal.amenalbackend.utils.core.domain.Colorable;
+import com.amenal.amenalbackend.utils.core.domain.HasSons;
+import com.amenal.amenalbackend.utils.core.domain.HasSons;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -104,17 +106,17 @@ public class Project extends Colorable {
 	}
 
 	@Override
-	public List<List<Colorable>> getSons() {
-		List<List<Colorable>> sons = new ArrayList<>();
-		List<Colorable> colorableAvenants = new ArrayList<>();
-		List<Colorable> colorableLots = new ArrayList<>();
+	public List<List<HasSons>> getSons() {
+		List<List<HasSons>> sons = new ArrayList<>();
+		List<HasSons> colorableAvenants = new ArrayList<>();
+		List<HasSons> colorableLots = new ArrayList<>();
 		if (avenants != null)
 			colorableAvenants = avenants.stream()
-					.map(avenant -> (Colorable) avenant)
+					.map(avenant -> (HasSons) avenant)
 					.collect(Collectors.toList());
 		if (lots != null)
 			colorableLots = lots.stream()
-					.map(lot -> (Colorable) lot)
+					.map(lot -> (HasSons) lot)
 					.collect(Collectors.toList());
 		sons.add(colorableAvenants);
 		sons.add(colorableLots);

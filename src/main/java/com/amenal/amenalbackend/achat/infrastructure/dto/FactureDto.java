@@ -16,6 +16,7 @@ public class FactureDto {
     private Double mntHtNote;
     private Double mntTvaNote;
     private Double mntTtcNote;
+    private Boolean isPayee;
 
     private Fournisseur fournisseur;
     private List<Reception> receptions;
@@ -159,5 +160,13 @@ public class FactureDto {
 
     public void setMntTtc(Double mntTtc) {
         this.mntTtc = mntTtc;
+    }
+
+    public Boolean getPayee() {
+        return isPayee;
+    }
+
+    public void setPayee(Boolean payee) {
+        isPayee = payee;
     }
 }

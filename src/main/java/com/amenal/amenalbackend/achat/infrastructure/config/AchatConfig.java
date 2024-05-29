@@ -149,8 +149,8 @@ public class AchatConfig {
 	}
 
 	@Bean
-	public PaiementUseCase paiementUseCase(PaiementDao paiementDao) {
-		return new PaiementUseCase(paiementDao);
+	public PaiementUseCase paiementUseCase(PaiementDao paiementDao, FactureDao factureDao) {
+		return new PaiementUseCase(paiementDao, factureDao);
 	}
 
 	@Bean

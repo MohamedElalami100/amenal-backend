@@ -19,4 +19,7 @@ public interface DetailChargeDao {
     List<DetailCharge> getDetailChargesByAvenantId(Integer id);
 
     List<DetailCharge> getDetailChargesByTacheId(Integer id);
-}
+
+	List<DetailCharge> getDetailChargesByProjectId(Integer id);
+
+	}

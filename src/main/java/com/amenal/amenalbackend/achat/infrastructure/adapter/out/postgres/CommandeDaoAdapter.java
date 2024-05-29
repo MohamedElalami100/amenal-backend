@@ -67,4 +67,11 @@ public class CommandeDaoAdapter implements CommandeDao {
 		commandeRepository.delete(commandeEntity);
 	}
 
+	@Override
+	public List<Commande> getCommandesByProjectId(Integer id) {
+		List<CommandeEntity> commandeEntities = commandeRepository.getCommandesByProjectId(id);
+		return commandeEntities.stream().map(commandeEntity -> modelMapper.map(commandeEntity, Commande.class))
+				.collect(Collectors.toList());
+	}
+
 }

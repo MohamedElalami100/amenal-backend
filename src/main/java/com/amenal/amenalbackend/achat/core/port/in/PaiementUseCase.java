@@ -3,14 +3,18 @@ package com.amenal.amenalbackend.achat.core.port.in;
 import java.util.List;
 
 import com.amenal.amenalbackend.achat.core.domain.Paiement;
+import com.amenal.amenalbackend.achat.core.port.out.FactureDao;
 import com.amenal.amenalbackend.achat.core.port.out.PaiementDao;
 
 public class PaiementUseCase {
 	
 	private PaiementDao paiementDao;
-	
-	public PaiementUseCase(PaiementDao paiementDao) {
+
+	private FactureDao factureDao;
+
+	public PaiementUseCase(PaiementDao paiementDao, FactureDao factureDao) {
 		this.paiementDao = paiementDao;
+		this.factureDao = factureDao;
 	}
 
 	public Paiement findPaiementById(Integer id) {
@@ -22,6 +26,13 @@ public class PaiementUseCase {
 	}
 	
 	public Paiement savePaiement(Paiement paiement) {
+		if(paiement.getFactures() != null){
+			var facturesPayee = paiement.getFactures();
+			for (var facturePayee: facturesPayee) {
+				facturePayee.setPayee(true);
+				factureDao.updateFacture(facturePayee);
+			}
+		}
 		return paiementDao.savePaiement(paiement);
 	}
 	

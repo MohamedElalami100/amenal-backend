@@ -1,5 +1,7 @@
 package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities;
 
+import com.amenal.amenalbackend.security.auditing.AuditableEntity;
+import com.amenal.amenalbackend.utils.infrastructure.ColorableEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,7 +15,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "project")
-public class ProjectEntity {
+public class ProjectEntity extends ColorableEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

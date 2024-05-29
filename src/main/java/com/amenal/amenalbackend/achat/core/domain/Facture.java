@@ -13,6 +13,8 @@ public class Facture {
 	private Double mntTvaNote;
 	private Double mntTtcNote;
 
+	private Boolean isPayee;
+
 	private Fournisseur fournisseur;
 	private List<Reception> receptions;
 	private List<DetailFacture> detailFactures;
@@ -124,6 +126,14 @@ public class Facture {
 
 	public void setDetailFactures(List<DetailFacture> detailFactures) {
 		this.detailFactures = detailFactures;
+	}
+
+	public Boolean getPayee() {
+		return isPayee;
+	}
+
+	public void setPayee(Boolean payee) {
+		isPayee = payee;
 	}
 
 	//Business methods:
