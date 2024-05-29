@@ -15,4 +15,5 @@ public interface CommandeDao {
 	
 	void deleteCommande(Integer id);
 
+    List<Commande> getCommandesByProjectId(Integer id);
 }

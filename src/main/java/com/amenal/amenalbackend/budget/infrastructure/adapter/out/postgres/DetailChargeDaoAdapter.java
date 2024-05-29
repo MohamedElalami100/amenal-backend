@@ -110,4 +110,11 @@ public class DetailChargeDaoAdapter implements DetailChargeDao {
 				.collect(Collectors.toList());
 	}
 
+	@Override
+	public List<DetailCharge> getDetailChargesByProjectId(Integer id) {
+		List<DetailChargeEntity> detailChargeEntities = detailChargeRepository.getDetailChargesByProjectId(id);
+		return detailChargeEntities.stream().map(detailChargeEntity -> modelMapper.map(detailChargeEntity, DetailCharge.class))
+				.collect(Collectors.toList());
+	}
+
 }
