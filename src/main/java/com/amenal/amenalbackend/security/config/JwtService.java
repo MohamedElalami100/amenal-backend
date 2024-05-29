@@ -1,5 +1,6 @@
 package com.amenal.amenalbackend.security.config;
 
+import com.amenal.amenalbackend.security.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -35,8 +36,16 @@ public class JwtService {
   }
 
   public String generateToken(UserDetails userDetails) {
-    return generateToken(new HashMap<>(), userDetails);
+    Map<String, Object> claims = new HashMap<>();
+    if (userDetails instanceof User) {
+      User user = (User) userDetails;
+      claims.put("firstName", user.getFirstname());
+      claims.put("lastName", user.getLastname());
+      claims.put("role", user.getRole());
+    }
+    return generateToken(claims, userDetails);
   }
+
 
   public String generateToken(
       Map<String, Object> extraClaims,
