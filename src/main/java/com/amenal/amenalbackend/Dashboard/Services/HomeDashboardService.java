@@ -116,7 +116,7 @@ public class HomeDashboardService {
         //facturesAPayer
         List<FactureResumeDto> factureResumeDtos = new ArrayList<>();
         List<FactureDto> facturesAPayer = factureDao.findAllFactures().stream()
-                .filter(facture -> !facture.getPayee())
+                .filter(facture -> facture.getPayee() != null && !facture.getPayee())
                 .collect(Collectors.toList());
         for (FactureDto facture: facturesAPayer) {
             FactureResumeDto factureResumeDto = FactureResumeDto.builder()
