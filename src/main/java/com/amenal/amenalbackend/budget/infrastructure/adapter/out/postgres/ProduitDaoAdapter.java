@@ -57,7 +57,7 @@ public class ProduitDaoAdapter implements ProduitDao {
 		try {
 			// if there is a produit with the same designation in the same avenant:
 			List<ProduitEntity> sameProduitEntities = produitRepository.getProduitsByAvenantIdAndDesignation(
-					produit.getMetre().getBudget().getAvenant().getId(), produit.getDesignation());
+					produit.getMetre().getAvenant().getId(), produit.getDesignation());
 			List<Produit> sameProduits = sameProduitEntities.stream()
 					.map(produitEntity -> modelMapper.map(produitEntity, Produit.class)).collect(Collectors.toList());
 			if (!sameProduits.isEmpty()) {
@@ -80,7 +80,7 @@ public class ProduitDaoAdapter implements ProduitDao {
 			// if there is a produit with the same designation in the same avenant:
 			if (!produit.getDesignation().equals(existingEntity.getDesignation())) {
 				List<ProduitEntity> sameProduitEntities = produitRepository.getProduitsByAvenantIdAndDesignation(
-						produit.getMetre().getBudget().getAvenant().getId(), produit.getDesignation());
+						produit.getMetre().getAvenant().getId(), produit.getDesignation());
 				List<Produit> sameProduits = sameProduitEntities.stream()
 						.map(produitEntity -> modelMapper.map(produitEntity, Produit.class))
 						.collect(Collectors.toList());

@@ -11,7 +11,7 @@ import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entit
 @Repository
 public interface MetreAvRepository extends JpaRepository<MetreAvEntity, Integer>{
 
-	@Query("SELECT p FROM MetreAvEntity p WHERE p.budget.avenant.id = :id")
+	@Query("SELECT p FROM MetreAvEntity p WHERE p.avenant.id = :id")
 	List<MetreAvEntity> getMetresByAvenantId(Integer id);
 
 }

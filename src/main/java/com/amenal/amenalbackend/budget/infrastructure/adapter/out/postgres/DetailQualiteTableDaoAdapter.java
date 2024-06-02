@@ -149,7 +149,7 @@ public class DetailQualiteTableDaoAdapter implements DetailQualiteTableDao {
 		Produit produit = modelMapper.map(produitEntity, Produit.class);
 
 		List<DetailQualiteTableDto> detailQualiteTableDtos = getDetailQualiteTableByAvenantId(
-				produit.getMetre().getBudget().getAvenant().getId());
+				produit.getMetre().getAvenant().getId());
 
 		List<DetailQualiteTableDto> filteredDetailQualite = detailQualiteTableDtos.stream()
 				.filter(obj -> obj.getProduitId() == produitId && obj.getLotId() == lotId).collect(Collectors.toList());
@@ -162,7 +162,7 @@ public class DetailQualiteTableDaoAdapter implements DetailQualiteTableDao {
 		Produit produit = modelMapper.map(produitEntity, Produit.class);
 
 		List<DetailQualiteTableDto> detailQualiteTableDtos = getDetailQualiteTableByAvenantId(
-				produit.getMetre().getBudget().getAvenant().getId());
+				produit.getMetre().getAvenant().getId());
 
 		List<DetailQualiteTableDto> filteredDetailQualite = detailQualiteTableDtos.stream()
 				.filter(obj -> obj.getProduitId() == produitId).collect(Collectors.toList());
@@ -175,7 +175,7 @@ public class DetailQualiteTableDaoAdapter implements DetailQualiteTableDao {
 		Tache tache = modelMapper.map(tacheEntity, Tache.class);
 		
 		List<DetailQualiteTableDto> detailQualiteTableDtos = getDetailQualiteTableByAvenantId(
-				tache.getProduit().getMetre().getBudget().getAvenant().getId());
+				tache.getProduit().getMetre().getAvenant().getId());
 		
 		List<DetailQualiteTableDto> filteredDetailQualite = detailQualiteTableDtos.stream()
 				.filter(obj -> obj.getActiviteId() == tacheId).collect(Collectors.toList());

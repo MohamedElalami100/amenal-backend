@@ -40,7 +40,7 @@ public class DetailQualiteAttenteUseCase {
 		List<DetailQualiteAttente> detailQualiteAttenteList = new ArrayList<>();
 		try {
 			detailQualiteAttenteList = detailQualiteAttenteDao.
-					getDetailQualiteAttentesByAvenantId(detailQualiteAttente.getMetre().getBudget().getAvenant().getId());
+					getDetailQualiteAttentesByAvenantId(detailQualiteAttente.getMetre().getAvenant().getId());
 		} catch (NullPointerException e) {
 		}
 
@@ -62,7 +62,7 @@ public class DetailQualiteAttenteUseCase {
 		List<DetailQualiteAttente> detailQualiteAttenteList = new ArrayList<>();
 		try {
 			detailQualiteAttenteList = detailQualiteAttenteDao.
-					getDetailQualiteAttentesByAvenantId(newDetailQualiteAttente.getMetre().getBudget().getAvenant().getId());
+					getDetailQualiteAttentesByAvenantId(newDetailQualiteAttente.getMetre().getAvenant().getId());
 		} catch (NullPointerException e) {
 		}
 
@@ -110,13 +110,13 @@ public class DetailQualiteAttenteUseCase {
 
 		try {
 			tachesInOtherAvenants = tacheDao.getTachesInOtherAvenants(
-					detailQualiteAttentes.get(0).getMetre().getBudget().getAvenant().getId()
+					detailQualiteAttentes.get(0).getMetre().getAvenant().getId()
 			);
 			tachesInSameAvenants = tacheDao.getTachesByAvenantId(
-					detailQualiteAttentes.get(0).getMetre().getBudget().getAvenant().getId()
+					detailQualiteAttentes.get(0).getMetre().getAvenant().getId()
 			);
 			otherDetailQualites = detailQualiteDao.getDetailQualitesByAvenantId(
-					detailQualiteAttentes.get(0).getMetre().getBudget().getAvenant().getId());
+					detailQualiteAttentes.get(0).getMetre().getAvenant().getId());
 		} catch (NullPointerException e) {
 		}
 

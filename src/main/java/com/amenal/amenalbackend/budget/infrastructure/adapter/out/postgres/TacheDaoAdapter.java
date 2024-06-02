@@ -52,7 +52,7 @@ public class TacheDaoAdapter implements TacheDao {
 		try {
 			// TACHE EXISTE DANS UN AUTRE AVENANT
 			List<TacheEntity> tachesInOtherAvenantEntities = tacheRepository
-					.getTachesInOtherAvenants(tache.getProduit().getMetre().getBudget().getAvenant().getId());
+					.getTachesInOtherAvenants(tache.getProduit().getMetre().getAvenant().getId());
 			tachesInOtherAvenants = tachesInOtherAvenantEntities.stream()
 					.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
 		} catch (NullPointerException e) {
@@ -71,7 +71,7 @@ public class TacheDaoAdapter implements TacheDao {
 		try {
 			// if there is a Tache with the same activite and lot in the same avenant:
 			List<TacheEntity> sameTacheEntities = tacheRepository.getTachesByAvenantIdAndLotAndActivite(
-					tache.getProduit().getMetre().getBudget().getAvenant().getId(), tache.getLot().getDesignation(),
+					tache.getProduit().getMetre().getAvenant().getId(), tache.getLot().getDesignation(),
 					tache.getTitreActivite());
 			List<Tache> sameTaches = sameTacheEntities.stream()
 					.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
@@ -98,7 +98,7 @@ public class TacheDaoAdapter implements TacheDao {
 				try {
 					// TACHE EXISTE DANS UN AUTRE AVENANT
 					List<TacheEntity> tachesInOtherAvenantEntities = tacheRepository
-							.getTachesInOtherAvenants(tache.getProduit().getMetre().getBudget().getAvenant().getId());
+							.getTachesInOtherAvenants(tache.getProduit().getMetre().getAvenant().getId());
 					tachesInOtherAvenants = tachesInOtherAvenantEntities.stream()
 							.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());
 				} catch (NullPointerException e) {
@@ -114,7 +114,7 @@ public class TacheDaoAdapter implements TacheDao {
 				try {
 					// if there is a Tache with the same activite and lot in the same avenant:
 					List<TacheEntity> sameTacheEntities = tacheRepository.getTachesByAvenantIdAndLotAndActivite(
-							tache.getProduit().getMetre().getBudget().getAvenant().getId(),
+							tache.getProduit().getMetre().getAvenant().getId(),
 							tache.getLot().getDesignation(), tache.getTitreActivite());
 					List<Tache> sameTaches = sameTacheEntities.stream()
 							.map(tacheEntity -> modelMapper.map(tacheEntity, Tache.class)).collect(Collectors.toList());

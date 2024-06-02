@@ -16,21 +16,21 @@ public interface TacheRepository extends JpaRepository<TacheEntity, Integer> {
 	@Query("SELECT l FROM TacheEntity l WHERE l.lot.id = :lotId")
 	List<TacheEntity> getActiviteByLotId(Integer lotId);
 
-	@Query("SELECT l FROM TacheEntity l WHERE l.lot.id = :lotId And l.produit.metre.budget.avenant.id = :avenantId")
+	@Query("SELECT l FROM TacheEntity l WHERE l.lot.id = :lotId And l.produit.metre.avenant.id = :avenantId")
 	List<TacheEntity> getActiviteByLotIdAndAvenantId(Integer lotId, Integer avenantId);
 
 	@Query("SELECT l FROM TacheEntity l WHERE l.produit.id = :produitId")
 	List<TacheEntity> getActiviteByProduitId(Integer produitId);
 
-	@Query("SELECT l FROM TacheEntity l WHERE l.produit.metre.budget.avenant.id = :id")
+	@Query("SELECT l FROM TacheEntity l WHERE l.produit.metre.avenant.id = :id")
 	List<TacheEntity> getTachesByAvenantId(Integer id);
 
-	@Query("SELECT l FROM TacheEntity l WHERE l.produit.metre.budget.avenant.id <> :id AND l.produit.metre.budget.avenant.project.id = (SELECT a.project.id FROM AvenantEntity a WHERE a.id = :id)")
+	@Query("SELECT l FROM TacheEntity l WHERE l.produit.metre.avenant.id <> :id AND l.produit.metre.avenant.project.id = (SELECT a.project.id FROM AvenantEntity a WHERE a.id = :id)")
 	List<TacheEntity> getTachesInOtherAvenants(Integer id);
 
-	@Query("SELECT l FROM TacheEntity l WHERE l.produit.metre.budget.avenant.id = :id AND l.lot.designation = :lotDesignation AND l.titreActivite = :titreActivite")
+	@Query("SELECT l FROM TacheEntity l WHERE l.produit.metre.avenant.id = :id AND l.lot.designation = :lotDesignation AND l.titreActivite = :titreActivite")
 	List<TacheEntity> getTachesByAvenantIdAndLotAndActivite(Integer id, String lotDesignation, String titreActivite);
 
-	@Query("SELECT l FROM TacheEntity l WHERE l.produit.metre.budget.avenant.id = :id And :charge IN (SELECT c.charge FROM DetailChargeEntity c WHERE c.tache.id = l.id)")
+	@Query("SELECT l FROM TacheEntity l WHERE l.produit.metre.avenant.id = :id And :charge IN (SELECT c.charge FROM DetailChargeEntity c WHERE c.tache.id = l.id)")
 	List<TacheEntity> getTachesByAvenantIdAndCharge(Integer id, String charge);
 }
