@@ -82,6 +82,9 @@ public class ProjectUseCase {
 		// figer project if it can be
 		String erreur = project.figer();
 
+		if (erreur.isEmpty())
+			projectDao.saveProject(project);
+
 		return erreur;
 	}
 
