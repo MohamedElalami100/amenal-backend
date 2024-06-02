@@ -64,13 +64,13 @@ public class MetreAvEntity {
 
 	// Fk objects:
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_budget_achat_av")
-	private BudgetAchatAvEntity budget;
+	@JoinColumn(name = "id_avenant")
+	private AvenantEntity avenant;
 
 	public MetreAvEntity(Integer id, String titre, LocalDate dateBudget, String reference, Double qteGeneralPrevu,
 			String uniteGeneral, Double pUnitaireGeneral, Integer delaiGlobalPrevu, Integer delaiGlobalReel,
 			Double qteGeneralReel, LocalDate dateDebutPrevu, LocalDate dateFinPrevu, LocalDate dateDebutReel,
-			LocalDate dateFinReel, Boolean valide, BudgetAchatAvEntity budget) {
+			LocalDate dateFinReel, Boolean valide, AvenantEntity avenant) {
 		super();
 		this.id = id;
 		this.titre = titre;
@@ -87,7 +87,7 @@ public class MetreAvEntity {
 		this.dateDebutReel = dateDebutReel;
 		this.dateFinReel = dateFinReel;
 		this.valide = valide;
-		this.budget = budget;
+		this.avenant = avenant;
 	}
 
 	public MetreAvEntity() {
@@ -214,12 +214,12 @@ public class MetreAvEntity {
 		this.valide = valide;
 	}
 
-	public BudgetAchatAvEntity getBudget() {
-		return budget;
+	public AvenantEntity getAvenant() {
+		return avenant;
 	}
 
-	public void setBudget(BudgetAchatAvEntity budget) {
-		this.budget = budget;
+	public void setAvenant(AvenantEntity avenantEntity) {
+		this.avenant = avenantEntity;
 	}
 
 }

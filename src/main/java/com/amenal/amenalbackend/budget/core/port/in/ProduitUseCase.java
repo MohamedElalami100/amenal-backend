@@ -31,7 +31,7 @@ public class ProduitUseCase {
 		// if produit existes:
 		List<Produit> currentProduits = null;
 		try {
-			currentProduits = produitDao.getProduitsByAvenantId(produit.getMetre().getBudget().getAvenant().getId());
+			currentProduits = produitDao.getProduitsByAvenantId(produit.getMetre().getAvenant().getId());
 		} catch (Exception e) {
 			System.out.println(e);
 		}

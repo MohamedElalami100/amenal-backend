@@ -137,7 +137,7 @@ public class DetailChargeTableDaoAdapter implements DetailChargeTableDao {
 		Produit produit = modelMapper.map(produitEntity, Produit.class);
 
 		List<DetailChargeTableDto> detailChargeTableDtos = getDetailChargeTableByAvenantId(
-				produit.getMetre().getBudget().getAvenant().getId());
+				produit.getMetre().getAvenant().getId());
 
 		List<DetailChargeTableDto> filteredDetailCharge = detailChargeTableDtos.stream()
 				.filter(obj -> obj.getProduitId() == produitId && obj.getLotId() == lotId).collect(Collectors.toList());
@@ -150,7 +150,7 @@ public class DetailChargeTableDaoAdapter implements DetailChargeTableDao {
 		Produit produit = modelMapper.map(produitEntity, Produit.class);
 
 		List<DetailChargeTableDto> detailChargeTableDtos = getDetailChargeTableByAvenantId(
-				produit.getMetre().getBudget().getAvenant().getId());
+				produit.getMetre().getAvenant().getId());
 
 		List<DetailChargeTableDto> filteredDetailCharge = detailChargeTableDtos.stream()
 				.filter(obj -> obj.getProduitId() == produitId).collect(Collectors.toList());
@@ -164,7 +164,7 @@ public class DetailChargeTableDaoAdapter implements DetailChargeTableDao {
 		Tache tache = modelMapper.map(tacheEntity, Tache.class);
 		
 		List<DetailChargeTableDto> detailChargeTableDtos = getDetailChargeTableByAvenantId(
-				tache.getProduit().getMetre().getBudget().getAvenant().getId());
+				tache.getProduit().getMetre().getAvenant().getId());
 		
 		List<DetailChargeTableDto> filteredDetailCharge = detailChargeTableDtos.stream()
 				.filter(obj -> obj.getActiviteId() == tacheId).collect(Collectors.toList());

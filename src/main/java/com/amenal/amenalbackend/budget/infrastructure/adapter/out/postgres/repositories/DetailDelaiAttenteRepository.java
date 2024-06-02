@@ -11,9 +11,9 @@ import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entit
 @Repository
 public interface DetailDelaiAttenteRepository extends JpaRepository<DetailDelaiAttenteEntity, Integer>{
 	
-	@Query("SELECT d FROM DetailDelaiAttenteEntity d WHERE d.id <> :id AND d.metre.budget.avenant.id = :avenantId")
+	@Query("SELECT d FROM DetailDelaiAttenteEntity d WHERE d.id <> :id AND d.metre.avenant.id = :avenantId")
 	List<DetailDelaiAttenteEntity> getOtherDetailsById(Integer id, Integer avenantId);
 	
-	@Query("SELECT d FROM DetailDelaiAttenteEntity d WHERE d.metre.budget.avenant.id = :id")
+	@Query("SELECT d FROM DetailDelaiAttenteEntity d WHERE d.metre.avenant.id = :id")
 	List<DetailDelaiAttenteEntity> getDetailDelaiAttentesByAvenantId(Integer id);
 }

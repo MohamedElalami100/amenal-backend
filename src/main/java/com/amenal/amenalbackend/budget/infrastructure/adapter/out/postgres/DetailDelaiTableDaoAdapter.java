@@ -128,7 +128,7 @@ public class DetailDelaiTableDaoAdapter implements DetailDelaiTableDao {
 		Produit produit = modelMapper.map(produitEntity, Produit.class);
 
 		List<DetailDelaiTableDto> detailDelaiTableDtos = getDetailDelaiTableByAvenantId(
-				produit.getMetre().getBudget().getAvenant().getId());
+				produit.getMetre().getAvenant().getId());
 
 		List<DetailDelaiTableDto> filteredDetailDelai = detailDelaiTableDtos.stream()
 				.filter(obj -> obj.getProduitId() == produitId && obj.getLotId() == lotId).collect(Collectors.toList());
@@ -153,7 +153,7 @@ public class DetailDelaiTableDaoAdapter implements DetailDelaiTableDao {
 		Produit produit = modelMapper.map(produitEntity, Produit.class);
 
 		List<DetailDelaiTableDto> detailDelaiTableDtos = getDetailDelaiTableByAvenantId(
-				produit.getMetre().getBudget().getAvenant().getId());
+				produit.getMetre().getAvenant().getId());
 
 		List<DetailDelaiTableDto> filteredDetailDelai = detailDelaiTableDtos.stream()
 				.filter(obj -> obj.getProduitId() == produitId).collect(Collectors.toList());
@@ -167,7 +167,7 @@ public class DetailDelaiTableDaoAdapter implements DetailDelaiTableDao {
 		Tache tache = modelMapper.map(tacheEntity, Tache.class);
 		
 		List<DetailDelaiTableDto> detailDelaiTableDtos = getDetailDelaiTableByAvenantId(
-				tache.getProduit().getMetre().getBudget().getAvenant().getId());
+				tache.getProduit().getMetre().getAvenant().getId());
 		
 		List<DetailDelaiTableDto> filteredDetailDelai = detailDelaiTableDtos.stream()
 				.filter(obj -> obj.getActiviteId() == tacheId).collect(Collectors.toList());

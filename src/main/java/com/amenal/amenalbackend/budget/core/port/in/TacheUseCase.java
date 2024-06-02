@@ -28,7 +28,7 @@ public class TacheUseCase {
 		List<Tache> currentTaches = null;
 		try {
 			currentTaches = tacheDao
-					.getTachesByAvenantId(tache.getProduit().getMetre().getBudget().getAvenant().getId());
+					.getTachesByAvenantId(tache.getProduit().getMetre().getAvenant().getId());
 		} catch (Exception e) {
 			System.out.println(e);
 		}

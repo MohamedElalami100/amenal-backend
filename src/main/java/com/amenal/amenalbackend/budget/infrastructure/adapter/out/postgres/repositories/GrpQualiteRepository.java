@@ -13,7 +13,7 @@ public interface GrpQualiteRepository extends JpaRepository<GrpQualiteEntity, In
 	@Query("SELECT l FROM GrpQualiteEntity l WHERE l.tache.id = :tacheId")
     List<GrpQualiteEntity> getGrpQualiteByTacheId(Integer tacheId);
 	
-	@Query("SELECT l FROM GrpQualiteEntity l WHERE l.tache.produit.metre.budget.avenant.id = :id AND l.titre = :titre")
+	@Query("SELECT l FROM GrpQualiteEntity l WHERE l.tache.produit.metre.avenant.id = :id AND l.titre = :titre")
 	List<GrpQualiteEntity> getGrpQualitesByAvenantIdAndTitre(Integer id, String titre);
 	
 	@Query("SELECT l FROM GrpQualiteEntity l WHERE l.tache.id = :tacheId AND l.titre = :titre")

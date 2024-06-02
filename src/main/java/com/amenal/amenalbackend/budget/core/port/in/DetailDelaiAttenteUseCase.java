@@ -36,7 +36,7 @@ public class DetailDelaiAttenteUseCase {
 		List<DetailDelaiAttente> detailDelaiAttenteList = new ArrayList<>();
 		try {
 			detailDelaiAttenteList = detailDelaiAttenteDao.
-					getDetailDelaiAttentesByAvenantId(detailDelaiAttente.getMetre().getBudget().getAvenant().getId());
+					getDetailDelaiAttentesByAvenantId(detailDelaiAttente.getMetre().getAvenant().getId());
 		} catch (NullPointerException e) {
 		}
 
@@ -58,7 +58,7 @@ public class DetailDelaiAttenteUseCase {
 		List<DetailDelaiAttente> detailDelaiAttenteList = new ArrayList<>();
 		try {
 			detailDelaiAttenteList = detailDelaiAttenteDao.
-					getDetailDelaiAttentesByAvenantId(newDetailDelaiAttente.getMetre().getBudget().getAvenant().getId());
+					getDetailDelaiAttentesByAvenantId(newDetailDelaiAttente.getMetre().getAvenant().getId());
 		} catch (NullPointerException e) {
 		}
 
@@ -105,10 +105,10 @@ public class DetailDelaiAttenteUseCase {
 
 		try {
 			tachesInOtherAvenants = tacheDao.getTachesInOtherAvenants(
-					detailDelaiAttentes.get(0).getMetre().getBudget().getAvenant().getId()
+					detailDelaiAttentes.get(0).getMetre().getAvenant().getId()
 			);
 			tachesInSameAvenants = tacheDao.getTachesByAvenantId(
-					detailDelaiAttentes.get(0).getMetre().getBudget().getAvenant().getId()
+					detailDelaiAttentes.get(0).getMetre().getAvenant().getId()
 			);
 		} catch (NullPointerException e) {
 		}

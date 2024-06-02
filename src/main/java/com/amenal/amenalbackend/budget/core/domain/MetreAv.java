@@ -18,12 +18,12 @@ public class MetreAv {
 	private LocalDate dateDebutReel;
 	private LocalDate dateFinReel;
 	private Boolean valide;
-	private BudgetAchatAv budget;
+	private Avenant avenant;
 
 	public MetreAv(Integer id, String titre, LocalDate dateBudget, String reference, Double qteGeneralPrevu,
 			String uniteGeneral, Double pUnitaireGeneral, Integer delaiGlobalPrevu, Integer delaiGlobalReel,
 			Double qteGeneralReel, LocalDate dateDebutPrevu, LocalDate dateFinPrevu, LocalDate dateDebutReel,
-			LocalDate dateFinReel, Boolean valide, BudgetAchatAv budget) {
+			LocalDate dateFinReel, Boolean valide, Avenant avenant) {
 		super();
 		this.id = id;
 		this.titre = titre;
@@ -40,7 +40,7 @@ public class MetreAv {
 		this.dateDebutReel = dateDebutReel;
 		this.dateFinReel = dateFinReel;
 		this.valide = valide;
-		this.budget = budget;
+		this.avenant = avenant;
 	}
 
 	public MetreAv() {
@@ -166,12 +166,12 @@ public class MetreAv {
 	public void setValide(Boolean valide) {
 		this.valide = valide;
 	}
-	public BudgetAchatAv getBudget() {
-		return budget;
+	public Avenant getAvenant() {
+		return avenant;
 	}
 
-	public void setBudget(BudgetAchatAv budget) {
-		this.budget = budget;
+	public void setAvenant(Avenant avenant) {
+		this.avenant = avenant;
 	}
 
 }

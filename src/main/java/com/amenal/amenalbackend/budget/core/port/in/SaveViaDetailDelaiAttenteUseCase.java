@@ -55,7 +55,7 @@ public class SaveViaDetailDelaiAttenteUseCase {
 		// Set Lot:
 		Lot lot = new Lot();
 		lot.setDesignation(detailDelaiAttente.getLot());
-		lot.setProject(produit.getMetre().getBudget().getAvenant().getProject());
+		lot.setProject(produit.getMetre().getAvenant().getProject());
 
 		// Save lot:
 		lot = lotDao.saveLot(lot);

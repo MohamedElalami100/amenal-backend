@@ -13,7 +13,7 @@ public interface DetailQualiteRepository extends JpaRepository<DetailQualiteEnti
 	@Query("SELECT l FROM DetailQualiteEntity l WHERE l.groupe.id = :grpId")
     List<DetailQualiteEntity> getDetailQualiteByGrpId(Integer grpId);
 	
-    @Query("SELECT l FROM DetailQualiteEntity l WHERE l.groupe.tache.produit.metre.budget.avenant.id = :avenantId")
+    @Query("SELECT l FROM DetailQualiteEntity l WHERE l.groupe.tache.produit.metre.avenant.id = :avenantId")
     List<DetailQualiteEntity> getDetailQualitesByAvenantId(Integer avenantId);
     
 	@Query("SELECT l FROM DetailQualiteEntity l WHERE l.groupe.id = :grpId AND l.pointDeControle = :affaire")

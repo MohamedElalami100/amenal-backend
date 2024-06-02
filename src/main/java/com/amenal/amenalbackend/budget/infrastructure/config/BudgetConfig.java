@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 
 import com.amenal.amenalbackend.budget.core.port.in.AvenantUseCase;
 import com.amenal.amenalbackend.budget.core.port.in.BanqueUseCase;
-import com.amenal.amenalbackend.budget.core.port.in.BudgetAchatAvUseCase;
 import com.amenal.amenalbackend.budget.core.port.in.ClientUseCase;
 import com.amenal.amenalbackend.budget.core.port.in.DetailChargeAttenteUseCase;
 import com.amenal.amenalbackend.budget.core.port.in.DetailChargeTableUseCase;
@@ -40,7 +39,6 @@ import com.amenal.amenalbackend.budget.core.port.in.TacheUseCase;
 import com.amenal.amenalbackend.budget.core.port.in.UtilisateurUseCase;
 import com.amenal.amenalbackend.budget.core.port.out.AvenantDao;
 import com.amenal.amenalbackend.budget.core.port.out.BanqueDao;
-import com.amenal.amenalbackend.budget.core.port.out.BudgetAchatAvDao;
 import com.amenal.amenalbackend.budget.core.port.out.ClientDao;
 import com.amenal.amenalbackend.budget.core.port.out.CloudStorageDao;
 import com.amenal.amenalbackend.budget.core.port.out.DetailChargeAttenteDao;
@@ -81,11 +79,6 @@ public class BudgetConfig {
 	@Bean
 	public BanqueUseCase banqueUseCase(BanqueDao banqueDao) {
 		return new BanqueUseCase(banqueDao);
-	}
-
-	@Bean
-	public BudgetAchatAvUseCase budgetAchatAvUseCase(BudgetAchatAvDao budgetAchatAvDao) {
-		return new BudgetAchatAvUseCase(budgetAchatAvDao);
 	}
 
 	@Bean

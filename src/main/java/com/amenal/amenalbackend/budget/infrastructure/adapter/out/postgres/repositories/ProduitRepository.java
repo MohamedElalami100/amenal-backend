@@ -11,13 +11,13 @@ import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entit
 @Repository
 public interface ProduitRepository extends JpaRepository<ProduitEntity, Integer>{
 
-	@Query("SELECT p FROM ProduitEntity p WHERE p.metre.budget.avenant.id = :id")
+	@Query("SELECT p FROM ProduitEntity p WHERE p.metre.avenant.id = :id")
     List<ProduitEntity> getProduitsByAvenantId(Integer id);
 	
-	@Query("SELECT p FROM ProduitEntity p WHERE p.metre.budget.avenant.id = :id AND p.designation = :designation")
+	@Query("SELECT p FROM ProduitEntity p WHERE p.metre.avenant.id = :id AND p.designation = :designation")
     List<ProduitEntity> getProduitsByAvenantIdAndDesignation(Integer id, String designation);
 
-	@Query("SELECT p FROM ProduitEntity p WHERE p.metre.budget.avenant.id = :id And :charge IN (SELECT c.charge FROM DetailChargeEntity c WHERE c.tache.produit.id = p.id)")
+	@Query("SELECT p FROM ProduitEntity p WHERE p.metre.avenant.id = :id And :charge IN (SELECT c.charge FROM DetailChargeEntity c WHERE c.tache.produit.id = p.id)")
 	List<ProduitEntity> getProduitsByAvenantIdAndCharge(Integer id, String charge);
 	
 }
