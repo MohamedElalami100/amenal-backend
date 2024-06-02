@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.amenal.amenalbackend.budget.core.domain.DetailQualite;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailQualiteEntity;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailQualiteEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repos
 import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementException;
 
 import lombok.RequiredArgsConstructor;
+
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
 
 @RequiredArgsConstructor
 @Service
@@ -82,7 +85,9 @@ public class DetailQualiteDaoAdapter implements DetailQualiteDao {
 		}
 		// if not:
 		// Use ModelMapper to map non-null properties from DetailQualite to existingEntity
-		modelMapper.map(detailQualite, existingEntity);
+		DetailQualiteEntity newEntity = modelMapper.map(detailQualite, DetailQualiteEntity.class);
+
+		copyNonNullProperties(newEntity, existingEntity);
 
 		DetailQualiteEntity updatedEntity = detailQualiteRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, DetailQualite.class);

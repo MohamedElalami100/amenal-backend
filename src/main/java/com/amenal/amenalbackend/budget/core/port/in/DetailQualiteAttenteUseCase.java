@@ -166,5 +166,4 @@ public class DetailQualiteAttenteUseCase {
 		return addedDetailsWithErreurs;
 	}
 
-
 }

@@ -15,6 +15,8 @@ import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repos
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -49,11 +51,13 @@ public class ClientDaoAdapter implements ClientDao {
 
 	@Override
 	public Client updateClient(Client client) {
-		clientRepository.findById(client.getId()).orElseThrow();
+		ClientEntity existingEntity = clientRepository.findById(client.getId()).orElseThrow();
 
 		ClientEntity newEntity = modelMapper.map(client, ClientEntity.class);
 
-		ClientEntity updatedEntity = clientRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		ClientEntity updatedEntity = clientRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, Client.class);
 	}
 

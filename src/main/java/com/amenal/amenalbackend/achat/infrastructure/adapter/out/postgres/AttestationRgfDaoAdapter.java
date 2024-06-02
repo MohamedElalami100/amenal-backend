@@ -15,6 +15,8 @@ import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.reposi
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -54,7 +56,9 @@ public class AttestationRgfDaoAdapter implements AttestationRgfDao {
 		// Use ModelMapper to map non-null properties from AttestationRgf to existingEntity
 		AttestationRgfEntity newEntity = modelMapper.map(attestationRgf, AttestationRgfEntity.class);
 
-		AttestationRgfEntity updatedEntity = attestationRgfRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		AttestationRgfEntity updatedEntity = attestationRgfRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, AttestationRgf.class);
 	}
 

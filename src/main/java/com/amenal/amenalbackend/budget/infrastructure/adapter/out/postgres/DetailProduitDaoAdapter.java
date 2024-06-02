@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.amenal.amenalbackend.budget.core.domain.DetailProduit;
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailChargeEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailProduitEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repos
 import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementException;
 
 import lombok.RequiredArgsConstructor;
+
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
 
 @RequiredArgsConstructor
 @Service
@@ -82,7 +85,9 @@ public class DetailProduitDaoAdapter implements DetailProduitDao {
 		}
 		// if not:
 		// Use ModelMapper to map non-null properties from DetailProduit to existingEntity
-		modelMapper.map(detailProduit, existingEntity);
+		DetailProduitEntity newEntity = modelMapper.map(detailProduit, DetailProduitEntity.class);
+
+		copyNonNullProperties(newEntity, existingEntity);
 
 		DetailProduitEntity updatedEntity = detailProduitRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, DetailProduit.class);

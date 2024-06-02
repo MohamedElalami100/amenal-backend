@@ -15,6 +15,8 @@ import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.reposi
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -54,7 +56,9 @@ public class DetailDemandeDevisDaoAdapter implements DetailDemandeDevisDao {
 		// Use ModelMapper to map non-null properties from DetailDemandeDevis to existingEntity
 		DetailDemandeDevisEntity newEntity = modelMapper.map(detailDemandeDevis, DetailDemandeDevisEntity.class);
 
-		DetailDemandeDevisEntity updatedEntity = detailDemandeDevisRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		DetailDemandeDevisEntity updatedEntity = detailDemandeDevisRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, DetailDemandeDevis.class);
 	}
 

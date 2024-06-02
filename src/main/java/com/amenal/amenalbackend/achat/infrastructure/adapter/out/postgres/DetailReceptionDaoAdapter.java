@@ -16,6 +16,8 @@ import com.amenal.amenalbackend.achat.infrastructure.dto.DetailReceptionDto;
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -76,7 +78,9 @@ public class DetailReceptionDaoAdapter implements DetailReceptionDao {
 		// Use ModelMapper to map non-null properties from DetailReception to existingEntity
 		DetailReceptionEntity newEntity = modelMapper.map(detailReception, DetailReceptionEntity.class);
 
-		DetailReceptionEntity updatedEntity = detailReceptionRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		DetailReceptionEntity updatedEntity = detailReceptionRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, DetailReception.class);
 	}
 

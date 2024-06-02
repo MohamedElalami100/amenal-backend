@@ -16,6 +16,8 @@ import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementE
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -83,7 +85,9 @@ public class DetailChargeDaoAdapter implements DetailChargeDao {
 		// Use ModelMapper to map non-null properties from DetailCharge to existingEntity
 		DetailChargeEntity newEntity = modelMapper.map(detailCharge, DetailChargeEntity.class);
 
-		DetailChargeEntity updatedEntity = detailChargeRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		DetailChargeEntity updatedEntity = detailChargeRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, DetailCharge.class);
 	}
 

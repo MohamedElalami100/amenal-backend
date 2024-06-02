@@ -15,6 +15,8 @@ import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.reposi
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -54,7 +56,9 @@ public class DemandeDevisDaoAdapter implements DemandeDevisDao {
 		// Use ModelMapper to map non-null properties from DemandeDevis to existingEntity
 		DemandeDevisEntity newEntity = modelMapper.map(demandeDevis, DemandeDevisEntity.class);
 
-		DemandeDevisEntity updatedEntity = demandeDevisRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		DemandeDevisEntity updatedEntity = demandeDevisRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, DemandeDevis.class);
 	}
 

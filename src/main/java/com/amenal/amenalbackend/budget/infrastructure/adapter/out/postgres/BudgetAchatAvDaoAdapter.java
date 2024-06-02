@@ -15,6 +15,8 @@ import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repos
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -49,11 +51,13 @@ public class BudgetAchatAvDaoAdapter implements BudgetAchatAvDao {
 
 	@Override
 	public BudgetAchatAv updateBudgetAchatAv(BudgetAchatAv budgetAchatAv) {
-		budgetAchatAvRepository.findById(budgetAchatAv.getId()).orElseThrow();
+		BudgetAchatAvEntity existingEntity = budgetAchatAvRepository.findById(budgetAchatAv.getId()).orElseThrow();
 
 		BudgetAchatAvEntity newEntity = modelMapper.map(budgetAchatAv, BudgetAchatAvEntity.class);
 
-		BudgetAchatAvEntity updatedEntity = budgetAchatAvRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		BudgetAchatAvEntity updatedEntity = budgetAchatAvRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, BudgetAchatAv.class);
 	}
 

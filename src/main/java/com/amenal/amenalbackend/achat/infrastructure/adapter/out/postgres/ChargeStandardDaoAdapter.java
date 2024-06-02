@@ -15,6 +15,8 @@ import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.reposi
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -54,7 +56,9 @@ public class ChargeStandardDaoAdapter implements ChargeStandardDao {
 		// Use ModelMapper to map non-null properties from ChargeStandard to existingEntity
 		ChargeStandardEntity newEntity = modelMapper.map(chargeStandard, ChargeStandardEntity.class);
 
-		ChargeStandardEntity updatedEntity = chargeStandardRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		ChargeStandardEntity updatedEntity = chargeStandardRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, ChargeStandard.class);
 	}
 

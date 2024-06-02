@@ -16,6 +16,8 @@ import com.amenal.amenalbackend.achat.infrastructure.dto.BesoinDto;
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -76,7 +78,9 @@ public class BesoinDaoAdapter implements BesoinDao {
 		// Use ModelMapper to map non-null properties from Besoin to existingEntity
 		BesoinEntity newEntity = modelMapper.map(besoin, BesoinEntity.class);
 
-		BesoinEntity updatedEntity = besoinRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		BesoinEntity updatedEntity = besoinRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, Besoin.class);
 	}
 

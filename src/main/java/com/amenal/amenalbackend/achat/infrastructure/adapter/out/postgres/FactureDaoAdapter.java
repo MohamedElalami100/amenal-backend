@@ -16,6 +16,8 @@ import com.amenal.amenalbackend.achat.infrastructure.dto.FactureDto;
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -77,7 +79,9 @@ public class FactureDaoAdapter implements FactureDao {
 		// Use ModelMapper to map non-null properties from Facture to existingEntity
 		FactureEntity newEntity = modelMapper.map(facture, FactureEntity.class);
 
-		FactureEntity updatedEntity = factureRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		FactureEntity updatedEntity = factureRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, Facture.class);
 	}
 
