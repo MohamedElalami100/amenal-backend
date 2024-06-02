@@ -158,7 +158,6 @@ public class DetailProduitAttenteUseCase {
 				//save detail with error
 				DetailProduitAttente addedDetail = detailProduitAttenteDao.saveDetailProduitAttente(detailProduitAttente);
 				addedDetailsWithErreurs.add(addedDetail);
-				System.out.println(i);
 				i++;
 			} catch (Exception e) {
 			}

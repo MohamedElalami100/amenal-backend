@@ -7,7 +7,7 @@ public class TacheTableDto {
 	private String ordre;
 	private String produit;
 	private String lot;
-	private String activite;
+	private String titreActivite;
 	private Boolean cle;
 	private String upb;
 	private Double qpm;
@@ -24,7 +24,7 @@ public class TacheTableDto {
 	private Integer produitId;
 	private Integer lotId;
 
-	public TacheTableDto(Integer id, String ordre, String produit, String lot, String activite, Boolean cle, String upb, Double qpm,
+	public TacheTableDto(Integer id, String ordre, String produit, String lot, String titreActivite, Boolean cle, String upb, Double qpm,
 			Double ppm, Double mpm, Double qpb, Double ppb, Double mpb, Double mrg, Double prcRg, LocalDate ddb,
 			Integer dlb, LocalDate dfb, Integer produitId, Integer lotId) {
 		super();
@@ -32,7 +32,7 @@ public class TacheTableDto {
 		this.ordre = ordre;
 		this.produit = produit;
 		this.lot = lot;
-		this.activite = activite;
+		this.titreActivite = titreActivite;
 		this.cle = cle;
 		this.upb = upb;
 		this.qpm = qpm;
@@ -86,12 +86,12 @@ public class TacheTableDto {
 		this.lot = lot;
 	}
 
-	public String getActivite() {
-		return activite;
+	public String getTitreActivite() {
+		return titreActivite;
 	}
 
-	public void setActivite(String activite) {
-		this.activite = activite;
+	public void setTitreActivite(String titreActivite) {
+		this.titreActivite = titreActivite;
 	}
 
 	public Boolean getCle() {

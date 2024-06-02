@@ -1,5 +1,6 @@
 package com.amenal.amenalbackend.security.auth;
 
+import com.amenal.amenalbackend.security.user.Role;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ public class AuthenticationController {
   public ResponseEntity<AuthenticationResponse> register(
       @RequestBody RegisterRequest request
   ) {
+    request.setRole(Role.USER);
     return ResponseEntity.ok(service.register(request));
   }
   @PostMapping("/authenticate")
