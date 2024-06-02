@@ -151,7 +151,6 @@ public class DetailDelaiAttenteUseCase {
 				//save detail with error
 				DetailDelaiAttente addedDetail = detailDelaiAttenteDao.saveDetailDelaiAttente(detailDelaiAttente);
 				addedDetailsWithErreurs.add(addedDetail);
-				System.out.println(i);
 				i++;
 			} catch (Exception e) {
 			}

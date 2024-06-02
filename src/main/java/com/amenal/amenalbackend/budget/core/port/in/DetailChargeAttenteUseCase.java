@@ -158,7 +158,6 @@ public class DetailChargeAttenteUseCase {
                 //save detail with error
                 DetailChargeAttente addedDetail = detailChargeAttenteDao.saveDetailChargeAttente(detailChargeAttente);
                 addedDetailsWithErreurs.add(addedDetail);
-                System.out.println(i);
                 i++;
             } catch (Exception e) {
             }

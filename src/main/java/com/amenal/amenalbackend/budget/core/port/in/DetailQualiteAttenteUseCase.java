@@ -158,7 +158,6 @@ public class DetailQualiteAttenteUseCase {
 				//save detail with error
 				DetailQualiteAttente addedDetail = detailQualiteAttenteDao.saveDetailQualiteAttente(detailQualiteAttente);
 				addedDetailsWithErreurs.add(addedDetail);
-				System.out.println(i);
 				i++;
 			} catch (Exception e) {
 			}
