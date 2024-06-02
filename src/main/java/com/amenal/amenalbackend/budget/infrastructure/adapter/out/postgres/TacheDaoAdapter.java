@@ -19,6 +19,8 @@ import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementE
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -128,7 +130,9 @@ public class TacheDaoAdapter implements TacheDao {
 		// Use ModelMapper to map non-null properties from Tache to existingEntity
 		TacheEntity newEntity = modelMapper.map(tache, TacheEntity.class);
 
-		TacheEntity updatedEntity = tacheRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		TacheEntity updatedEntity = tacheRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, Tache.class);
 	}
 

@@ -15,6 +15,8 @@ import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.reposi
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -54,7 +56,9 @@ public class CommandeDaoAdapter implements CommandeDao {
 		// Use ModelMapper to map non-null properties from Commande to existingEntity
 		CommandeEntity newEntity = modelMapper.map(commande, CommandeEntity.class);
 
-		CommandeEntity updatedEntity = commandeRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		CommandeEntity updatedEntity = commandeRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, Commande.class);
 	}
 

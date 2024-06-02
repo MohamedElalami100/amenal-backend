@@ -16,6 +16,8 @@ import com.amenal.amenalbackend.achat.infrastructure.dto.DevisDto;
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -76,7 +78,9 @@ public class DevisDaoAdapter implements DevisDao {
 		// Use ModelMapper to map non-null properties from Devis to existingEntity
 		DevisEntity newEntity = modelMapper.map(devis, DevisEntity.class);
 
-		DevisEntity updatedEntity = devisRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		DevisEntity updatedEntity = devisRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, Devis.class);
 	}
 

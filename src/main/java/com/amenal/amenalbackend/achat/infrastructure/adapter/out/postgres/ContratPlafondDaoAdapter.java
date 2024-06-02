@@ -15,6 +15,8 @@ import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.reposi
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -54,7 +56,9 @@ public class ContratPlafondDaoAdapter implements ContratPlafondDao {
 		// Use ModelMapper to map non-null properties from ContratPlafond to existingEntity
 		ContratPlafondEntity newEntity = modelMapper.map(contratPlafond, ContratPlafondEntity.class);
 
-		ContratPlafondEntity updatedEntity = contratPlafondRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		ContratPlafondEntity updatedEntity = contratPlafondRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, ContratPlafond.class);
 	}
 

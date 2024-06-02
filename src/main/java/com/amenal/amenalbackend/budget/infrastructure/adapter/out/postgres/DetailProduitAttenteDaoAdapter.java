@@ -15,6 +15,8 @@ import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repos
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -59,13 +61,15 @@ public class DetailProduitAttenteDaoAdapter implements DetailProduitAttenteDao {
 
 	@Override
 	public DetailProduitAttente updateDetailProduitAttente(DetailProduitAttente detailProduitAttente) {
-		detailProduitAttenteRepository.findById(detailProduitAttente.getId())
+		DetailProduitAttenteEntity existingEntity = detailProduitAttenteRepository.findById(detailProduitAttente.getId())
 				.orElseThrow();
 		// Use ModelMapper to map non-null properties from DetailProduitAttente to
 		// existingEntity
 		DetailProduitAttenteEntity newEntity = modelMapper.map(detailProduitAttente, DetailProduitAttenteEntity.class);
 
-		DetailProduitAttenteEntity updatedEntity = detailProduitAttenteRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		DetailProduitAttenteEntity updatedEntity = detailProduitAttenteRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, DetailProduitAttente.class);
 	}
 

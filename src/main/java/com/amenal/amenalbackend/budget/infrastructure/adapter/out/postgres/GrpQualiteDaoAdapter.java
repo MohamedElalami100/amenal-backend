@@ -16,6 +16,8 @@ import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementE
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -85,7 +87,9 @@ public class GrpQualiteDaoAdapter implements GrpQualiteDao {
 		// Use ModelMapper to map non-null properties from GrpQualite to existingEntity
 		GrpQualiteEntity newEntity = modelMapper.map(grpQualite, GrpQualiteEntity.class);
 
-		GrpQualiteEntity updatedEntity = grpQualiteRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		GrpQualiteEntity updatedEntity = grpQualiteRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, GrpQualite.class);
 	}
 

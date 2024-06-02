@@ -3,6 +3,7 @@ package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailChargeAttenteEntity;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.DetailDelaiAttenteEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import com.amenal.amenalbackend.budget.core.port.out.DetailDelaiAttenteDao;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.DetailDelaiAttenteRepository;
 
 import lombok.RequiredArgsConstructor;
+
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
 
 @RequiredArgsConstructor
 @Service
@@ -59,13 +62,15 @@ public class DetailDelaiAttenteDaoAdapter implements DetailDelaiAttenteDao {
 
 	@Override
 	public DetailDelaiAttente updateDetailDelaiAttente(DetailDelaiAttente detailDelaiAttente) {
-		detailDelaiAttenteRepository.findById(detailDelaiAttente.getId())
+		DetailDelaiAttenteEntity existingEntity = detailDelaiAttenteRepository.findById(detailDelaiAttente.getId())
 				.orElseThrow();
 		// Use ModelMapper to map non-null properties from DetailDelaiAttente to
 		// existingEntity
 		DetailDelaiAttenteEntity newEntity = modelMapper.map(detailDelaiAttente, DetailDelaiAttenteEntity.class);
 
-		DetailDelaiAttenteEntity updatedEntity = detailDelaiAttenteRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		DetailDelaiAttenteEntity updatedEntity = detailDelaiAttenteRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, DetailDelaiAttente.class);
 	}
 

@@ -1,11 +1,17 @@
 package com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres;
 
+import java.beans.PropertyDescriptor;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.amenal.amenalbackend.budget.core.domain.Avenant;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.entities.AvenantEntity;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +20,8 @@ import com.amenal.amenalbackend.budget.core.port.out.AvenantDao;
 import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repositories.AvenantRepository;
 
 import lombok.RequiredArgsConstructor;
+
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
 
 @RequiredArgsConstructor
 @Service
@@ -49,11 +57,14 @@ public class AvenantDaoAdapter implements AvenantDao {
 
 	@Override
 	public Avenant updateAvenant(Avenant avenant) {
-		avenantRepository.findById(avenant.getId()).orElseThrow();
+		AvenantEntity existingEntity = avenantRepository.findById(avenant.getId()).orElseThrow();
 
 		AvenantEntity newEntity = modelMapper.map(avenant, AvenantEntity.class);
 
-		AvenantEntity updatedEntity = avenantRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		AvenantEntity updatedEntity = avenantRepository.save(existingEntity);
+
 		return modelMapper.map(updatedEntity, Avenant.class);
 	}
 

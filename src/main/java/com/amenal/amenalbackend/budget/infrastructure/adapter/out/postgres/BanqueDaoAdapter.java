@@ -15,6 +15,8 @@ import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repos
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -49,11 +51,13 @@ public class BanqueDaoAdapter implements BanqueDao {
 
 	@Override
 	public Banque updateBanque(Banque banque) {
-		banqueRepository.findById(banque.getId()).orElseThrow();
+		BanqueEntity existingEntity = banqueRepository.findById(banque.getId()).orElseThrow();
 
 		BanqueEntity newEntity = modelMapper.map(banque, BanqueEntity.class);
 
-		BanqueEntity updatedEntity = banqueRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		BanqueEntity updatedEntity = banqueRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, Banque.class);
 	}
 

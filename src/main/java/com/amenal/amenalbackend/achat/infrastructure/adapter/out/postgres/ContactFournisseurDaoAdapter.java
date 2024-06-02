@@ -15,6 +15,8 @@ import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.reposi
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -54,7 +56,9 @@ public class ContactFournisseurDaoAdapter implements ContactFournisseurDao {
 		// Use ModelMapper to map non-null properties from ContactFournisseur to existingEntity
 		ContactFournisseurEntity newEntity = modelMapper.map(contactFournisseur, ContactFournisseurEntity.class);
 
-		ContactFournisseurEntity updatedEntity = contactFournisseurRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		ContactFournisseurEntity updatedEntity = contactFournisseurRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, ContactFournisseur.class);
 	}
 

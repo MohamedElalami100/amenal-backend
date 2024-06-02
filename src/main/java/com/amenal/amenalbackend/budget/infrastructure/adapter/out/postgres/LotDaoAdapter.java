@@ -16,6 +16,8 @@ import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementE
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -97,7 +99,9 @@ public class LotDaoAdapter implements LotDao {
 		// Use ModelMapper to map non-null properties from Lot to existingEntity
 		LotEntity newEntity = modelMapper.map(lot, LotEntity.class);
 
-		LotEntity updatedEntity = lotRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		LotEntity updatedEntity = lotRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, Lot.class);
 	}
 

@@ -15,6 +15,8 @@ import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repos
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -54,7 +56,9 @@ public class DocumentDaoAdapter implements DocumentDao {
 		// Use ModelMapper to map non-null properties from Document to existingEntity
 		DocumentEntity newEntity = modelMapper.map(document, DocumentEntity.class);
 
-		DocumentEntity updatedEntity = documentRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		DocumentEntity updatedEntity = documentRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, Document.class);
 	}
 

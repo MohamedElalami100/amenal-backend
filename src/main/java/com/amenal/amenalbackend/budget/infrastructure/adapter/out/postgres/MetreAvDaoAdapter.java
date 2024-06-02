@@ -17,6 +17,8 @@ import com.amenal.amenalbackend.budget.infrastructure.adapter.out.postgres.repos
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -56,7 +58,9 @@ public class MetreAvDaoAdapter implements MetreAvDao {
 		// Use ModelMapper to map non-null properties from MetreAv to existingEntity
 		MetreAvEntity newEntity = modelMapper.map(metreAv, MetreAvEntity.class);
 
-		MetreAvEntity updatedEntity = metreAvRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		MetreAvEntity updatedEntity = metreAvRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, MetreAv.class);
 	}
 

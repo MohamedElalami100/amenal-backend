@@ -18,6 +18,8 @@ import com.amenal.amenalbackend.utils.infrastructure.exception.DuplicateElementE
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -94,7 +96,9 @@ public class ProduitDaoAdapter implements ProduitDao {
 		// Use ModelMapper to map non-null properties from Produit to existingEntity
 		ProduitEntity newEntity = modelMapper.map(produit, ProduitEntity.class);
 
-		ProduitEntity updatedEntity = produitRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		ProduitEntity updatedEntity = produitRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, Produit.class);
 	}
 

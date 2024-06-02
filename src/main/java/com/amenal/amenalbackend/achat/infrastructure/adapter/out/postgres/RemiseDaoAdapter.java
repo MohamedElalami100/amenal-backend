@@ -15,6 +15,8 @@ import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.reposi
 
 import lombok.RequiredArgsConstructor;
 
+import static com.amenal.amenalbackend.utils.infrastructure.Methods.Copy.copyNonNullProperties;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -54,7 +56,9 @@ public class RemiseDaoAdapter implements RemiseDao {
 		// Use ModelMapper to map non-null properties from Remise to existingEntity
 		RemiseEntity newEntity = modelMapper.map(remise, RemiseEntity.class);
 
-		RemiseEntity updatedEntity = remiseRepository.save(newEntity);
+		copyNonNullProperties(newEntity, existingEntity);
+
+		RemiseEntity updatedEntity = remiseRepository.save(existingEntity);
 		return modelMapper.map(updatedEntity, Remise.class);
 	}
 
