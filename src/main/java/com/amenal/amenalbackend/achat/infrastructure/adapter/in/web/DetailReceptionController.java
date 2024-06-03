@@ -3,6 +3,8 @@ package com.amenal.amenalbackend.achat.infrastructure.adapter.in.web;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import com.amenal.amenalbackend.achat.infrastructure.dto.AddDetailReceptionDto;
+import com.amenal.amenalbackend.utils.infrastructure.exception.DetailReceptionLargerThanDetailCommande;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -44,17 +46,24 @@ public class DetailReceptionController {
 	}
 
 	@PostMapping
-	public ResponseEntity<DetailReception> saveDetailReception(@RequestBody DetailReception detailReception) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(detailReceptionUseCase.saveDetailReception(detailReception));
+	public ResponseEntity<?> saveDetailReception(@RequestBody AddDetailReceptionDto addDetailReceptionDto) {
+		try {
+			return ResponseEntity.status(HttpStatus.CREATED).body(detailReceptionUseCase
+					.saveDetailReception(addDetailReceptionDto));
+		} catch (DetailReceptionLargerThanDetailCommande e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
 	}
 
 	@PutMapping
-	public ResponseEntity<DetailReception> updateDetailReception(@RequestBody DetailReception detailReception) {
+	public ResponseEntity<?> updateDetailReception(@RequestBody DetailReception detailReception) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(detailReceptionUseCase.updateDetailReception(detailReception));
 		} catch (NoSuchElementException e) {
 			// return a response with status 404 if an object with id is not found
 			return ResponseEntity.notFound().build();
+		} catch (DetailReceptionLargerThanDetailCommande e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 	}
 

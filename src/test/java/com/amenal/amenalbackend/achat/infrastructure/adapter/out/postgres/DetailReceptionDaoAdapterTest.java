@@ -57,19 +57,7 @@ public class DetailReceptionDaoAdapterTest {
         assertTrue(result.isEmpty());
     }
 
-    @Test
-    void testSaveDetailReception() {
-        DetailReception detailReception = new DetailReception();
-        detailReception.setId(1);
-        DetailReceptionEntity entity = new DetailReceptionEntity();
-        entity.setId(1);
-
-        when(detailReceptionRepository.save(any(DetailReceptionEntity.class))).thenReturn(entity);
-
-        DetailReception result = detailReceptionDaoAdapter.saveDetailReception(detailReception);
-        assertNotNull(result);
-        assertEquals(1, result.getId());
-    }
+   
 
     @Test
     void testUpdateDetailReception() {

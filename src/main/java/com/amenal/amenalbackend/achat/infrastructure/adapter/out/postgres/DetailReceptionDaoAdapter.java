@@ -3,6 +3,12 @@ package com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.amenal.amenalbackend.achat.core.domain.DetailDevis;
+import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.entities.DetailDevisEntity;
+import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.entities.ReceptionEntity;
+import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.repositories.DetailDevisRepository;
+import com.amenal.amenalbackend.achat.infrastructure.adapter.out.postgres.repositories.ReceptionRepository;
+import com.amenal.amenalbackend.achat.infrastructure.dto.AddDetailReceptionDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +31,12 @@ public class DetailReceptionDaoAdapter implements DetailReceptionDao {
 
 	@Autowired
 	private DetailReceptionRepository detailReceptionRepository;
+
+	@Autowired
+	private ReceptionRepository receptionRepository;
+
+	@Autowired
+	private DetailDevisRepository detailDevisRepository;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -65,8 +77,21 @@ public class DetailReceptionDaoAdapter implements DetailReceptionDao {
 	}
 
 	@Override
-	public DetailReception saveDetailReception(DetailReception detailReception) {
-		DetailReceptionEntity detailReceptionEntity = modelMapper.map(detailReception, DetailReceptionEntity.class);
+	public DetailReception saveDetailReception(AddDetailReceptionDto addDetailReceptionDto) {
+
+		//get reception:
+		ReceptionEntity receptionEntity = receptionRepository.
+				findById(addDetailReceptionDto.getReceptionId()).get();
+
+		//get detailCmd:
+		DetailDevisEntity detailCommande = detailDevisRepository.
+				findById(addDetailReceptionDto.getDetailCommandeId()).get();
+
+		DetailReceptionEntity detailReceptionEntity = new DetailReceptionEntity();
+		detailReceptionEntity.setReception(receptionEntity);
+		detailReceptionEntity.setDetailCommande(detailCommande);
+		detailReceptionEntity.setQte(addDetailReceptionDto.getQte());
+
 		DetailReceptionEntity savedEntity = detailReceptionRepository.save(detailReceptionEntity);
 		return modelMapper.map(savedEntity, DetailReception.class);
 	}
@@ -93,4 +118,24 @@ public class DetailReceptionDaoAdapter implements DetailReceptionDao {
 		detailReceptionRepository.delete(detailReceptionEntity);
 	}
 
+	@Override
+	public List<DetailReceptionDto> findByDetailCommandeId(Integer commandeId) {
+		List<DetailReceptionEntity> detailReceptionEntities = detailReceptionRepository.findByDetailCommandeId(commandeId);
+		List<DetailReceptionDto> detailReceptionDtos = new ArrayList<>();
+
+		for (DetailReceptionEntity detailReceptionEntity : detailReceptionEntities) {
+			DetailReceptionDto detailReceptionDto = modelMapper.map(detailReceptionEntity, DetailReceptionDto.class);
+			DetailReception detailReception = modelMapper.map(detailReceptionEntity, DetailReception.class);
+
+			// Set attributes for the DetailReceptionDto object
+			detailReceptionDto.setMntHt(detailReception.getMntHt());
+			detailReceptionDto.setMntTtc(detailReception.getMntTtc());
+			detailReceptionDto.setMntTva(detailReception.getMntTva());
+
+			detailReceptionDtos.add(detailReceptionDto);
+		}
+
+		return detailReceptionDtos;
+
+	}
 }

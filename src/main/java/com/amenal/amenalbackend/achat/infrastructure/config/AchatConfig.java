@@ -123,8 +123,8 @@ public class AchatConfig {
 	}
 
 	@Bean
-	public DetailReceptionUseCase detailReceptionUseCase(DetailReceptionDao detailReceptionDao) {
-		return new DetailReceptionUseCase(detailReceptionDao);
+	public DetailReceptionUseCase detailReceptionUseCase(DetailReceptionDao detailReceptionDao, DetailDevisDao detailDevisDao) {
+		return new DetailReceptionUseCase(detailReceptionDao, detailDevisDao);
 	}
 
 	@Bean
