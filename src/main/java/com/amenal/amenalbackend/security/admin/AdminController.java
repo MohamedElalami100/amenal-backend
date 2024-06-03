@@ -1,40 +1,66 @@
 package com.amenal.amenalbackend.security.admin;
 
-import io.swagger.v3.oas.annotations.Hidden;
+import com.amenal.amenalbackend.security.user.Role;
+import com.amenal.amenalbackend.security.user.UserDto;
+import com.amenal.amenalbackend.security.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
 @PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
 
+    @Autowired
+    UserService userService;
+
     @GetMapping
     @PreAuthorize("hasAuthority('admin:read')")
-    public String get() {
-        return "GET:: admin controller";
+    public String gett() {
+        return "ok";
     }
-    @PostMapping
-    @PreAuthorize("hasAuthority('admin:create')")
-    @Hidden
-    public String post() {
-        return "POST:: admin controller";
+    @GetMapping("/users")
+    @PreAuthorize("hasAuthority('admin:read')")
+    public ResponseEntity<List<UserDto>> getUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
-    @PutMapping
+
+    @PutMapping("users/manager/{id}")
     @PreAuthorize("hasAuthority('admin:update')")
-    @Hidden
-    public String put() {
-        return "PUT:: admin controller";
+    //@Hidden
+    public ResponseEntity<?> putMn(@PathVariable("id") Integer id) {
+        userService.changeStatus(id, Role.MANAGER);
+        return ResponseEntity.ok().build();
     }
-    @DeleteMapping
+
+    @PutMapping("users/supManager/{id}")
+    @PreAuthorize("hasAuthority('admin:update')")
+    public ResponseEntity<?> putSup(@PathVariable("id") Integer id) {
+        userService.changeStatus(id, Role.SUPMANAGER);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("users/admin/{id}")
+    @PreAuthorize("hasAuthority('admin:update')")
+    public ResponseEntity<?> putAdm(@PathVariable("id") Integer id) {
+        userService.changeStatus(id, Role.ADMIN);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("users/user/{id}")
+    @PreAuthorize("hasAuthority('admin:update')")
+    public ResponseEntity<?> putUser(@PathVariable("id") Integer id) {
+        userService.changeStatus(id, Role.USER);
+        return ResponseEntity.ok().build();
+    }
+    @DeleteMapping("users/{id}")
     @PreAuthorize("hasAuthority('admin:delete')")
-    @Hidden
-    public String delete() {
-        return "DELETE:: admin controller";
+    public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

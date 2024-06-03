@@ -1,11 +1,14 @@
 package com.amenal.amenalbackend.security.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -31,5 +34,43 @@ public class UserService {
 
         // save the new password
         repository.save(user);
+    }
+
+    public List<UserDto> getAllUsers() {
+        List<UserDto> userDtos = new ArrayList<>();
+        List<User> users = repository.findAll();
+        for (User user: users) {
+            UserDto userDto = UserDto.builder()
+                    .id(user.getId())
+                    .firstname(user.getFirstname())
+                    .lastname(user.getLastname())
+                    .email(user.getEmail())
+                    .role(user.getRole())
+                    .build();
+            userDtos.add(userDto);
+        }
+        return  userDtos;
+    }
+
+    public User changeStatus(String email, Role role) {
+        User user = repository.findByEmail(email).get();
+        user.setRole(role);
+        return repository.save(user);
+    }
+
+    public void delete(String email) {
+        User user = repository.findByEmail(email).get();
+        repository.delete(user);
+    }
+
+    public void changeStatus(Integer id, Role role) {
+        User user = repository.findById(id).get();
+        user.setRole(role);
+        repository.save(user);
+    }
+
+    public void delete(Integer id) {
+        User user = repository.findById(id).get();
+        repository.delete(user);
     }
 }
